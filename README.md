@@ -1,6 +1,6 @@
 # 42_CURSUS
 
-                        COMMON CORE 42 PARIS
+   COMMON CORE 42 PARIS
 _________________________________
 
 :warning: DISCLAIMER FOR FELLOW STUDENTS OF 42! :warning:
