@@ -12,5 +12,5 @@ PROJECTS FROM NEWEST TO OLDEST
 
 | Name  | Language      | End Date      |                       Description                     | Estimated effort (h) | Hours i spent|
 | ----- |:-------------:| :-----------: | :----------------------------------------------------:| ---------------------| --------------|
-| [libft](https://github.com/waseemnaseeven/42_CURSUS/tree/main/PROJET_00_LIBFT) | C             | November2022 | Code usefull functions i'll use later in my projects    | 70                   | 40
+| [libft](https://github.com/waseemnaseeven/42_CURSUS/tree/main/PROJET_00_LIBFT) | C             | November2022 | Code usefull functions that i'll use later in my projects    | 70                   | 40 |
 
