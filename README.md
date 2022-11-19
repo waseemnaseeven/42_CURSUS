@@ -10,8 +10,7 @@ Don't copy from this repository. I'm not that good and it's against the spirit o
 ________________________________
 PROJECTS FROM NEWEST TO OLDEST
 
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
+| Name  | Language      | End Date     | Description | Estimated effort (h) | Hours i spent |
+| ----- |:-------------:| -----------: | -----------:| ---------------------| --------------|
+| libft | C | November2022 |
+
