@@ -1,6 +1,7 @@
 # 42_CURSUS
 
-The projects of the CommonCore i've made in 42 Paris 
+                        COMMON CORE 42 PARIS
+_________________________________
 
 :warning: DISCLAIMER FOR FELLOW STUDENTS OF 42! :warning:
 
