@@ -1,47 +1,30 @@
 #include <unistd.h>
 
-char    *lower(char *c)
+void    str_capitalizer(char *str)
 {
     int i = 0;
-    while (c[i])
-    {
-        if (c[i] >= 'a' && c[i] <= 'z')
-            c[i] -= 32;
-        i++;
-    }
-    return (c);
-}
 
-char *upper(char *c)
-{
-    
+    if (str[i] >= 'a' && str[i] <= 'z')
+        str[i] -= 32;
+    write(1, &str[i], 1);
+    while (str[++i])
+    {
+        if (str[i] >= 'A' && str[i] <= 'Z')
+            str[i] += 32;
+        if (str[i] >= 'a' && str[i] <= 'z' && (str[i - 1] == ' ' || str[i - 1] == '\t'))
+            str[i] -= 32;
+        write(1, &str[i], 1);
+    }
 }
 
 int main(int ac, char **av)
 {
-    int i = 0;
-    int j = 0;
-    
-    if (ac == 2)
+    int i = 1;
+    while (i < ac)
     {
-        while (av[1][i])
-        {
-            write(1, "A", 1);
-            if (av[1][i] == ' ')
-                j = 0;
-            else if (j == 0)
-            {
-                if (av[1][i + 1] >= 'a' && av[1][i + 1] <= 'z')
-                    av[1][i + 1] -= 32;
-                j = 1;
-            }
-            else
-            {
-                if (av[1][i] >= 'A' && av[1][i] <= 'Z')
-                    av[1][i] += 32;
-            }
-            i++;
-        }
+        str_capitalizer(av[i]);
+        i++;
     }
     write(1, "\n", 1);
+
 }
