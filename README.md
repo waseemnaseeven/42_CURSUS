@@ -13,6 +13,9 @@ PROJECTS FROM NEWEST TO OLDEST
 
 | Name  | Language      | End Date      |                       Description                 | Estimated effort (h)   | Hours i spent|
 | ----- |:-------------:| :-----------: | :------------------------------------------------:| :---------------------:| :------------:|
-| [libft](https://github.com/waseemnaseeven/42_CURSUS/tree/main/PROJET_00_LIBFT) |C| November2022 | Code usefull functions that i'll use later in my projects| 70  | 40 |
-| [libft](https://github.com/waseemnaseeven/42_CURSUS/tree/main/PROJET_00_LIBFT) |C| November2022 | Code usefull functions that i'll use later in my projects| 70  | 40 |
+| [ExamRank02](https://github.com/waseemnaseeven/42_CURSUS/tree/main/04_EXAMRANK02) |C| December2022 | Some exercises before the exam | ...  | ... |
+| Born2beroot |Sysadmin| December2022 | Discovering Virtual Box, installing Debian server + parameters | 40  | 17 |
+| [get_next_line](https://github.com/waseemnaseeven/42_CURSUS/tree/main/02_GNL) |C| December2022 | Code a function that return the line i read with the '\n' | 70  | 44 |
+| [ft_printf](https://github.com/waseemnaseeven/42_CURSUS/tree/main/01_FTPRINTF) |C| December2022 | recode printf just for %csudipxX | 70  | 30 |
+| [libft](https://github.com/waseemnaseeven/42_CURSUS/tree/main/00_LIBFT) |C| November2022 | Code usefull functions that i'll use later in my projects| 70  | 40 |
 
