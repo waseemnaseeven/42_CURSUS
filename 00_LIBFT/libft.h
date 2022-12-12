@@ -6,7 +6,7 @@
 /*   By: wnaseeve <wnaseeve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 14:42:40 by wnaseeve          #+#    #+#             */
-/*   Updated: 2022/11/18 17:18:55 by wnaseeve         ###   ########.fr       */
+/*   Updated: 2022/12/12 11:46:30 by wnaseeve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,18 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <bsd/string.h>
+# include <stdarg.h>
 
 typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
 }	t_list;
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+
+# endif
 
 int		ft_atoi(const char *nptr);
 void	ft_bzero(void *s, size_t n);
@@ -78,5 +84,25 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+
+/* ********** ft_printf ********** */
+
+void	ft_putchar(int c, unsigned int *count);
+void	ft_putstr(char *c, unsigned int *count);
+void	ft_putnbr(int nb, unsigned int *count);
+void	ft_putunbr(unsigned int nb, unsigned int *count);
+void	ft_puthex(unsigned int nb, unsigned int *count);
+void	ft_puthexmaj(unsigned int nb, unsigned int *count);
+void	ft_putmem(void *nb, unsigned int *count);
+int		ft_strlenprintf(char *c);
+void	ft_flags(const char format, va_list args, unsigned int *count);
+int		ft_printf(const char *format, ...);
+
+/* ********** get_next_line ********** */
+
+size_t	ft_strlen_gnl(const char *s);
+char	*ft_strjoin_gnl(const char *s1, const char *s2);
+char	*ft_strdup_gnl(char *s);
+char	*get_next_line(int fd);
 
 #endif

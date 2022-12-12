@@ -6,7 +6,7 @@
 #    By: wnaseeve <wnaseeve@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/07 14:41:19 by wnaseeve          #+#    #+#              #
-#    Updated: 2022/11/18 17:13:55 by wnaseeve         ###   ########.fr        #
+#    Updated: 2022/12/12 11:56:20 by wnaseeve         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,13 @@ SRCS    = ft_atoi.c\
 	  ft_putendl_fd.c\
 	  ft_putnbr_fd.c\
 	  ft_striteri.c\
+	  ft_printf_utils1.c\
+	  ft_printf_utils2.c\
+	  ft_printf.c\
+	  get_next_line_utils.c\
+	  get_next_line.c\
+	  
+
 
 BNS		= ft_lstnew.c\
 		  ft_lstadd_front.c\
