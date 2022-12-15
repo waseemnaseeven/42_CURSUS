@@ -8,7 +8,6 @@ void    print_bits(unsigned char octet)
 
     while (i--)
     {
-        printf(" here is bit: %c when %d \n", bit, i);
         bit = (octet >> i & 1) + '0';
         write(1, &bit, 1);
     }

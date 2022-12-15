@@ -10,7 +10,7 @@ void ft_putsum(int nb)
     char digit;
 
     if (nb > 9)
-        ft_putnbr(nb / 10);
+        ft_putsum(nb / 10);
     digit = (nb % 10) + '0';
     ft_putchar(digit);
 }
