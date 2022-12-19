@@ -1,15 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int	    is_power_of_2(unsigned int n)
+int is_power_of_2(unsigned int n)
 {
-    unsigned int number = 1;
-
-    while (number <= n)
-    {
-        if (number == n)
-            return (1);
-        number = number * 2;
-    }
-    return (0);
+	if (n == 0)
+		return (0);
+	while (n != 1)
+	{
+		if (n % 2 != 0)
+			return (0);
+		n = n / 2;
+	}
+	return (1);
 }
