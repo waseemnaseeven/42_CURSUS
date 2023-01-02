@@ -6,7 +6,7 @@
 /*   By: wnaseeve <wnaseeve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 08:05:35 by wnaseeve          #+#    #+#             */
-/*   Updated: 2022/12/12 11:59:22 by wnaseeve         ###   ########.fr       */
+/*   Updated: 2022/12/16 21:05:31 by wnaseeve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,37 +160,37 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-int main(void)
-{
-	int fd;
-	int fd2;
-	char *line;
-	char *line2;
-	int i;
+//int main(void)
+//{
+//	int fd;
+//	int fd2;
+//	char *line;
+//	char *line2;
+//	int i;
 
-	i = 1;
-	fd = open("get_next_line.h", O_RDONLY);
-	fd2 = open("test2.txt", O_RDONLY);
-	if (fd == -1)
-		return -1;
-	if (fd2 == -1)
-		return -1;
-	while(i < 1651)
-	{
-		line = get_next_line(fd);
-		line2 = get_next_line(fd2);
-		if (!line)
-			break;
-		if (!line2)
-			break;
-		printf("line [%d] : %s", i, line);
-		printf("line [%d] : %s", i, line2);
-		free(line);
-		free(line2);
-		i++;
-	}
-	// free(line);
-	// free(line2);
-	close(fd);
-	return (0);
-}
+//	i = 1;
+//	fd = open("get_next_line.h", O_RDONLY);
+//	fd2 = open("test2.txt", O_RDONLY);
+//	if (fd == -1)
+//		return -1;
+//	if (fd2 == -1)
+//		return -1;
+//	while(i < 1651)
+//	{
+//		line = get_next_line(fd);
+//		line2 = get_next_line(fd2);
+//		if (!line)
+//			break;
+//		if (!line2)
+//			break;
+//		printf("line [%d] : %s", i, line);
+//		printf("line [%d] : %s", i, line2);
+//		free(line);
+//		free(line2);
+//		i++;
+//	}
+//	// free(line);
+//	// free(line2);
+//	close(fd);
+//	return (0);
+//}

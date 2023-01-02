@@ -6,7 +6,7 @@
 /*   By: wnaseeve <wnaseeve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 14:42:40 by wnaseeve          #+#    #+#             */
-/*   Updated: 2022/12/12 11:46:30 by wnaseeve         ###   ########.fr       */
+/*   Updated: 2023/01/02 19:10:57 by wnaseeve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,11 @@ size_t	ft_strlen_gnl(const char *s);
 char	*ft_strjoin_gnl(const char *s1, const char *s2);
 char	*ft_strdup_gnl(char *s);
 char	*get_next_line(int fd);
+
+/* ***** new functions ***** */
+void	ft_swap(int *a, int *b);
+int		ft_freetab(char **tab, int boolean);
+long	ft_atol(const char *nptr);
+int		ft_checkargs(int ac, char **av);
 
 #endif

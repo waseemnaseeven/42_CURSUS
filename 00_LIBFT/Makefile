@@ -6,7 +6,7 @@
 #    By: wnaseeve <wnaseeve@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/07 14:41:19 by wnaseeve          #+#    #+#              #
-#    Updated: 2022/12/12 11:56:20 by wnaseeve         ###   ########.fr        #
+#    Updated: 2023/01/02 19:13:35 by wnaseeve         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,12 @@ SRCS    = ft_atoi.c\
 	  ft_printf.c\
 	  get_next_line_utils.c\
 	  get_next_line.c\
-	  
+	  ft_swap.c\
+	  ft_freetab.c\
+	  ft_atol.c\
+	  ft_checkargs.c
+
+
 
 
 BNS		= ft_lstnew.c\
@@ -93,7 +98,7 @@ clean:
 fclean:		clean
 		rm  -f ${NAME}
 
-re:		fclean 
+re:		fclean
 		@make all
 
 .PHONY:		all clean fclean re .c .o bonus
