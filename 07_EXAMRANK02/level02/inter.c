@@ -1,53 +1,36 @@
 #include <unistd.h>
 
-void ft_putstr(char *str)
+int	checkdouble1(char *str, char c, int pos)
 {
-    int i = 0;
-    while (str[i])
-    {
-        write(1, &str[i], 1);
-        i++;
-    }
+	for (int i = 0; i < pos; i++)
+	{
+		if (str[i] == c)
+			return (0);
+	}
+	return (1);
 }
 
-int check_double(char *str, char c, int pos)
+void	ft_inter(char *str, char *base)
 {
-    int i = 0;
-    while (i < pos)
-    {
-        if (str[i] == c)
-            return (1);
-        i++;
-    }
-    return (0);
+	for (int i = 0; str[i]; i++)
+	{
+		for (int j = 0; base[j]; j++)
+		{
+			if (str[i] == base[j])
+			{
+				if (checkdouble1(str, str[i], i) == 1)
+				{
+					write(1, &str[i], 1);
+					break ;
+				}
+			}
+		}
+	}
 }
 
-void inter_c(char *str, char *base)
+int main(int ac, char *av[])
 {
-    int i = 0;
-    int j = 0;
-    while (str[i])
-    {
-        while (base[j])
-        {
-            if (str[i] == base[j])
-            {
-                if (check_double(str, str[i], i) == 0)
-                {
-                    write(1, &str[i], 1);
-                    break;
-                }
-            }
-            j++;
-        }
-        i++;
-    }
-}
-
-int main(int argc, char **argv)
-{
-	if (argc == 3)
-		inter_c(argv[1], argv[2]);
+	if (ac > 2)
+		ft_inter(av[1], av[2]);
 	write(1, "\n", 1);
-	return (0);
 }

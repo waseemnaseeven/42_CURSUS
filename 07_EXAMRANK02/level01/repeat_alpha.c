@@ -2,7 +2,7 @@
 
 int ft_count(char c)
 {
-    int count= 0;
+    int count = 0;
 
 	if (c >= 'A' && c <= 'Z')
 		count = c - 'A' + 1;

@@ -1,55 +1,45 @@
 #include <unistd.h>
 
-int check_doubles2(char *str, char c)
+int	checkdouble2(char *str, char c)
 {
-	int i = 0;
-	while (str[i])
-	{
-		if (str[i] == c)
-		{
-			return(0);
-		}
-		i++;
-	}
-	return (1);
-}
-
-int check_doubles1(char *str, char c, int pos)
-{
-	int i = 0;
-	while (i < pos)
+	for (int i = 0; str[i]; i++)
 	{
 		if (str[i] == c)
 			return (0);
-		i++;
 	}
 	return (1);
 }
 
-void	uni(char *str, char *base)
+int checkdouble1(char *str, int c, int pos)
 {
-	int i = 0;	
-	while (str[i])
+	for (int i = 0; i < pos; i++)
 	{
-		if (check_doubles1(str, str[i], i) == 1)
-			write(1, &str[i], 1);
-		i++;
+		if (str[i] == c)
+			return (0);
 	}
-	i = 0;
-	while (base[i])
+	return (1);
+}
+
+void	ft_union(char *str, char *base)
+{
+	for (int i = 0; str[i]; i++)
 	{
-		if (check_doubles2(str, base[i]) == 1)
+		if (checkdouble1(str, str[i], i) == 1)
+			write(1, &str[i], 1);
+	}
+	for (int j = 0; base[j]; j++)
+	{
+		if (checkdouble2(str, base[j]) == 1)
 		{
-			if (check_doubles1(base, base[i], i) == 1)
-				write(1, &base[i], 1);
+			if (checkdouble1(base, base[j], j) == 1)
+				write(1, &base[j], 1);
 		}
-		i++;
 	}
 }
 
-int main (int argc, char **argv)
+int main(int ac, char *av[])
 {
-	if (argc == 3)
-		uni(argv[1], argv[2]);
+	if (ac > 2)
+		ft_union(av[1], av[2]);
 	write(1, "\n", 1);
 }
