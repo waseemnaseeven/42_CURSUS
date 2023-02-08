@@ -34,7 +34,7 @@ Caling your function get_next_line in a lop will therefore allow you to read
 the text avaiable on a file descriptor one line at a time until the end of the 
 text, no matter the size od either the text or one of its lines.
 
-Make sure that your function behaves well when it reads from a file, from the
+Make sure that your function behaves wel when it reads from a file, from the
 standard output, from a redirection, etc...
 
 No call to another function will be done on the file descriptor between 2 calls
