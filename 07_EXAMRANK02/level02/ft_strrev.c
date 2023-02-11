@@ -17,12 +17,12 @@ char *ft_strrev(char *str)
     char b;
 
     if (!str)
-        return (0); 
+        return (0);
 
     while (i < len / 2)
     {
         a = str[i];
-        b = str[len -i];
+        b = str[len - i];
         str[len - i] = a;
         str[i] = b;
         i++;

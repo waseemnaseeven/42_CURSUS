@@ -2,7 +2,6 @@
 #include <stdio.h>
 
 
-
 int check(char c)
 {
     if ((c == 0) || (c >= 9 && c <= 13))
@@ -72,7 +71,6 @@ char **ft_split(char *str)
         while (*str && (check(*str) == 0))
             str++;
     }
-    new[i] = '\0';
     return (new);
 }
 
