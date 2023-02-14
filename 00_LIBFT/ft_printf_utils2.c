@@ -6,7 +6,7 @@
 /*   By: wnaseeve <wnaseeve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 18:59:00 by wnaseeve          #+#    #+#             */
-/*   Updated: 2022/12/12 11:43:35 by wnaseeve         ###   ########.fr       */
+/*   Updated: 2023/01/03 12:04:14 by wnaseeve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_convert(unsigned int nb, char *base, int len, unsigned int *count)
 		ft_convert(nb % len, base, len, count);
 	}
 	else
-		ft_putchar(base[nb], count);
+		ft_putcharprintf(base[nb], count);
 }
 
 void	ft_puthex(unsigned int nb, unsigned int *count)
@@ -54,7 +54,7 @@ void	ft_convertmem(unsigned long long nb, int len, unsigned int *count)
 		ft_convertmem(nb % len, len, count);
 	}
 	else
-		ft_putchar(nb[base], count);
+		ft_putcharprintf(nb[base], count);
 }
 
 void	ft_putmem(void *nb, unsigned int *count)
@@ -68,7 +68,7 @@ void	ft_putmem(void *nb, unsigned int *count)
 		*count += write(1, "(nil)", 5);
 		return ;
 	}
-	ft_putstr("0x", count);
+	ft_putstrprintf("0x", count);
 	nbr = (unsigned long long) nb;
 	base = "0123456789abcdef";
 	len = ft_strlen(base);

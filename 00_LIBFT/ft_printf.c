@@ -6,7 +6,7 @@
 /*   By: wnaseeve <wnaseeve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:33:58 by wnaseeve          #+#    #+#             */
-/*   Updated: 2022/12/12 11:43:22 by wnaseeve         ###   ########.fr       */
+/*   Updated: 2023/01/03 12:05:38 by wnaseeve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 void	ft_flags(const char format, va_list args, unsigned int *count)
 {
 	if (format == 's')
-		ft_putstr(va_arg(args, char *), count);
+		ft_putstrprintf(va_arg(args, char *), count);
 	else if (format == 'c')
-		ft_putchar(va_arg(args, int), count);
+		ft_putcharprintf(va_arg(args, int), count);
 	else if ((format == 'd' || format == 'i'))
-		ft_putnbr(va_arg(args, int), count);
+		ft_putnbrprintf(va_arg(args, int), count);
 	else if (format == 'u')
-		ft_putunbr(va_arg(args, unsigned int), count);
+		ft_putunbrprintf(va_arg(args, unsigned int), count);
 	else if (format == 'x')
 		ft_puthex(va_arg(args, unsigned int), count);
 	else if (format == 'X')

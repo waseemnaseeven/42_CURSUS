@@ -6,7 +6,7 @@
 /*   By: wnaseeve <wnaseeve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 12:35:03 by wnaseeve          #+#    #+#             */
-/*   Updated: 2022/11/18 17:29:34 by wnaseeve         ###   ########.fr       */
+/*   Updated: 2023/02/04 19:17:20 by wnaseeve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ char	**ft_split(char const *s, char c)
 // 	int i = 0;
 // 	//printf("%s\n", str);
 // 	//printf("%c\n", c);
-// 	tab = ft_split((char*)str, c); 
+// 	tab = ft_split((char*)str, c);
 // 	while (tab[i])
 // 	{
 // 		printf("%s\n", tab[i]);

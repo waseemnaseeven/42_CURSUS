@@ -6,7 +6,7 @@
 #    By: wnaseeve <wnaseeve@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/07 14:41:19 by wnaseeve          #+#    #+#              #
-#    Updated: 2023/01/02 19:13:35 by wnaseeve         ###   ########.fr        #
+#    Updated: 2023/02/02 14:57:41 by wnaseeve         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,9 +54,12 @@ SRCS    = ft_atoi.c\
 	  ft_swap.c\
 	  ft_freetab.c\
 	  ft_atol.c\
-	  ft_checkargs.c
-
-
+	  ft_checkargs.c\
+	  ft_putchar.c\
+	  ft_putstr.c\
+	  ft_putnbr.c\
+	  ft_strcpy.c\
+	  ft_strcmp.c\
 
 
 BNS		= ft_lstnew.c\
@@ -79,7 +82,7 @@ LIB	= ar rcs
 
 CC	= cc
 
-CFLAGS	= -Wall -Wextra -Werror
+CFLAGS	= -g3 -Wall -Wextra -Werror
 
 all:	$(NAME)
 

@@ -6,7 +6,7 @@
 /*   By: wnaseeve <wnaseeve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:37:14 by wnaseeve          #+#    #+#             */
-/*   Updated: 2022/12/12 11:43:34 by wnaseeve         ###   ########.fr       */
+/*   Updated: 2023/01/03 12:03:24 by wnaseeve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ int	ft_strlenprintf(char *c)
 	return (i);
 }
 
-void	ft_putchar(int c, unsigned int *count)
+void	ft_putcharprintf(int c, unsigned int *count)
 {
 	write(1, &c, 1);
 	(*count)++;
 }
 
-void	ft_putstr(char *c, unsigned int *count)
+void	ft_putstrprintf(char *c, unsigned int *count)
 {
 	int	i;
 
@@ -46,36 +46,36 @@ void	ft_putstr(char *c, unsigned int *count)
 	}
 }
 
-void	ft_putnbr(int nb, unsigned int *count)
+void	ft_putnbrprintf(int nb, unsigned int *count)
 {
 	if (nb == -2147483648)
 	{
-		ft_putchar('-', count);
-		ft_putnbr(2, count);
-		ft_putnbr(147483648, count);
+		ft_putcharprintf('-', count);
+		ft_putnbrprintf(2, count);
+		ft_putnbrprintf(147483648, count);
 	}
 	else if (nb < 0)
 	{
-		ft_putchar('-', count);
+		ft_putcharprintf('-', count);
 		nb = -nb;
-		ft_putnbr(nb, count);
+		ft_putnbrprintf(nb, count);
 	}
 	else if (nb > 9)
 	{
-		ft_putnbr((nb / 10), count);
-		ft_putnbr((nb % 10), count);
+		ft_putnbrprintf((nb / 10), count);
+		ft_putnbrprintf((nb % 10), count);
 	}
 	else
-		ft_putchar((nb + 48), count);
+		ft_putcharprintf((nb + 48), count);
 }
 
-void	ft_putunbr(unsigned int nb, unsigned int *count)
+void	ft_putunbrprintf(unsigned int nb, unsigned int *count)
 {
 	if (nb > 9)
 	{
-		ft_putnbr((nb / 10), count);
-		ft_putnbr((nb % 10), count);
+		ft_putunbrprintf((nb / 10), count);
+		ft_putunbrprintf((nb % 10), count);
 	}
 	else
-		ft_putchar((nb + 48), count);
+		ft_putcharprintf((nb + 48), count);
 }

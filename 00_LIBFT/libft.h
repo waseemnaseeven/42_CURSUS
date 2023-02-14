@@ -6,7 +6,7 @@
 /*   By: wnaseeve <wnaseeve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 14:42:40 by wnaseeve          #+#    #+#             */
-/*   Updated: 2023/01/02 19:10:57 by wnaseeve         ###   ########.fr       */
+/*   Updated: 2023/02/05 14:24:20 by wnaseeve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,13 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 }	t_list;
+
+typedef struct s_gnl
+{
+	char		*buf;
+	char		*line;
+	int			r_read;
+}	t_gnl;
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
@@ -86,11 +93,10 @@ void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 /* ********** ft_printf ********** */
-
-void	ft_putchar(int c, unsigned int *count);
-void	ft_putstr(char *c, unsigned int *count);
-void	ft_putnbr(int nb, unsigned int *count);
-void	ft_putunbr(unsigned int nb, unsigned int *count);
+void	ft_putcharprintf(int c, unsigned int *count);
+void	ft_putstrprintf(char *c, unsigned int *count);
+void	ft_putnbrprintf(int nb, unsigned int *count);
+void	ft_putunbrprintf(unsigned int nb, unsigned int *count);
 void	ft_puthex(unsigned int nb, unsigned int *count);
 void	ft_puthexmaj(unsigned int nb, unsigned int *count);
 void	ft_putmem(void *nb, unsigned int *count);
@@ -99,16 +105,21 @@ void	ft_flags(const char format, va_list args, unsigned int *count);
 int		ft_printf(const char *format, ...);
 
 /* ********** get_next_line ********** */
-
+int		ft_findnl(char *stash);
 size_t	ft_strlen_gnl(const char *s);
 char	*ft_strjoin_gnl(const char *s1, const char *s2);
 char	*ft_strdup_gnl(char *s);
-char	*get_next_line(int fd);
+char	*get_next_line(int fd, int boolean);
 
 /* ***** new functions ***** */
 void	ft_swap(int *a, int *b);
 int		ft_freetab(char **tab, int boolean);
 long	ft_atol(const char *nptr);
 int		ft_checkargs(int ac, char **av);
+void	ft_putchar(char c);
+void	ft_putstr(char *str);
+void	ft_putnbr(int nb);
+char	*ft_strcpy(char *dest, char *src);
+int		ft_strcmp(const char *s1, const char *s2);
 
 #endif
