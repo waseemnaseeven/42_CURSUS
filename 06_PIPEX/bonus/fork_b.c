@@ -6,7 +6,7 @@
 /*   By: wnaseeve <wnaseeve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:46:11 by wnaseeve          #+#    #+#             */
-/*   Updated: 2023/02/05 16:20:52 by wnaseeve         ###   ########.fr       */
+/*   Updated: 2023/02/14 16:21:24 by wnaseeve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ void	forking(t_pipex *args)
 			if (args->prev_pipes != -1)
 				close(args->prev_pipes);
 			args->prev_pipes = args->fd[0];
-			ft_wait(args);
 		}
 	}
 }

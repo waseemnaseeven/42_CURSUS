@@ -6,7 +6,7 @@
 #    By: wnaseeve <wnaseeve@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/15 14:14:09 by wnaseeve          #+#    #+#              #
-#    Updated: 2023/02/11 12:13:43 by wnaseeve         ###   ########.fr        #
+#    Updated: 2023/02/14 18:34:40 by wnaseeve         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,7 +65,7 @@ libft/libft.a:
 	${MAKE} -C libft
 
 valgrind:
-	valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all --track-fds=yes
+	valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all --track-fds=yes --show-reachable=yes
 
 norminette:
 	norminette *

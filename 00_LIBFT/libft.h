@@ -6,7 +6,7 @@
 /*   By: wnaseeve <wnaseeve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 14:42:40 by wnaseeve          #+#    #+#             */
-/*   Updated: 2023/02/05 14:24:20 by wnaseeve         ###   ########.fr       */
+/*   Updated: 2023/02/14 14:29:24 by wnaseeve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_gnl
 
 # endif
 
+/* ********** libft ********** */
 int		ft_atoi(const char *nptr);
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t count, size_t size);
