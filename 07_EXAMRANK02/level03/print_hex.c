@@ -5,14 +5,6 @@ void ft_putchar(char c)
     write(1, &c, 1);
 }
 
-int ft_strlen(char *str)
-{
-    int i = 0;
-    while (str[i])
-        i++;
-    return (i);
-}
-
 int ft_atoi(char *str)
 {
     int i = 0;
@@ -30,12 +22,11 @@ int ft_atoi(char *str)
 void ft_putnbr(int nb)
 {
     char *base = "0123456789abcdef";
-    int len = ft_strlen(base);
 
-    if (nb >= len)
+    if (nb >= 16)
     {
-        ft_putnbr(nb / len);
-        ft_putnbr(nb % len);
+        ft_putnbr(nb / 16);
+        ft_putnbr(nb % 16);
     }
     else
         ft_putchar(base[nb]);
