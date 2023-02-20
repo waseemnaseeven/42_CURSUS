@@ -6,7 +6,7 @@
 /*   By: wnaseeve <wnaseeve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 12:23:43 by wnaseeve          #+#    #+#             */
-/*   Updated: 2023/02/14 16:33:16 by wnaseeve         ###   ########.fr       */
+/*   Updated: 2023/02/20 15:20:03 by wnaseeve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int	main(int argc, char *argv[], char *env[])
 	get_env(args, env);
 	forking(args);
 	ft_wait(args);
-	ft_printf("%d\n", args->status);
 	close(args->fd[0]);
 	if (args->here_doc_here != -1)
 		unlink("tmp.txt");
