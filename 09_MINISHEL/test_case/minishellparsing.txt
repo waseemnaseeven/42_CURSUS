@@ -1,0 +1,46 @@
+Parsing 1 :
+
+Tableau de chaine,
+
+si arguments is: echo bonjour > 1 | ls -l >> 2
+alors tableau sera:
+cat bonjour
+> 1
+ls -l
+>> 2
+et flag dans structure struct->flagpipe= 1
+					   struct->nbCommands= 2
+					   struct->nbFd = 2
+
+gestions des quotes ?
+
+Parsing 2: Lexer and AST:
+
+Premiere etape tableau de chaine,
+si arguments is: echo bonjour > 1 | ls -l >> 2
+alors liste chaine
+cat
+bonjour
+>
+1
+|
+ls
+-l
+>>
+2
+
+implementation fonction:
+get_token() – qui renvoie le token actuel
+eat() – passe au token suivant
+get_next_token() – pour récupérer le suivant
+
+Deuxieme etape AST:
+
+						[ | ]
+			[ > ]				    [ >> ]
+	[ echo ]  		[ 1 ]		[ ls ]    [ 2 ]
+	[ bonjour ]                 [ -l ]
+
+
+
+

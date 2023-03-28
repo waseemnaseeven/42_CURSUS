@@ -1,0 +1,893 @@
+############################################# builtin/cd #############################################
+echo $PWD
+echo $OLDPWD
+cd .. && pwd && echo $PWD && echo $OLDPWD
+cd ../..
+cd ../../..
+cd ../../../..
+cd ../../../../..
+cd ../../../../../..
+cd / && pwd && echo $PWD && echo $OLDPWD
+cd '' && pwd && echo $PWD && echo $OLDPWD
+cd '' ''
+cd '' '' ''
+cd ' ' && pwd && echo $PWD && echo $OLDPWD
+cd d ''
+cd d d
+cd d ' '
+export HOME='/Users/ngasco' && cd $HOME && pwd && echo $PWD && echo $OLDPWD
+cd / && pwd && echo $PWD && echo $OLDPWD
+cd /.
+cd /./
+cd /././././
+cd //
+cd ///
+cd ////
+cd //////////////////////////////////////////////////////
+cd
+cd '/'
+cd ' / '
+cd '                  /'
+cd '                  /              '
+cd ' // '
+cd //home
+cd ' //home'
+cd '     //home    '
+Cd .
+cD .
+cD .
+
+############################################ builtin/echo ############################################
+echo
+echo bonjour
+echo lalalala lalalalal alalalalal alalalala
+echo lalalala                lalalalal      alalalalal alalalala
+echo Mollitia asperiores assumenda excepturi et ipsa. Nihil corporis facere aut a rem conseq...
+echo -n
+echo -n bonjour
+echo -n lalalala lalalalal alalalalal alalalala
+echo -n lalalala                lalalalal      alalalalal alalalala
+echo -n Mollitia asperiores assumenda excepturi et ipsa. Nihil corporis facere aut a rem con...
+echo bonjour -n
+echo -n bonjour -n
+                        echo                     bonjour             je
+                        echo       -n            bonjour             je
+echo a '' b '' c '' d
+echo a "" b "" c "" d
+echo -n a "" b "" c "" d
+echo '' '' ''
+Echo bonjour
+eCho bonjour
+ecHo bonjour
+echO bonjour
+EchO bonjour
+eCHo bonjour
+EcHo bonjour
+eChO bonjour
+echo -n -n -n -n bonjour
+echo -nnnnnnnnnnnnnnnnnnnnn bonjour
+echo -nnnnnnnnnnnnnnnnnnnnn -n -n -n bonjour -n -n
+
+############################################ builtin/env #############################################
+env
+export A=a && env
+export A=a B=b C=c && env
+Env
+enV
+Env
+enV
+
+############################################ builtin/exit ############################################
+exit
+exit 1
+exit 2
+exit 3
+exit ' 3'
+exit '	3'
+exit '	   3'
+exit '3 '
+exit '3	'
+exit '3 '
+exit '3	   '
+exit '3     a'
+exit '3			a'
+exit 0
+exit -0
+exit -1
+exit 255
+exit 256
+exit 2000000
+exit -2000000
+exit 2147483647
+exit -2147483648
+exit 2147483648
+exit -2147483649
+exit 3147483648
+exit -3147483649
+exit 4294967295
+exit 4294967296
+exit -9223372036854775808
+exit 9223372036854775807
+exit -9223372036854775809
+exit 9223372036854775808
+exit 18446744073709551615
+exit 18446744073709551616
+exit +1
+exit +2
+exit +3
+exit +0
+exit +255
+exit +256
+exit +2000000
+exit +2147483647
+exit ++1
+exit ++2
+exit ++3
+exit ++0
+exit ++255
+exit ++256
+exit ++2000000
+exit ++2147483647
+exit --1
+exit --2
+exit --3
+exit --0
+exit --255
+exit --256
+exit --2000000
+exit --2147483647
+exit bonjour
+exit 0_
+exit _0
+exit 0123456789
+exit -0123456789
+exit 00000000000000000000000000000000000000000000001
+exit 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+exit 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+exit -00000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+exit -99999999999999999999999999999999999999999999999999999999999999999999999999999999999999
+exit 9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
+exit 0 bonjour
+exit bonjour 0
+exit 0 1
+exit 0 1 2 3 4 5 6 7 8 9
+exit Mollitia asperiores assumenda excepturi et ipsa. Nihil corporis facere aut a rem conseq
+
+########################################### builtin/export ###########################################
+export
+[EXPORTS A=''] export
+[EXPORTS A='"'] export
+[EXPORTS A='\'] export
+[EXPORTS A='$'] export
+[EXPORTS A='	'] export
+[EXPORTS A='''] export
+[EXPORTS A='a'] export
+export A=a; echo $A
+export A=a B=b C=c; echo $A$B$C
+export A=a B=b C=c D=d E=e F=f G=g H=h I=i J=j K=k L=lM=m N=n O=o P=p Q=q R=r S=s T=t U=u
+export BONJOURJESUIS=a; echo $BONJOURJESUIS
+export bonjourjesuis=a; echo $bonjourjesuis
+export bonjour_je_suis=a; echo $bonjour_je_suis
+export BONJOURJESUIS1=a; echo $BONJOURJESUIS1
+export bO_nJq123o__1ju_je3234sui__a=a; echo $bO_nJq123o__1ju_je3234sui__a
+export a0123456789=a; echo $a0123456789
+export abcdefghijklmnopqrstuvwxyz=a; echo $abcdefghijklmnopqrstuvwxyz
+export ABCDEFGHIJKLMNOPQRSTUVWXYZ=a; echo $ABCDEFGHIJKLMNOPQRSTUVWXYZ
+export __________________________=a; echo $__________________________
+export _bonjour_=a; echo $_bonjour_
+export _=a; echo $_a
+export 1=a
+export BONJOURJESUIS= a
+export BONJOUR\\JESUIS=a
+export BONJOUR\'JESUIS=a
+export BONJOUR\"JESUIS=a
+export BONJOUR\$JESUIS=a
+export BONJOUR\&JESUIS=a
+export BONJOUR\|JESUIS=a
+export BONJOUR\;JESUIS=a
+export BONJOUR\_JESUIS=a
+export BONJOUR\0JESUIS=a
+export \B\O
+\ \ \ \ \ \ \ JOURJESUIS=a
+export A=\B\O
+\ \ \ \ \ \ \ JOURJESUIS; echo $A
+export A='bonjour je suis charles'; echo $A
+export A="bonjour je suis charles"; echo $A
+export A==a; echo $A
+export A===a; echo $A
+export A====a; echo $A
+export A=====a; echo $A
+export A======a; echo $A
+export A=a=a=a=a=a; echo $A
+export A 'asdf ' B ' asdf asdf asd f' ' asdf ' '' 'asdf ' C; echo $A$B$C
+export 'asdf ' B ' asdf asdf asd f' ' asdf ' '' 'asdf ' C; echo $A$B$C
+export A 'asdf ' B ' asdf asdf asd f' ' asdf ' '' 'asdf '; echo $A$B$C
+export A B C; echo $A$B$C
+export A B C; env
+export 'AH@'=nop
+export "AH'"=nop
+export 'AH"'=nop
+export 'AH$'=nop
+export 'AH!'=nop
+export 'AH|'=nop
+export 'AH;'=nop
+export 'AH&'=nop
+export 'AH\'=nop
+[EXPORTS TEST='A=a'] export $TEST
+export BONJOUR\\JESUIS
+export BONJOUR\'JESUIS
+export BONJOUR\"JESUIS
+export BONJOUR\$JESUIS
+export BONJOUR\&JESUIS
+export BONJOUR\|JESUIS
+export BONJOUR\;JESUIS
+export BONJOUR\_JESUIS
+export BONJOUR\0JESUIS
+Export B=bonjour
+exporT B=bonjour
+
+############################################ builtin/pwd #############################################
+pwd
+[SETUP cd ..] pwd
+[SETUP cd ../..] pwd
+[SETUP cd ../../..] pwd
+[SETUP cd /] pwd
+[SETUP cd $HOME] pwd
+pwd | cat -e
+[EXPORTS PWD='/etc'] pwd
+unset PWD && pwd && echo $PWD
+export PWD=foo; pwd; echo $PWD
+Pwd
+pwD
+
+########################################### builtin/unset ############################################
+unset
+                                                                                         [PASS]
+[EXPORTS A='a'] unset A; echo $A
+                                                              [FAIL]
+[EXPORTS A='a'] unset 'A '; echo $A
+                                                           [FAIL]
+[EXPORTS A='a'] unset 'A='; echo $A
+                                                           [FAIL]
+[EXPORTS A='a' B='b' C='c'] unset A B C; echo $A$B$C
+                                          [FAIL]
+[EXPORTS A='a' B='b' C='c'] unset A 'asdf ' B ' asdf asdf asd f' ' asdf ' '' 'asdf ' C; echo... [FAIL]
+[EXPORTS A='a' B='b' C='c'] unset 'asdf ' B ' asdf asdf asd f' ' asdf ' '' 'asdf ' C; echo $... [FAIL]
+[EXPORTS A='a' B='b' C='c'] unset A 'asdf ' B ' asdf asdf asd f' ' asdf ' '' 'asdf '; echo $... [FAIL]
+[EXPORTS A='a' B='b' C='c'] unset A; echo $A$B$C
+                                              [FAIL]
+[EXPORTS A='a' B='b' C='c'] unset C; echo $A$B$C
+                                              [FAIL]
+[EXPORTS A='a' B='b' C='c'] unset A B C
+                                                       [PASS]
+[EXPORTS A='a' B='b' C='c'] unset A 'asdf ' B ' asdf asdf asd f' ' asdf ' '' 'asdf ' C
+        [FAIL]
+[EXPORTS A='a' B='b' C='c'] unset 'asdf ' B ' asdf asdf asd f' ' asdf ' '' 'asdf ' C
+          [FAIL]
+[EXPORTS A='a' B='b' C='c'] unset A 'asdf ' B ' asdf asdf asd f' ' asdf ' '' 'asdf '
+          [FAIL]
+[EXPORTS A='a' B='b' C='c'] unset A
+                                                           [PASS]
+unset 'AH@'=nop
+                                                                               [FAIL]
+unset "AH'"=nop
+                                                                               [FAIL]
+unset 'AH"'=nop
+                                                                               [FAIL]
+unset 'AH$'=nop
+                                                                               [FAIL]
+unset 'AH!'=nop
+                                                                               [FAIL]
+unset 'AH|'=nop
+                                                                               [FAIL]
+unset 'AH;'=nop
+                                                                               [FAIL]
+unset 'AH&'=nop
+                                                                               [FAIL]
+unset 'AH\'=nop
+                                                                               [FAIL]
+Unset TERM
+unseT TERM
+[EXPORTS PATH='/bin:/usr/bin'] Unset TERM
+                                                     [FAIL]
+[EXPORTS PATH='/bin:/usr/bin'] unseT TERM
+                                                     [FAIL]
+############################################## cmd/cmd ###############################################
+notfound
+ 
+notfound a b c
+echo "'" >>a"b""c"  
+echo foo>bar
+echo foo >bar
+echo foo> bar
+echo foo > bar
+
+############################################ cmd/cmd_path ############################################
+[SETUP touch a b c] /bin/ls
+                                                                   [FAIL]
+[SETUP touch a b c] /bin/ls -l
+                                                                [FAIL]
+[SETUP touch a b c; cp /bin/ls bonjour] ./bonjour
+                                             [FAIL]
+[SETUP touch a b c; cp /bin/ls bonjour] ./bonjour -l
+                                          [FAIL]
+[SETUP mkdir somedir; touch a b c; touch somedir/d somedir/e;cp /bin/ls somedir/bonjour] ./s... [FAIL]
+[SETUP touch a b c; echo bonjour > a; cp /bin/cat ls] ./ls . a b c
+                            [FAIL]
+[SETUP touch a b c; echo bonjour > a; cp /bin/cat ls] ls . a b c
+                              [FAIL]
+[SETUP echo > somefile; chmod 000 somefile] ./somefile
+                                        [FAIL]
+[SETUP echo > somefile; chmod 001 somefile] ./somefile
+                                        [FAIL]
+[SETUP echo > somefile; chmod 002 somefile] ./somefile
+                                        [FAIL]
+[SETUP echo > somefile; chmod 003 somefile] ./somefile
+                                        [FAIL]
+[SETUP echo > somefile; chmod 004 somefile] ./somefile
+                                        [FAIL]
+[SETUP echo > somefile; chmod 005 somefile] ./somefile
+                                        [FAIL]
+[SETUP echo > somefile; chmod 006 somefile] ./somefile
+                                        [FAIL]
+[SETUP echo > somefile; chmod 007 somefile] ./somefile
+                                        [FAIL]
+[SETUP echo > somefile; chmod 010 somefile] ./somefile
+                                        [FAIL]
+[SETUP echo > somefile; chmod 020 somefile] ./somefile
+                                        [FAIL]
+[SETUP echo > somefile; chmod 030 somefile] ./somefile
+                                        [FAIL]
+[SETUP echo > somefile; chmod 040 somefile] ./somefile
+                                        [FAIL]
+[SETUP echo > somefile; chmod 050 somefile] ./somefile
+                                        [FAIL]
+[SETUP echo > somefile; chmod 060 somefile] ./somefile
+                                        [FAIL]
+[SETUP echo > somefile; chmod 070 somefile] ./somefile
+                                        [FAIL]
+[SETUP echo > somefile; chmod 100 somefile] ./somefile
+                                        [FAIL]
+[SETUP echo > somefile; chmod 200 somefile] ./somefile
+                                        [FAIL]
+[SETUP echo > somefile; chmod 300 somefile] ./somefile
+                                        [FAIL]
+[SETUP echo > somefile; chmod 400 somefile] ./somefile
+                                        [FAIL]
+[SETUP echo > somefile; chmod 500 somefile] ./somefile
+                                        [FAIL]
+[SETUP echo > somefile; chmod 600 somefile] ./somefile
+                                        [FAIL]
+[SETUP echo > somefile; chmod 700 somefile] ./somefile
+                                        [FAIL]
+[SETUP echo > somefile; chmod 755 somefile] ./somefile
+                                        [FAIL]
+[SETUP echo > somefile; chmod 644 somefile] ./somefile
+                                        [FAIL]
+[SETUP echo > somefile; chmod 311 somefile] ./somefile
+                                        [FAIL]
+[SETUP echo > somefile; chmod 111 somefile] ./somefile
+                                        [FAIL]
+[SETUP echo > somefile; chmod 222 somefile] ./somefile
+                                        [FAIL]
+[SETUP echo > somefile; chmod 333 somefile] ./somefile
+                                        [FAIL]
+[SETUP mkdir somedir] somedir/
+                                                                [FAIL]
+[SETUP mkdir somedir] ./somedir/
+                                                              [FAIL]
+[SETUP mkdir somedir] somedir
+                                                                 [FAIL]
+[SETUP mkdir somedir] ./somedir
+                                                               [FAIL]
+[SETUP mkdir somedir] somedir
+                                                                 [FAIL]
+[SETUP mkdir somedir; ln -s somedir somedirsoftlink] somedirsoftlink/
+                         [FAIL]
+[SETUP mkdir somedir; ln -s somedir somedirsoftlink] ./somedirsoftlink/
+                       [FAIL]
+[SETUP mkdir somedir; ln -s somedir somedirsoftlink] somedirsoftlink
+                          [FAIL]
+[SETUP mkdir somedir; ln -s somedir somedirsoftlink] ./somedirsoftlink
+                        [FAIL]
+[SETUP mkdir somedir; ln -s somedir somedirsoftlink] somedirsoftlink
+                          [FAIL]
+[SETUP touch somefile; ln -s somefile someremovedlink; rm -f somefile] ./someremovedlink
+      [FAIL]
+[SETUP touch somefile; ln -s somefile somelink1; ln -s somelink1 somelink2] ./somelink2
+       [FAIL]
+[SETUP touch somefile; ln -s somefile somelink1; ln -s somelink1 somelink2;ln -s somelink2 s... [FAIL]
+[SETUP touch somefile; ln -s somefile somelink1; ln -s somelink1 somelink2;ln -s somelink2 s... [FAIL]
+[SETUP cp /bin/ls somefile;ln -s somefile somelink1; ln -s somelink1 somelink2] ./somelink2ls
+ [FAIL]
+[SETUP cp /bin/ls somefile;ln -s somefile somelink1; ln -s somelink1 somelink2;ln -s somelin... [FAIL]
+[SETUP cp /bin/ls somefile;ln -s somefile somelink1; ln -s somelink1 somelink2;ln -s somelin... [FAIL]
+[SETUP touch _] _
+                                                                             [FAIL]
+[SETUP touch -] '-'
+                                                                           [FAIL]
+[SETUP touch _] ./_
+                                                                           [FAIL]
+[SETUP touch a; mv a ./-] ./-
+                                                                 [FAIL]
+[SETUP touch .] ./.
+                                                                           [FAIL]
+[SETUP touch ..] ./..
+                                                                         [FAIL]
+[SETUP echo > somefile && chmod 0777 somefile] ./somefile
+                                     [FAIL]
+[SETUP echo > somefile && chmod 1000 somefile] ./somefile
+                                     [FAIL]
+[SETUP echo > somefile && chmod 2000 somefile] ./somefile
+                                     [FAIL]
+[SETUP echo > somefile && chmod 3000 somefile] ./somefile
+                                     [FAIL]
+[SETUP echo > somefile && chmod 4000 somefile] ./somefile
+                                     [FAIL]
+[SETUP echo > somefile && chmod 5000 somefile] ./somefile
+                                     [FAIL]
+[SETUP echo > somefile && chmod 6000 somefile] ./somefile
+                                     [FAIL]
+[SETUP echo > somefile && chmod 7000 somefile] ./somefile
+                                     [FAIL]
+[SETUP echo > somefile && chmod 1777 somefile] ./somefile
+                                     [FAIL]
+[SETUP echo > somefile && chmod 2777 somefile] ./somefile
+                                     [FAIL]
+[SETUP echo > somefile && chmod 3777 somefile] ./somefile
+                                     [FAIL]
+[SETUP echo > somefile && chmod 4777 somefile] ./somefile
+                                     [FAIL]
+[SETUP echo > somefile && chmod 5777 somefile] ./somefile
+                                     [FAIL]
+[SETUP echo > somefile && chmod 6777 somefile] ./somefile
+                                     [FAIL]
+[SETUP echo > somefile && chmod 7777 somefile] ./somefile
+                                     [FAIL]
+[SETUP echo > somefile && chmod 0000 somefile] ./somefile
+                                     [FAIL]
+[SETUP mkdir -m 0777 somedir] ./somedir
+                                                       [FAIL]
+[SETUP mkdir -m 1000 somedir] ./somedir
+                                                       [FAIL]
+[SETUP mkdir -m 2000 somedir] ./somedir
+                                                       [FAIL]
+[SETUP mkdir -m 3000 somedir] ./somedir
+                                                       [FAIL]
+[SETUP mkdir -m 4000 somedir] ./somedir
+                                                       [FAIL]
+[SETUP mkdir -m 5000 somedir] ./somedir
+                                                       [FAIL]
+[SETUP mkdir -m 6000 somedir] ./somedir
+                                                       [FAIL]
+[SETUP mkdir -m 7000 somedir] ./somedir
+                                                       [FAIL]
+[SETUP mkdir -m 1777 somedir] ./somedir
+                                                       [FAIL]
+[SETUP mkdir -m 2777 somedir] ./somedir
+                                                       [FAIL]
+[SETUP mkdir -m 3777 somedir] ./somedir
+                                                       [FAIL]
+[SETUP mkdir -m 4777 somedir] ./somedir
+                                                       [FAIL]
+[SETUP mkdir -m 5777 somedir] ./somedir
+                                                       [FAIL]
+[SETUP mkdir -m 6777 somedir] ./somedir
+                                                       [FAIL]
+[SETUP mkdir -m 0000 somedir] ./somedir
+                                                       [FAIL]
+[SETUP echo > somefile && chmod 000 somefile] ./Somefile
+                                      [FAIL]
+[SETUP echo > somefile && chmod 000 somefile] ./someFILE
+                                      [FAIL]
+
+########################################## cmd/redirection ###########################################
+echo bonjour > test
+echo > test bonjour
+> test echo bonjour
+echo bonjour >> test
+echo >> test bonjour
+>> test echo bonjour
+cat < test
+echo > test'sticked' bonjour
+> test'sticked' echo bonjour
+echo bonjour >> test'sticked'
+echo >> test'sticked' bonjour
+>> test'sticked' echo bonjour
+cat < test'sticked'
+< test'sticked' cat
+echo > test"sticked" bonjour
+> test"sticked" echo bonjour
+echo bonjour >> test"sticked"
+echo >> test"sticked" bonjour
+>> test"sticked" echo bonjour
+cat < test"sticked"
+ < test"sticked" cat
+echo > test'yo'"sticked" bonjour
+> test'yo'"sticked" echo bonjour
+echo bonjour >> test'yo'"sticked"
+echo >> test'yo'"sticked" bonjour
+>> test'yo'"sticked" echo bonjour
+cat < test'yo'"sticked"
+< test'yo'"sticked" cat
+echo bonjour > test > je > suis
+echo > test > je bonjour > suis
+> test echo bonjour > je > suis
+echo bonjour >> test > je >> suis
+echo >> test bonjour > je > suis
+>> test echo > je bonjour > suis
+cat < test < je
+echo bonjour>test>je>suis
+>test echo bonjour>je>suis
+echo bonjour>>test>je>>suis
+echo bonjour > a'b'c'd'e'f'g'h'i'j'k'l'm'n'o'p'q'r's't'u'v'w'x'y'z'
+echo bonjour > a"b"c"d"e"f"g"h"i"j"k"l"m"n"o"p"q"r"s"t"u"v"w"x"y"z"
+echo bonjour > a'b'c"d"e'f'g"h"i'j'k"l"m'n'o"p'q'r"s't'u"v"w"x"y'z'
+> file
+ < file
+>   
+>> 
+<
+echo >
+echo >>
+echo <
+> test
+>> test
+< test
+echo foo >>> bar
+echo foo >>>> bar
+echo foo >>>>> bar
+cat << < bar
+cat << << bar
+cat <<<<< bar
+cat < doesnotexist
+echo bonjour >> a
+echo bonjour >> a >> a
+echo bonjour > a
+echo bonjour > a >> a
+
+############################################# cmd/status #############################################
+echo $?
+echo && echo $?
+notfound && echo $?
+cat < doesntexist; echo $?
+cat < noperm; echo $?
+echo
+notfound
+
+cat < doesntexist
+[SETUP echo bonjour > noperm; chmod 000 noperm] cat < noperm
+
+############################################# flow/pipe ##############################################
+cat /etc/shells | head -c 10
+cat -e /etc/shells | head -c 10
+cat -e /etc/shells | cat -e | head -c 10
+cat -e /etc/shells | cat -e | cat -e | head -c 10
+cat -e /dev/random | head -c 10
+cat -e /dev/random | cat -e | head -c 10
+cat -e /dev/random | cat -e | cat -e | head -c 10
+echo bonjour | cat
+echo bonjour | cat -e
+echo bonjour | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e
+echo|
+echo |
+echo | 
+|cat
+| cat
+ | cat
+echo bonjour | | cat -e
+echo bonjour | asdf
+asdf | echo bonjour
+echo a ||| echo b
+ls asdfasdf | echo a
+echo a | ls asdfasdf
+echo a > foo | cat -e
+echo a >> foo | cat -e
+echo a | cat -e < foo
+echo a > bar | cat -e < foo
+                                              [PASS]
+######################################### flow/syntax_error ##########################################
+< | a
+> | a
+>> | a   
+| < a
+| > a
+| >> a
+
+######################################### path/path_variable #########################################
+[EXPORTS PATH='doesnotexits'] echo $PATH
+[EXPORTS PATH='doesnotexits:asdfasdfas'] echo $PATH
+[EXPORTS PATH='a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:t:u:v:w:x:y:z'] echo $PATH
+[EXPORTS PATH='________'] echo $PATH
+[EXPORTS PATH='        '] echo $PATH
+[EXPORTS PATH='   :    '] echo $PATH
+[EXPORTS PATH='     /bin      '] echo $PATH
+[EXPORTS PATH='     /sbin      '] echo $PATH
+[EXPORTS PATH='/bin:/bin:/bin:/bin'] echo $PATH
+[EXPORTS PATH='/sbin:/sbin:/sbin:/sbin'] echo $PATH
+[EXPORTS PATH=''] echo $PATH
+[EXPORTS PATH=':'] echo $PATH
+[EXPORTS PATH=':::::::::::::::::::'] echo $PATH
+                                               [PASS]
+[EXPORTS PATH='/asdfasdf'] echo $PATH
+                                                         [PASS]
+[EXPORTS PATH='/usr/asdf:/usr/lib/asdfasdf'] echo $PATH
+                                       [PASS]
+[EXPORTS PATH='doesnotexits'] whoami
+                                                          [FAIL]
+[EXPORTS PATH='doesnotexits:asdfasdfas'] whoami
+                                               [FAIL]
+[EXPORTS PATH='a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:t:u:v:w:x:y:z'] whoami
+                   [FAIL]
+[EXPORTS PATH='________'] whoami
+                                                              [FAIL]
+[EXPORTS PATH='        '] whoami
+                                                              [FAIL]
+[EXPORTS PATH='   :    '] whoami
+                                                              [FAIL]
+[EXPORTS PATH='     /usr/bin      '] whoami
+                                                   [FAIL]
+[EXPORTS PATH='/usr/bin:/usr/bin:/usr/bin:/usr/bin'] whoami
+                                   [PASS]
+[EXPORTS PATH='     /sbin      '] whoami
+                                                      [FAIL]
+[EXPORTS PATH='/sbin:/sbin:/sbin:/sbin'] whoami
+                                               [FAIL]
+[EXPORTS PATH=''] whoami
+                                                                      [FAIL]
+unset PATH; whoami
+                                                                            [FAIL]
+[EXPORTS PATH=':'] whoami
+                                                                     [FAIL]
+[EXPORTS PATH=':::::::::::::::::::'] whoami
+                                                   [FAIL]
+[EXPORTS PATH='/asdfasdf'] whoami
+                                                             [FAIL]
+[EXPORTS PATH='/usr/asdf:/usr/lib/asdfasdf'] whoami
+                                           [FAIL]
+[SETUP unset PATH] whoami
+                                                                     [FAIL]
+[SETUP echo '#!/bin/sh
+echo bonjour' > somecmd; chmod +x somecmd] [EXPORTS PATH=''] somecmd
+  [PASS]
+[SETUP echo '#!/bin/sh
+echo bonjour' > somecmd; chmod +x somecmd] [EXPORTS PATH=':'] somecmd
+ [PASS]
+[SETUP echo '#!/bin/sh
+echo bonjour' > somecmd; chmod +x somecmd] [EXPORTS PATH='::::::::']... [PASS]
+[SETUP echo '#!/bin/sh
+echo bonjour' > somecmd; chmod +x somecmd] [EXPORTS PATH='/asdfasdf'... [FAIL]
+[SETUP echo '#!/bin/sh
+echo bonjour' > somecmd; chmod +x somecmd] [EXPORTS PATH='/usr/asdf:... [FAIL]
+[SETUP echo '#!/bin/sh
+echo bonjour' > somecmd; chmod +x somecmd; unset PATH] somecmd
+        [FAIL]
+[SETUP echo '#!/bin/sh
+echo bonjour' > somecmd; chmod +x somecmd] [EXPORTS PATH='/bin:'] so... [PASS]
+[SETUP echo '#!/bin/sh
+echo bonjour' > somecmd; chmod +x somecmd] [EXPORTS PATH=':/bin'] so... [PASS]
+[SETUP echo '#!/bin/sh
+echo bonjour' > somecmd; chmod +x somecmd] [EXPORTS PATH=':/bin:'] s... [PASS]
+[EXPORTS PATH='/usr/bin'] Whoami
+                                                              [PASS]
+[EXPORTS PATH='/usr/bin'] wHoAMi
+                                                              [PASS]
+[EXPORTS PATH='/usr/bIn'] whoami
+                                                              [PASS]
+[EXPORTS PATH='/Usr/bin'] whoami
+                                                              [PASS]
+[EXPORTS PATH='/usr/bIn'] Whoami
+                                                              [PASS]
+[EXPORTS PATH='/Usr/bin'] wHoami
+                                                              [PASS]
+[EXPORTS PATH=''] Whoami
+                                                                      [FAIL]
+[EXPORTS PATH=''] wHoami
+                                                                      [FAIL]
+
+###################################### preprocess/interpolation ######################################
+[EXPORTS TEST='bonjour'] echo $TEST
+[EXPORTS TEST='bonjour'] echo $TES
+[EXPORTS TEST='bonjour'] echo $TEST_
+[EXPORTS TEST='bonjour'] echo "|$TEST|"
+[EXPORTS TEST='bonjour'] echo "|$TES|"
+[EXPORTS TEST='bonjour'] echo "|$TEST_|"
+[EXPORTS TEST='bonjour'] echo '|$TEST|'
+[EXPORTS TEST='bonjour'] echo '|$TES|'
+[EXPORTS TEST='bonjour'] echo '|$TEST_|'
+[EXPORTS A='foo' B='bar' C='baz'] echo $A$B$C
+[EXPORTS A='foo' B='bar' C='baz'] echo "$A$B$C"
+[EXPORTS A='foo' B='bar' C='baz'] echo '$A$B$C'
+[EXPORTS A='foo' B='bar' C='baz'] echo $A,$B,$C
+[EXPORTS A='foo' B='bar' C='baz'] echo "$A,$B,$C"
+[EXPORTS A='foo' B='bar' C='baz'] echo '$A,$B,$C'
+[EXPORTS A='foo' B='bar' C='baz'] echo $A"$B"$C"A"$B"$C"
+[EXPORTS A='foo' B='bar' C='baz'] echo $A'$B'$C'A'$B'$C'
+[EXPORTS A='foo ' B=' bar  ' C='baz '] echo $A"$B"$C"A"$B"$C"
+[EXPORTS A='foo ' B=' bar  ' C='baz '] echo $A'$B'$C'A'$B'$C'
+echo $A
+echo $A$B
+echo $A$B$C
+echo $A$B$C$D
+[EXPORTS A='bonjour\je'] echo [$A]
+[EXPORTS A=' '] echo [$A]
+                                                                     [PASS]
+[EXPORTS A='    '] echo [$A]
+                                                                  [FAIL]
+[EXPORTS A='\ '] echo [$A]
+                                                                    [PASS]
+[EXPORTS A=' \  '] echo [$A]
+                           [FAIL]
+[EXPORTS A='bonjour je suis splited'] echo $A
+                                                 [PASS]
+[EXPORTS A='bonjour     je     suis    splited'] echo $A
+                                      [FAIL]
+[EXPORTS A='   bonjour     je     suis    splited   '] echo $A
+                                [FAIL]
+[EXPORTS A='bonjour je suis splited'] echo [$A]
+                                               [PASS]
+[EXPORTS A='bonjour     je     suis    splited'] echo [$A]
+                                    [FAIL]
+[EXPORTS A='   bonjour     je     suis    splited   '] echo [$A]
+                              [FAIL]
+[EXPORTS A='bonjour je suis splited'] echo "[$A]"
+                                             [PASS]
+[EXPORTS A='bonjour     je     suis    splited'] echo "[$A]"
+                                  [PASS]
+[EXPORTS A='   bonjour     je     suis    splited   '] echo "[$A]"
+                            [PASS]
+[EXPORTS A='bonjour je suis splited'] echo \ $A
+                                               [FAIL]
+[EXPORTS A='bonjour     je     suis    splited'] echo \ $A
+                                    [FAIL]
+[EXPORTS A='   bonjour     je     suis    splited   '] echo \ $A
+                              [FAIL]
+[EXPORTS A='bonjour je suis splited'] echo $A\ 
+                                               [FAIL]
+[EXPORTS A='bonjour     je     suis    splited'] echo $A\ 
+                                    [FAIL]
+[EXPORTS A='   bonjour     je     suis    splited   '] echo $A\ 
+                              [FAIL]
+[EXPORTS A='   bonjour     je     suis    splited   '] echo $A$A$A
+                            [FAIL]
+[EXPORTS ECHO='echo'] $ECHO $ECHO
+                                                             [PASS]
+[EXPORTS A='ec' B='ho'] $A$B bonjour
+                                                          [PASS]
+[SETUP touch a b c] [EXPORTS LS='ls -l'] $LS
+                                                  [FAIL]
+echo $
+                                                                                        [PASS]
+echo \$
+  
+echo \$\$\$\$
+                                                                                 [FAIL]
+echo \$$\$$
+                                                                                   [FAIL]
+[EXPORTS A='a' B='b'] echo $\A $\B
+                                                            [FAIL]
+[EXPORTS A='a' B='b'] echo $\A$\B
+                                                             [FAIL]
+[EXPORTS A=' '] echo $A
+                                                                       [FAIL]
+[EXPORTS A='  '] echo $A
+                                                                      [FAIL]
+[EXPORTS A='   '] echo $A
+                                                                     [FAIL]
+[EXPORTS A='    '] echo $A
+                                                                    [FAIL]
+[EXPORTS A='  a '] echo $A
+                                                                    [FAIL]
+[EXPORTS A='                                '] echo $A
+                                        [FAIL]
+[EXPORTS A='                     a          '] echo $A
+                                        [FAIL]
+[EXPORTS A=' '] echo @$A@
+                                                                     [PASS]
+[EXPORTS A=' '] echo @ $A@
+                                                                    [FAIL]
+[EXPORTS A=' '] echo @$A @
+                                                                    [FAIL]
+[EXPORTS A='       '] echo @$A@
+                                                               [FAIL]
+[EXPORTS A=' '] echo '@'$A'@'
+                                                                 [FAIL]
+[EXPORTS A=' '] echo '@' $A'@'
+                                                                [FAIL]
+[EXPORTS A=' '] echo '@'$A '@'
+                                                                [FAIL]
+[EXPORTS A=' '] echo "@"$A"@"
+                                                                 [FAIL]
+[EXPORTS A=' '] echo "@" $A"@"
+                                                                [FAIL]
+[EXPORTS A=' '] echo "@"$A "@"
+                                                                [FAIL]
+[EXPORTS A=' '] echo @"$A"@
+                                                                   [FAIL]
+[EXPORTS A=' '] echo @ "$A"@
+                                                                  [FAIL]
+[EXPORTS A=' '] echo @"$A" @
+                                                                  [FAIL]
+[EXPORTS A='       '] echo @"$A"@
+                                                             [FAIL]
+[EXPORTS A=' '] echo '@'"$A"'@'
+                                                               [FAIL]
+[EXPORTS A=' '] echo '@' "$A"'@'
+                                                              [FAIL]
+[EXPORTS A=' '] echo '@'"$A" '@'
+                                                              [FAIL]
+[EXPORTS A=' '] echo "@""$A""@"
+                                                               [FAIL]
+[EXPORTS A=' '] echo "@" "$A""@"
+                                                              [FAIL]
+[EXPORTS A=' '] echo "@""$A" "@"
+                                                              [FAIL]
+[EXPORTS A='' B='' C=''] echo $A$B$C
+                                                          [PASS]
+[EXPORTS A='file'] echo bonjour > $A
+                                                          [FAIL]
+[EXPORTS A='fi le'] echo bonjour > $A
+                                                         [FAIL]
+[EXPORTS A='fi le'] echo bonjour > "$A"
+                                                       [FAIL]
+[EXPORTS A='fi le'] echo bonjour > '$A'
+                                                       [FAIL]
+########################################## preprocess/quote ##########################################
+'echo' 'bonjour'
+'echo' 'je' 'suis' 'charles'
+"echo" "bonjour"
+"echo" "je" "suis" "charles"
+echo je'suis'"charles"
+echo "je"suis'charles'
+echo 'je'"suis"charles
+ls ""
+ls ''
+ls "" "" "" '' """"
+ls '' '' '''' ''
+'     echo' bonjour
+'echo     ' bonjour
+"     echo" bonjour
+"echo     " bonjour
+''echo bonjour
+""echo bonjour
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''echo bonjour
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""echo bonjour
+echo'' bonjour
+echo"" bonjour
+echo'''''''''''''''''''''''''''''''''''''''''''''''''''''''''' bonjour
+echo"""""""""""""""""""""""""""""""""""""""""""""""""""""""""" bonjour
+ec''ho bonjour
+ec""ho bonjour
+ec''''''''''''''''''''''''''''''''''''''''''''''''''''''''''ho bonjour
+ec""""""""""""""""""""""""""""""""""""""""""""""""""""""""""ho bonjour
+'''''''e''''''''''c''''''''''''h''''''''o''''''''''''''''''''' bonjour
+"""""""e""""""""""c""""""""""""h""""""""o""""""""""""""""""""" bonjour
+echo '"'
+echo '""""""""""""""""""""""""""'
+echo "'"
+echo "''''''''''''''''''''''''''"
+echo '
+echo "
+echo '''
+echo """
+echo '''''''''''''''''''''''''''''''''''''''''''
+echo """"""""""""""""""""""""""""""""""""""""""""
+echo bonjour > "fi le"
+echo bonjour > 'fi le'
+
+######################################### preprocess/spaces ##########################################
+echo foo
+echo                    foo
+             echo foo
+echo foo             
+         echo           foo             
+echo										foo
+						echo	foo
+echo	foo						
+				echo				foo				
+ echo foo
+
+echo
+foo
+ echo foo
+echofoo
