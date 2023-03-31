@@ -13,6 +13,7 @@ PROJECTS FROM NEWEST TO OLDEST
 
 | Name  | Language      | End Date      |                       Description                 | Estimated effort (h)   | Hours i spent|
 | ----- |:-------------:| :-----------: | :------------------------------------------------:| :---------------------:| :------------:|
+| [minishell](https://github.com/waseemnaseeven/42_CURSUS/tree/main/09_MINISHEL) |C| Mars 2022 | Create a simple minishell | 210  | 198 |
 | [ExamRank03](https://github.com/waseemnaseeven/42_CURSUS/tree/main/04_EXAMRANK02) |C| Fevrier 2022 | re_work of get_next_line and ft_printf for the exam | ...  | ... |
 | [ExamRank02](https://github.com/waseemnaseeven/42_CURSUS/tree/main/04_EXAMRANK02) |C| Fevrier 2022| Some exercises before the exam | ...  | ... |
 | [pipex](https://github.com/waseemnaseeven/42_CURSUS/tree/main/06_PIPEX) |C| Jan/Fevrier 2022 | This project aims to deepen your understanding of the two concepts: Redirections and Pipes. Had to handle multiple pipe and heredoc as well (bonus) | 50  | 42 |
