@@ -1,15 +1,19 @@
-/*
-	- Sonne + comme un pipex qu'un minishell
-	- implémentation "|" et ";"
-	- implémentation de cd (bas de gamme)
-*/
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/wait.h>
 
-int		ft_strlen(char *src)
+typedef struct s_data
 {
-	int ret = 0;
-	for (int i = 0; src[i]; i++)
-		ret = i;
-	return (ret);
+	int	fd[2];
+	pid_t pid[4096];
+}	t_data;
+
+int		ft_strlen(char *str)
+{
+	int i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }
 
 char	*ft_strdup(char *src)
@@ -24,5 +28,8 @@ char	*ft_strdup(char *src)
 
 int main(int ac, char *av[], char *envp[])
 {
-	
+	(void) av;
+	(void) ac;
+	(void) envp;
+	t_data data;
 }
