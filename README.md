@@ -13,7 +13,10 @@ PROJECTS FROM NEWEST TO OLDEST
 
 | Name  | Language      | End Date      |                       Description                 | Estimated effort (h)   | Hours i spent|
 | ----- |:-------------:| :-----------: | :------------------------------------------------:| :---------------------:| :------------:|
-| [minishell](https://github.com/waseemnaseeven/42_CURSUS/tree/main/09_MINISHEL) |C| Mars 2023 | Create a simple minishell | 210  | 198 |
+| [cub3D](https://github.com/waseemnaseeven/42_CURSUS/tree/main/12_CUB3D) |C| Avril 2023 | Implement a microshell | 280  | 280 |
+| [examRank04](https://github.com/waseemnaseeven/42_CURSUS/tree/main/11_EXAMRANK04) |C| Avril 2023 | Implement a microshell | ...  | ... |
+| [philosopher](https://github.com/waseemnaseeven/42_CURSUS/tree/main/10_PHILO) |C| Avril 2023 | A way to learn about threads, mutex with the dining philosphers exercises | 70 | 36 |
+| [minishell](https://github.com/waseemnaseeven/42_CURSUS/tree/main/09_MINISHEL) |C| Mars 2023 | Create a simple minishell | 210  | 179 |
 | [examRank03](https://github.com/waseemnaseeven/42_CURSUS/tree/main/04_EXAMRANK02) |C| Fevrier 2023 | re_work of get_next_line and ft_printf for the exam | ...  | ... |
 | [examRank02](https://github.com/waseemnaseeven/42_CURSUS/tree/main/04_EXAMRANK02) |C| Fevrier 2023| Some exercises before the exam | ...  | ... |
 | [pipex](https://github.com/waseemnaseeven/42_CURSUS/tree/main/06_PIPEX) |C| Jan/Fevrier 2023 | This project aims to deepen your understanding of the two concepts: Redirections and Pipes. Had to handle multiple pipe and heredoc as well (bonus) | 50  | 42 |
