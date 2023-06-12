@@ -13,7 +13,7 @@ PROJECTS FROM NEWEST TO OLDEST
 
 | Name  | Language      | End Date      |                       Description                 | Estimated effort (h)   | Hours i spent|
 | ----- |:-------------:| :-----------: | :------------------------------------------------:| :---------------------:| :------------:|
-| [cub3D](https://github.com/waseemnaseeven/42_CURSUS/tree/main/12_CUB3D) |C| Avril 2023 | Implement a microshell | 280  | 280 |
+| [cub3D](https://github.com/waseemnaseeven/42_CURSUS/tree/main/12_CUB3D) |C| May/June 2023 | Implement a raycasting  | 280  | 280 |
 | [examRank04](https://github.com/waseemnaseeven/42_CURSUS/tree/main/11_EXAMRANK04) |C| Avril 2023 | Implement a microshell | ...  | ... |
 | [philosopher](https://github.com/waseemnaseeven/42_CURSUS/tree/main/10_PHILO) |C| Avril 2023 | A way to learn about threads, mutex with the dining philosphers exercises | 70 | 36 |
 | [minishell](https://github.com/waseemnaseeven/42_CURSUS/tree/main/09_MINISHEL) |C| Mars 2023 | Create a simple minishell | 210  | 179 |
