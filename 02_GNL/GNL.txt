@@ -1,0 +1,46 @@
+			                        CE QUE JE DOIS RETENIR DE GNL
+
+COMPREHENSION GENERALE : exemple "Hello world.\n Goodbye.fin de fichier"
+	- lorsqu'on read a 5nbytes, on lit Hello mais arriver au \n, on doit stocker ce qu'on a lu jusqu'a arriver au \n
+	- après avoir lu, on met dans une autre variable ce qu'on a lu JUSQU'AU \n mais s'il y a plusieurs lettres après, il faut
+	  garder ces valeurs là
+
+FD = 
+	- descripteur de fichier depuis lequel lire
+	- return le contenu de la ligne lue 
+
+- On doit return la ligne lue suivie du \n SAUF dans le cas ou on a atteint la fin du fichier et que ce dernier
+  ne termine pas par un \n
+
+COMPILATION = 
+	- -D : pour define le nom d'un préprocceur comme BUFFER_SIZE=42
+	- gcc -Wall -Wextra -Werror -fsanitize=address
+
+FONCTIONS A UTILISER : 
+	- EXPLICATION DU CODE AU SEIN DU .c
+	- ft_strchr pour trouver le '\n'
+	- ft_strjoin = concaténer ce qu'on a lu
+	- ft_strtrim(mais pas vraiment) = get_first_pos jusqu'au \n et retourner cette valeur 
+
+
+PROTOTYPE DE READ :  size_t read(int fildes, void *buf, size_t nbytes)
+	- nbytes : le nombre de donnees lu (BUFFER_SIZE) 
+	- int fildes : le fd, donc le fichier qu'on aura reussi a ouvrir, on lui envoie le signal
+	- buf : il pointe vers ce qu'on a lu, on y stocke la lecture
+	- Si on se situe a la fin du fichier elle renvoie 0
+
+VARIABLE STATIC : 
+	- Garder la valeur dans ma variable après le premier appel de la fonction
+
+HOW TO TEST :
+	- une phrase + \n
+	- trois phrases 
+	- rien
+	- plusieurs saut de ligne
+	- BUFFER_SIZE tres tres enorme
+
+HOMEWORK = 
+	- effectuer tous les tests seul puis tester
+	- normer 
+	VENDREDI = 
+		- push

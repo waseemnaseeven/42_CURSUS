@@ -1,0 +1,143 @@
+					CE QUE JE DOIS RETENIR DE FT_PRINTF
+
+Apprehension de tous les typages possibles en C :
+
+- donnée chaine de caractère = %s (DONE)
+- donnée de type caractère codé sur un octet = %c (DONE)
+- donnée entière décimale signé (int) = %d et %i (DONE)
+- donnée adresse en mémoire présentée sous forme héxadécimale = %p (DONE)
+- unsigned int = %u (DONE)
+- donnée entière affichée en héxadécimal = %x  (DONE)
+- donnée hexa en majusucle = %X (DONE)
+- %% (DONE)
+
+---------------------------------------------------------------------
+
+Utilisation de fonction variadic :
+	- prototype va_start(va_list ptr, argN);
+		- va_list est un POINTEUR jusqu'au dernier argument de la liste de ma fonction
+		- argN c'est tous les arguments (on va mettre 3 petits points)
+	- protoype va_arg(va_list ptr, type);
+		- un pointeur sur ma liste
+		- remplacer type par un type voulu : int, char ...
+	- prototype va_end(va_list ptr)
+		- met fin à la lecture/ecriture
+
+Compréhension du prototype : int ft_printf(const char *format, ...) :
+	- printf c'est :
+		- Soit un format (% puis d,i,p,c,s qui sont les pts d'injections, les types)
+		- Soit une chaine de caractère et dans ce cas-là il faut print du texte
+	- On parcourt la chaine de caractère format : 
+		- Si dans la chaine on trouve '%' alors :
+			- Si dans [la chaine + 1], il y a un '%' alors écrire dans la valeur de retour la chaine
+			- Sinon, => Chercher les flags 
+		- Sinon, on affiche une chaine de caractère : 
+
+=> Chercher les flags : 
+		- Si s = putstr + count 
+		- Si c = putchar + count
+		- Si d ou i = putnbr + count
+		- Si u = putunbr + count
+		- si x = puthex + count
+		- si X = putHex + count
+		- si p = putmem + count
+
+Makefile : 
+	- 
+
+
+TEST = 
+	=> d et i :
+		- min
+		- max
+		- 0
+		- NULL
+	=> s :
+		- NULL
+		- \0
+		- string
+	=> c :
+		- NULL
+		- \0
+		- carac
+	=> u :
+		- umin
+		- umax
+		- 0
+		- NULL
+
+int main(void)
+{
+	char *p = NULL;
+
+	printf("\n**********COMPARAISON AVEC LA VRAIE FONCTION**********\n\n");
+
+	ft_printf("POUR LE d : \n\n");
+	printf("longueur de mon exemple w/ printf : %d\n", printf("%d\n", 2147483647));
+	printf("MA FONCTION FT_PRINTF: %d\n", ft_printf("%d\n", 2147483647));
+	// printf("longueur de mon exemple w/ printf : %d\n", printf("%d\n", -2147483648));
+	printf("MA FONCTION FT_PRINTF: %d\n", ft_printf("%d\n", -2147483648));
+	printf("longueur de mon exemple w/ printf : %d\n", printf("%d\n", 0));
+	printf("MA FONCTION FT_PRINTF: %d\n", ft_printf("%d\n", 0));
+	// printf("longueur de mon exemple w/ printf : %d\n", printf("%d\n", NULL));
+	printf("MA FONCTION FT_PRINTF: %d\n", ft_printf("%d\n", NULL));
+
+	ft_printf("\nPPOUR LE c : \n");
+	printf("longueur de mon exemple w/ printf : %d\n", printf("%c\n", 'a'));
+	printf("MA FONCTION FT_PRINTF: %d\n", ft_printf("%c\n", 'a'));
+	printf("longueur de mon exemple w/ printf : %d\n", printf("%c %c %c \n", '\0', 0, '1'));
+	printf("MA FONCTION FT_PRINTF: %d\n", ft_printf("%c %c %c \n", '\0', 0, '1'));
+
+	ft_printf("\nPOUR LE s: \n");
+	printf("longueur de mon exemple w/ printf : %d\n", printf("%s\n", "Hello world"));
+	printf("MA FONCTION FT_PRINTF:: %d\n", ft_printf("%s\n", "Hello world"));
+	printf("longueur de mon exemple w/ printf : %d\n", printf("%s\n", "\0"));
+	printf("MA FONCTION FT_PRINTF: : %d\n", ft_printf("%s\n", "\0"));
+	printf("longueur de mon exemple w/ printf : %d\n", printf(" NULL %s NULL ", p));
+	printf("MA FONCTION FT_PRINTF: : %d\n", ft_printf(" NULL %s NULL ", p));
+
+
+	ft_printf("\nPOUR LE u : \n");
+	printf("longueur de mon exemple w/ printf : %d\n", printf("%u\n", UINT_MAX));
+	printf("MA FONCTION FT_PRINTF: : %d\n", ft_printf("%u\n", UINT_MAX));
+	printf("longueur de mon exemple w/ printf : %d\n", printf("%u\n", 0));
+	printf("MA FONCTION FT_PRINTF: : %d\n", ft_printf("%u\n", 0));
+
+	ft_printf("\nPOUR LE x : \n");
+	printf("longueur de mon exemple w/ printf : %d\n", printf("%x\n", 42949672));
+	printf("MA FONCTION FT_PRINTF: %d\n", ft_printf("%x\n", 42949672));
+	printf("longueur de mon exemple w/ printf : %d\n", printf("%x\n", -429496729));
+	printf("MA FONCTION FT_PRINTF: %d\n", ft_printf("%x\n", -429496729));
+	printf("longueur de mon exemple w/ printf : %d\n", printf("%x\n", 0));
+	printf("MA FONCTION FT_PRINTF: %d\n", ft_printf("%x\n", 0));
+
+	ft_printf("\nPOUR LE X MAJUSCULE : \n");
+	printf("longueur de mon exemple w/ printf : %d\n", printf("%X\n", 42949672)); // 28F5C28
+	printf("MA FONCTION FT_PRINTF: %d\n", ft_printf("%X\n", 42949672)); // 28F5C28
+	printf("longueur de mon exemple w/ printf : %d\n", printf("%X\n", -429496729));
+	printf("MA FONCTION FT_PRINTF: %d\n", ft_printf("%X\n", -429496729));
+	printf("longueur de mon exemple w/ printf : %d\n", printf("%X\n", 0));
+	printf("MA FONCTION FT_PRINTF: %d\n", ft_printf("%X\n", 0));
+
+	unsigned long int a = 16546;
+	void *ptr_a = &a;
+
+	void *ptr1 = NULL;
+	
+	ft_printf("Pour le p : \n");
+	printf("longueur de mon exemple w/ printf : %d\n", printf("%p\n", &ptr_a));
+	printf("MA FONCTION FT_PRINTF: %d\n", ft_printf("%p\n", &ptr_a));
+	// printf("longueur de mon exemple w/ printf : %d\n", printf("%x\n", 4294967295));
+	// printf("MA FONCTION FT_PRINTF: %d\n", ft_printf("%x\n", 4294967295));
+	// printf("longueur de mon exemple w/ printf : %d\n", printf("%x\n", 0));
+	// printf("MA FONCTION FT_PRINTF: %d\n", ft_printf("%x\n", 0));
+	printf("%p\n", &main);
+	ft_printf("%p\n", &main);
+	printf("%p\n", ptr1);
+	ft_printf("%p\n", ptr1);
+	
+	ft_printf("Pour le mix : \n");
+
+}
+
+VALIDATION AVANT LE 10 DECEMBRE

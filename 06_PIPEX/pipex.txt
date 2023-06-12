@@ -1,0 +1,81 @@
+new_cmds:
+
+- history
+- htop
+
+La fonction pipe() en C est utilisée pour créer un pipe, qui est un canal de communication
+unidirectionnel entre des processus. Les processus peuvent utiliser les entrées et sorties
+standard (stdin et stdout) pour lire et écrire dans le pipe, respectivement.
+
+la fonction fork va nous permettre de dupliquer le processus principal (parent)
+en sous processus (enfant).
+
+la fonction wait va nous permettre de stopper l'execution du parent tant que l'enfant n'a
+pas fini d'exécuter son process.
+
+dup2()  transforme  newfd  en  une copie de oldfd, fermant auparavant newfd si besoin
+
+here_doc = une manière de déclarer une chaîne de caractères dans les interpréteurs de commandes comme les shells Unix
+
+"|" a deux fd = fd[0](read) et fd[1](write)
+
+cmd1 | cmd2 = pipe va lire sur la sortie de cmd1 et l'injecter sur cmd2
+
+dup2 va dupliquer le fd du premier parametre dans le deuxieme parametre
+
+< file1 = permet d'ajouter a un fichier
+
+<< permet d'ecrire dans un fichier jusqu'a ecriture du delimiteur
+
+> = truncate (supprime puis ecris)
+
+>> = append (ajoute a la suite)
+
+Dans le parent:
+	printf("%i|%i|%i\n", args->fd[0], args->fd[1], args->prev_pipes);
+
+techniques ++:
+	return (free(stash), NULL);
+	
+test : 
+- [ ]  ./pipex infile outfile
+- [ ]  << cat | cat > outfile (rien dans outfile mais error in pipex)
+⇒ ./pipex here_doc “cat” “cat” outfile
+- [ ]  bash: < infile       cat |        cat > outfile
+⇒ ./pipex infile “         cat” “             cat” outfile
+- [ ]  bash: < infile      cat       -e         | cat > outifle
+⇒ ./pipex infile “       cat         -e        ” “cat” outfile
+- [ ]  bash: << EOF cat | cat >> outfile
+⇒ ./pipex here_doc EOF “cat” “cat” outfile
+- [ ]  bash: << “” cat | cat >> outfile
+⇒ ./pipex here_doc “” “cat” “cat” outfile
+- [ ]  bash: < infile | > outfile
+⇒ ./pipex infile “” “” outfile
+- [ ]  bash: < infile | | > outfile
+⇒ ./pipex infile “” “” “” outfile
+- [ ]  bash: < infile /cat | cat > outfile
+⇒ ./pipex infile “/cat” “cat” outfile
+- [ ]  bash: < infile /usr/bin/cat | cat > outfile
+⇒ ./pipex infile “/usr/bin/cat” “cat” outfile
+- [ ]  bash: env -i < infile cat | cat > outfile
+⇒ ./pipex infile “/usr/bin/cat” “cat” outfile
+- [ ]  bash: env -i < infile /usr/bin/cat | cat > outfile
+⇒ ./pipex infile “/usr/bin/cat” “cat” outfile
+- [ ]  bash: < infile badcmd | ls > outfile
+⇒ ./pipex infile “badcmd” “ls” outfile
+- [ ]  bash: < infile ls | badcmd > outfile
+⇒ ./pipex infile “ls” “badcmd” outfile
+- [ ]  bash: < sleep 5 | sleep 5 > outfile
+⇒ ./pipex infile “sleep 5” “sleep 5”
+- [ ]  bash: < notexist cat | cat > outfile
+⇒ ./pipex notexist “cat” “cat” outfile
+- [ ]  bash: < infile cat | cat > notexist
+⇒ ./pipex infile “cat” “cat” notexist
+- [ ]  bash: < infile cat | cat not_outfile
+⇒ ./pipex infile “cat” “cat” not_outfile
+- [ ]  bash: < infile yes | head > outfile
+⇒ ./pipex infile “yes” “head” outfile
+- [ ]  bash: < /dev/stdin cat | cat > /dev/stdout
+⇒ ./pipex /dev/stdin “cat” “cat” /dev/stdout
+- [ ]  bash: < /dev/stdin cat | echo hello | cat > /dev/stdout
+⇒ ./pipex /dev/stdin “cat” “echo hello” “cat” /dev/stdout

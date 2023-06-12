@@ -1,0 +1,317 @@
+				CE QUE JE DOIS RETENIR DE LA LIBFT
+
+Comment compiler a partir du libft.a = 
+	- gcc <myfunctiontest> -L. -lft
+		- -L. = on lui demande de theck la librairie (le point pour lui dire qu'il se trouve dans notre dossier meme)
+		- -l [pour lib] et ft [notre librairie s'appelle 42]
+
+Gerer les constantes = 
+	- ex: const char *src
+		ft_strlen((char *)s1);
+	- caster pour indiquer quels types donner
+
+Makefile =
+	- Dans un Makefile, on definit des taches a realiser pour compiler les fichiers .c en fichier binaire .o
+	- ${EXAMPLE} est une variable de reference, on se sert de ces var pour realiser les commandes que l'on souhaite
+	- commande qui tchek et test la libft.a = ar -t libft.a 
+	- LIB commande 'ar' creer, modifie et extrait des donnees et en faire une librairie
+		r = remplace
+		c = crer un archive
+		s = ajoute un index
+	- CPPFLAGS  = flag de preprocesseur, 
+	- MMD (un flag de preprocesseur: cree fichier dependance en .d)
+	- INCS = include la biblio
+	- make -j = multi-threading (ca va plus vite)
+
+Valgrind = 
+	- valgrind --leak-check=full ./a.out
+	- gcc -Wall -Wextra -Werror -fsanitize=address
+
+GDB = 
+	- gcc -g3
+	- gdb ./a.out --tui = pour avoir l'écran
+
+Static function = 
+	- les fonctions static servent a restreindre la fonction auxilliaire a resoudre la fonction complexe
+	- Pq ? Les fonctions auxilliaires sont utilisees ailleurs, static permet d'eviter un conflit entre celles-ci
+
+Le file descriptor =
+	- un fd gere des operations comme 'open, close, read, write' 
+	- un fd est un int qui gere l'input et l'output
+	- Concretement, lorsqu'on ouvre un fichier, kernel creer une entree pour representer ce fichier et stocker des infos
+	  par rapport a ce fichier. Ces entrees sont representees par des int. Un fd est donc un nombre ou un chiffre qui represente
+	  qui des fichiers ouverts.
+
+=> ft_atoi.c [DONE]
+	- Convertir un const char en int
+	- il fallait gérer les + et les - 
+	- 3 var :
+		- i pour index
+		- res pour le res de la conversion du char en int
+		- sign
+	-> TEST = 
+		- tester avec la vraie fonction
+
+=> ft_bzero.c [DONE]
+	- La fonction bzero peut être utilisée pour effacer la zone de mémoire donnée avec zéro octet ( \0 ). 
+	- Elle prend deux arguments, l'adresse de départ de la zone de mémoire (*s) et le nombre d'octets qui doivent être mis à zéro.
+	-> TEST = 
+		- avec un char (bof) 
+		- avec un tableau de int (boucle)
+
+=> ft_calloc.c [DONE]
+	- Cette fonction alloue un bloc de mémoire en initialisant tous ces octets à la valeur 0. 
+	- Bien que relativement proche de la fonction malloc, deux aspects les différencient :
+		- L'initialisation : calloc met tous les octets du bloc à la valeur 0 alors que malloc ne modifie pas la zone de mémoire.
+		- Les paramètres d'appels : calloc requière deux paramètres (le nombre d'éléments consécutifs à allouer et la taille d'un élément) alors que malloc attend la taille totale du bloc à allouer.
+	PARAMETRES =
+		- nmemb = le nombre en memoire de byte
+		- size = la taille d'un int, char... on calculera dans le main par 'sizeof(int)' 
+	
+	FONCTION = 
+		4 var = 
+			- index i
+			- nb  = multiplication de count et size
+			- p = pour se deplacer dans la memoire
+			- m = la zone a memoire ou ecrire, et donc, a return
+	SIZEMAX = 
+		- SIZE_MAX / nb : verifie si nb n'est pas plus grand que SIZE_MAX (c'est différent de int max)
+		- SIZE_MAX = SIZE_MAX (2^1024)-1
+	MAIN = 
+/*
+int main() 
+{
+    
+    int i = 0;
+    int * pointer = (int *) calloc(10, sizeof(int) );
+
+    // // Un petit test sur le bon fonctionnement de calloc
+    // assert( pointer != NULL );
+
+    // il y a une range de 0 à 10 dans le tableau, mais si l'on ajoute (-x) il sera remplacé par des 0
+	while (i < 10-2)
+	{
+		pointer[i] = i;
+		i++;
+	}
+    // On affiche le contenu du tableau d'entier 
+    // Ce qui donne : 0 1 2 3 4 5 6 7 8 0, si x=-1
+    for (i=0; i<10-2; i++ ) {
+        printf( "%d ", pointer[i] );
+    }
+    printf( "\n" );
+
+    // On libère le bloc de mémoire alloué dynamiquement 
+    free( pointer );
+
+	char *p = (char*) ft_calloc(10, sizeof(char));
+
+	p = "Hello World!";
+	printf("%s", p);
+
+    return 0;
+}
+*/
+
+=> ft_isalnum isalpha isdigit isascii isprint strlen [DONE]
+
+=> ft_itoa [DONE]
+	- Convertir un int en char
+		- Calculer le nombre de digits pour malloc (count function)
+			- si n vaut 0, il faut retourner 1 pour éviter les pbs de leaks pour le malloc
+			- si n < 0, n * -1 pour le passer en positif 
+			- boucle si n > 0, division jusqu'a 0 digit
+		- 2 var = 
+			- un char pour la valeur de retour avec un index
+			- une variable pour calculer le nbre de digits pour le malloc
+			- tant que n > 0
+				- ex n = -2147483648 % 10 = 8 donc str[len] = 8, puis division, puis len-- etc..
+		- ATTENTION aux valeurs negatives a calculer
+
+=> ft_memset [DONE]
+	- Cette fonction permet de remplir une zone mémoire, identifiée par son adresse et sa taille, avec une valeur précise
+		1- typecast the given buffer memory (void *s) to unsigned char*
+		2- assigned the value to each byte of the buffer until n from (size_t n)
+	- int c : est un caractere, ca peut être tout !
+
+=> ft_memchr [DONE] 
+	- Recherche la première occurence d'une valeur typée int, mais interprétée en tant que char, dans un bloc de mémoire. 
+Comme on traite un bloc de mémoire et non pas une chaîne de caractères AZT (à zéro terminal), 
+nous devons aussi spécifier à la fonction la taille du bloc de mémoire dans laquelle réaliser la recherche.
+	- Par ex : pour chercher une valeur existante dans un tableau , demander a chercher 'telle valeur'
+MAIN = 
+// int main(void)
+// {
+// 	    char data[] = { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
+//     const unsigned int size = 10;
+
+//     // On recherche une valeur inhéxistante :
+//     void * found = ft_memchr( data, 57, size );
+//     printf( "57 is %s\n", ( found != NULL ? "found" : "not found" ) );
+
+//     // On recherche une valeur existante :
+//     found = ft_memchr( data, 50, size );
+//     printf( "50 is %s\n", ( found != NULL ? "found" : "not found" ) );
+//     if ( found != NULL ) {
+//         printf( "La valeur à la position calculée est %d\n", *((char *) found) );
+//     }
+
+//     return (0);
+// }
+
+=> ft_memcpy [DONE]
+	- 
+	- cette fonction permet de copier src vers dest vers une autre zone memoire, identifie par son adresse et sa taille
+		- de index a n je copie d dans s et return d
+
+=> ft_memmove [DONE]
+	- Cette fonction permet de copier un bloc de mémoire spécifié par le paramètre source dans un nouvel emplacement désigné par le paramètre destination. 
+	  On peut donc dire que cette fonction est proche de la fonction memcpy. 
+	  Néanmoins, la différence réside dans le fait que la fonction memmove accepte que les deux zones de mémoire puissent se chevaucher.
+
+	- En cas de chevauchement, la copie se passe comme si les octets de la zone source étaient d'abord copiés dans une zone temporaire, 
+	  qui ne chevauche aucune des deux zones pointées par source et destination, et les octets sont ensuite copiés de la zone temporaire vers la zone de destination.
+	- Si d < s alors ft_memcpy
+	- Sinon si d > s
+		- on decremente n-- et on copie en reverse d[n] = s[n]
+
+=> ft_strlcpy [DONE]
+	- cette fonction renvoie la longueur de la chaine et non pas le nombre d'octet copié, on doit continuer de compter
+	les caracteres de src jusqu'a '\0', meme si on depasse size
+
+=> ft_strlcat [DONE]
+	- 3 variables = 
+		- taille de src, de dest et index de src
+
+=> ft_tolower ft_toupper [DONE]
+
+=> ft_strchr [DONE] 
+	- cette fonction recherche la premiere occurence d'une chaine, on va chercher UN caractere (un chiffre, une lettre, carac special)
+	- c'est une const donc la valeur de retour doit etre cast, on caste également le int c en unsigned char 
+	- S'il n'y de c, alors on retourne la valeur et non le pointeur, donc &s[ft_strlen(s)]
+	- Parcourir la chaine de s
+		- si c_u se trouve dans s alors return le pointeur
+	
+=> ft_strrchr [DONE]
+	- Cette fonction recherche la dernière occurrence du caractère passé en second paramètre dans la chaîne de caractères spécifiée via le premier paramètre.
++ i pour le NULL-terminator
+	- la meme logique que la fonction last_word 
+	- ca cherche un caractere en particulier (voir main) sauf qu'on commence par la fin
+	- caster le int c en unsigned char et s'il n'y a pas de c on retourne la valeur de la chaine telkelpoto
+	- On parcourt toute la chaine 
+	- puis on decrémente en se demandant si s est diff de c ET tant que i > 0
+	- si i == 0 ET que c_u est diff de 0 return 0
+		Sinon on return le pointeur
+
+=> ft_strncmp [DONE]
+
+	
+=> ft_memcmp [DONE]
+	- Cette fonction permet de comparer le contenu de deux blocs de mémoire spécifiés par les deux premiers paramètres de la fonction. 
+	- Le troisième paramètre, size, permet de spécifier le nombre d'octets sur lequel comparer les deux blocs. 
+Les octets des deux blocs sont comparés deux à deux. 
+	- Tant que les deux octets comparés sont égaux, la fonction passe aux deux suivants. 
+	- Si les deux octets comparés sont différents, alors la fonction renverra lequel des deux blocs est le plus petit en termes de contenu
+
+=> ft_strnstr [DONE]
+	- Chercher une chaine dans une chaine
+	- Si la chaine little vaut 0, retourner la chaine big telle quelle
+	- Si la longueur de la chaine a calculer est sup a 0
+		- tant que la chaine big avec index de big et index de little équivaut à little ET que index de big + 
+		index de little est inferieur à len
+			- Si little arrive jusqu'au NULL alors return ce qu'on a trouvé de little dans big
+	- Sinon, return 0
+
+=> ft_strdup [DONE]
+
+=> ft_substr [DONE] 
+	- Fonction qui retourne une sous chaine a partir de start et selon une len donnée
+	- FONCTION TRES UTILE
+
+=> ft_strjoin [DONE]
+	- Concatener deux chaine au sein d'une nouvelle chaine qu'on a malloc
+	- calculer la longueurdes deux chaines de carac pour malloc
+
+=> ft_strtrim [DONE]
+	- trimmer, c'est retirer un caractere ou une chaine en début et fin de chaine
+	FONCTIONS = 
+		- fonction qui retourne 1 si set se trouve dans s1 (is in set)
+		- fonction qui determine la longueur de s1 en partant du debut et si 'is in set == 1' puis return la longueur
+		- fonction qui determine la longueur de s2 en partant de la fin :
+			- longueur dans une var i puis, si 'is in set == 1', decrementer et return i
+		- fonction trimmer :
+			- Calcule de la longueur : la longueur en partant de la fin - la longueur en partant du debut, + 1 pour le NULL afin d'avoir la longueur totale a malloc
+			- on start s1 sans les caracteres trouves dans le set dans s1
+			- tant que index de var trim n'equivaut pas s1[start]
+			- copier s1 dans trim
+		- return trim = '\0'
+
+=> ft_split.c [DONE]
+	- fonction qui retourne un TABLEAU DE CHAINE (char **) qui delimite s via c
+	- a partir du delimiteur on va ranger la chaine dans un tableau
+	- 3 fonctions : 
+		- count word = 
+			- on compte les lettres sans le charset, des qu'on trouve la fin du mot, on le compte (if s[i] alors countword++)
+		- ft_dup = 
+			- f° ou je remplis le tableau de chaine (ft_substr) grace aux index (avec char c, sans char c)
+		- ft split = 
+			- calcul de la taille du malloc + utilisation de ft_dup
+
+	FREE FUNCTION = 
+// static void		*ft_freeword(char **word, int k)
+// {
+// 	while (word[k])
+// 	{
+// 		free(word[k]);
+// 		word[k] = NULL;
+// 		k--;
+// 	}
+// 	free(word);
+// 	word = NULL;
+// 	return (word);
+// }
+
+=> ft_strmapi.c [DONE]
+	- Cette fonction permet d'appliquer une fonction nommee 'f' a chaque caractere de la chaine *s passee en argument pour creer une nouvelle chaine (res)
+	- On doit d"abord copier la chaine dans la nouvelle (res) qui a ete au prealable malloc 
+	- Puis tant que res[i]
+		- appliquer la fonction f a res;
+		- return res = '\0'
+	
+
+=> ft_putchar_fd, ft_putstr_fd, ft_putendl_fd, ft_putnbr_fd [DONE]
+
+=> ft_striteri.c [DONE]
+	- fonction dont la chaine itère dans une autre fonction
+
+BONUS :
+
+LISTE CHAINEES = 
+	- lire de gauche a droite. Ex : lst->next = tmp; ca veut dire que tmp est a l'élément suivant
+
+=> ft_lstnew :
+	- cree une nouvelle liste : en pointant le nouvel element malloc vers la liste struct content 
+	- ce nouvel element equivaut content
+	- l'element suivant pointe par next est NULL
+
+=> ft_lstadd_front :
+	- si la liste existe alors : 
+		- cree un nouvel element grace ft_lstnew 
+		- le nouvel element pointant vers l'element suivant n'est pas NULL mais lst, donc le premier element de ma liste
+		- lst équivaut au nouvel element pour le push front
+
+=> ft_lstmap :
+	- creation d'une liste, avec iteration par f sur la liste detenant le content
+	- si allocation échoue, on clear avec le pointeur vers la fonction en seconde argument
+	- add dans la pile du nouvel element dont on a alloué de la mémoire pour détenir du contenu (lst_addback)
+	- on passe a l'element suivant en disant que ma liste equivqut a lst->next
+
+HOMEWORK = 
+	GENERAL = 
+		- liste idees asso
+		- revoir contenu sur la blockchain
+	- Vendredi =
+		- push
+		- GNL commencement
+
+VALIDATION AVANT 20 NOVEMBRE DOOOOOOOOOONE

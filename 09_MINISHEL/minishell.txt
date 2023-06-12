@@ -1,0 +1,88 @@
+- comportement de bash posix = same error management
+
+Quelques definitions :
+	- le PID est un code unique attribué sur les systèmes Unix ou Windows à tout processus lors de son démarrage.
+	Il permet ainsi d'identifier le processus dans la plupart des commandes s'appliquant sur un processus donné.
+
+Comprehension du sujt :
+	=> fonctions externes :
+		- readline = va lire une ligne et la retourner(la valeur de retour sera malloc) avec le prompt
+		- rl_clear_history = Function: void rl_clear_history (void) = va supprimer toutes les entrees, il va free les donnees de read line.
+		- rl_on_new_line = juste apres la lecture d'une ligne, va avertir que l'on se trouve sur ue nouvelle ligne vide (?)
+		- rl_replace_line = ...
+		- rl_redisplay = modifie ce qui est affiché à l'écran pour refléter le contenu actuel de rl_line_buffer.
+		- add_history = sauvegarder une ligne dans 'history'
+		- difference entre wait, wait3, wait4 et waitpid =
+			~ wait4 accepte un argement supplementaire (donc 4 arguments) par rapport a wait3 qui n'acceptent pas de pid
+			~ wait4 et wait3 ont un parametre rusage renvoie un résumé des ressources système utilisées par le processus enfant.
+			~ entre wait et waitpid = L'appel système waitpid() suspend l'exécution du processus appelant
+			  jusqu'à ce qu'un enfant spécifié par l'argument pid ait changé d'état.
+		- signal = gerer les signaux tels que interrupt, kill signal
+		- sigaction L'appel système sigaction() est utilisé pour modifier l'action entreprise par
+    	  un processus à la réception d'un signal spécifique.
+		- sigemptyset (?)
+		- sigaddset (?)
+		- getcwd = cette fonction permet de récupérer le chemin du répertoire de travail courant (getcwd = get current working directory).
+		  Le chemin renvoyé sera exprimé en absolu (à partir de la racine du système de fichiers).
+		- chdir = cette fonction permet de changer le répertoire courant de travail. Le chemin vers le nouveau dossier doit être
+		  passé en paramètre. Le nouveau chemin peut être exprimé en absolu (à partir de la racine de votre système de fichier)
+		  ou relativement au répertoire courant.
+		- stat = La fonction stat() obtient des informations sur l'état d'un fichier spécifié et le place dans la zone de mémoire pointée
+	      		 par l'argument buf. Si le fichier nommé est un lien symbolique, stat() résout le lien symbolique.
+		  	Il renvoie également des informations sur le fichier résultant.
+		- lstat = La fonction lstat() obtient des informations sur l'état d'un fichier spécifié et le place dans la zone
+		  de mémoire pointée par buf. Si le fichier nommé est un lien symbolique, lstat() renvoie des informations
+		  sur le lien symbolique lui-même. Les informations sont renvoyées dans la structure stat, référencée par buf.
+		- fstat = meme chose, sauf que ca prend un fd en parametre
+		- opendir = ouvre un flux de répertoire correspondant au nom du répertoire et renvoie un pointeur vers le répertoire flux.
+		- readdir (?)
+		- closedir (?)
+		- isatty = teste si fildes, un fichier ouvert descripteur, est associé à un terminal.
+		- ttyname = renvoie un pointeur vers le chemin d'accès terminé par un caractère nul du terminal qui est ouvert sur
+		  le descripteur de fichier fd, ou NULL en cas d'erreur (par exemple, si fd n'est pas connecté à un terminal)
+		- ttyslot = trouver l'emplacement du terminal de l'utilisateur actuel dans un fichier
+		- tcsetattr (?)
+		- tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs (man) = pour les signaux a priori
+
+	=> Ce que doit faire mon shell :
+		- prompt = invite de cmd en l'attente d'une commande
+		- history = historique des commandes effectues
+		- executable = like pipex donc : "cat | ls" same as "/usr/bin/cat | /usr/bin/ls"
+		- variable globale = env ? struct ?
+		- les quotes = metacharacters like : |, $, <, >, <<, >>
+			- single quotes = entre les singles quotes, metacharacter deviennent caractere normaux
+			- doubles quotes = meme choses, sauf le $ qui doit fonctionner normalement
+		- redirection = deja effectue dans pipex mais sans les signes "<, >, <<, >>"
+		- pipes = pipex
+		- variables d'environnement = en gros, c'est "env" ! Il faut gerer le $ suivi de tout de ce qu'il peut y avoir dans env
+		- $ =
+			- $?-The exit status of the last command executed
+
+		- ctrl-C affiche un nouveau prompt sur une nouvelle ligne.
+◦ 		- ctrl-D quitte le shell.
+◦		- ctrl-\ ne fait rien.
+		- built-in =
+			- echo = print a string. echo -n = retire le \n
+			- cd = current directory
+			- pwd = savoir dans quels dossier se trouve t-on ?
+				- getcwd(char * name) printf(name);
+			- export = Il est utilisé pour marquer les variables et les fonctions à transmettre aux processus enfants.
+			  Fondamentalement, une variable sera incluse dans les environnements de processus enfants sans affecter
+			  les autres environnements.
+			- unset =
+			- env =
+			- exit =
+
+	=>PARSING:
+		- env : ce qui nous interresse
+			- PATH=
+			- PWD=
+			- HOME=
+			- SHLVL=
+			- OLDPWD=
+	=>ERROR:
+		- bash: [arg]: command not found
+		- bash: syntax error near unexpected token [arg]
+		- bash: export: [arg]: not a valid identifier
+
+

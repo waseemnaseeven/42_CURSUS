@@ -1,0 +1,114 @@
+cmd :
+	- cc -Wall -Wextra -Werror so_long.c -I . -Lmlx_linux -lmlx -lXext -lX11 -o so_long && ./so_long
+	- clang - Weverything -g -fsanitize=address *.c libft.a
+	- convert wnaseeve.jpg -scale 32 32 wnaseeve.xpm
+
+how to use mlx :
+	-
+
+Orga =
+
+	I- Parsing
+		- nb arg (done)
+		- structure (~ done, during the exercise)
+		- creer fonctions qui verifient si c'est bien un fichier .ber (done)
+		- gérer erreur de mlx_init() (done)
+		- gerer ouverture de fichier, lecture de map avec gnl, open, close (done)
+		- si la map est rectangulaire (done)
+		- il ne doit y avoir que des murs autours donc tchek s'il n'y a que des 1 autour (done)
+		- il ne doit y avoir que des caracteres conforment aux sujets : 1,0,E,P,C (done)
+		- que tous les fichiers xpm existent,
+			- aller chercher des images en format png
+			- proportion en 50-50
+		- mlx_new_window(), mlx_xpm_file_to image()
+		- faire fonction exit (cf push_swap) en ajoutant :
+			- window : mlx.destroy.window()
+			- mlx : mlx.destroy.display() + free
+			- sprites (ce sont les xpm) : mlx_destroy.image()
+		free();
+
+	II- Structure
+		- malloc ou calloc
+		- initiliaser à zéro
+		- creer 2 void * qui vont servir à mlx_init()
+
+	III- Render
+		- analyser la map et afficher en fonction de l'element (mlx_put_image_to_window())
+
+	IV- Interaction avec le clavier
+		- mlx_key_hook()
+			- choisir une fonction à implementer ex : ft_event_key() pour les touches de directions
+
+	V- Faire apparaitre les images en boucle
+		- mlx_loop()
+		- mlx_hook() permet d'inserer une fonction pour fermer la fenetre avec la croix
+
+
+
+
+void	ft_collectinfomap(t_game *map)
+{
+	int	y;
+	int	x;
+	int z;
+	int	w;
+
+	y = 0;
+	x = 0;
+	z = 0;
+	w = 0;
+	map->collectible = 0;
+	while (map->map[z][w])
+	{
+		z++;
+		w++;
+	}
+	while (y < z)
+	{
+		x = 0;
+		while (map->map[y][x])
+		{
+			if (map->map[y][x] == 'C')
+				map->collectible++;
+			else if (map->map[y][x] == 'P')
+			{
+				map->p_x = x;
+				map->p_y = y;
+			}
+			else if (map->map[y][x] == 'E')
+			{
+				map->e_x = x;
+				map->e_y = y;
+			}
+			x++;
+		}
+		y++;
+	}
+	map->rows = y;
+	map->cols = --x;
+	//ft_printf("Pos de P -> x = [%d] y = [%d]\n", map->p_x, map->p_y);
+	//ft_printf("Pos de E -> x = [%d] y = [%d]\n", map->e_x, map->e_y);
+	//ft_printf("Collectible trouve : %d\n", map->collectible);
+}
+
+
+if (map->map[pos_e_y + 1][pos_e_x] == '1'
+		&& map->map[pos_e_y - 1][pos_e_x] == '1'
+		&& map->map[pos_e_y][pos_e_x - 1] == '1'
+		&& map->map[pos_e_y][pos_e_x + 1] == '1')
+	{
+		ft_printf("Error\n");
+		ft_printf("Please, provide a valid path\n");
+		free_map(map);
+		exit (1);
+	}
+	else if (map->map[pos_p_y - 1][pos_p_x] == '1'
+		&& map->map[pos_p_y + 1][pos_p_x] == '1'
+		&& map->map[pos_p_y][pos_p_x - 1] == '1'
+		&& map->map[pos_p_y][pos_p_x + 1] == '1')
+	{
+		ft_printf("Error\n");
+		ft_printf("Please, provide a valid path\n");
+		free_map(map);
+		exit (1);
+	}
