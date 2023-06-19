@@ -26,4 +26,3 @@ PROJECTS FROM NEWEST TO OLDEST
 | [get_next_line](https://github.com/waseemnaseeven/42_CURSUS/tree/main/02_GNL) |C| December2022 | Code a function that return the line i read with the '\n' | 70  | 44 |
 | [ft_printf](https://github.com/waseemnaseeven/42_CURSUS/tree/main/01_FTPRINTF) |C| December2022 | recode printf just for %csudipxX | 70  | 30 |
 | [libft](https://github.com/waseemnaseeven/42_CURSUS/tree/main/00_LIBFT) |C| November2022 | Code usefull functions that i'll use later in my projects| 70  | 40 |
-
