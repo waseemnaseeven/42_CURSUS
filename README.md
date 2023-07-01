@@ -2,8 +2,6 @@
 
 Every projects from the common core that i did during 2022-2024
 
-=====
-
 | Name  | Language      | End Date      |                       Description                 | Estimated effort (h)   | Hours i spent|
 | ----- |:-------------:| :-----------: | :------------------------------------------------:| :---------------------:| :------------:|
 | [cub3D](https://github.com/waseemnaseeven/42_CURSUS/tree/main/12_CUB3D) |C| May/June 2023 | Implement a raycasting  | 280  | 280 |
