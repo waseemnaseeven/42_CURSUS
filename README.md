@@ -1,9 +1,7 @@
-# 42_CURSUS
-
 ## COMMON CORE 42 PARIS
-_________________________________
 
-PROJECTS FROM NEWEST TO OLDEST
+Every projects from the common core that i did during 2022-2024
+
 =====
 
 | Name  | Language      | End Date      |                       Description                 | Estimated effort (h)   | Hours i spent|
