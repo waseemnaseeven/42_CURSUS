@@ -34,6 +34,8 @@ echo $ARG
 
 Copy the result of "echo $ARG" and then paste it after the executable + word_count. Expected output is :
 
+![Screenshot](img/finalresult.png)
+
 ```
 4369 moves
 ```
