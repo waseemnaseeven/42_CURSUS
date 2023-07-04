@@ -6,7 +6,9 @@ Description:
 First, i have calculated the median and if the number is upper than the median, i push to the stack B while i'm decrementing the median. If not, the first number of the stack A go at the end (RA).
 Then, i used an array of index to calculate how much it cost to push the first number of the stack b to his right place order in the stack A.
 
-![alt text](https://github.com/waseemnaseeven/42_CURSUS/tree/main/04_PUSHSWAP/img/push_swap.png "Push_swap result")
+![alt text][logo]
+
+[logo]: https://github.com/waseemnaseeven/42_CURSUS/tree/main/04_PUSHSWAP/img/push_swap.png "Push_swap result"
 
 ## Run the script
 
