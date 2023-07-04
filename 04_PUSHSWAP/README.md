@@ -30,7 +30,7 @@ Then:
 echo $ARG
 ```
 
-![alt text](https://github.com/waseemnaseeven/42_CURSUS/tree/main/04_PUSHSWAP/img/echo$ARG.png "echo $ARG result")
+![Screenshot](img/echo$ARG.png)
 
 Copy the result of "echo $ARG" and then paste it after the executable + word_count. Expected output is :
 
