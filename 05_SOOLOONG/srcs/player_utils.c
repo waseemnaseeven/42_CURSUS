@@ -6,7 +6,7 @@
 /*   By: wnaseeve <wnaseeve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 16:41:54 by wnaseeve          #+#    #+#             */
-/*   Updated: 2023/01/20 17:57:45 by wnaseeve         ###   ########.fr       */
+/*   Updated: 2023/07/26 18:22:04 by wnaseeve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ void	ft_swap_exit(char *player, char *exit)
 {
 	char	e;
 	char	p;
-	char	zero;
+	//char	zero;
 
 	e = *exit;
 	p = *player;
-	zero = '0';
+	//zero = '0';
 	*exit = p;
 	*player = e;
 }

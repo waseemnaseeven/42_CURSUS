@@ -1,4 +1,4 @@
-## COMMON CORE 42 PARIS 🧠
+# COMMON CORE 42 PARIS 🧠
 
 Every projects from the common core that i did during 2022-2024
 
