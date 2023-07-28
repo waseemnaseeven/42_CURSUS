@@ -57,6 +57,9 @@ make
 - Some builtins
 
 ![Screenshot](img/pwd&cd.png)
+
 ![Screenshot](img/export.png)
+
 ![Screenshot](img/unset.png)
+
 ![Screenshot](img/exit.png)
