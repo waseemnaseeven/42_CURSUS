@@ -3,8 +3,8 @@
 | Name  | Language      | End Date      |                       Description                 | Estimated effort (h)   | Hours i spent|
 | ----- |:-------------:| :-----------: | :------------------------------------------------:| :---------------------:| :------------:|
 | [examRank05](https://github.com/waseemnaseeven/42_CURSUS/tree/main/15_EXAMRANK05) |C++| August 2023 | Some exercises before the exam | ...  | ... |
-| [PISCINE_CPP](https://github.com/waseemnaseeven/42_CURSUS/tree/main/14_PISCINECPP) |C++| August 2023 | Learning CPP | ...  | ... |
-| [NETPRACTICE](https://github.com/waseemnaseeven/42_CURSUS/tree/main/13_NETPRACTICE) |Networking| July 2023 |  | ...  | ... |
+| [piscine_cpp](https://github.com/waseemnaseeven/42_CURSUS/tree/main/14_PISCINECPP) |C++| August 2023 | Learning CPP | ...  | ... |
+| [netpractice](https://github.com/waseemnaseeven/42_CURSUS/tree/main/13_NETPRACTICE) |Networking| July 2023 |  | ...  | ... |
 | [cub3D](https://github.com/waseemnaseeven/42_CURSUS/tree/main/12_CUB3D) |C| May/June 2023 | Implement a raycasting  | 280  | 280 |
 | [examRank04](https://github.com/waseemnaseeven/42_CURSUS/tree/main/11_EXAMRANK04) |C| Avril 2023 | Implement a microshell | ...  | ... |
 | [philosopher](https://github.com/waseemnaseeven/42_CURSUS/tree/main/10_PHILO) |C| Avril 2023 | A way to learn about threads, mutex with the dining philosphers exercises | 70 | 36 |
