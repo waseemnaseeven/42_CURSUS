@@ -29,7 +29,6 @@ int main() {
 		new Cat()
 	};
 
-
 	std::cout << BOLDMAGENTA << "\n\t========== EVENTS ==========\t\n" <<  RESET << std::endl;
 	Dog dog1;
     dog1.setIdea(0, "Idea from dog1");
@@ -37,7 +36,6 @@ int main() {
     std::cout << "Idea from dog2: " << dog2.getIdea(0) << std::endl;
     dog2.setIdea(0, "Modified idea from dog2");
     std::cout << "Idea from dog1 after modification in dog2: " << dog1.getIdea(0) << std::endl;
-
 
 	std::cout << BOLDMAGENTA << "\n\t========== DELETE ==========\t\n" <<  RESET << std::endl;
 	for (int i = 0; i < 2; i++) {
