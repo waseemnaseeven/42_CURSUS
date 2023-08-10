@@ -5,10 +5,17 @@
 	- On aimerait appeler la bonne version d'une méthode, pour cela on va utiliser le mot clé "virtual"
 
 	- classe abstraite:
-		On ne peut pas creer d'objet a partir d'une classe abstraite
+		En C++, une classe abstraite est une classe qui ne peut pas être instanciée directement, c'est-à-dire qu'on ne peut pas créer d'objets à partir de cette classe. Elle est conçue pour servir de base à d'autres classes dérivées qui implémentent ses fonctions abstraites. Une fonction abstraite est une fonction membre déclarée dans une classe abstraite mais qui n'a pas de définition (pas de corps) dans cette classe. Les sous-classes dérivées de la classe abstraite doivent fournir des implémentations pour ces fonctions abstraites.
+
+La principale utilité des classes abstraites réside dans la définition d'une interface commune pour un groupe de classes dérivées. Cela permet de garantir qu'un certain ensemble de fonctions ou de comportements spécifiques seront présents dans toutes les classes dérivées, mais chaque classe dérivée peut implémenter ces fonctions de manière différente selon ses besoins.
+
+En ce qui concerne les fonctions membres virtuelles, elles sont utilisées pour réaliser le polymorphisme dans le C++. Lorsqu'une fonction membre est déclarée comme virtuelle dans une classe de base, les classes dérivées peuvent fournir leur propre implémentation de cette fonction. Lorsque vous appelez une fonction virtuelle à travers un pointeur ou une référence à la classe de base, l'appel sera résolu à la fonction appropriée dans la classe dérivée, en fonction du type réel de l'objet.
+
+L'utilisation de fonctions membres virtuelles est cruciale pour obtenir le comportement polymorphique souhaité, notamment lorsque vous utilisez des pointeurs ou des références polymorphiques pour manipuler des objets de différentes sous-classes via un pointeur ou une référence à la classe de base. Cela permet d'implémenter des relations d'héritage plus flexibles et dynamiques, et c'est un élément clé du principe d'encapsulation et d'abstraction en programmation orientée objet.
+
+En résumé, les classes abstraites et les fonctions membres virtuelles sont des concepts importants en C++ pour définir des interfaces communes et pour réaliser le polymorphisme, permettant ainsi une meilleure organisation et réutilisation du code.
 
 ### AUTRES
 	- Makefile
 		$^ = spécifies toutes les dépendances
 		$< = spécifie la dépendance du fichier source
-
