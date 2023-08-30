@@ -53,6 +53,7 @@ int main() {
 
 Fonction virtuelle classique:
 Une fonction virtuelle classique est une fonction définie dans la classe de base, mais cette définition peut être redéfinie dans les classes dérivées. Lorsqu'une classe dérivée redéfinit une fonction virtuelle de la classe de base, elle fournit sa propre implémentation, mais elle peut toujours appeler la version de la classe de base à l'aide de la syntaxe ClasseBase::nomFonction().
+
 ```cpp
 class Animal {
 public:
@@ -79,6 +80,7 @@ Fonction virtuelle pure:
 Une fonction virtuelle pure est une fonction déclarée dans la classe de base, mais elle n'a pas d'implémentation. Elle est marquée avec = 0 à la fin de la déclaration. Une classe qui contient au moins une fonction virtuelle pure devient automatiquement une classe abstraite, ce qui signifie qu'elle ne peut pas être instanciée directement.
 
 Les classes dérivées sont obligées de fournir une implémentation pour les fonctions virtuelles pures de la classe de base. Si une classe dérivée ne fournit pas d'implémentation pour une fonction virtuelle pure, elle devient également abstraite.
+
 ```cpp
 class AAnimal {
 public:
