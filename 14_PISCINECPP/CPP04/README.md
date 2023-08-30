@@ -16,6 +16,40 @@ L'utilisation de fonctions membres virtuelles est cruciale pour obtenir le compo
 
 En résumé, les classes abstraites et les fonctions membres virtuelles sont des concepts importants en C++ pour définir des interfaces communes et pour réaliser le polymorphisme, permettant ainsi une meilleure organisation et réutilisation du code.
 
+### PLUS DE DETAILS
+
+Un destructeur virtuel :
+
+- Garantit la destruction correcte des sous-objets, si vous travaillez avec une hiérarchie de classes et que vous déclarez un destructeur virtuel dans la classe de base, cela garantit que le destructeur des sous-objets (objets des classes dérivées) sera également appelé. Cela permet de libérer correctement les ressources et de gérer les opérations de nettoyage spécifiques à chaque sous-classe.
+- Polymorphisme lors de la destruction : Lorsque vous détruisez un objet à travers un pointeur de la classe de base, le destructeur virtuel assure que le destructeur approprié de la sous-classe est appelé. Cela implique que la liaison dynamique est utilisée pour déterminer quel destructeur doit être appelé en fonction du type réel de l'objet.
+
+```cpp
+class Animal {
+public:
+    virtual ~Animal() { }
+};
+
+class Dog : public Animal {
+public:
+    ~Dog() { }
+};
+
+class Cat : public Animal {
+public:
+    ~Cat() { }
+};
+
+int main() {
+    Animal* ptr = new Dog;
+    delete ptr; // Le destructeur virtuel assure que ~Dog() est appelé
+
+    ptr = new Cat;
+    delete ptr; // Le destructeur virtuel assure que ~Cat() est appelé
+
+    return 0;
+}
+
+```
 ### AUTRES
 	- Makefile
 		$^ = spécifies toutes les dépendances
