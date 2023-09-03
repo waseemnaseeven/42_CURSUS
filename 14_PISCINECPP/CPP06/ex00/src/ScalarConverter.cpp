@@ -15,37 +15,37 @@ ScalarConverter& ScalarConverter::operator=(const ScalarConverter &src) {
 	return (*this);
 }
 
-void ScalarConverter::convert(const std::string &input)
+void ScalarConverter::convert(const std::string& input)
 {
-	// Try to convert to int
-	int intValue = atoi(input.c_str());
-	std::cout << intValue << std::endl;
-	char charValue = static_cast<char>(intValue);
-	std::cout << charValue << std::endl;
-	float floatValue = static_cast<float>(intValue);
-	std::cout << floatValue << std::endl;
-	double doubleValue = static_cast<double>(intValue);
-	std::cout << doubleValue << std::endl;
-
 	try {
-		if (intValue == 0 && input != "0")
-			throw std::invalid_argument("Conversion to int failed");
-		if (intValue > 2147483647 || intValue < -2147483648)
-			throw std::invalid_argument("Under the limits");
-		std::cout << BOLDRED << "char: ";
-		if (!isprint(charValue))
-			std::cout << "Non displayable" << std::endl;
+		int intValue = atoi(input.c_str());
+		if (intValue == 0 && input[0] != '0')
+			throw std::exception();
+		char charValue = static_cast<char>(intValue);
+		float floatValue = static_cast<float>(intValue);
+		double doubleValue = static_cast<double>(intValue);
+		if (intValue < 32 || intValue > 126)
+			std::cout << BOLDBLUE << "char: Non displayable" << std::endl;
 		else
-			std::cout << charValue << std::endl;
+			std::cout << BOLDBLUE<< "char: " << charValue << std::endl;
 
 		std::cout << "int: " << intValue << std::endl;
-		std::cout << "float: " << floatValue << "f" << std::endl;
-		std::cout << "double: " << doubleValue << RESET << std::endl;
-	} catch (const std::invalid_argument&) {
-		// Conversion to int failed
-		std::cout << "char: impossible" << std::endl;
-		std::cout << "int: impossible" << std::endl;
-		std::cout << "float: " << input << "f" << std::endl;
-		std::cout << "double: " << input << std::endl;
+		std::cout << "float: " << floatValue << ".0f" << std::endl;
+		std::cout << "double: " << doubleValue << ".0" << RESET << std::endl;
+	} catch (const std::exception& e) {
+		std::cout << BOLDMAGENTA << "char: impossible" << std::endl;
+		std::cout << "int: impossible"  << std::endl;
+
+		try {
+			float floatValue = atof(input.c_str());
+			if (floatValue == 0 && input[0] != '0')
+				throw std::exception();
+			double doubleValue = static_cast<double>(floatValue);
+			std::cout << "float: " << floatValue << "f" << std::endl;
+			std::cout << "double: " << doubleValue << RESET << std::endl;
+		} catch (const std::exception& e) {
+			std::cout << BOLDMAGENTA << "float: impossible" << std::endl;
+			std::cout << "double: impossible" << RESET << std::endl;
+		}
 	}
 }
