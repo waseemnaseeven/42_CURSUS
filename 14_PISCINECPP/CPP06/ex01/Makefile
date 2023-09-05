@@ -6,17 +6,16 @@
 #    By: wnaseeve <wnaseeve@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/03 11:38:41 by wnaseeve          #+#    #+#              #
-#    Updated: 2023/09/05 14:33:10 by wnaseeve         ###   ########.fr        #
+#    Updated: 2023/09/05 15:42:23 by wnaseeve         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= 	convert
+NAME	= 	serialize
 
 SRCS	= 	src/main.cpp \
-			src/ScalarConverter.cpp
+			src/Serialization.cpp \
 
-
-HEADER	=	includes/ScalarConverter.hpp \
+HEADER	=	includes/Serialization.hpp \
 
 
 OBJS	= $(SRCS:src/%.cpp=obj/%.o)

@@ -6,7 +6,7 @@
 /*   By: wnaseeve <wnaseeve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 11:42:03 by wnaseeve          #+#    #+#             */
-/*   Updated: 2023/07/27 16:11:17 by wnaseeve         ###   ########.fr       */
+/*   Updated: 2023/09/04 12:53:27 by wnaseeve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int main( void ) {
 	Fixed a;
+	Fixed const d(2147483648);
 	Fixed const c(10);
 	//if (a < c)
 	//	std::cout << "a is less than c" << std::endl;

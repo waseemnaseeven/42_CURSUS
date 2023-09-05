@@ -32,3 +32,26 @@ void ScalarConverter::convert(const std::string &input)
 		std::cout << "double: " << input << std::endl;
 	}
 }
+
+int main()
+{
+	Data data;
+	data.value = 42;
+	data.symbol = 'A';
+
+	uintptr_t ptr_seria = Serializer::serialize(&data);
+	std::cout << BOLDCYAN << "seria: " << ptr_seria << RESET << std::endl;
+
+	/* le cas ou ca fail */
+	//uintptr_t modifiedPtr = ptr_seria + 1;
+	//std::cout << BOLDCYAN << "seria: " << modifiedPtr << RESET << std::endl;
+
+	Data* ptr_deseria = Serializer::deserialize(ptr_seria);
+	//Data* ptr_deseria = Serializer::deserialize(modifiedPtr);
+
+	if (ptr_deseria == &data)
+		draw_tab(ptr_seria, &data, true);
+	else
+		draw_tab(ptr_seria, &data, false);
+
+}
