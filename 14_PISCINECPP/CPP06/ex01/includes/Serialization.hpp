@@ -25,6 +25,6 @@ class Serializer {
 
 };
 
-void	draw_tab(uintptr_t raw, Data* ptr, bool flag);
+void	draw_tab(Data* deseria, Data* data, bool flag);
 
 #endif

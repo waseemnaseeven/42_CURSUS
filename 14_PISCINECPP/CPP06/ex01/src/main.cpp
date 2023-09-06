@@ -23,14 +23,14 @@ int main()
 
 	/* le cas ou ca fail */
 	uintptr_t modifiedPtr = ptr_seria + 1;
-	//std::cout << BOLDCYAN << "seria: " << modifiedPtr << RESET << std::endl;
+	std::cout << BOLDCYAN << "\tseria: " << modifiedPtr << RESET << std::endl;
 
-	//Data* ptr_deseria = Serializer::deserialize(ptr_seria);
+	// Data* ptr_deseria = Serializer::deserialize(ptr_seria);
 	Data* ptr_deseria = Serializer::deserialize(modifiedPtr);
 
 	if (ptr_deseria == &data)
-		draw_tab(ptr_seria, &data, true);
+		draw_tab(ptr_deseria, &data, true);
 	else
-		draw_tab(ptr_seria, &data, false);
+		draw_tab(ptr_deseria, &data, false);
 }
 

@@ -8,28 +8,26 @@ Data* Serializer::deserialize(uintptr_t raw) {
     return reinterpret_cast<Data*>(raw);
 }
 
-void	draw_tab(uintptr_t raw, Data* ptr, bool flag)
+void	draw_tab(Data* deseria, Data* ptr, bool flag)
 {
 	std::cout << "****************************************" << std::endl;
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 8; j++) {
             if (j == 0) {
-                if (i == 0 && j == 0) {
-                    std::cout << "\tPointer: " << ptr << " ";
-                } else if (i == 1) {
-                    std::cout << "\tUint: " << raw << " ";
-                } else if (i == 2) {
+                if (i == 0 && j == 0)
+                    std::cout << "\tDeseria: " << deseria << " ";
+                else if (i == 1)
+                    std::cout << "\tData: " << ptr << " ";
+                else if (i == 2) {
                     std::cout << "\tStatus: ";
-                    if (flag) {
+                    if (flag)
                         std::cout << BOLDGREEN << "Success ✅ " << RESET;
-                    } else {
+                    else
                         std::cout << BOLDRED << "Failed ❌ " << RESET;
-                    }
                 }
             }
         }
         std::cout << std::endl;
     }
-
     std::cout << "****************************************" << std::endl;
 }
