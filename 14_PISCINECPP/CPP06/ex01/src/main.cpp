@@ -6,11 +6,15 @@
 /*   By: wnaseeve <wnaseeve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:50:26 by wnaseeve          #+#    #+#             */
-/*   Updated: 2023/09/05 17:18:36 by wnaseeve         ###   ########.fr       */
+/*   Updated: 2023/09/07 12:45:51 by wnaseeve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/Serialization.hpp"
+
+/*
+	Here, use of reinterpret_cast cuz we're dealing with pointers
+*/
 
 int main()
 {

@@ -15,9 +15,9 @@ void	draw_tab(Data* deseria, Data* ptr, bool flag)
         for (int j = 0; j < 8; j++) {
             if (j == 0) {
                 if (i == 0 && j == 0)
-                    std::cout << "\tDeseria: " << deseria << " ";
+					std::cout << "\tData: " << ptr << " ";
                 else if (i == 1)
-                    std::cout << "\tData: " << ptr << " ";
+					std::cout << "\tDeseria: " << deseria << " ";
                 else if (i == 2) {
                     std::cout << "\tStatus: ";
                     if (flag)

@@ -9,6 +9,7 @@
 //#include <cstdint>
 #include "includes/Colors.hpp"
 
+// representation entiere non signee de pointeurs
 typedef unsigned long uintptr_t;
 
 struct Data {

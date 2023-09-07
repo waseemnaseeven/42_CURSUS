@@ -11,8 +11,6 @@
 class ScalarConverter {
 	public:
 		static void convert(const std::string& input);
-		static std::string getType(int flag);
-		static void drawType(const std::string& input, int flag);
 
 	private:
 		ScalarConverter();
@@ -24,5 +22,6 @@ class ScalarConverter {
 
 int is_fchar(const std::string&input);
 int	is_double(const std::string& input);
+void drawType(const std::string& input, int flag);
 
 #endif
