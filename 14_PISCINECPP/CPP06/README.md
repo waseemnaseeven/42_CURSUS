@@ -36,6 +36,12 @@
 
 ![Screenshot](img/casting.png)
 
+### SERIALIZE
+
+Mecanisme qui converti un objet en sequence de bits qui peut etre stocke en memoire.
+
+En C++, la serialization fait référence au processus de conversion de données ou d'objets en un format qui peut être facilement stocké dans un fichier, transmis sur un réseau ou stocké dans une base de données. La sérialisation permet de prendre des données en mémoire et de les convertir en une séquence de bits qui peuvent être enregistrés ou transférés.
+
 - REINTERPRET_CAST
 	- Reinterpretation both in updown and downcast
 	- `reinterpret_cast<type>(foo)`
@@ -72,12 +78,6 @@ Dans cet exemple, nous convertissons un objet de type A en un objet de type B. C
 - CONST_CAST
 	- It allows to change non-const class members inside a const member function.
 	- It can be symptom of bad design
-
-### SERIALIZE
-
-Mecanisme qui converti un objet en sequence de bits qui peut etre stocke en memoire.
-
-En C++, la serialization fait référence au processus de conversion de données ou d'objets en un format qui peut être facilement stocké dans un fichier, transmis sur un réseau ou stocké dans une base de données. La sérialisation permet de prendre des données en mémoire et de les convertir en une séquence de bits qui peuvent être enregistrés ou transférés.
 
 
 
