@@ -10,12 +10,11 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= 	base
+NAME	= 	template
 
 SRCS	= 	src/main.cpp \
-			src/Base.cpp \
 
-HEADER	=	includes/Base.hpp \
+HEADER	=	includes/Templates.hpp \
 
 OBJS	= $(SRCS:src/%.cpp=obj/%.o)
 
