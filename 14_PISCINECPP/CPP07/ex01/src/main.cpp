@@ -32,20 +32,20 @@ int main() {
 	std::cout << BOLDMAGENTA << "\n\t ********** ITER EVENTS ********** \n" << RESET << std::endl;
 
     iter(arr, len, plus_one<int>);
-	iter(str, 6, plus_one<std::string>);
+	iter(str, 6, plus_str<std::string>);
 	iter(doublearr, len, plus_one<double>);
 
-   	std::cout << GREEN << "[ Modified array: ";
+   	std::cout << RED << "[ Modified array: ";
     for (int i = 0; i < len; i++) {
         std::cout << arr[i] << " ";
     }
-   	std::cout << "]" << RESET << std::endl;
-	std::cout << GREEN << "[ Modified array: ";
+   	std::cout << "]" << std::endl;
+	std::cout << "[ Modified array: ";
 	for (int i = 0; i < lenght; i++) {
         std::cout << str[i] << " ";
     }
-   	std::cout << "]" << RESET << std::endl;
-	std::cout << GREEN << "[ Modifed array: ";
+   	std::cout << "]" << std::endl;
+	std::cout << "[ Modifed array: ";
     for (int i = 0; i < len; i++) {
         std::cout << doublearr[i] << " ";
     }

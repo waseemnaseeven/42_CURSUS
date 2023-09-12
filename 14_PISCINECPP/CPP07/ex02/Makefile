@@ -6,15 +6,15 @@
 #    By: wnaseeve <wnaseeve@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/03 11:38:41 by wnaseeve          #+#    #+#              #
-#    Updated: 2023/09/12 13:52:37 by wnaseeve         ###   ########.fr        #
+#    Updated: 2023/09/12 16:30:08 by wnaseeve         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= 	iter
+NAME	= 	array
 
 SRCS	= 	src/main.cpp \
 
-HEADER	=	includes/iter.hpp \
+HEADER	=	includes/Array.hpp \
 
 OBJS	= $(SRCS:src/%.cpp=obj/%.o)
 

@@ -13,6 +13,11 @@ void plus_one(T &arr) {
     arr += 1;
 }
 
+template <typename T>
+void plus_str(T &arr) {
+    arr += 'o';
+}
+
 template <typename T, typename F>
 void iter(T *array, int len, F func) {
     for (int i = 0; i < len; i++) {
