@@ -68,7 +68,8 @@ def main():
 
     hpp_content = hpp_creation(class_name)
     cpp_content = cpp_creation(class_name, hpp_file_name)
-
+    # switch case to know which kind of file i want
+	# use try except && assert
     with open(hpp_file_name, 'w') as hpp_file, open(cpp_file_name, 'w') as cpp_file:
         hpp_file.write(hpp_content)
         cpp_file.write(cpp_content)
