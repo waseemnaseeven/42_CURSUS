@@ -10,43 +10,74 @@
 
 template<class T> class Array {
 	public:
-		Array();
-		Array(unsigned int n);
-		~Array();
-		Array(const Array& src);
-		Array& operator=(const Array& src) {
+		Array<T>() : _size(0) {
+			std::cout << PURPLE << "Constructor by default called for a new array " << RESET << std::endl;
+			this->_array = new T[_size];
+		}
+
+		Array<T>(unsigned int n) : _size(n) {
+			std::cout << PURPLE << "Constructor by default with parameters called " << RESET << std::endl;
+			this->_array = new T[this->_size];
+			//for (unsigned int i = 0; i < n; ++i) {
+			//	_array[i] = 0;
+			//}
+		}
+		~Array<T>() {
+			std::cout << PURPLE << "Array Destructor" << RESET << std::endl;
+			if (this->_array != NULL)
+				delete [] _array;
+		}
+
+		//Array<T>(Array<T> const &src) : _array(new T[src._size]), _size(src._size) {
+		//	std::cout << PURPLE << "New array (copy constructor)" << RESET << std::endl;
+		//	for (unsigned int i = 0; i < _size; i++) {
+		//		_array[i] = src._array[i];
+		//	}
+		//}
+
+		Array<T>(Array<T> const &src) : _size(src._size) {
+			std::cout << PURPLE << "New array (copy constructor)" << RESET << std::endl;
+			this->_array = NULL;
+			*this = src;
+		}
+
+		Array<T>& operator=(const Array& src) {
 			if (this != &src) {
-				delete[] _array;
-				_n = src._n;
-				_array = new T[src._n];
-				for (unsigned int i = 0; i < src._n; i++) {
-					_array[i] = src._array[i];
+				T* newArray = new T[src._size];
+				for (unsigned int i = 0; i < src._size; ++i) {
+					newArray[i] = src._array[i];
 				}
+				delete [] _array;
+				_array = newArray;
+				_size = src._size;
 			}
 			return (*this);
 		}
 
 		T &operator[](int index)
 		{
-			int d = (unsigned int)_n;
+			int d = (unsigned int)_size;
 			if (index >= d)
 				throw Array<T>::IndexOutOfBound();
 			return (this->_array[index]);
 		}
 
-		//T const &operator[](int index) const
-		//{
-		//	int d = (unsigned int)_n;
-		//	if (index >= d)
-		//		throw Array<T>::IndexOutOfBound();
-		//	return (this->_array[index]);
-		//}
-		unsigned int size() const;
-		void print();
+		unsigned int size() const {
+			return _size;
+		}
+
+		void print(){
+			for (unsigned int i = 0; i < _size; ++i)
+			{
+        		std::cout << BOLDCYAN << "\n " << *(_array + i);
+
+			}
+   	 		std::cout << RESET << std::endl;
+		}
 
 	private:
 		T* _array;
-		unsigned int _n;
+		unsigned int _size;
 
 		class IndexOutOfBound : public std::exception {
 			public:
@@ -57,38 +88,5 @@ template<class T> class Array {
 		};
 
 };
-
-template <typename T> Array<T>::Array() : _n(0) {
-	std::cout << "Constructor by default called " << std::endl;
-	_array = new T[0];
-}
-
-template <typename T> Array<T>::Array(unsigned int n) : _n(n) {
-	std::cout << "Constructor by default with parameters called " << std::endl;
-	_array = new T[n];
-	for (unsigned int i = 0; i < this->_n; i++) {
-		_array[i] = 0;
-	}
-}
-
-template <typename T> Array<T>::~Array() {
-		delete [] _array;
-}
-
-template<typename T> Array<T>::Array(const Array<T> &src) {
-	delete[] _array;
-	*this = src;
-}
-
-template <typename T> void Array<T>::print()
-{
-    for (unsigned int i = 0; i < _n; i++)
-        std::cout << BOLDCYAN << "\n " << *(_array + i);
-    std::cout << RESET << std::endl;
-}
-
-template<typename T> unsigned int Array<T>::size() const {
-	return _n;
-}
 
 #endif // ARRAY_HPP

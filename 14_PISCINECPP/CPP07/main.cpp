@@ -10,6 +10,7 @@ int main(int, char**)
     for (int i = 0; i < MAX_VAL; i++)
     {
         const int value = rand();
+		std::cout << value << std::endl;
         numbers[i] = value;
         mirror[i] = value;
     }
