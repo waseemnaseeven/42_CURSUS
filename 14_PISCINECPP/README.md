@@ -4,7 +4,7 @@
 | ----- |:-------------:| :------------------------------------------------:|
 | [CPP09](https://github.com/waseemnaseeven/42_CURSUS/tree/main/14_PISCINECPP/CPP09) |C++|  |
 | [CPP08](https://github.com/waseemnaseeven/42_CURSUS/tree/main/14_PISCINECPP/CPP08) |C++|  |
-| [CPP07](https://github.com/waseemnaseeven/42_CURSUS/tree/main/14_PISCINECPP/CPP07) |C++|  |
+| [CPP07](https://github.com/waseemnaseeven/42_CURSUS/tree/main/14_PISCINECPP/CPP07) |C++| Templates |
 | [CPP06](https://github.com/waseemnaseeven/42_CURSUS/tree/main/14_PISCINECPP/CPP06) |C++| static_cast<type> |
 | [CPP05](https://github.com/waseemnaseeven/42_CURSUS/tree/main/14_PISCINECPP/CPP05) |C++| Try, throw and catch conditions |
 | [CPP04](https://github.com/waseemnaseeven/42_CURSUS/tree/main/14_PISCINECPP/CPP04) |C++| This module is designed to understand Subtype polymorphism, abstract classes and interfaces in CPP.|
