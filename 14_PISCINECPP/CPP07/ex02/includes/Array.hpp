@@ -1,92 +1,103 @@
-#ifndef ARRAY_HPP
-#define ARRAY_HPP
-
+#ifndef __ARRAY_HPP__
+#define __ARRAY_HPP__
 #include <iostream>
-#include <string>
-#include <cmath>
-#include <iomanip>
-#include <exception>
-#include "includes/Colors.hpp"
+#include <cstdlib>
 
-template<class T> class Array {
-	public:
-		Array<T>() : _size(0) {
-			std::cout << PURPLE << "Constructor by default called for a new array " << RESET << std::endl;
-			this->_array = new T[_size];
-		}
+#define PURPLE "\033[0;35m"
+#define NOCOL "\033[0m"
 
-		Array<T>(unsigned int n) : _size(n) {
-			std::cout << PURPLE << "Constructor by default with parameters called " << RESET << std::endl;
-			this->_array = new T[this->_size];
-			//for (unsigned int i = 0; i < n; ++i) {
-			//	_array[i] = 0;
-			//}
-		}
-		~Array<T>() {
-			std::cout << PURPLE << "Array Destructor" << RESET << std::endl;
-			if (this->_array != NULL)
-				delete [] _array;
-		}
+template <typename T>
+class Array
+{
+public:
+    Array<T>(void) : arrSize(0)
+    {
+        std::cout << PURPLE << "New array (default constructor)" << NOCOL << std::endl;
+        this->values = new T[0];
+    }
 
-		//Array<T>(Array<T> const &src) : _array(new T[src._size]), _size(src._size) {
-		//	std::cout << PURPLE << "New array (copy constructor)" << RESET << std::endl;
-		//	for (unsigned int i = 0; i < _size; i++) {
-		//		_array[i] = src._array[i];
-		//	}
-		//}
+    Array<T>(unsigned int n) : arrSize(n)
+    {
+        std::cout << PURPLE << "New array (parameter constructor of size " << n << ")" << NOCOL << std::endl;
+        this->values = new T[n];
+        for (unsigned int i = 0; i < this->arrSize; ++i)
+            this->values[i] = 0;
+    }
 
-		Array<T>(Array<T> const &src) : _size(src._size) {
-			std::cout << PURPLE << "New array (copy constructor)" << RESET << std::endl;
-			this->_array = NULL;
-			*this = src;
-		}
+    Array<T>(Array<T> const &src)
+    {
+        std::cout << PURPLE << "New array (copy constructor)" << NOCOL << std::endl;
+        *this = src;
+    }
 
-		Array<T>& operator=(const Array& src) {
-			if (this != &src) {
-				T* newArray = new T[src._size];
-				for (unsigned int i = 0; i < src._size; ++i) {
-					newArray[i] = src._array[i];
-				}
-				delete [] _array;
-				_array = newArray;
-				_size = src._size;
-			}
-			return (*this);
-		}
+    ~Array<T>(void)
+    {
+        std::cout << PURPLE << "Array destructor" << NOCOL << std::endl;
+		delete [] values;
+    }
 
-		T &operator[](int index)
-		{
-			int d = (unsigned int)_size;
-			if (index >= d)
-				throw Array<T>::IndexOutOfBound();
-			return (this->_array[index]);
-		}
+    Array<T> &operator=(Array<T> const &src)
+    {
+        this->arrSize = src.arrSize;
+        this->values = new T[arrSize];
+        for (unsigned int i = 0; i < arrSize; i++)
+            this->values[i] = src.values[i];
+        return (*this);
+    }
 
-		unsigned int size() const {
-			return _size;
-		}
+	/*
+		operateur d'acces à un élément
+	*/
+    T &operator[](int index)
+    {
+        if (index < 0 || index >= (static_cast<int>(arrSize)))
+            throw Array<T>::IndexOutOfBound();
+        return (this->values[index]);
+    }
 
-		void print(){
-			for (unsigned int i = 0; i < _size; ++i)
-			{
-        		std::cout << BOLDCYAN << "\n " << *(_array + i);
+    T const &operator[](int index) const
+    {
+        if (index < 0 || index >= (static_cast<int>(arrSize)))
+            throw Array<T>::IndexOutOfBound();
+        return (this->values[index]);
+    }
 
-			}
-   	 		std::cout << RESET << std::endl;
-		}
+    unsigned int size(void) const {
+        return arrSize;
+    }
 
-	private:
-		T* _array;
-		unsigned int _size;
+private:
+    T *values;
+    unsigned int arrSize;
 
-		class IndexOutOfBound : public std::exception {
-			public:
-				virtual const char *what() const throw() {
-					return ("Index out of bound: ");
-				}
-
-		};
-
+    class IndexOutOfBound : public std::exception
+    {
+    public:
+        virtual const char *what() const throw()
+        {
+            return ("Index value out of bound");
+        }
+    };
 };
 
-#endif // ARRAY_HPP
+// template <typename T>
+// std::ostream &operator<<(std::ostream &os, Array<T> const &std)
+// {
+//     std::cout << PURPLE << "--------------------------------------------------------------------------------------------------------" << std::endl;
+//     std::cout << "Size of array is: " << std.size() << std::endl;
+
+//     if (std.size() == 0)
+//         std::cout << "* empty *" << std::endl;
+
+//     for (unsigned int i = 0; i < ((std.size() < 50) ? std.size() : 50); i++)
+//     {
+//         std::cout << const_cast<Array<T> &>(std)[i] << (i == (std.size() - 1) ? "" : "  ");
+//     }
+//     if (std.size() > 50)
+//         std::cout << "... ... ... (results hidden for brevity) ... ... ..." << std::endl;
+//     std::cout << std::endl;
+//     std::cout << "--------------------------------------------------------------------------------------------------------" << NOCOL << std::endl;
+//     return os;
+// }
+
+#endif
