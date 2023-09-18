@@ -54,6 +54,7 @@
 		"typeinfo": "cpp",
 		"ranges": "cpp",
 		"optional": "cpp",
-		"span": "cpp"
+		"span": "cpp",
+		"list": "cpp"
 	}
 }
