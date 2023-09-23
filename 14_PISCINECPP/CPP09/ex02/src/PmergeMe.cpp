@@ -24,3 +24,8 @@ PmergeMe& PmergeMe::operator=(const PmergeMe& src) {
 
 	return *this;
 }
+
+//void PmergeMe::parseInput(std::string& const input)
+//{
+
+//}

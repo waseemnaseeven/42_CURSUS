@@ -6,8 +6,13 @@
 #include <cmath>
 #include <iomanip>
 #include <exception>
-#include <vector>
+#include <fstream>
+#include <sstream>
+#include <cstring>
+#include <limits>
+#include <ctime>
 #include <cstdlib>
+#include <vector>
 #include "includes/Colors.hpp"
 
 class PmergeMe {
@@ -16,6 +21,8 @@ class PmergeMe {
 		~PmergeMe();
 		PmergeMe(const PmergeMe& src);
 		PmergeMe& operator=(const PmergeMe& src);
+
+		//void parseInput(std::string const &input);
 
 
 
