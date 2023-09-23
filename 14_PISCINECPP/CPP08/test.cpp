@@ -53,12 +53,19 @@ int main()
     LIFO.push(3);
     LIFO.push(4);
     LIFO.push(5);
+	LIFO.push(6);
+	LIFO.push(7);
 
-    std::cout << LIFO.top() << std::endl;
+	std::cout << LIFO.size() << std::endl;
 
-    LIFO.pop();
+	std::cout << "top is: " << LIFO.top() << std::endl;
 
-    std::cout << LIFO.top() << std::endl;
+	LIFO.pop();
+
+	std::cout << LIFO.size() << std::endl;
+
+	std::cout << "top is: " << LIFO.top() << std::endl;
+
 
 	std::cout << BOLDMAGENTA << "\n\t ********** QUEUE ********** \n" << RESET << std::endl;
 
@@ -143,7 +150,7 @@ int main()
 
 	Addition foncteur;
 	int a(2), b(3);
-	std::cout << a << "+" << b << " = " << foncteur(a,b) << std::endl;
+	std::cout << a << " + " << b << " = " << foncteur(a,b) << std::endl;
 
     return 0;
 }

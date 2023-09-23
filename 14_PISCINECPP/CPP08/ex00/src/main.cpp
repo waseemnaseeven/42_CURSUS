@@ -2,7 +2,7 @@
 
 int main()
 {
-	std::vector<int> tab(5, 4);
+	std::list<int> tab(5, 4);
 	tab.push_back(6);
 	tab.push_back(8);
 	for (size_t i(0); i < tab.size(); ++i)

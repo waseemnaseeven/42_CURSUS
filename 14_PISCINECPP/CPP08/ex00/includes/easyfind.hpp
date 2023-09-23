@@ -1,18 +1,18 @@
 #ifndef EASYFIND_HPP
-#define EASYFIND_HPP
+# define EASYFIND_HPP
 
 #include <iostream>
 #include <string>
 #include <cmath>
 #include <iomanip>
 #include <exception>
-#include <vector>
-#include <deque>
-#include <stack>
-#include <queue>
+//#include <vector>
+//#include <deque>
+//#include <stack>
+//#include <queue>
 #include <list>
-#include <utility>
-#include <map>
+//#include <utility>
+//#include <map>
 #include <algorithm>
 #include "includes/Colors.hpp"
 
