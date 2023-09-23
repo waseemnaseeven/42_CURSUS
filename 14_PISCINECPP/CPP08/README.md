@@ -137,7 +137,58 @@ Ici on va decouvrir des algo de la STL qui vont nous permettre:
 	- inverser une selection
 	- chercher, remplacer, supprimer des elements
 
-- algorthm `generate`
--
+
+- generate(tab.begin(), tab.end(), function)
+	- ici on applique function aux éléments de la liste, function peut être une classe
+	- par ex, +1 sur un tableau de int
+
+- count()
+	- par ex: int nombre = count(tab.begin(), tab.end(), 2);
+
+```cpp
+class Generer
+{
+public:
+    int operator()() const
+    {
+        return rand() % 10;  //On renvoie un nombre entre 0 et 9
+    }
+};
+
+int main()
+{
+    srand(time(0));
+
+    vector<int> tab(100,-1); //Un tableau de 100 cases
+
+    generate(tab.begin(), tab.end(), Generer());  //On génère les nombres aléatoires
+
+    int const compteur = count(tab.begin(), tab.end(), 5); //Et on compte les occurrences du 5
+
+    cout << "Il y a " << compteur << " elements valant 5." << endl;
+
+    return 0;
+}
+```
+- find()
+	- example below:
+
+```cpp
+int main()
+{
+    deque<char> lettres;
+
+    deque<char>::iterator trouve = find(lettres.begin(), lettres.end(), 'a');
+
+    if(trouve == lettres.end())
+        cout << "La lettre 'a' n'a pas ete trouvee" << endl;
+    else
+        cout << "La lettre 'a' a ete trouvee" << endl;
+
+    return 0;
+}
+```
+
+- min_element(), max_element()
 
 

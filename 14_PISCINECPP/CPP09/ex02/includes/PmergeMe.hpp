@@ -8,19 +8,15 @@
 #include <exception>
 #include <vector>
 #include <cstdlib>
-// #include <chrono>
 #include "includes/Colors.hpp"
 
 class PmergeMe {
-	private:
-		std::string _str;
-		int	_value;
-
 	public:
 		PmergeMe();
 		~PmergeMe();
 		PmergeMe(const PmergeMe& src);
 		PmergeMe& operator=(const PmergeMe& src);
+
 
 
 };
