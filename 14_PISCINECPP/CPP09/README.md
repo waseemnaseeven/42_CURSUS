@@ -50,3 +50,5 @@ int main()
 - isstringstream:
     - std::istringstream is a convenient way to treat a string as a source of input data that you can easily read from.
     - while (iss >> token) { ... }: This while loop reads individual tokens (words or values) from the iss input stream. It continues reading until there are no more tokens in the rpnExpression string.
+
+./PmergeMe `shuf -i 1-100000 -n 3000 | tr "\n" " "`

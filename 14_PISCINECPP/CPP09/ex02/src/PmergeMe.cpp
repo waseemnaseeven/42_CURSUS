@@ -25,7 +25,10 @@ PmergeMe& PmergeMe::operator=(const PmergeMe& src) {
 	return *this;
 }
 
-//void PmergeMe::parseInput(std::string& const input)
-//{
+void	print_vector(std::vector<int> tab)
+{
+	for (std::vector<int>::iterator it = tab.begin(); it != tab.end(); ++it) {
+            std::cout << "tab is: " << *it << std::endl;
+        }
+}
 
-//}

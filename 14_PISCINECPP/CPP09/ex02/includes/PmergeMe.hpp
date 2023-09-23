@@ -16,16 +16,20 @@
 #include "includes/Colors.hpp"
 
 class PmergeMe {
+	private:
+		std::vector<int> tab;
 	public:
 		PmergeMe();
 		~PmergeMe();
 		PmergeMe(const PmergeMe& src);
 		PmergeMe& operator=(const PmergeMe& src);
 
-		//void parseInput(std::string const &input);
-
-
-
+		void parseInput(int ac, char **av);
+		void fill_vector(std::string line);
 };
+
+void print_vector(std::vector<int> tab);
+void check_double(std::vector<int> tab);
+
 
 #endif // PMERGEME_HPP
