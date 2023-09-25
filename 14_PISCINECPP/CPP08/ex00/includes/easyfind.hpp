@@ -6,11 +6,11 @@
 #include <cmath>
 #include <iomanip>
 #include <exception>
-//#include <vector>
+#include <vector>
 //#include <deque>
 //#include <stack>
 //#include <queue>
-#include <list>
+//#include <list>
 //#include <utility>
 //#include <map>
 #include <algorithm>

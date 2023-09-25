@@ -27,7 +27,7 @@ BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& src) {
 
 void BitcoinExchange::fillMap()
 {
-	std::string database = "/home/was/Desktop/CPP09/ex00/data.csv";
+	std::string database = "./data.csv";
 	std::ifstream file;
 	std::string delimiter2 = ",";
 	std::string line;
@@ -63,6 +63,7 @@ void BitcoinExchange::fillMap()
 
 void BitcoinExchange::parseInput(std::string filename)
 {
+	//std::cout << "pb sur input.txt" << std::endl;
 	std::ifstream input;
 	input.open(filename.c_str());
 	if (!input) {

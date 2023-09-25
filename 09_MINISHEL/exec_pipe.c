@@ -6,7 +6,7 @@
 /*   By: wnaseeve <wnaseeve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 13:47:18 by wnaseeve          #+#    #+#             */
-/*   Updated: 2023/03/22 11:52:46 by wnaseeve         ###   ########.fr       */
+/*   Updated: 2023/09/25 11:43:37 by wnaseeve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	ft_child_process(t_data *data, t_process process, char **cmds, int i)
 			free(data->process[j].file_hd);
 		j++;
 	}
+	printf("%d, %d, %d\n", data->prev_pipes, data->pipe_fd[0], data->pipe_fd[1]);
 	ft_dup_fd(data, i);
 	ft_check_redirection(data, process, 1);
 	close(data->pipe_fd[0]);

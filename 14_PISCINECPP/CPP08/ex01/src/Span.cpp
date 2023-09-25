@@ -77,5 +77,5 @@ void Span::addNumbers()
 
 unsigned int send_int()
 {
-	return (std::rand() % (20 - 10) + 10);
+	return (std::rand() % 10);
 }

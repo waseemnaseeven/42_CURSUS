@@ -25,64 +25,6 @@ RPN& RPN::operator=(const RPN& src) {
 	return *this;
 }
 
-// int performOperation(int operand1, int operand2, char c) {
-//     switch (c) {
-//         case '+':
-//             return operand1 + operand2;
-//         case '-':
-//             return operand1 - operand2;
-//         case '*':
-//             return operand1 * operand2;
-//         case '/':
-//             if (operand2 != 0) {
-//                 return operand1 / operand2;
-//             } else {
-//                 throw std::runtime_error("Error: Division by zero.");
-//             }
-//         default:
-//             throw std::runtime_error("Error: Invalid operation.");
-//     }
-// }
-
-// int ReversePolishNotationCalculator(std::string& input)
-// {
-// 	std::stack<int> list;
-// 	// int ret = 0;
-// 	// int v1, v2;
-// 	size_t i = 0;
-// 	std::string token = "";
-// 	// check for integer
-// 	while (i < input.length())
-// 	{
-// 		while (std::isspace(input[i]))
-// 			i++;
-// 		if (std::isdigit(input[i]) || std::strchr("+-*/", input[i]))
-// 			i++;
-// 		else
-// 			throw std::runtime_error("Error: bad input");
-// 	}
-
-// 	for (i = 0; i < input.length(); i++) {
-// 		while (std::isspace(input[i]))
-// 			i++;
-// 		// Check for digits
-// 		if (std::isdigit(input[i]))
-// 		{
-// 			token += input[i];
-// 			i++;
-// 		}
-// 		list.push(std::atof(token.c_str()));
-// 		token = "";
-// 		// std::cout << list.top() << std::endl;
-// 	}
-// 	if (list.size() < 2)
-// 		throw std::runtime_error("Error: need at least 2 int");
-
-// 	std::cout << "list: " << list;
-// 	return 0;
-// }
-
-
 int ReversePolishNotationCalculator(std::string& input) {
     std::stack<int> list;
     size_t i = 0;

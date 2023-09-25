@@ -7,7 +7,6 @@
 - The simple idea is to pass the data type as a parameter so that we don’t need to write the same code for different data types.
 - C++ declaration of tempaltes allow us to use either class or typename to specify the parameter of the generic model.
 - `template` keyword say to the compiler that the thing after will be generic
--
 
 ![Screenshot](img/templates-cpp.jpg)
 
