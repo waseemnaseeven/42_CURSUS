@@ -6,7 +6,7 @@
 #    By: wnaseeve <wnaseeve@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/03 11:38:41 by wnaseeve          #+#    #+#              #
-#    Updated: 2023/09/12 16:30:08 by wnaseeve         ###   ########.fr        #
+#    Updated: 2023/09/27 11:22:20 by wnaseeve         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ OBJS	= $(SRCS:src/%.cpp=obj/%.o)
 
 CC		= c++
 
-CFLAGS	= -std=c++98 -Wall -Wextra -Werror
+CFLAGS	= -std=c++98 -Wall -Wextra -Werror -g3
 
 all:	obj $(NAME)
 

@@ -1,2 +1,1 @@
-c++ -Wall -Wextra -Werror test.cpp && ./a.out
-rm a.out
+c++ -Wall -Wextra -Werror -g3 test.cpp && ./a.out

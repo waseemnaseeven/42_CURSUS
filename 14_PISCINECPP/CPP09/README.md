@@ -52,3 +52,9 @@ int main()
     - while (iss >> token) { ... }: This while loop reads individual tokens (words or values) from the iss input stream. It continues reading until there are no more tokens in the rpnExpression string.
 
 ./PmergeMe `shuf -i 1-100000 -n 3000 | tr "\n" " "`
+
+### FORDJOHNSON ALGORITHM
+
+L'utilisation de l'algorithme de tri dépend de plusieurs facteurs, dont la taille de la séquence à trier. En ce qui concerne l'algorithme Ford-Johnson (ou le tri merge-insertion), il est courant de combiner l'insertion sort avec le tri fusion (merge sort) pour tirer parti des avantages de chaque algorithme en fonction de la taille des données.
+
+La décision de basculer de l'insertion sort au tri fusion dépend souvent de la taille des sous-séquences à trier, car l'insertion sort est plus efficace pour de petites séquences, tandis que le tri fusion est plus adapté aux séquences plus grandes.
