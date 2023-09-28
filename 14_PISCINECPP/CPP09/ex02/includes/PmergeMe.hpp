@@ -31,7 +31,10 @@ class PmergeMe {
 		void sort_vector(int begin, int end);
 		void insertionVector(int begin, int end);
 		void mergeVector(int begin, int mid, int end);
-		//void sort_list(int begin, int end);
+
+		void sort_list();
+		void sort_list(std::list<int>::iterator begin, std::list<int>::iterator end);
+		void mergeList(std::list<int>::iterator begin, std::list<int>::iterator mid, std::list<int>::iterator end);
 
 	public:
 		PmergeMe();
@@ -41,9 +44,11 @@ class PmergeMe {
 
 		void parse_input(int ac, char **av);
 		bool isSortedFunction();
-		void print_time(int process);
+		void time_vector();
+		void time_list();
 };
 
-void print_output(std::vector<int> tab, bool flag);
+void 	print_vector(std::vector<int> tab, bool flag);
+void	print_list(std::list<int> list, bool flag);
 
 #endif // PMERGEME_HPP

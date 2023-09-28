@@ -6,7 +6,6 @@ PmergeMe::~PmergeMe() {}
 
 PmergeMe::PmergeMe(const PmergeMe& src) {
 	*this = src;
-
 }
 
 PmergeMe& PmergeMe::operator=(const PmergeMe& src) {
@@ -58,45 +57,81 @@ void PmergeMe::parse_input(int ac, char **av)
 	}
 }
 
-void 	PmergeMe::print_time(int process)
+void 	PmergeMe::time_vector()
 {
-	if (process == 1)
-	{
-		print_output(_unsorted_vec, false);
-		// vector sort
-		struct timeval start_vec, end_vec;
-		gettimeofday(&start_vec, NULL);
-		// FordJohnsonAlgorithm perform
-		sort_vector(0, _unsorted_vec.size());
-		gettimeofday(&end_vec, NULL);
-		this->elapsed_timeVec = (end_vec.tv_sec - start_vec.tv_sec) * 1000.0; // Microseconds
-		this->elapsed_timeVec += (end_vec.tv_usec - start_vec.tv_usec) / 1000.0;
-		print_output(_sorted_vec, true);
-		std::cout << "Time to process a range of " << _sorted_vec.size() << " elements with std::[...] : " << elapsed_timeVec << " us" << std::endl;
-		return ;
-	}
-	else if (process == 2)
-	{
+	// vector_sort
+	std::cout << BOLDMAGENTA << " ********** Perform Merge-Insertion sort for Vector ********** " << std::endl;
+	print_vector(_unsorted_vec, false);
+	struct timeval start_vec, end_vec;
+	gettimeofday(&start_vec, NULL);
+	// FordJohnsonAlgorithm perform
+	sort_vector(0, _unsorted_vec.size());
+	gettimeofday(&end_vec, NULL);
+	this->elapsed_timeVec = (end_vec.tv_sec - start_vec.tv_sec) * 1000.0;
+	this->elapsed_timeVec += (end_vec.tv_usec - start_vec.tv_usec) / 1000.0;
+	print_vector(_sorted_vec, true);
+	std::cout << "Time to process a range of " << _sorted_vec.size() << " elements with std::[...] : " << elapsed_timeVec << " us" << RESET << std::endl;
+	std::cout << std::endl;
+}
+
+void	PmergeMe::time_list()
+{
 		// list_sort
-		struct timeval start_list, end_list;
-		gettimeofday(&start_list, NULL);
-		// FordJohnsonAlgorithm perform
-		//sort_list(0, _unsorted_list.size());
-		gettimeofday(&end_list, NULL);
-		this->elapsed_timeList = (end_list.tv_sec - start_list.tv_sec) * 1000.0; // Microseconds
-		this->elapsed_timeList += (end_list.tv_usec - start_list.tv_usec) / 1000.0;
+	std::cout << BOLDCYAN << " ********** Perform Merge-Insertion sort for List ********** " << std::endl;
+	print_list(_unsorted_list, false);
+	struct timeval start_list, end_list;
+	gettimeofday(&start_list, NULL);
+	// FordJohnsonAlgorithm perform
+	sort_list();
+	gettimeofday(&end_list, NULL);
+	this->elapsed_timeList = (end_list.tv_sec - start_list.tv_sec) * 1000.0;
+	this->elapsed_timeList += (end_list.tv_usec - start_list.tv_usec) / 1000.0;
+	print_list(_sorted_list, true);
+	std::cout << "Time to process a range of " << _sorted_list.size() << " elements with std::[...] : " << elapsed_timeList << " us" << std::endl;
+}
 
-		std::cout << "Time to process a range of " << _sorted_list.size() << " elements with std::[...] : " << elapsed_timeVec << " us" << std::endl;
-		return ;
+bool PmergeMe::isSortedFunction() {
+    bool isSorted = true;
+    for (std::vector<int>::iterator it = _unsorted_vec.begin(); it != _unsorted_vec.end() - 1; ++it) {
+        if (*it > *(it + 1)) {
+            isSorted = false;
+            break;
+        }
+    }
+    return isSorted;
+}
+
+void PmergeMe::sort_vector(int begin, int end)
+{
+	if ((end - begin) > 1)
+	{
+		int mid = (begin + end) / 2;
+		sort_vector(begin, mid);
+		sort_vector(mid, end);
+		mergeVector(begin, mid, end);
 	}
+	else
+		insertionVector(begin, end);
+	_sorted_vec = _unsorted_vec;
+}
 
+void PmergeMe::insertionVector(int begin, int end)
+{
+	for (int i = begin + 1; i < end; i++)
+	{
+		int key = _unsorted_vec[i];
+		int j = i - 1;
+		while (j >= begin && _unsorted_vec[j] > key)
+		{
+			_unsorted_vec[j + 1] = _unsorted_vec[j];
+			--j;
+		}
+		_unsorted_vec[j + 1] = key;
+	}
 }
 
 void PmergeMe::mergeVector(int begin, int mid, int end)
 {
-	std::cout << begin << std::endl;
-	std::cout << end << std::endl;
-	std::cout << mid << std::endl;
 	std::vector<int> temp(_unsorted_vec.begin() + begin, _unsorted_vec.begin() + end);
 	int left = 0;
 	int right = mid - begin;
@@ -124,48 +159,67 @@ void PmergeMe::mergeVector(int begin, int mid, int end)
         ++right;
         ++result;
     }
-
 }
 
-void PmergeMe::insertionVector(int begin, int end)
+void PmergeMe::mergeList(std::list<int>::iterator begin, std::list<int>::iterator mid, std::list<int>::iterator end)
 {
-	for (int i = begin + 1; i < end; i++)
+	std::list<int> temp;
+	std::list<int>::iterator left = begin;
+	std::list<int>::iterator right = mid;
+
+	while (left != mid && right != end)
 	{
-		int key = _unsorted_vec[i];
-		int j = i - 1;
-		while (j >= begin && _unsorted_vec[j] > key)
+		if (*left <= *right)
 		{
-			_unsorted_vec[j + 1] = _unsorted_vec[j];
-			--j;
+			temp.push_back(*left);
+			++left;
 		}
-		_unsorted_vec[j + 1] = key;
+		else
+		{
+			temp.push_back(*right);
+			++right;
+		}
+	}
+
+	while (left != mid)
+	{
+		temp.push_back(*left);
+		++left;
+	}
+
+	while (right != end)
+	{
+		temp.push_back(*right);
+		++right;
+	}
+
+	// Maintenant on copie les element de ma liste temporaire dans ma liste d'origine
+	std::list<int>::iterator beg = begin;
+	for (std::list<int>::iterator it = temp.begin(); it != temp.end(); ++it)
+	{
+		*beg = *it;
+		++beg;
 	}
 }
 
-void PmergeMe::sort_vector(int begin, int end)
+void PmergeMe::sort_list(std::list<int>::iterator begin, std::list<int>::iterator end)
 {
-	if ((end - begin) > 10)
-	{
-		int mid = (begin + end) / 2;
-		sort_vector(begin, mid);
-		sort_vector(mid, end);
-		mergeVector(begin, mid, end);
+	if (begin != end && std::distance(begin, end) > 1) {
+		std::list<int>::iterator mid = begin;
+		int count = std::distance(begin, end) / 2;
+		for (int i = 0; i < count; ++i) {
+			++mid;
+		}
+		sort_list(begin, mid);
+		sort_list(mid, end);
+		mergeList(begin, mid, end);
 	}
-	else
-	{
-		insertionVector(begin, end);
-	}
-	_sorted_vec = _unsorted_vec;
+
+
 }
 
-bool PmergeMe::isSortedFunction() {
-    bool isSorted = true;
-    for (std::vector<int>::iterator it = _unsorted_vec.begin(); it != _unsorted_vec.end() - 1; ++it) {
-        if (*it > *(it + 1)) {
-            isSorted = false;
-            break;
-        }
-    }
-    return isSorted;
+void PmergeMe::sort_list()
+{
+	sort_list(_unsorted_list.begin(), _unsorted_list.end());
+	_sorted_list = _unsorted_list;
 }
-

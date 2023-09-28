@@ -1,113 +1,136 @@
 #include <iostream>
-#include <deque>
+#include <vector>
+#include <stdexcept>
 
-template <typename Iterator>
-void insertionSort(Iterator begin, Iterator end) {
-    for (Iterator i = begin + 1; i != end; i++) {
-        typename Iterator::value_type key = *i;
-        Iterator j = i - 1;
-        while (j >= begin && *j > key) {
-            *(j + 1) = *j;
-			--j;
+class PmergeMe {
+private:
+    std::vector<int> _unsorted_vec;
+    std::vector<int> _sorted_vec;
+
+    double elapsed_timeVec;
+
+    void mergeVector(int begin, int mid, int end);
+    void mergeSort(int begin, int end);
+
+public:
+    PmergeMe();
+    ~PmergeMe();
+
+    void parse_input(int ac, char **av);
+    void print_time();
+};
+
+PmergeMe::PmergeMe() {}
+
+PmergeMe::~PmergeMe() {}
+
+void PmergeMe::parse_input(int ac, char **av) {
+    std::string line;
+
+    for (int i = 1; i < ac; i++) {
+        std::string input = av[i];
+        std::istringstream iss(input);
+
+        while (iss >> line) {
+            bool isDigit = true;
+
+            for (size_t j = 0; j < line.size(); j++) {
+                if (!std::isdigit(line[j])) {
+                    isDigit = false;
+                    throw std::runtime_error("Only integers are allowed.");
+                }
+            }
+            if (isDigit) {
+                int num = std::atoi(line.c_str());
+                if (num < 0 || num > 2147483647)
+                    throw std::runtime_error("Only positive integers are allowed");
+                this->_unsorted_vec.push_back(num);
+            }
         }
-        *(j + 1) = key;
+    }
+    if (_unsorted_vec.size() > 3000)
+        throw std::runtime_error("Too many integers");
+    for (size_t i = 0; i < _unsorted_vec.size(); i++) {
+        for (size_t j = i + 1; j < _unsorted_vec.size(); j++) {
+            if (_unsorted_vec[i] == _unsorted_vec[j] && j != i)
+                throw std::runtime_error("Duplicate found");
+        }
     }
 }
 
-template <typename Iterator>
-void merge(Iterator begin, Iterator middle, Iterator end) {
-    std::deque<typename Iterator::value_type> temp(begin, middle);
-    Iterator left = temp.begin();
-    Iterator right = middle;
-    Iterator result = begin;
+void PmergeMe::mergeVector(int begin, int mid, int end) {
+    std::vector<int> temp(end - begin);
 
-    while (left != temp.end() && right != end) {
-        if (*left <= *right) {
-            *result = *left;
-            ++left;
+    int left = begin;
+    int right = mid;
+    int result = 0;
+
+    while (left < mid && right < end) {
+        if (_unsorted_vec[left] <= _unsorted_vec[right]) {
+            temp[result++] = _unsorted_vec[left++];
         } else {
-            *result = *right;
-            ++right;
+            temp[result++] = _unsorted_vec[right++];
         }
-        ++result;
     }
 
-    while (left != temp.end()) {
-        *result = *left;
-        ++left;
-        ++result;
+    while (left < mid) {
+        temp[result++] = _unsorted_vec[left++];
+    }
+
+    while (right < end) {
+        temp[result++] = _unsorted_vec[right++];
+    }
+
+    for (int i = 0; i < result; i++) {
+        _unsorted_vec[begin + i] = temp[i];
     }
 }
 
-template <typename Iterator>
-void fordJohnsonSort(Iterator begin, Iterator end) {
-    bool alreadySorted = true;
-    for (Iterator it = begin; it != end; ++it) {
-        Iterator next = it;
-        ++next;
-        if (next != end && *it > *next) {
-            alreadySorted = false;
-            break;
-        }
-    }
-
-    if (alreadySorted) {
-        return;
-    }
-
-    size_t sequenceSize = 16;
-    size_t b = std::distance(begin, end);
-
-    while (b >= sequenceSize) {
-        insertionSort(begin, std::next(begin, sequenceSize));
-        begin += sequenceSize;
-        b -= sequenceSize;
-    }
-
-    insertionSort(begin, end);
-
-    while (sequenceSize < b) {
-        Iterator current = begin;
-
-        while (b >= sequenceSize * 2) {
-            Iterator middle = current;
-            std::advance(middle, sequenceSize);
-            Iterator next = middle;
-            std::advance(next, sequenceSize);
-            merge(current, middle, next);
-            current = next;
-            b -= sequenceSize * 2;
-        }
-
-        sequenceSize *= 2;
+void PmergeMe::mergeSort(int begin, int end) {
+    if (end - begin > 1) {
+        int mid = (begin + end) / 2;
+        mergeSort(begin, mid);
+        mergeSort(mid, end);
+        mergeVector(begin, mid, end);
     }
 }
 
-int main() {
-    std::deque<int> data;
-    data.push_back(8);
-    data.push_back(3);
-    data.push_back(5);
-    data.push_back(1);
-    data.push_back(9);
-    data.push_back(4);
-    data.push_back(7);
-    data.push_back(2);
-    data.push_back(6);
-
-    std::cout << "Before sorting:";
-    for (std::deque<int>::iterator it = data.begin(); it != data.end(); ++it) {
-        std::cout << " " << *it;
+void PmergeMe::print_time() {
+    std::cout << "Before: ";
+    for (int i = 0; i < _unsorted_vec.size(); i++) {
+        std::cout << _unsorted_vec[i] << " ";
     }
-    std::cout << std::endl;
+    std::cout << " [...]" << std::endl;
 
-    fordJohnsonSort(data.begin(), data.end());
+    struct timeval start_vec, end_vec;
+    gettimeofday(&start_vec, NULL);
 
-    std::cout << "After sorting:";
-    for (std::deque<int>::iterator it = data.begin(); it != data.end(); ++it) {
-        std::cout << " " << *it;
+    mergeSort(0, _unsorted_vec.size());
+
+    gettimeofday(&end_vec, NULL);
+    elapsed_timeVec = (end_vec.tv_sec - start_vec.tv_sec) * 1000.0; // Microseconds
+    elapsed_timeVec += (end_vec.tv_usec - start_vec.tv_usec) / 1000.0;
+
+    std::cout << "After: ";
+    for (int i = 0; i < _unsorted_vec.size(); i++) {
+        std::cout << _unsorted_vec[i] << " ";
     }
-    std::cout << std::endl;
+    std::cout << " [...]" << std::endl;
+    std::cout << "Time to process a range of " << _unsorted_vec.size() << " elements with std::[...] : " << elapsed_timeVec << " us" << std::endl;
+}
+
+int main(int ac, char **av) {
+    if (ac < 2 || av[1][0] == '\0') {
+        std::cout << "Usage: ./PmergeMe <range of, at least, 3000 different integers>" << std::endl;
+        return 1;
+    }
+    try {
+        PmergeMe sort;
+        sort.parse_input(ac, av);
+        sort.print_time();
+    } catch (std::exception &e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+    }
 
     return 0;
 }
