@@ -42,6 +42,7 @@ def cpp_creation(class_name, hpp_file_name):
 }}
 
 {class_name}::{class_name}(const {class_name}& src) {{
+	*this = src
 	std::cout << GREEN << "Copy constructor called for " << RESET << std::endl;
 
 }}
@@ -50,6 +51,7 @@ def cpp_creation(class_name, hpp_file_name):
 	std::cout << GREEN << "Assignation operator called" << RESET << std::endl;
 	if (this != &src) {{
 		// this->_value = src._value;
+        // this->_str = src_str;
 	}}
 
 	return *this;
