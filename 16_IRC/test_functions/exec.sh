@@ -1,0 +1,1 @@
+cc -o server server.c -lnsl -lsocket -lresolv 
