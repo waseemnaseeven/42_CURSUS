@@ -2,8 +2,8 @@
 
 | Name  | Language      |                  Description                      |
 | ----- |:-------------:| :------------------------------------------------:|
-| [CPP09](https://github.com/waseemnaseeven/42_CURSUS/tree/main/14_PISCINECPP/CPP09) |C++|  |
-| [CPP08](https://github.com/waseemnaseeven/42_CURSUS/tree/main/14_PISCINECPP/CPP08) |C++|  |
+| [CPP09](https://github.com/waseemnaseeven/42_CURSUS/tree/main/14_PISCINECPP/CPP09) |C++| Standard Templates Library, Merge-insertion sort algorithm |
+| [CPP08](https://github.com/waseemnaseeven/42_CURSUS/tree/main/14_PISCINECPP/CPP08) |C++| Containers, algorithms |
 | [CPP07](https://github.com/waseemnaseeven/42_CURSUS/tree/main/14_PISCINECPP/CPP07) |C++| Templates |
 | [CPP06](https://github.com/waseemnaseeven/42_CURSUS/tree/main/14_PISCINECPP/CPP06) |C++| static_cast<type> |
 | [CPP05](https://github.com/waseemnaseeven/42_CURSUS/tree/main/14_PISCINECPP/CPP05) |C++| Try, throw and catch conditions |
