@@ -1,36 +1,8 @@
 # FT_IRC 🧠
 
-## FUNCTIONS AUTHORIZED:
-    - `socket`:
-        int sockfd = socket(domain, type, protocol)
-    - `close`:
-    - `setsockopt`:
-    - `getsockname`:
-    - `getprotobyname`:
-    - `gethostbyname`:
-    - `getaddrinfo`:
-    - `freeaddrinfo`: 
-    - `bind`:
-    - `connect`:
-    - `listen`:
-    - `accept`:
-    - `htons`:
-    - `htonl`:
-    - `ntohs, ntohl`:
-    - `inet_addr`:
-    - `inet_ntoa`:
-    - `send`:
-    - `recv`:
-    - `signal`:
-    - `sigaction`:
-    - `lseek`:
-    - `fstat`:
-    - `fcntl`:
-    - `poll`:
-
 ## HOW TO MAKE AN IRC SERVER
 
-- port:
+- port: port sur lequel mon server se reposera sur les messages entrants (du client?)
 
 - password:
 
@@ -49,6 +21,68 @@
 
 ### EVERYTHINGS I'VE TO KNOW
 
-- les sockets consiste a interagir avec d'autres programmes en utilisant les fd. Un fd c'est un int associe a un fichier ouvert. 
-
 ![Screenshot](img/socket.png)
+
+- les ports :  les numéros de port permettent de différencier différentes services sur un même ordinateur ayant une seule adresse IP. Par exemple, si vous avez un ordinateur avec une seule adresse IP et que vous souhaitez gérer à la fois les services de messagerie entrants et les services web, vous pouvez le faire en utilisant des numéros de port différents. Différents services sur Internet ont des numéros de port bien connus. Par exemple, HTTP (pour le web) utilise le port 80, telnet utilise le port 23, SMTP (pour les e-mails) utilise le port 25, et ainsi de suite. Les ports numérotés en dessous de 1024 sont souvent considérés comme spéciaux et nécessitent généralement des privilèges spéciaux du système d'exploitation pour être utilisés.
+
+-
+
+## FUNCTIONS AUTHORIZED:
+
+- les `sockets` consiste a interagir avec d'autres programmes en utilisant les fd. Un fd c'est un int associe a un fichier ouvert. C'est un node, qui écoute sur un port particulier sur un IP, pendant que l'autre socket (client) rejoint le client pour se connecter. C'est lors de la connexion que l'on gère les cas d'erreur.
+    - int sockfd = socket(domain, type, protocol)
+        - un int en sortie, c'est le socket descriptor
+        - domain : domaine communication, AF_LOCAL pour le standard POSIX communication entre les processus sur le même hôte.
+        - type : SOCK_STREAM: TCP(reliable, connection oriented) ou SOCK_DGRAM: UDP(unreliable, connectionless)
+        - protocol on va mettre 0
+    - `close`:
+    - `setsockopt`:
+    - `getsockname`:
+    - `getprotobyname`:
+    - `gethostbyname`:
+
+    - `getaddrinfo`:
+- aide a configurer les structures nécessaires pour les opérations réseau ultérieures.
+    - int getaddrinfo(const char *restrict node,
+                       const char *restrict service,
+                       const struct addrinfo *restrict hints,
+                       struct addrinfo **restrict res);
+    - The addrinfo structure used by getaddrinfo() contains the following fields:
+```cpp
+           struct addrinfo {
+               int              ai_flags;
+               int              ai_family;
+               int              ai_socktype;
+               int              ai_protocol;
+               socklen_t        ai_addrlen;
+               struct sockaddr *ai_addr;
+               char            *ai_canonname;
+               struct addrinfo *ai_next;
+           };
+```
+    - `freeaddrinfo`:
+    - `bind`:
+- le bind() intervient après la création d'un socket, la fonction va `bind` le socket avec l'adresse et le numéro de port spécifié sur addr
+    - int bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
+
+    - `connect`:
+- vient du client, va connecter le socket client avec le socket server
+    - int connect(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
+    - `listen`:
+- `listen()` va mettre le socket server en mode passif, il attend le client pour un connexion. backlog defini la longueur max a laquelle la file d'attente des connexions en attente pour sockfd peut croitre. Si une demande arrive alors que la file d'attente est pleine, le client peut recevoir une erreur (ECONNREFUSED).
+    - int listen(int sockfd, int backlog);
+
+    - `accept`:
+    - `htons`:
+    - `htonl`:
+    - `ntohs, ntohl`:
+    - `inet_addr`:
+    - `inet_ntoa`:
+    - `send`:
+    - `recv`:
+    - `signal`:
+    - `sigaction`:
+    - `lseek`:
+    - `fstat`:
+    - `fcntl`:
+    - `poll`:
