@@ -13,9 +13,11 @@
 NAME	= 	ircserv
 
 SRCS	= 	src/main.cpp \
-			src/PmergeMe.cpp
+			src/Server.cpp \
+			# src/Client.cpp \
 
-HEADER	=	includes/PmergeMe.hpp \
+HEADER	=	includes/Server.hpp \
+			# includes/Client.hpp \
 
 OBJS	= $(SRCS:src/%.cpp=obj/%.o)
 
