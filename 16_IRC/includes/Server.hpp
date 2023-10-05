@@ -1,6 +1,7 @@
 #ifndef SERVER_HPP
 #define SERVER_HPP
 
+// C++ functions
 #include <iostream>
 #include <string>
 #include <cmath>
@@ -11,6 +12,8 @@
 #include <list>
 #include <vector>
 #include <algorithm>
+
+// C functions
 #include <errno.h>
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -21,13 +24,14 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+
+// My library
 #include "includes/Colors.hpp"
 
 using namespace std;
 
 #define LOCAL_HOST "127.0.0.1"
 #define BUFFERSIZE 1024
-#define MAX_
 
 class Server {
 	private:

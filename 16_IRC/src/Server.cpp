@@ -33,6 +33,7 @@ void Server::runIRC()
 {
 	cout << CYAN <<"Initializing server..." << RESET << endl;
 	initServer();
+	cout << CYAN <<"Initializing client..." << RESET << endl;
 }
 
 void Server::initServer()
@@ -51,13 +52,13 @@ void Server::initServer()
 	cout << CYAN <<"Server Socket connection created..." << RESET << endl;
 
 	// Forcefully attaching socket to the port 8080
-	if (setsockopt(_serv_fd, SOL_SOCKET,
-				SO_REUSEADDR | SO_REUSEPORT, &_opt,
-				sizeof(_opt)))
-	{
-		cerr << RED << "setsockopt error" << RESET << endl;
-		exit(EXIT_FAILURE);
-	}
+	// if (setsockopt(_serv_fd, SOL_SOCKET,
+	// 			SO_REUSEADDR | SO_REUSEPORT, &_opt,
+	// 			sizeof(_opt)))
+	// {
+	// 	cerr << RED << "setsockopt error" << RESET << endl;
+	// 	exit(EXIT_FAILURE);
+	// }
 
 	_serv_addr.sin_family = AF_INET;
 	_serv_addr.sin_addr.s_addr = htons(INADDR_ANY);
@@ -95,26 +96,26 @@ void Server::initServer()
 
 	cout << CYAN << "Client connected" << RESET << endl;
 
-	// while (1)
-	// {
-	// 	cout << CYAN << "Waiting for client message..." << RESET << endl;
-	// 	_valread = read(_newsockfd, _buffer, BUFFERSIZE);
-	// 	if (_valread < 0)
-	// 	{
-	// 		cerr << RED << "read failed" << RESET << endl;
-	// 		exit(EXIT_FAILURE);
-	// 	}
-	// 	cout << CYAN << "Client: " << _buffer << RESET << endl;
-	// 	if (strcmp(_buffer, "exit") == 0)
-	// 		break;
-	// 	cout << CYAN << "Enter message to client: " << RESET << endl;
-	// 	cin >> _buffer;
-	// 	send(_newsockfd, _buffer, strlen(_buffer), 0);
-	// 	if (strcmp(_buffer, "exit") == 0)
-	// 		break;
-	// }
-	// cout << CYAN << "Closing connection..." << RESET << endl;
-	// close(_newsockfd);
-	// shutdown(_serv_fd, SHUT_RDWR);
+	while (1)
+	{
+		cout << CYAN << "Waiting for client message..." << RESET << endl;
+		_valread = read(_newsockfd, _buffer, BUFFERSIZE);
+		if (_valread < 0)
+		{
+			cerr << RED << "read failed" << RESET << endl;
+			exit(EXIT_FAILURE);
+		}
+		cout << CYAN << "Client: " << _buffer << RESET << endl;
+		if (strcmp(_buffer, "exit") == 0)
+			break;
+		cout << CYAN << "Enter message to client: " << RESET << endl;
+		cin >> _buffer;
+		send(_newsockfd, _buffer, strlen(_buffer), 0);
+		if (strcmp(_buffer, "exit") == 0)
+			break;
+	}
+	cout << CYAN << "Closing connection..." << RESET << endl;
+	close(_newsockfd);
+	shutdown(_serv_fd, SHUT_RDWR);
 
 }

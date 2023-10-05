@@ -25,7 +25,9 @@
 
 - les ports :  les numéros de port permettent de différencier différentes services sur un même ordinateur ayant une seule adresse IP. Par exemple, si vous avez un ordinateur avec une seule adresse IP et que vous souhaitez gérer à la fois les services de messagerie entrants et les services web, vous pouvez le faire en utilisant des numéros de port différents. Différents services sur Internet ont des numéros de port bien connus. Par exemple, HTTP (pour le web) utilise le port 80, telnet utilise le port 23, SMTP (pour les e-mails) utilise le port 25, et ainsi de suite. Les ports numérotés en dessous de 1024 sont souvent considérés comme spéciaux et nécessitent généralement des privilèges spéciaux du système d'exploitation pour être utilisés.
 
--
+- Les clients doivent avoir le même num de port pour recevoir les messages. Le client envoie la requête au serveur qu'il souhaite envoyer à un message à une autre personne, le serveur envoie une réponse.
+
+- 
 
 ## FUNCTIONS AUTHORIZED:
 
@@ -73,6 +75,11 @@
     - int listen(int sockfd, int backlog);
 
     - `accept`:
+Vous appelez `accept()` et vous lui dites d'obtenir la connexion en attente. Ça reviendra
+à vous un tout nouveau descripteur de fichier socket à utiliser pour cette connexion unique ! C'est vrai, tout à coup tu as
+deux descripteurs de fichiers socket pour le prix d'un ! L'original est toujours à l'écoute de nouvelles connexions,
+et celui nouvellement créé est enfin prêt à envoyer() et recv().
+    - (nouveau fd) int accept(int fd, adrr, adrrlen); 
     - `htons`:
     - `htonl`:
     - `ntohs, ntohl`:
