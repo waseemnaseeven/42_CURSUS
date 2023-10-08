@@ -21,8 +21,18 @@ int main (int ac, char **av)
 	// Client *client = new Client();
 	// Channel *channel = new Channel();
 	// Users *users = new Users();
+	try {
+		char hostname[128];
+		gethostname(hostname, 128);
+		cout << PURPLE << "Hostname: " << hostname << RESET << endl;
+		server->runIRC();
+	}
+	catch (std::exception &e) {
+		cout << RED << e.what() << RESET << endl;
+		delete server;
+		return (1);
+	}
 
-	server->runIRC();
 
 	delete server;
 	// delete client;

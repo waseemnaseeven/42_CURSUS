@@ -116,6 +116,8 @@ void Server::initServer()
 	}
 	cout << CYAN << "Closing connection..." << RESET << endl;
 	close(_newsockfd);
-	shutdown(_serv_fd, SHUT_RDWR);
-
+	if (shutdown(_serv_fd, SHUT_RDWR) < 0) {
+		cerr << RED << "Shutdown failed" << RESET << endl;
+		exit(EXIT_FAILURE);
+	}
 }

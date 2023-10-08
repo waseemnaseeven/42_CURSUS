@@ -6,8 +6,6 @@
 
 class Client {
 	private:
-		string _str;
-		int	_value;
 		struct sockaddr_in cli_addr;
 		socklen_t clilen;
 

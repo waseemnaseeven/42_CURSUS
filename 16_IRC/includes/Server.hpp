@@ -32,6 +32,10 @@ using namespace std;
 
 #define LOCAL_HOST "127.0.0.1"
 #define BUFFERSIZE 1024
+#define MAX_EVENTS 10 // ou backlog, ou max_clients, le nbr de pending connections queue 
+
+class Client;
+class Channel;
 
 class Server {
 	private:
