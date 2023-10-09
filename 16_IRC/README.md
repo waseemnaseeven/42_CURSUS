@@ -48,7 +48,6 @@ Les ports :  les numéros de port permettent de différencier différentes servi
 
 - Chaque user a un fd unique, le serveur doit pouvoir gérer plusieurs clients en même temps sans jamais se bloquer. On va utiliser epoll().
 
-
 ## FUNCTIONS AUTHORIZED:
 
 - les `sockets` consiste a interagir avec d'autres programmes en utilisant les fd. Un fd c'est un int associe a un fichier ouvert. C'est un node, qui écoute sur un port particulier sur un IP, pendant que l'autre socket (client) rejoint le client pour se connecter. C'est lors de la connexion que l'on gère les cas d'erreur.

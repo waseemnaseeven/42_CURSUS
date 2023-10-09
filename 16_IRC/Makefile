@@ -6,7 +6,7 @@
 #    By: wnaseeve <wnaseeve@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/03 11:38:41 by wnaseeve          #+#    #+#              #
-#    Updated: 2023/09/27 11:22:20 by wnaseeve         ###   ########.fr        #
+#    Updated: 2023/10/09 16:46:09 by wnaseeve         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,11 @@ NAME	= 	ircserv
 
 SRCS	= 	src/main.cpp \
 			src/Server.cpp \
-			# src/Client.cpp \
+			parsing/parsing.cpp \
 
 HEADER	=	includes/Server.hpp \
-			# includes/Client.hpp \
+			includes/IRC.hpp \
+			includes/Colors.hpp \
 
 OBJS	= $(SRCS:src/%.cpp=obj/%.o)
 
