@@ -1,4 +1,4 @@
-#include "includes/Server.hpp"
+#include "../includes/Server.hpp"
 
 Server::Server() {
 	cout << GREEN << "Constructor by default called... " << RESET << endl;
