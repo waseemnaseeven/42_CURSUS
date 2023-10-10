@@ -18,7 +18,9 @@
 
 - switch case pour les commandes
 
-### EVERYTHINGS I'VE TO KNOW
+## EVERYTHINGS I'VE TO KNOW
+
+### CONNECTION SERVER-CLIENTS (MONITORING MULTIPLE FDS)
 
 ![Screenshot](img/socket.png)
 
@@ -39,14 +41,69 @@ Les ports :  les numéros de port permettent de différencier différentes servi
 
 - Communication between client and server has to be done via TCP/IP v4 or v6
 
-- IRC client reference, has to got those features:
-    - authenticate: nickname, username, join channel, send and receive private messages using your reference client
-    - implement the commands specific to channel operator:
-        - KICK, INVITE, TOPIC, MODE
-
 - Les clients doivent avoir le même num de port pour recevoir les messages. Le client envoie la requête au serveur qu'il souhaite envoyer à un message à une autre personne, le serveur envoie une réponse.
 
 - Chaque user a un fd unique, le serveur doit pouvoir gérer plusieurs clients en même temps sans jamais se bloquer. On va utiliser epoll().
+
+		epoll pour manipuler plusieurs clients 
+		epoll_create1(EPOLL_CLOEXEC) crer un descrpteur de fichier
+		CLO_EXEC indique que le descripteur sera ferme automatiquement
+		lorsqu'un exec est effectue dans le processus (utile pour eviter
+		les fuites de descripteur)
+
+		Vous ajoutez le descripteur de fichier du socket serveur à 
+		l'instance epoll en utilisant epoll_ctl() avec EPOLL_CTL_ADD. 
+		Vous spécifiez que vous souhaitez surveiller les événements 
+		EPOLLIN, ce qui signifie que l'événement sera déclenché 
+		lorsqu'il y aura des données à lire sur le socket serveur.
+
+        epoll_wait : pour attendre des événements sur les descripteurs de fichiers surveillés par epoll. Cela bloquera jusqu'à ce qu'au moins un événement se produise.
+
+- Difference entre fcntl() et epoll_wait():
+    - `fcntl` va rendre un fd (comme le socket par ex) non bloquant, ca signifie que les operations de lecture et d'ecriture sur le fd, meme s'il n'y a pas de donnees dispo pour la lecture ou si le tampon est plein pour l'ecriture. ca nous permet de ne pas manquer d'evenements avant de passer sur de la gestion asynchrone.
+
+    - `epoll_wait` c'est de la gestion asynchrone des entrees/sorties pour les sockets.
+    il va attendre et gerer les evenements sur un ensemble de fd surveille par epoll, il gere uniquement la connexion de plusieurs fd a un meme socket.
+
+    - `Efficacité` : L'une des raisons d'utiliser epoll est de gérer efficacement de nombreuses connexions simultanées. En configurant les descripteurs de fichiers avec fcntl avant de les ajouter à epoll, vous vous assurez que chaque opération de lecture ou d'écriture ultérieure sur ces descripteurs de fichiers se comportera conformément à vos attentes en matière de blocage ou de non-blocage. Cela garantit que votre boucle de gestion des événements avec epoll_wait ne sera pas bloquée, ce qui serait le cas si vous tentiez de lire ou d'écrire sur un socket bloquant.
+
+### CHANNEL DEVICE
+
+- Un `channel` va comporter
+    - un nom de channel
+    - un ou plusieurs clients
+    - channel est une string qui commence soit par & ou #, max 200 caracteres
+    - un channel peut etre prive ou public
+    - ne doit pas contenir d'espace (/r/n/t) ou ',' ou ':' ou 7bit ASCII
+    - un channel peut etre cree par un client
+    - limite de 10 channels par client
+
+- IRC client reference, has to got those features:
+    - authenticate: nickname, username, join channel, send and receive private messages using your reference client
+
+### COMMANDS
+ONLY OPERATORS CAN USE THOSE COMMANDS
+- KICK
+    - trouver le client a kick sinon erreur
+- INVITE (mode +i)
+    - trouver le client a inviter sinon erreur
+- 
+
+
+### USERS
+
+- Un client doit avoir un nickname d'une longueur max de 9 caracteres
+
+- Un user peut etre un operator 
+
+- 
+
+### MESSAGES
+
+- gestion des spams
+- gestion des messages vides
+- gestion des messages trop longs
+- gestion des messages avec des caracteres speciaux
 
 ## FUNCTIONS AUTHORIZED:
 

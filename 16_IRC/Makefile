@@ -6,13 +6,13 @@
 #    By: wnaseeve <wnaseeve@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/03 11:38:41 by wnaseeve          #+#    #+#              #
-#    Updated: 2023/10/09 17:34:24 by wnaseeve         ###   ########.fr        #
+#    Updated: 2023/10/10 12:42:55 by wnaseeve         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= 	ircserv
 
-SRCS	= 	src/main.cpp \
+SRCS	= 	srcs/main.cpp \
 			init_server/Server.cpp \
 			parsing/parse_args.cpp \
 

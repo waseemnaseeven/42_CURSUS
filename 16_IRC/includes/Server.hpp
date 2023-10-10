@@ -12,6 +12,7 @@
 #include <list>
 #include <vector>
 #include <algorithm>
+#include <csignal>
 
 // C functions
 #include <errno.h>
@@ -25,6 +26,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <fcntl.h>
 
 // My library
 #include "../includes/Colors.hpp"
@@ -44,10 +46,8 @@ typedef struct s_epoll
 
 }						t_epoll;
 
-
-
-class Client;
 class Channel;
+class User;
 
 class Server {
 	private:
@@ -58,10 +58,24 @@ class Server {
 		socklen_t size;
 		int _opt;
 		bool _isOpen;
-		// int _valread;
-		// char _buffer[BUFFERSIZE];
-		// int _newsockfd;
+		int _valread;
+		char _buffer[BUFFERSIZE];
+		int _newsockfd;
 
+	/* ********** EXCEPTIONS ********** */
+	class ServerException : public std::exception {
+		public:
+			virtual const char* what() const throw() 
+			{
+				// if (this->_serv_fd)
+				// 	close(this->_serv_fd);
+				// if (this->_newsockfd)
+				// 	close(this->_newsockfd);
+				return ("Server error");
+			}
+	};
+
+	/* ********** INIT ********** */
 	void initServer(t_epoll epoll);
 	void initClients(t_epoll epoll);
 
@@ -72,10 +86,11 @@ class Server {
 		Server(const Server& src);
 		Server& operator=(const Server& src);
 
+	/* ********** SERVER METHODS ********** */
 	void runIRC();
-
+	void clients_actions(t_epoll epoll, int i);
+	void exit_server();
 };
 
-void server_actions(t_epoll epoll, int i);
 
 #endif // SERVER_HPP
