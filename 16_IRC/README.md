@@ -92,7 +92,10 @@ ONLY OPERATORS CAN USE THOSE COMMANDS
 
 ### USERS
 
-- Un client doit avoir un nickname d'une longueur max de 9 caracteres
+- Un client doit :
+    - avoir un nickname
+        - no space, no ',', no asterisk, no ?, no dot, no \0, no ':' no '$, & or #', - 
+
 
 - Un user peut etre un operator 
 

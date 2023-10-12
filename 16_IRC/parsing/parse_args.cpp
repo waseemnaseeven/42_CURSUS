@@ -1,4 +1,4 @@
-#include "../includes/IRC.hpp"
+#include "../includes/Server.hpp"
 
 bool valid_pwd(const string& pwd)
 {

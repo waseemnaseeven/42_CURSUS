@@ -1,4 +1,3 @@
-#include "../includes/IRC.hpp"
 #include "../includes/Server.hpp"
 
 using namespace std;
@@ -17,18 +16,13 @@ int main (int ac, char **av)
 		return (1);
 	}
 	Server *server = new Server(port, pwd);
-	// Channel *channel = new Channel();
-	// Users *users = new Users();
 	try {
 		server->runIRC();
 	}
 	catch (std::exception &e) {
 		cout << RED << e.what() << RESET << endl;
+		delete server;
 		return (1);
 	}
-	// delete server;
-	// delete client;
-	// delete channel;
-	// delete users;
 	return (0);
 }

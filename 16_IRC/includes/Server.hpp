@@ -8,6 +8,7 @@
 #include <iomanip>
 #include <cstdlib>
 #include <exception>
+#include <memory>
 #include <map>
 #include <list>
 #include <vector>
@@ -27,9 +28,11 @@
 #include <string.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <syslog.h>
 
 // My library
 #include "../includes/Colors.hpp"
+#include "../includes/User.hpp"
 
 using namespace std;
 
@@ -37,47 +40,47 @@ using namespace std;
 #define BUFFERSIZE 1024
 #define MAX_EVENTS 10 // ou backlog, ou max_clients, le nbr de pending connections queue 
 
+extern bool Open;
+
+class User;
+
+// typedef map<int, User*> 		t_users; 	//Users will be mapped key: fd; User*: User corresponding to the fd
+// typedef map<string, Channel *>	t_channels; //Key: channel name; Channel*: corresponding Channel
+
+// I/O multiplexing with epoll
 typedef struct s_epoll
 {
 	int					fd;
 	int					nb_events; // nb de clients
 	struct epoll_event event;
 	struct epoll_event events[MAX_EVENTS];
-
 }						t_epoll;
 
-class Channel;
-class User;
+// Communication client-server
+typedef struct s_serv
+{
+	int 				serv_fd;
+	struct sockaddr_in 	serv_addr;
+	socklen_t 			size;
+	int 				opt;
+
+	int					new_fd; // for accept
+	vector<int>			open_fds; // to get a name
+	t_epoll 			epoll;
+	// t_users				users;
+	// t_channels			channels;
+}					t_serv;	
+
 
 class Server {
 	private:
+	/* ********** ATTRIBUTES FOR SERVER ********** */
 		int _port;
 		string _passwd;
-		int _serv_fd;
-		struct sockaddr_in _serv_addr;
-		socklen_t size;
-		int _opt;
-		bool _isOpen;
-		int _valread;
-		char _buffer[BUFFERSIZE];
-		int _newsockfd;
-
-	/* ********** EXCEPTIONS ********** */
-	class ServerException : public std::exception {
-		public:
-			virtual const char* what() const throw() 
-			{
-				// if (this->_serv_fd)
-				// 	close(this->_serv_fd);
-				// if (this->_newsockfd)
-				// 	close(this->_newsockfd);
-				return ("Server error");
-			}
-	};
 
 	/* ********** INIT ********** */
-	void initServer(t_epoll epoll);
-	void initClients(t_epoll epoll);
+	bool initServer(t_serv *server);
+	void initClients(t_serv *server);
 
 	public:
 		Server();
@@ -86,11 +89,38 @@ class Server {
 		Server(const Server& src);
 		Server& operator=(const Server& src);
 
+	/* ********** GETTERS ********** */
+	int get_port() const;
+	string get_passwd() const;
+
+	/* ********** SETTERS ********** */
+	void set_port(int port);
+	void set_passwd(const string& passwd);
+
 	/* ********** SERVER METHODS ********** */
 	void runIRC();
-	void clients_actions(t_epoll epoll, int i);
-	void exit_server();
 };
 
+
+/* ********** PARSING ARGS FUNCTIONS ********** */
+bool parsing(string& port, string& pwd);
+bool valid_port(const string& port);
+bool valid_pwd(const string& pwd);
+
+/* ********** SERVER FUNCTIONS ********** */
+void clients_actions(t_serv *server, int i);
+void user_connection(t_serv *server);
+void user_disconnection(t_serv *server, int fd);
+
+/* ********** CLEAR_DATA FUNCTIONS ********** */
+void clear_data(t_serv *server);
+
+/* ********** SIGNAL FUNCTIONS ********** */
+void signal_handler(int signum);
+
+/* ********** PRINT FUNCTIONS ********** */
+void 	print_map(map<int, User*> map);
+void 	print_vector(vector<int> fd);
+void	print_epoll_status(t_serv *server, int i);
 
 #endif // SERVER_HPP

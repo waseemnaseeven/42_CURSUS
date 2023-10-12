@@ -6,19 +6,23 @@
 #    By: wnaseeve <wnaseeve@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/03 11:38:41 by wnaseeve          #+#    #+#              #
-#    Updated: 2023/10/10 12:42:55 by wnaseeve         ###   ########.fr        #
+#    Updated: 2023/10/12 04:46:00 by wnaseeve         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= 	ircserv
 
 SRCS	= 	srcs/main.cpp \
+			srcs/User.cpp \
 			init_server/Server.cpp \
 			parsing/parse_args.cpp \
+			cleaning/clear_data.cpp \
+			utils/print_functions.cpp \
 
 HEADER	=	includes/Server.hpp \
 			includes/IRC.hpp \
 			includes/Colors.hpp \
+			includes/User.hpp \
 
 OBJS	= $(SRCS:src/%.cpp=obj/%.o)
 
@@ -38,7 +42,7 @@ obj/%.o:	src/%.cpp
 	${CC} ${CFLAGS} -I. -c $< -o $@
 
 valgrind:
-	make && clear && valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all ./$(NAME)
+	make && clear && valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all --track-fds=yes ./ircserv 8080 lol
 
 clean:
 	@printf "%b" "\t    $(_PURPLE)[Cleaning] $(_PURPLE)[all]$(_PINK_ORANGE)\n";
