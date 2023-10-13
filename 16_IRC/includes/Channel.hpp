@@ -4,20 +4,23 @@
 #include "includes/Server.hpp"
 #include "includes/User.hpp"
 
-class Channel : public User {
+class Server;
+class User;
+
+class Channel {
 	private:
 		string _name;
 		string _topic;
 		string _password; // optional
-		vector<User> _users;
-		vector<User> _operators;
+		vector<User*> _users;
+		vector<User*> _operators;
 
 	public:
 		Channel();
 		~Channel();
 		Channel(const Channel& src);
 		Channel& operator=(const Channel& src);
-	
+
 
 	/* ********** GETTERS ********** */
 	string get_name() const;

@@ -38,7 +38,7 @@ using namespace std;
 
 #define LOCAL_HOST "127.0.0.1"
 #define BUFFERSIZE 1024
-#define MAX_EVENTS 10 // ou backlog, ou max_clients, le nbr de pending connections queue 
+#define MAX_EVENTS 10 // ou backlog, ou max_clients, le nbr de pending connections queue
 
 extern bool Open;
 
@@ -65,11 +65,12 @@ typedef struct s_serv
 	int 				opt;
 
 	int					new_fd; // for accept
+	
 	vector<int>			open_fds; // to get a name
 	t_epoll 			epoll;
 	// t_users				users;
 	// t_channels			channels;
-}					t_serv;	
+}					t_serv;
 
 
 class Server {

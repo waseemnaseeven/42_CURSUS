@@ -2,6 +2,7 @@
 #include "../includes/User.hpp"
 
 bool Open = true;
+
 typedef map<int, User*> t_users;
 t_users users_map;
 
@@ -14,7 +15,7 @@ Server::Server(const string& port, const string& passwd) : _port(atoi(port.c_str
 }
 
 Server::~Server() {
-	cout << RED << "Server Disconnection from " << LOCAL_HOST << " with port " << _port << RESET << endl;
+	cout << BOLDRED << "Server Disconnection from " << LOCAL_HOST << " with port " << _port << RESET << endl;
 }
 
 Server::Server(const Server& src) {
@@ -33,51 +34,39 @@ Server& Server::operator=(const Server& src) {
 
 /* ********** GETTERS ********** */
 
-int Server::get_port() const
-{
-	return _port;
-}
+int Server::get_port() const { return _port; }
 
-string Server::get_passwd() const
-{
-	return _passwd;
-}
+string Server::get_passwd() const { return _passwd; }
 
 /* ********** SETTERS ********** */
 
-void Server::set_port(int port)
-{
-	_port = port;
-}
+void Server::set_port(int port) { _port = port; }
 
-void Server::set_passwd(const string& passwd)
-{
-	_passwd = passwd;
-}
+void Server::set_passwd(const string& passwd) { _passwd = passwd; }
 
 /* ********** SERVER METHODS ********** */
 
 void Server::runIRC()
 {
-	t_serv 	server;
-	struct sigaction sa;
+	t_serv 	server = {};
+	struct sigaction sa = {};
 
-	memset(&server, 0, sizeof(server));
-	memset(&sa, 0, sizeof(sa));
+	// memset(&server, 0, sizeof(server));
+	// memset(&sa, 0, sizeof(sa));
 
 	cout << BOLDMAGENTA <<"Initializing server..." << RESET << endl;
-	
+
 	if (!initServer(&server))
 		clear_data(&server);
-	
+
 	sa.sa_handler = signal_handler;
 	sa.sa_flags = SA_RESTART; // restart system calls
 	sigemptyset(&sa.sa_mask); // while signal handler is executing, block other signals
 	if (sigaction(SIGINT, &sa, NULL) < 0)
 		clear_data(&server);
-	
+
 	cout << BOLDMAGENTA <<"Initializing client..." << RESET << endl;
-	
+
 	initClients(&server);
 
 	clear_data(&server);
@@ -109,14 +98,14 @@ bool Server::initServer(t_serv *server)
 
 	if (listen(server->serv_fd, MAX_EVENTS) < 0)
 		return false;
-	
+
 	return true;
 }
 
 void Server::initClients(t_serv *server)
 {
 	server->epoll.fd = epoll_create1(0);
-	if (server->epoll.fd < 0) 
+	if (server->epoll.fd < 0)
         clear_data(server);
 	server->epoll.event.events = EPOLLIN;
     server->epoll.event.data.fd = server->serv_fd;
@@ -132,10 +121,7 @@ void Server::initClients(t_serv *server)
 		if (nb_events < 0)
 			clear_data(server);
 		for (int i = 0; i < nb_events; i++)
-		{
 			clients_actions(server, i);
-			// cout << "nb de clients: " << nb_events << endl;
-		}
 	}
 }
 
@@ -161,64 +147,49 @@ void clients_actions(t_serv *server, int i)
 		// print_vector(server->open_fds);
 		event_new_con.events = EPOLLIN | EPOLLRDHUP;
 		event_new_con.data.fd = server->new_fd;
-		// fcntl(server->new_fd, F_SETFL, O_NONBLOCK); // MacOnly 
+		// fcntl(server->new_fd, F_SETFL, O_NONBLOCK); // MacOnly
 		if (epoll_ctl(server->epoll.fd, EPOLL_CTL_ADD, server->new_fd, &event_new_con) < 0)
 			clear_data(server);
 		++user_id;
+
+		std::string welcome = "Welcome to the IRC server!\n";
+		send(server->new_fd, welcome.c_str(), welcome.size(), 0);
 	}
-	else if (server->epoll.events[i].events & EPOLLIN)
+	else
 	{
-		int fd = server->epoll.events[i].data.fd;
-		char buffer[BUFFERSIZE];
-		cout << "enter something: ";
-		cin >> buffer;
-		ssize_t bytes_read = recv(fd, buffer, BUFFERSIZE, 0);
-		if (bytes_read < 0)
-			user_disconnection(server, fd);
+		cout << "Client request here" << endl;
+		char buffer[1024];
+		int sender_fd = server->epoll.events[i].data.fd;
+		int bytes_read = recv(sender_fd, buffer, 1024, 0);
+
+		if (bytes_read <= 0)
+		{
+			user_disconnection(server, sender_fd);
+		}
+		else
+		{
+			cout << "message" << endl;
+		}
 	}
 }
 
-void user_disconnection(t_serv *server, int fd)
+void user_disconnection(t_serv *server, int disc_fd)
 {
-	epoll_ctl(server->epoll.fd, EPOLL_CTL_DEL, fd, &server->epoll.event);
-	close(fd);
+	cout << "user_disconnection" << endl;
+	epoll_ctl(server->epoll.fd, EPOLL_CTL_DEL, disc_fd, &server->epoll.event);
+	close(disc_fd);
 	vector<int>::iterator it = server->open_fds.begin();
 	vector<int>::iterator ite = server->open_fds.end();
 	for (; it != ite; ++it)
 	{
-		if (*it == fd)
+		if (*it == disc_fd)
 		{
-			cout << "user disconnected = " << fd << " or it = " << *it << endl; 
+			cout << "user disconnected = " << disc_fd << " or it = " << *it << endl;
 			server->open_fds.erase(it);
 			break;
 		}
 	}
 }
-
-// void user_connection(t_serv *server)
-// {
-// 	server->new_fd = 0;
-// 	struct sockaddr_in socket_new_con = sockaddr_in();
-// 	struct epoll_event event_new_con = epoll_event();
-// 	socklen_t socket_new_con_len = sizeof(socket_new_con);
-// 	static int user_id = 1;
-
-// 	server->new_fd = accept(server->serv_fd, (struct sockaddr *)&socket_new_con, &socket_new_con_len);
-// 	if (server->new_fd < 0)
-// 		clear_data(server);
-
-// 	User *new_user = new User(server->new_fd, user_id);
-// 	users_map.insert(pair<int, User*>(server->new_fd, new_user));
-// 	// print_map(users_map);
-// 	server->open_fds.push_back(server->new_fd);
-// 	// print_vector(server->open_fds);
-// 	event_new_con.events = EPOLLIN | EPOLLRDHUP;
-// 	event_new_con.data.fd = server->new_fd;
-// 	// fcntl(server->new_fd, F_SETFL, O_NONBLOCK); // MacOnly 
-// 	if (epoll_ctl(server->epoll.fd, EPOLL_CTL_ADD, server->new_fd, &event_new_con) < 0)
-// 		clear_data(server);
-// 	++user_id;
-// }
 
 void signal_handler(int sig)
 {

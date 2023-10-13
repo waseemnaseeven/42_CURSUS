@@ -5,16 +5,16 @@ User::User() {
 
 }
 
-User::User(int fd, int id) : 
+User::User(int fd, int id) :
 	_username(""),
 	_nickname(""),
 	_messages(""),
-	_fd(fd), 
+	_fd(fd),
 	_id(id),
 	_isOperator(false),
 	_isAuthentified(false),
 	_hasNickname(false),
-	_hasUsername(false) 
+	_hasUsername(false)
 {
 	std::cout << GREEN << "User Constructor with fd " << _fd << " and id " << _id << RESET << std::endl;
 }
@@ -41,6 +41,16 @@ User& User::operator=(const User& src) {
 	return *this;
 }
 
+
+/* ********** USER METHODS ********** */
+
+void User::send_message(const string& message) {
+	send(_fd, message.c_str(), message.size(), 0);
+}
+
+void User::receive_message(const string& message) {
+	_messages += message;
+}
 /* ********** GETTERS ********** */
 
 string User::get_username() const {
@@ -115,14 +125,4 @@ void User::set_hasNickname(bool hasNickname) {
 
 void User::set_hasUsername(bool hasUsername) {
 	_hasUsername = hasUsername;
-}
-
-/* ********** USER METHODS ********** */
-
-void User::send_message(const string& message) {
-	send(_fd, message.c_str(), message.size(), 0);
-}
-
-void User::receive_message(const string& message) {
-	_messages += message;
 }
