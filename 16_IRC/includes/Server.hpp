@@ -44,7 +44,7 @@ extern bool Open;
 
 class User;
 
-// typedef map<int, User*> 		t_users; 	//Users will be mapped key: fd; User*: User corresponding to the fd
+typedef map<int, User*> 		t_users; 	//Users will be mapped key: fd; User*: User corresponding to the fd
 // typedef map<string, Channel *>	t_channels; //Key: channel name; Channel*: corresponding Channel
 
 // I/O multiplexing with epoll
@@ -68,7 +68,7 @@ typedef struct s_serv
 	
 	vector<int>			open_fds; // to get a name
 	t_epoll 			epoll;
-	// t_users				users;
+	t_users				users_map;
 	// t_channels			channels;
 }					t_serv;
 
@@ -102,7 +102,6 @@ class Server {
 	void runIRC();
 };
 
-
 /* ********** PARSING ARGS FUNCTIONS ********** */
 bool parsing(string& port, string& pwd);
 bool valid_port(const string& port);
@@ -112,6 +111,7 @@ bool valid_pwd(const string& pwd);
 void clients_actions(t_serv *server, int i);
 void user_connection(t_serv *server);
 void user_disconnection(t_serv *server, int fd);
+string welcome_msg();
 
 /* ********** CLEAR_DATA FUNCTIONS ********** */
 void clear_data(t_serv *server);

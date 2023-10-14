@@ -11,6 +11,11 @@ void	clear_data(t_serv *server)
 	for (int i = 0; server->epoll.events[i].data.fd; ++i) {
 		close(server->epoll.events[i].data.fd);
 	}
+	map<int, User*>::iterator it = server->users_map.begin();
+	map<int, User*>::iterator ite = server->users_map.end();
+	for (; it != ite; ++it){
+			delete it->second;
+	}
 	shutdown(server->serv_fd, SHUT_RDWR);
 	throw runtime_error("Data Cleaned");
 }

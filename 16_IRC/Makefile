@@ -6,7 +6,7 @@
 #    By: wnaseeve <wnaseeve@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/03 11:38:41 by wnaseeve          #+#    #+#              #
-#    Updated: 2023/10/12 04:46:00 by wnaseeve         ###   ########.fr        #
+#    Updated: 2023/10/14 14:09:04 by wnaseeve         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ NAME	= 	ircserv
 SRCS	= 	srcs/main.cpp \
 			srcs/User.cpp \
 			init_server/Server.cpp \
+			init_server/clients_actions.cpp \
 			parsing/parse_args.cpp \
 			cleaning/clear_data.cpp \
 			utils/print_functions.cpp \

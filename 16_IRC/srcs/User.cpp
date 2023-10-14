@@ -16,13 +16,13 @@ User::User(int fd, int id) :
 	_hasNickname(false),
 	_hasUsername(false)
 {
-	std::cout << GREEN << "User Constructor with fd " << _fd << " and id " << _id << RESET << std::endl;
+	std::cout << BOLDGREEN << "User Constructor with fd " << _fd << " and id " << _id << RESET << std::endl;
 }
 
 User::~User() {
 	if (_fd != -1)
 		close(_fd);
-	std::cout << RED << "User Destructor called for " << RESET << std::endl;
+	std::cout << BOLDRED << "User Destructor called for " << RESET << std::endl;
 
 }
 
