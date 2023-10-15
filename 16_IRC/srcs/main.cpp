@@ -15,13 +15,13 @@ int main (int ac, char **av)
 		cerr << RED << "Error: port must be a valid number and password must be a valid string" << RESET << endl;
 		return (1);
 	}
-	Server *server = new Server(port, pwd);
+	Server *server_class = new Server(port, pwd);
 	try {
-		server->runIRC();
+		server_class->runIRC(server_class);
 	}
 	catch (std::exception &e) {
 		cout << RED << e.what() << RESET << endl;
-		delete server;
+		delete server_class;
 		return (1);
 	}
 	return (0);

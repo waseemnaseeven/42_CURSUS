@@ -19,6 +19,7 @@ class User {
 		bool _isAuthentified;
 		bool _hasNickname;
 		bool _hasUsername;
+		bool _hasPassword;
 
 		// t_serv *server;
 
