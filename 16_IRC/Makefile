@@ -6,7 +6,7 @@
 #    By: wnaseeve <wnaseeve@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/03 11:38:41 by wnaseeve          #+#    #+#              #
-#    Updated: 2023/10/14 14:09:04 by wnaseeve         ###   ########.fr        #
+#    Updated: 2023/10/16 11:03:44 by wnaseeve         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRCS	= 	srcs/main.cpp \
 			parsing/parse_args.cpp \
 			cleaning/clear_data.cpp \
 			utils/print_functions.cpp \
+			utils/welcome_msg.cpp \
 
 HEADER	=	includes/Server.hpp \
 			includes/IRC.hpp \

@@ -14,7 +14,8 @@ User::User(int fd, int id) :
 	_isOperator(false),
 	_isAuthentified(false),
 	_hasNickname(false),
-	_hasUsername(false)
+	_hasUsername(false),
+	_hasPassword(false)
 {
 	std::cout << BOLDGREEN << "User Constructor with fd " << _fd << " and id " << _id << RESET << std::endl;
 }
@@ -89,6 +90,8 @@ bool User::get_hasUsername() const {
 	return _hasUsername;
 }
 
+bool User::get_hasPassword() const { return _hasPassword; }
+
 /* ********** SETTERS ********** */
 
 void User::set_username(const string& username) {
@@ -125,4 +128,29 @@ void User::set_hasNickname(bool hasNickname) {
 
 void User::set_hasUsername(bool hasUsername) {
 	_hasUsername = hasUsername;
+}
+
+void User::set_hasPassword(bool hasPassword) { _hasPassword = hasPassword; }
+
+vector<pair<string, string> > User::splitBuffer(const string& buffer) {
+	vector<pair<string, string> > result;
+	size_t start = 0;
+	size_t end = buffer.find("\r\n");
+
+	while (end != string::npos)
+	{
+		string line = buffer.substr(start, end - start);
+		size_t pos = line.find(" ");
+		if (pos != string::npos)
+		{
+			string command = line.substr(0, pos);
+			string args = line.substr(pos + 1);
+			result.push_back(make_pair(command, args));
+		}
+		else
+			result.push_back(make_pair(line, ""));
+		start = end + 2;
+		end = buffer.find("\r\n", start);
+	}
+	return result;
 }

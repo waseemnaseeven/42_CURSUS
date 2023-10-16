@@ -19,6 +19,7 @@ class User {
 		bool _isAuthentified;
 		bool _hasNickname;
 		bool _hasUsername;
+		bool _hasPassword;
 
 		// t_serv *server;
 
@@ -39,6 +40,7 @@ class User {
 		bool get_isAuthentified() const;
 		bool get_hasNickname() const;
 		bool get_hasUsername() const;
+		bool get_hasPassword() const;
 
 		/* ********** SETTERS ********** */
 		void set_username(const string& username);
@@ -50,10 +52,12 @@ class User {
 		void set_isAuthentified(bool isAuthentified);
 		void set_hasNickname(bool hasNickname);
 		void set_hasUsername(bool hasUsername);
+		void set_hasPassword(bool hasPassword);
 
 		/* ********** USER METHODS ********** */
 		void send_message(const string& message);
 		void receive_message(const string& message);
+		vector<pair<string, string> > splitBuffer(const string& buffer);
 
 };
 

@@ -111,7 +111,7 @@ bool valid_pwd(const string& pwd);
 void clients_actions(t_serv *server, int i);
 void user_connection(t_serv *server);
 void user_disconnection(t_serv *server, int fd);
-string welcome_msg();
+bool    execute_commands(t_serv *server, vector<pair<string, string> > commands, int sender_fd);
 
 /* ********** CLEAR_DATA FUNCTIONS ********** */
 void clear_data(t_serv *server);
@@ -120,8 +120,11 @@ void clear_data(t_serv *server);
 void signal_handler(int signum);
 
 /* ********** PRINT FUNCTIONS ********** */
+void	print_commandsargs(vector<pair<string, string> > commands);
 void 	print_map(map<int, User*> map);
 void 	print_vector(vector<int> fd);
 void	print_epoll_status(t_serv *server, int i);
+void    Hello_IRC(t_serv *server);
+string 	welcome_msg();
 
 #endif // SERVER_HPP
