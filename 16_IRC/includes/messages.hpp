@@ -18,7 +18,6 @@
 
 // NICK MESSAGE ERRORS
 # define    ERR_NONICKNAMEGIVEN(client) ("431 " + client + " : No nickame given\r\n")
-# define    ERR_ERRONEUSNICKNAME(client, nick) ("432 " + client " " + nick " :Erroneus nickname\r\n") 
-# define    ERR_NICKNAMEINUSE(client, nick) ("433 " + client + " " + nick + " :Nickname is alreay in use\r\n")
+# define    ERR_ERRONEUSNICKNAME(client, nick) (": 432 " + client + " " + nick + " :Erroneus nickname\r\n")
 
 #endif /* _MESSAGES_HPP */

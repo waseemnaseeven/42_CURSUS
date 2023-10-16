@@ -25,7 +25,7 @@ class User {
 
 	public:
 		User();
-		User(int fd, int id);
+		User(int fd);
 		~User();
 		User(const User& src);
 		User& operator=(const User& src);
@@ -55,10 +55,8 @@ class User {
 		void set_hasPassword(bool hasPassword);
 
 		/* ********** USER METHODS ********** */
-		void send_message(const string& message);
 		void receive_message(const string& message);
 		vector<pair<string, string> > splitBuffer(const string& buffer);
-
 };
 
 #endif // USER_HPP

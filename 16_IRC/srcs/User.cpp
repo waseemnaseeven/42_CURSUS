@@ -5,19 +5,18 @@ User::User() {
 
 }
 
-User::User(int fd, int id) :
+User::User(int fd) :
 	_username(""),
 	_nickname(""),
 	_messages(""),
 	_fd(fd),
-	_id(id),
 	_isOperator(false),
 	_isAuthentified(false),
 	_hasNickname(false),
 	_hasUsername(false),
 	_hasPassword(false)
 {
-	std::cout << BOLDGREEN << "User Constructor with fd " << _fd << " and id " << _id << RESET << std::endl;
+	std::cout << BOLDGREEN << "User Constructor with fd " << _fd << RESET << std::endl;
 }
 
 User::~User() {
@@ -45,9 +44,6 @@ User& User::operator=(const User& src) {
 
 /* ********** USER METHODS ********** */
 
-void User::send_message(const string& message) {
-	send(_fd, message.c_str(), message.size(), 0);
-}
 
 void User::receive_message(const string& message) {
 	_messages += message;

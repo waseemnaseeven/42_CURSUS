@@ -4,8 +4,8 @@ void	print_commandsargs(vector<pair<string, string> > commands)
 {
 	for (size_t i = 0; i < commands.size(); i++)
 	{
-		cout << "command: " << commands[i].first << endl;
-		cout << "args: " << commands[i].second << endl;
+		cout << "command: '" << commands[i].first << "'" << endl;
+		cout << "args: '" << commands[i].second << "'" << endl;
 	}
 }
 

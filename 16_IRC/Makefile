@@ -6,7 +6,7 @@
 #    By: wnaseeve <wnaseeve@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/03 11:38:41 by wnaseeve          #+#    #+#              #
-#    Updated: 2023/10/16 11:03:44 by wnaseeve         ###   ########.fr        #
+#    Updated: 2023/10/16 16:21:12 by wnaseeve         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,17 +14,23 @@ NAME	= 	ircserv
 
 SRCS	= 	srcs/main.cpp \
 			srcs/User.cpp \
+			srcs/messages.cpp \
 			init_server/Server.cpp \
 			init_server/clients_actions.cpp \
+			commands/pass.cpp \
+			commands/nick.cpp \
 			parsing/parse_args.cpp \
 			cleaning/clear_data.cpp \
 			utils/print_functions.cpp \
 			utils/welcome_msg.cpp \
+			utils/int_to_string.cpp \
 
 HEADER	=	includes/Server.hpp \
 			includes/IRC.hpp \
 			includes/Colors.hpp \
 			includes/User.hpp \
+			includes/messages.hpp \
+			includes/Channel.hpp \
 
 OBJS	= $(SRCS:src/%.cpp=obj/%.o)
 

@@ -14,6 +14,7 @@
 #include <vector>
 #include <algorithm>
 #include <csignal>
+#include <sstream> 
 
 // C functions
 #include <errno.h>
@@ -59,6 +60,9 @@ typedef struct s_epoll
 // Communication client-server
 typedef struct s_serv
 {
+	int 				_port;
+	string 				_passwd;
+
 	int 				serv_fd;
 	struct sockaddr_in 	serv_addr;
 	socklen_t 			size;
@@ -73,34 +77,14 @@ typedef struct s_serv
 }					t_serv;
 
 
-class Server {
-	private:
-	/* ********** ATTRIBUTES FOR SERVER ********** */
-		int _port;
-		string _passwd;
 
-	/* ********** INIT ********** */
 	bool initServer(t_serv *server);
 	void initClients(t_serv *server);
 
-	public:
-		Server();
-		Server(const string& port, const string& passwd);
-		~Server();
-		Server(const Server& src);
-		Server& operator=(const Server& src);
 
-	/* ********** GETTERS ********** */
-	int get_port() const;
-	string get_passwd() const;
 
-	/* ********** SETTERS ********** */
-	void set_port(int port);
-	void set_passwd(const string& passwd);
+	void runIRC(t_serv *server);
 
-	/* ********** SERVER METHODS ********** */
-	void runIRC();
-};
 
 /* ********** PARSING ARGS FUNCTIONS ********** */
 bool parsing(string& port, string& pwd);
@@ -108,10 +92,10 @@ bool valid_port(const string& port);
 bool valid_pwd(const string& pwd);
 
 /* ********** SERVER FUNCTIONS ********** */
-void clients_actions(t_serv *server, int i);
-void user_connection(t_serv *server);
-void user_disconnection(t_serv *server, int fd);
-bool    execute_commands(t_serv *server, vector<pair<string, string> > commands, int sender_fd);
+void 	clients_actions(t_serv *server, int i);
+void 	user_connection(t_serv *server);
+void 	user_disconnection(t_serv *server, int fd);
+void    execute_commands(t_serv *server, vector<pair<string, string> > commands, int sender_fd);
 
 /* ********** CLEAR_DATA FUNCTIONS ********** */
 void clear_data(t_serv *server);
@@ -126,5 +110,14 @@ void 	print_vector(vector<int> fd);
 void	print_epoll_status(t_serv *server, int i);
 void    Hello_IRC(t_serv *server);
 string 	welcome_msg();
+string	int_to_string(int n);
+
+/* ********** COMMANDS ********** */
+bool 	PASS_command(t_serv *server, const string& password, int sender_fd);
+bool    NICK_command(t_serv *server, const string& nickname, int sender_fd);
+
+/* ********** MESSAGES ********** */
+bool send_message(t_serv *server, const string& message, int sender_fd);
+
 
 #endif // SERVER_HPP
