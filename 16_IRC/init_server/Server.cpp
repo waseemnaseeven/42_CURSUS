@@ -3,7 +3,9 @@
 
 bool Open = true;
 
-Server::Server() {}
+Server::Server() {
+	cout << BOLDGREEN << "Server Connection by default called... " << RESET << endl;
+}
 
 Server::Server(const string& port, const string& passwd) : _port(atoi(port.c_str())), _passwd(passwd) {
 	cout << BOLDGREEN << "Server Connection with port " << _port << " and the passwd is '" << _passwd << "'" << RESET << endl;
@@ -13,9 +15,13 @@ Server::~Server() {
 	cout << BOLDRED << "Server Disconnection from " << LOCAL_HOST << " with port " << _port << RESET << endl;
 }
 
-Server::Server(const Server& src) {	*this = src; }
+Server::Server(const Server& src) {
+	cout << GREEN << "Server Copy constructor called for " << RESET << endl;
+	*this = src;
+}
 
 Server& Server::operator=(const Server& src) {
+	cout << GREEN << "Server Assignation operator called" << RESET << endl;
 	if (this != &src) {
 		this->_port = src._port;
 		this->_passwd = src._passwd;
@@ -37,9 +43,9 @@ void Server::set_passwd(const string& passwd) { _passwd = passwd; }
 
 /* ********** SERVER METHODS ********** */
 
-void Server::runIRC(Server *Server_class)
+void Server::runIRC()
 {
-	t_serv server = {};
+	t_serv 	server = {};
 	struct sigaction sa = {};
 
 	cout << BOLDMAGENTA <<"Initializing server..." << RESET << endl;
@@ -55,7 +61,7 @@ void Server::runIRC(Server *Server_class)
 
 	cout << BOLDMAGENTA <<"Initializing client..." << RESET << endl;
 
-	initClients(&server, Server_class);
+	initClients(&server);
 
 	clear_data(&server);
 }
@@ -75,8 +81,8 @@ bool Server::initServer(t_serv *server)
 
 	server->serv_addr = sockaddr_in();
 	server->serv_addr.sin_family = AF_INET;
-	server->serv_addr.sin_port = htons(_port);
 	server->serv_addr.sin_addr.s_addr = htonl(INADDR_ANY);
+	server->serv_addr.sin_port = htons(_port);
 
 	if (bind(server->serv_fd, (struct sockaddr *)&server->serv_addr,
 				sizeof(server->serv_addr)) < 0)
@@ -95,6 +101,8 @@ void signal_handler(int sig)
 	if (sig == SIGINT)
 	{
 		Open = false;
+
+		
 	}
 }
 

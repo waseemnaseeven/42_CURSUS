@@ -65,8 +65,7 @@ typedef struct s_serv
 	int 				opt;
 
 	int					new_fd; // for accept
-	static int			user_id;
-
+	
 	vector<int>			open_fds; // to get a name
 	t_epoll 			epoll;
 	t_users				users_map;
@@ -82,7 +81,7 @@ class Server {
 
 	/* ********** INIT ********** */
 	bool initServer(t_serv *server);
-	void initClients(t_serv *server, Server *Server_class);
+	void initClients(t_serv *server);
 
 	public:
 		Server();
@@ -100,7 +99,7 @@ class Server {
 	void set_passwd(const string& passwd);
 
 	/* ********** SERVER METHODS ********** */
-	void runIRC(Server *Server_class);
+	void runIRC();
 };
 
 /* ********** PARSING ARGS FUNCTIONS ********** */
@@ -109,26 +108,20 @@ bool valid_port(const string& port);
 bool valid_pwd(const string& pwd);
 
 /* ********** SERVER FUNCTIONS ********** */
-void 	clients_actions(t_serv *server, int i, Server *Server_class);
-void 	user_connection(t_serv *server);
-void 	user_disconnection(t_serv *server, int fd);
-void	user_requests(t_serv *server, int i, Server *Server_class);
-string 	readMessage(t_serv *server, int sender_fd);
-void    getAuthentication(Server *Server_class, string buffer);
+void clients_actions(t_serv *server, int i);
+void user_connection(t_serv *server);
+void user_disconnection(t_serv *server, int fd);
+string welcome_msg();
 
 /* ********** CLEAR_DATA FUNCTIONS ********** */
-void 	clear_data(t_serv *server);
+void clear_data(t_serv *server);
 
 /* ********** SIGNAL FUNCTIONS ********** */
-void 	signal_handler(int signum);
+void signal_handler(int signum);
 
 /* ********** PRINT FUNCTIONS ********** */
 void 	print_map(map<int, User*> map);
 void 	print_vector(vector<int> fd);
 void	print_epoll_status(t_serv *server, int i);
-
-/* ********** UTILS FUNCTIONS ********** */
-string 	welcome_msg();
-void 	Hello_IRC(t_serv *server);
 
 #endif // SERVER_HPP

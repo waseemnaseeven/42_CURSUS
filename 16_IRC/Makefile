@@ -13,17 +13,12 @@
 NAME	= 	ircserv
 
 SRCS	= 	srcs/main.cpp \
-			srcs/commands.cpp \
 			srcs/User.cpp \
 			init_server/Server.cpp \
 			init_server/clients_actions.cpp \
 			parsing/parse_args.cpp \
 			cleaning/clear_data.cpp \
 			utils/print_functions.cpp \
-			utils/find_user_fd.cpp \
-			utils/gethostname.cpp \
-			utils/welcome_msg.cpp \
-			utils/authenticate.cpp\
 
 HEADER	=	includes/Server.hpp \
 			includes/IRC.hpp \

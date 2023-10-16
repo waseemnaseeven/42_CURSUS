@@ -14,8 +14,7 @@ User::User(int fd, int id) :
 	_isOperator(false),
 	_isAuthentified(false),
 	_hasNickname(false),
-	_hasUsername(false),
-	_hasPassword(false)
+	_hasUsername(false)
 {
 	std::cout << BOLDGREEN << "User Constructor with fd " << _fd << " and id " << _id << RESET << std::endl;
 }
