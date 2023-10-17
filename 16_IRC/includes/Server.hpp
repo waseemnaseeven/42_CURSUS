@@ -14,7 +14,7 @@
 #include <vector>
 #include <algorithm>
 #include <csignal>
-#include <sstream> 
+#include <sstream>
 
 // C functions
 #include <errno.h>
@@ -69,7 +69,7 @@ typedef struct s_serv
 	int 				opt;
 
 	int					new_fd; // for accept
-	
+
 	vector<int>			open_fds; // to get a name
 	t_epoll 			epoll;
 	t_users				users_map;
@@ -115,9 +115,9 @@ string	int_to_string(int n);
 /* ********** COMMANDS ********** */
 bool 	PASS_command(t_serv *server, const string& password, int sender_fd);
 bool    NICK_command(t_serv *server, const string& nickname, int sender_fd);
+bool	USER_command(t_serv *server, const string& username, int sender_fd);
 
 /* ********** MESSAGES ********** */
 bool send_message(t_serv *server, const string& message, int sender_fd);
-
 
 #endif // SERVER_HPP

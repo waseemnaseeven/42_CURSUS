@@ -59,19 +59,18 @@ void    clients_actions(t_serv *server, int i)
 		// fcntl(server->new_fd, F_SETFL, O_NONBLOCK); // MacOnly
 		if (epoll_ctl(server->epoll.fd, EPOLL_CTL_ADD, server->new_fd, &event_new_con) < 0)
 			clear_data(server);
-		cout << "\033[1;" << 30 + 1 % 7 << "m" << "User " << 5 << " connected :)" << endl;
+		// cout << "\033[1;" << 30 + 1 % 7 << "m" << "User " << 5 << " connected :)" << endl;
         // Hello_IRC(server);
 	}
 	// if ((server->epoll.events[i].events & EPOLLERR)
 	// 	|| (server->epoll.events[i].events & EPOLLHUP)
 	// 	|| (server->epoll.events[i].events & EPOLLRDHUP)
-	// 	|| !(server->epoll.events[i].events & EPOLLIN))	
+	// 	|| !(server->epoll.events[i].events & EPOLLIN))
 	// 	user_disconnection(server, server->epoll.events[i].data.fd);
 	// else if (user_fd != -1)
 	else
 	{
 		int sender_fd = server->epoll.events[i].data.fd;
-		// send_message(server, RPL_WELCOME(server->users_map[sender_fd]->get_nickname(), "user", int_to_string(server->_port), "geq"), user_fd);
 		cout << "Client request here" << endl;
 		char buffer[BUFFERSIZE];
         cout << "sender_fd: " << sender_fd << endl;
@@ -94,13 +93,16 @@ void    execute_commands(t_serv *server, vector<pair<string, string> > commands,
     for (size_t i = 0; i < commands.size(); i++) {
         if (commands[i].first == "PASS")
 			PASS_command(server, commands[i].second, sender_fd);
-        if (commands[i].first == "NICK") {
+        else if (commands[i].first == "NICK") {
 			cout << BOLDBLUE << commands[i].second << RESET << endl;
-			(NICK_command(server, commands[i].second, sender_fd));
+			NICK_command(server, commands[i].second, sender_fd);
         }
-        if (commands[i].first == "JOIN") {
-			cout << BOLDRED << commands[i].second << RESET << endl;
-        }
+		else if (commands[i].first == "USER")
+		{
+			USER_command(server, commands[i].second, sender_fd);
+		}
+		// else
+		// 	Unknown_command(server, commands[i].first, sender_fd);
     }
 }
 
