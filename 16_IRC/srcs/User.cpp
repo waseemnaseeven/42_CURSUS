@@ -45,86 +45,47 @@ User& User::operator=(const User& src) {
 /* ********** USER METHODS ********** */
 
 
-void User::receive_message(const string& message) {
-	_messages += message;
-}
 /* ********** GETTERS ********** */
 
-string User::get_username() const {
-	return _username;
-}
+string User::get_username() const { return _username; }
 
-string User::get_nickname() const {
-	return _nickname;
-}
+string User::get_nickname() const { return _nickname; }
 
-int User::get_fd() const {
-	return _fd;
-}
+string User::get_realname() const { return _realname; }
 
-int User::get_id() const {
-	return _id;
-}
+int User::get_fd() const { return _fd; }
 
-string User::get_messages() const {
-	return _messages;
-}
+string User::get_messages() const { return _messages; }
 
-bool User::get_isOperator() const {
-	return _isOperator;
-}
+bool User::get_isOperator() const { return _isOperator; }
 
-bool User::get_isAuthentified() const {
-	return _isAuthentified;
-}
+bool User::get_isAuthentified() const { return _isAuthentified; }
 
-bool User::get_hasNickname() const {
-	return _hasNickname;
-}
+bool User::get_hasNickname() const { return _hasNickname; }
 
-bool User::get_hasUsername() const {
-	return _hasUsername;
-}
+bool User::get_hasUsername() const { return _hasUsername; }
 
 bool User::get_hasPassword() const { return _hasPassword; }
 
 /* ********** SETTERS ********** */
 
-void User::set_username(const string& username) {
-	_username = username;
-}
+void User::set_username(const string& username) { _username = username; }
 
-void User::set_nickname(const string& nickname) {
-	_nickname = nickname;
-}
+void User::set_nickname(const string& nickname) { _nickname = nickname; }
 
-void User::set_fd(int fd) {
-	_fd = fd;
-}
+void User::set_realname(const string& realname) { _realname = realname; }
 
-void User::set_id(int id) {
-	_id = id;
-}
+void User::set_fd(int fd) { _fd = fd; }
 
-void User::set_messages(const string& messages) {
-	_messages = messages;
-}
+void User::set_messages(const string& messages) { _messages = messages; }
 
-void User::set_isOperator(bool isOperator) {
-	_isOperator = isOperator;
-}
+void User::set_isOperator(bool isOperator) { _isOperator = isOperator; }
 
-void User::set_isAuthentified(bool isAuthentified) {
-	_isAuthentified = isAuthentified;
-}
+void User::set_isAuthentified(bool isAuthentified) { _isAuthentified = isAuthentified; }
 
-void User::set_hasNickname(bool hasNickname) {
-	_hasNickname = hasNickname;
-}
+void User::set_hasNickname(bool hasNickname) { _hasNickname = hasNickname; }
 
-void User::set_hasUsername(bool hasUsername) {
-	_hasUsername = hasUsername;
-}
+void User::set_hasUsername(bool hasUsername) { _hasUsername = hasUsername; }
 
 void User::set_hasPassword(bool hasPassword) { _hasPassword = hasPassword; }
 

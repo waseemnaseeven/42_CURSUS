@@ -71,37 +71,32 @@ typedef struct s_serv
 	int					new_fd; // for accept
 
 	vector<int>			open_fds; // to get a name
+	vector<int>			operator_fds;
 	t_epoll 			epoll;
 	t_users				users_map;
 	// t_channels			channels;
 }					t_serv;
 
-
-
-	bool initServer(t_serv *server);
-	void initClients(t_serv *server);
-
-
-
-	void runIRC(t_serv *server);
-
-
 /* ********** PARSING ARGS FUNCTIONS ********** */
-bool parsing(string& port, string& pwd);
-bool valid_port(const string& port);
-bool valid_pwd(const string& pwd);
+bool 	parsing(string& port, string& pwd);
+bool 	valid_port(const string& port);
+bool 	valid_pwd(const string& pwd);
 
 /* ********** SERVER FUNCTIONS ********** */
+void 	runIRC(t_serv *server);
+bool 	initServer(t_serv *server);
+void 	initClients(t_serv *server);
 void 	clients_actions(t_serv *server, int i);
 void 	user_connection(t_serv *server);
 void 	user_disconnection(t_serv *server, int fd);
+void 	receive_byts(t_serv *server, int i);
 void    execute_commands(t_serv *server, vector<pair<string, string> > commands, int sender_fd);
 
 /* ********** CLEAR_DATA FUNCTIONS ********** */
-void clear_data(t_serv *server);
+void 	clear_data(t_serv *server);
 
 /* ********** SIGNAL FUNCTIONS ********** */
-void signal_handler(int signum);
+void 	signal_handler(int signum);
 
 /* ********** PRINT FUNCTIONS ********** */
 void	print_commandsargs(vector<pair<string, string> > commands);
@@ -110,14 +105,24 @@ void 	print_vector(vector<int> fd);
 void	print_epoll_status(t_serv *server, int i);
 void    Hello_IRC(t_serv *server);
 string 	welcome_msg();
-string	int_to_string(int n);
 
 /* ********** COMMANDS ********** */
 bool 	PASS_command(t_serv *server, const string& password, int sender_fd);
 bool    NICK_command(t_serv *server, const string& nickname, int sender_fd);
 bool	USER_command(t_serv *server, const string& username, int sender_fd);
+bool	UNKNOWN_command(t_serv *server, const string& command, int sender_fd);
+bool	PING_command(t_serv *server, const string& args, int sender_fd);
+bool	OPER_command(t_serv *server, const string& args, int sender_fd);
+bool	QUIT_command(t_serv *server, const string& reason, int sender_fd);
+
 
 /* ********** MESSAGES ********** */
-bool send_message(t_serv *server, const string& message, int sender_fd);
+bool 	send_message(t_serv *server, const string& message, int sender_fd);
+
+
+/* ********** UTILS FUNCTIONS ********** */
+int		find_user_fd(int fd, t_serv *server);
+string	int_to_string(int n);
+
 
 #endif // SERVER_HPP

@@ -11,6 +11,7 @@ class Channel;
 class User {
 	private:
 		string _username;
+		string _realname;
 		string _nickname;
 		string _messages;
 		int _fd;
@@ -33,8 +34,8 @@ class User {
 		/* ********** GETTERS ********** */
 		string get_username() const;
 		string get_nickname() const;
+		string get_realname() const;
 		int get_fd() const;
-		int get_id() const;
 		string get_messages() const;
 		bool get_isOperator() const;
 		bool get_isAuthentified() const;
@@ -45,8 +46,8 @@ class User {
 		/* ********** SETTERS ********** */
 		void set_username(const string& username);
 		void set_nickname(const string& nickname);
+		void set_realname(const string& realname);
 		void set_fd(int fd);
-		void set_id(int id);
 		void set_messages(const string& messages);
 		void set_isOperator(bool isOperator);
 		void set_isAuthentified(bool isAuthentified);
@@ -55,7 +56,7 @@ class User {
 		void set_hasPassword(bool hasPassword);
 
 		/* ********** USER METHODS ********** */
-		void receive_message(const string& message);
+
 		vector<pair<string, string> > splitBuffer(const string& buffer);
 };
 

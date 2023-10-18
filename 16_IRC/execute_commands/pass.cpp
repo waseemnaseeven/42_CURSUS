@@ -14,8 +14,8 @@ bool    PASS_command(t_serv *server, const string& password, int sender_fd)
     {
         cout << "password : " << password << endl;
         cout << "server->_passwd : " << server->_passwd << endl;
-        // user_disconnection(server, sender_fd);
-        return (send_message(server, ERR_PASSWDMISMATCH(int_to_string(sender_fd)), sender_fd));
+        send_message(server, ERR_PASSWDMISMATCH(int_to_string(sender_fd)), sender_fd);
+        return false;
 
     }
     return true;

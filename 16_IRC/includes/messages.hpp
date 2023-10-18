@@ -2,7 +2,7 @@
 #define _MESSAGES_HPP
 
 // GENERAL MESSAGE
-# define    RPL_WELCOME(nick, user, port, host) (": 001 " + nick + " Welcome to the " + port + " Network, " + nick + "!" + user + "@" + host + "\r\n")
+# define    RPL_WELCOME(nick, user, port, host) ("001 " + nick + " Welcome to the " + port + " Network, " + nick + "!" + user + "@" + host + "\r\n")
 # define    ERR_UNKNOWNCOMMAND(client, command) (": 421 " + client + " " + command + " Unknown command(custom)\r\n")
 # define    ERR_NEEDMOREPARAMS(client, command) (": 461 " + client + " " + command + " Not enough parameters\r\n")
 
@@ -11,17 +11,31 @@
 /*  ****************************************************************************** */
 
 // USER MESSAGE ERRRORS
-# define    ERR_NOPRIVILEGES(nick) (": 481 " + nick + " :Permission denied-\r\n")
-# define    ERR_ALREADYREGISTERED(client) (": 462 " + client + " " ":You may not reregister\r\n")
+# define    ERR_NOPRIVILEGES(nick) ("481 " + nick + " :Permission denied-\r\n")
+# define    ERR_ALREADYREGISTERED(client) ("462 " + client + " " ":You may not reregister\r\n")
 
 // PASS MESSAGE ERRORS
-# define    ERR_PASSWDMISMATCH(client) (": 464 " + client + " :Password incorrect\r\n")
+# define    ERR_PASSWDMISMATCH(client) ("464 " + client + " :Password incorrect\r\n")
 
 // NICK MESSAGE ERRORS
 # define    NICK(old_nick, user, host, nick) (":" + old_nick + "!" + user + "@" + host + " NICK " + nick + "\r\n")
-# define    ERR_NONICKNAMEGIVEN(client) (": 431 " + client + " : No nickame given\r\n")
-# define    ERR_ERRONEUSNICKNAME(client, nick) (": 432 " + client + " " + nick + " :Erroneus nickname\r\n")
-# define    ERR_NICKNAMEINUSE(client, nick) (": 433 " + client + " " + nick + " :Nickname is alreay in use\r\n")
+# define    ERR_NONICKNAMEGIVEN(client) (" 431 " + client + " : No nickame given\r\n")
+# define    ERR_ERRONEUSNICKNAME(client, nick) (" 432 " + client + " " + nick + " :Erroneus nickname\r\n")
+# define    ERR_NICKNAMEINUSE(client, nick) (" 433 " + client + " " + nick + " :Nickname is alreay in use\r\n")
+
+/*  PING OR PONG   */
+# define    PING(user_id, param) (user_id + " PING :" + param + "\r\n")
+# define    PONG(user_id, param) (user_id + " PONG :" "PING sent "+ param + "\r\n")
+
+/*  OPERATOR messages   */
+# define    RPL_YOUREOPER(nick) ("381 " + nick + " :You are now an IRC operator\r\n")
+
+/*  QUIT   */
+# define    QUIT(user_id, reason) (user_id + " QUIT :" + reason + "\r\n")
+
+/*  Kill    */
+# define    KILL(source, reason) ("You have been disconeected from the server by " + source + ", because " + reason + "\r\n")
+# define    KILL_WOREASON(source) ("You have been disconeected from the server by " + source + "\r\n")
 
 /*  ****************************************************************************** */
 /*  ******************************** CHANNEL messages ******************************* */
@@ -29,4 +43,5 @@
 
 # define    ERR_NOSUCHNICKCHANNEL(nick) ("401 " + nick + " :No such nick\r\n")
 # define    ERR_NOSUCHCHANNEL(channel) ("403 " + channel + " :No such channel\r\n")
+
 #endif /* _MESSAGES_HPP */

@@ -18,15 +18,20 @@ SRCS	= 	srcs/main.cpp \
 			init_server/Server.cpp \
 			init_server/clients_actions.cpp \
 			execute_commands/actions_commands.cpp \
+			execute_commands/unknown.cpp \
 			execute_commands/help.cpp \
 			execute_commands/pass.cpp \
 			execute_commands/nick.cpp \
 			execute_commands/user.cpp \
+			execute_commands/ping.cpp \
+			execute_commands/oper.cpp \
+			execute_commands/quit.cpp \
 			parsing/parse_args.cpp \
 			cleaning/clear_data.cpp \
 			utils/print_functions.cpp \
 			utils/welcome_msg.cpp \
 			utils/int_to_string.cpp \
+			utils/find_user_fd.cpp \
 
 HEADER	=	includes/Server.hpp \
 			includes/IRC.hpp \
