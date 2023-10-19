@@ -15,14 +15,11 @@ class User {
 		string _nickname;
 		string _messages;
 		int _fd;
-		int _id;
 		bool _isOperator;
 		bool _isAuthentified;
 		bool _hasNickname;
 		bool _hasUsername;
 		bool _hasPassword;
-
-		// t_serv *server;
 
 	public:
 		User();
@@ -30,6 +27,7 @@ class User {
 		~User();
 		User(const User& src);
 		User& operator=(const User& src);
+
 	public:
 		/* ********** GETTERS ********** */
 		string get_username() const;

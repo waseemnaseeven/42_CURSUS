@@ -10,7 +10,6 @@
 #include <exception>
 #include <memory>
 #include <map>
-#include <list>
 #include <vector>
 #include <algorithm>
 #include <csignal>
@@ -34,6 +33,7 @@
 // My library
 #include "../includes/Colors.hpp"
 #include "../includes/User.hpp"
+#include "../includes/Channel.hpp"
 
 using namespace std;
 
@@ -44,9 +44,10 @@ using namespace std;
 extern bool Open;
 
 class User;
+class Channel;
 
 typedef map<int, User*> 		t_users; 	//Users will be mapped key: fd; User*: User corresponding to the fd
-// typedef map<string, Channel *>	t_channels; //Key: channel name; Channel*: corresponding Channel
+typedef map<string, Channel *>	t_channels; //Key: channel name; Channel*: corresponding Channel
 
 // I/O multiplexing with epoll
 typedef struct s_epoll
@@ -70,11 +71,13 @@ typedef struct s_serv
 
 	int					new_fd; // for accept
 
-	vector<int>			open_fds; // to get a name
-	vector<int>			operator_fds;
+	vector<int>			open_fds; // regular users
+	vector<int>			operator_fds; // moderator users
+
 	t_epoll 			epoll;
 	t_users				users_map;
-	// t_channels			channels;
+	t_channels			channels;
+
 }					t_serv;
 
 /* ********** PARSING ARGS FUNCTIONS ********** */
@@ -114,6 +117,8 @@ bool	UNKNOWN_command(t_serv *server, const string& command, int sender_fd);
 bool	PING_command(t_serv *server, const string& args, int sender_fd);
 bool	OPER_command(t_serv *server, const string& args, int sender_fd);
 bool	QUIT_command(t_serv *server, const string& reason, int sender_fd);
+bool    PRIVMSG_command(t_serv *server, const string& args, int sender_fd);
+bool    JOIN_command(t_serv *server, const string& args, int sender_fd);
 
 
 /* ********** MESSAGES ********** */

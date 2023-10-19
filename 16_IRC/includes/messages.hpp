@@ -15,7 +15,7 @@
 # define    ERR_ALREADYREGISTERED(client) ("462 " + client + " " ":You may not reregister\r\n")
 
 // PASS MESSAGE ERRORS
-# define    ERR_PASSWDMISMATCH(client) ("464 " + client + " :Password incorrect\r\n")
+# define    ERR_PASSWDMISMATCH(client) (":464 " + client + " :Password incorrect\r\n")
 
 // NICK MESSAGE ERRORS
 # define    NICK(old_nick, user, host, nick) (":" + old_nick + "!" + user + "@" + host + " NICK " + nick + "\r\n")
@@ -43,5 +43,37 @@
 
 # define    ERR_NOSUCHNICKCHANNEL(nick) ("401 " + nick + " :No such nick\r\n")
 # define    ERR_NOSUCHCHANNEL(channel) ("403 " + channel + " :No such channel\r\n")
+
+/*  Join    */
+# define    JOIN(nick, user, host, channel) (":" + nick + "!" + user + "@" + host + " JOIN :" + channel)
+# define    CREATEDCHANNEL(channel) (channel + " channel created\r\n")
+# define    ERR_INVITEONLYCHAN(nick, channel) ("473 " + nick + " " + channel + " :Cannot join channel (+i)\r\n")
+# define    ERR_BADCHANNELKEY(nick, channel) ("475 " + nick + " " + channel + " :Cannot join channel (+k)\r\n")
+# define    ERR_CHANNELISFULL(nick, channel) ("471 " + nick + " " + channel + " :Cannot join channel (+l)\r\n") 
+/*  Invite  */
+# define 	RPL_INVITING(user_id, nick, nickinvite, channel) (user_id + " 341 " + nick + " " + nickinvite + " " + channel + ": inviting " + nickinvite + " to " + channel + "\r\n")
+# define	INVITE(user_id, nickinvite, channel)  (user_id + " INVITE " + nickinvite + " " + channel + "\r\n")
+/*  Names   */
+# define    RPL_NAMREPLY(channel, nick, user, host, users) (": 353 " + nick + "!" + user + "@" + host + " = " + channel + " :" + users + "\r\n")
+# define    RPL_ENDOFNAMES(channel, nick, user, host) (": 366 " + nick + "!" + user + "@" + host + " " + channel + " :End of /NAMES list.\r\n")
+/*  KICK    */
+# define    RPL_KICK(user_id, channel, kicked, reason) (user_id + " KICK " + channel + " " + kicked + " " + reason + "\r\n")
+# define    RPL_KICK2(user_id, channel, kicked, reason) (user_id + " KICK " + channel + " " + kicked + " " + reason)
+/*  PART    */
+# define    PART_WOREASON(nick, user, host, channel) (":" + nick + "!" + user + "@" + host + " PART " + channel + " :Default reason")
+# define    PART_WREASON(nick, user, host, channel, reason) (":" + nick + "!" + user + "@" + host + " PART " + channel + " :" + reason)
+/*  Topic   */
+# define	RPL_TOPIC(nick, user, name, channel, topic) (": 332 " + nick + "!" + user + "@" + name + " " + channel + " :" + topic + "\r\n")
+# define	RPL_TOPIC2(nick, user, name, channel, topic) (": 332 " + nick + "!" + user + "@" + name + " " + channel + " :" + topic)
+# define	RPL_NOTOPIC(nick, user, name, channel) (": 331 " + nick + "!" + user + "@" + name + " " + channel + " :No topic is set\r\n")
+# define	RPL_NOTOPIC2(nick, user, name, channel) (": 331 " + nick + "!" + user + "@" + name + " " + channel + " :No topic is set")
+/*  Modes   */
+# define	ERR_CHANOPRIVSNEEDED(user_id, channel) (": 482 " + user_id + " " + channel + " :You're not channel operator\r\n")
+# define	MODE(channel, mode, comment) (": MODE " + channel + " " + mode + " :" + comment + "\r\n")
+# define	MODE2(user_id, channel, mode, comment) (user_id + " MODE " + channel + " " + mode + " :" + comment)
+# define    RPL_UMODEIS(nick) (": 221 " + nick + " +io\r\n")
+# define    ERR_KEYSET(channel) (": 467 " + channel + " :Channel key already set\r\n")
+# define    RPL_CHANNELMODEIS(nick, channel) ("324 " + nick + " " + channel + " +itko\r\n")
+# define    ERR_UNKNOWNMODE(mode) (": 472 " + mode + " :is unknown char to me\r\n")
 
 #endif /* _MESSAGES_HPP */

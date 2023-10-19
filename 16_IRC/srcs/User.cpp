@@ -1,9 +1,6 @@
 #include "../includes/User.hpp"
 
-User::User() {
-	std::cout << GREEN << "User Constructor called for " << RESET << std::endl;
-
-}
+User::User() {}
 
 User::User(int fd) :
 	_username(""),
@@ -16,27 +13,35 @@ User::User(int fd) :
 	_hasUsername(false),
 	_hasPassword(false)
 {
-	std::cout << BOLDGREEN << "User Constructor with fd " << _fd << RESET << std::endl;
+	std::cout << BOLDGREEN << "[CONSTRUCTOR] User " << _fd << " has been created!" << RESET << std::endl;
 }
 
 User::~User() {
 	if (_fd != -1)
 		close(_fd);
-	std::cout << BOLDRED << "User Destructor called for " << RESET << std::endl;
+	std::cout << BOLDRED << "[DESTRUCTOR] User " << _fd << " has been destroyed!" << RESET << std::endl;
 
 }
 
 User::User(const User& src) {
 	*this = src;
-	std::cout << GREEN << "User Copy constructor called for " << RESET << std::endl;
+	std::cout << GREEN << "[COPY CONSTRUCTOR] User " << _fd << " has been copied!" << RESET << std::endl;
 
 }
 
 User& User::operator=(const User& src) {
-	std::cout << GREEN << "User Assignation operator called" << RESET << std::endl;
+	std::cout << GREEN << "[ASSIGNATION] User Assignation operator called" << RESET << std::endl;
 	if (this != &src) {
-		// this->_value = src._value;
-        // this->_str = src_str;
+		this->_username = src._username;
+		this->_nickname = src._nickname;
+		this->_realname = src._realname;
+		this->_messages = src._messages;
+		this->_fd = src._fd;
+		this->_isOperator = src._isOperator;
+		this->_isAuthentified = src._isAuthentified;
+		this->_hasNickname = src._hasNickname;
+		this->_hasUsername = src._hasUsername;
+		this->_hasPassword = src._hasPassword;
 	}
 	return *this;
 }
@@ -44,6 +49,29 @@ User& User::operator=(const User& src) {
 
 /* ********** USER METHODS ********** */
 
+vector<pair<string, string> > User::splitBuffer(const string& buffer) {
+	vector<pair<string, string> > result;
+	size_t start = 0;
+	size_t end = buffer.find("\r\n");
+
+	// while we dont find the \r\n
+	while (end != string::npos)
+	{
+		string line = buffer.substr(start, end - start);
+		size_t pos = line.find(" ");
+		if (pos != string::npos)
+		{
+			string command = line.substr(0, pos);
+			string args = line.substr(pos + 1);
+			result.push_back(make_pair(command, args));
+		}
+		else
+			result.push_back(make_pair(line, ""));
+		start = end + 2;
+		end = buffer.find("\r\n", start);
+	}
+	return result;
+}
 
 /* ********** GETTERS ********** */
 
@@ -89,25 +117,3 @@ void User::set_hasUsername(bool hasUsername) { _hasUsername = hasUsername; }
 
 void User::set_hasPassword(bool hasPassword) { _hasPassword = hasPassword; }
 
-vector<pair<string, string> > User::splitBuffer(const string& buffer) {
-	vector<pair<string, string> > result;
-	size_t start = 0;
-	size_t end = buffer.find("\r\n");
-
-	while (end != string::npos)
-	{
-		string line = buffer.substr(start, end - start);
-		size_t pos = line.find(" ");
-		if (pos != string::npos)
-		{
-			string command = line.substr(0, pos);
-			string args = line.substr(pos + 1);
-			result.push_back(make_pair(command, args));
-		}
-		else
-			result.push_back(make_pair(line, ""));
-		start = end + 2;
-		end = buffer.find("\r\n", start);
-	}
-	return result;
-}

@@ -4,16 +4,16 @@
 
 bool    NICK_command(t_serv *server, const string& nickname, int sender_fd)
 {
-    /* Check if passwd is set */
-    if (!server->users_map[sender_fd]->get_hasPassword()) {
-        send_message(server, ERR_NOPRIVILEGES(nickname), sender_fd);
-        return false;
-    }
+    // /* Check if passwd is set */
+    // if (!server->users_map[sender_fd]->get_hasPassword()) {
+    //     send_message(server, ERR_NEEDMOREPARAMS(int_to_string(sender_fd), "PASS"), sender_fd);
+    //     return false;
+    // }
     /* Check if proper number of args is set */
     if (nickname.empty())
     {
         if (server->users_map[sender_fd]->get_hasNickname())
-            send_message(server, ERR_NONICKNAMEGIVEN(int_to_string(sender_fd)), sender_fd);
+            send_message(server, ERR_NONICKNAMEGIVEN(server->users_map[sender_fd]->get_nickname()), sender_fd);
         else
             send_message(server, ERR_NONICKNAMEGIVEN(int_to_string(sender_fd)), sender_fd);
         return false;
@@ -40,17 +40,16 @@ bool    NICK_command(t_serv *server, const string& nickname, int sender_fd)
                 return false;
             }
         }
-
     }
 
     /* Inform others about the change of name */
     if (server->users_map[sender_fd]->get_hasNickname() == true)
     {
-        for (size_t i = 0; i < server->open_fds.size(); i++) {
+        for (size_t i = 0; i <= server->open_fds.size(); i++) {
             if (server->users_map[server->open_fds[i]]->get_isAuthentified() == true)
             {
-                send_message(server, NICK(server->users_map[server->open_fds[i]]->get_nickname(), "user", LOCAL_HOST, nickname), sender_fd);
-                server->users_map[server->open_fds[i]]->set_nickname(nickname);
+                send_message(server, NICK(server->users_map[sender_fd]->get_nickname(), "user", LOCAL_HOST, nickname), sender_fd);
+                server->users_map[sender_fd]->set_nickname(nickname);
                 return true;
 
             }

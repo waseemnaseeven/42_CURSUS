@@ -22,10 +22,6 @@ void	clear_data(t_serv *server)
 	for (; it != ite; ++it){
 			delete it->second;
 	}
-	// vector<int>::iterator  it_open_fds = server->open_fds.begin();
-	// vector<int>::iterator  ite_open_fds = server->open_fds.end();
-	// for (; it_open_fds != ite_open_fds; it_open_fds++)
-	// 	close(*it_open_fds);
 	shutdown(server->serv_fd, SHUT_RDWR);
 	throw runtime_error("Data Cleaned");
 }

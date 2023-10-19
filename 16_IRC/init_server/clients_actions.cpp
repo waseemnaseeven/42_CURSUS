@@ -60,25 +60,6 @@ void 	user_connection(t_serv *server)
 			clear_data(server);
 }
 
-// void    user_disconnection(t_serv *server, int disc_fd)
-// {
-// 	epoll_ctl(server->epoll.fd, EPOLL_CTL_DEL, disc_fd, &server->epoll.event);
-// 	if (disc_fd > -1)
-//         close(disc_fd);
-// 	vector<int>::iterator it = server->open_fds.begin();
-// 	vector<int>::iterator ite = server->open_fds.end();
-// 	for (; it != ite; ++it)
-// 	{
-// 		if (*it == disc_fd)
-// 		{
-// 			cout << "user disconnected = " << disc_fd << endl;
-// 			server->open_fds.erase(it);
-// 			// delete server->users_map[disc_fd];
-// 			break;
-// 		}
-// 	}
-// }
-
 void user_disconnection(t_serv *server, int disc_fd)
 {
     epoll_ctl(server->epoll.fd, EPOLL_CTL_DEL, disc_fd, &server->epoll.event);
@@ -86,7 +67,6 @@ void user_disconnection(t_serv *server, int disc_fd)
     {
         close(disc_fd);
     }
-
     // Supprimez l'utilisateur de la map
     t_users::iterator user_it = server->users_map.find(disc_fd);
     if (user_it != server->users_map.end())
@@ -94,11 +74,12 @@ void user_disconnection(t_serv *server, int disc_fd)
         // Fermez la socket associée à l'utilisateur (vérifiez les erreurs)
         close(disc_fd);
         // Libérez la mémoire allouée dynamiquement pour l'objet User
-        delete user_it->second;
+        if (user_it->second)
+            delete user_it->second;
         // Supprimez l'utilisateur de la map
         server->users_map.erase(user_it);
     }
-
+    
     // Supprimez la socket de la liste open_fds
     vector<int>::iterator it = server->open_fds.begin();
     while (it != server->open_fds.end())
@@ -113,7 +94,5 @@ void user_disconnection(t_serv *server, int disc_fd)
             ++it;
         }
     }
-
-    cout << "User disconnected = " << disc_fd << endl;
 }
 

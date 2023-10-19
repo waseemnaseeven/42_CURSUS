@@ -6,7 +6,7 @@
 #    By: wnaseeve <wnaseeve@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/03 11:38:41 by wnaseeve          #+#    #+#              #
-#    Updated: 2023/10/16 16:21:12 by wnaseeve         ###   ########.fr        #
+#    Updated: 2023/10/19 12:29:04 by wnaseeve         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,8 @@ SRCS	= 	srcs/main.cpp \
 			execute_commands/ping.cpp \
 			execute_commands/oper.cpp \
 			execute_commands/quit.cpp \
+			execute_commands/privmsg.cpp \
+			execute_commands/join.cpp \
 			parsing/parse_args.cpp \
 			cleaning/clear_data.cpp \
 			utils/print_functions.cpp \

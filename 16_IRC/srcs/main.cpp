@@ -12,7 +12,7 @@ int main (int ac, char **av)
 	string pwd = av[2];
 	if (!parsing(port, pwd))
 	{
-		cerr << RED << "Error: port must be a valid number and password must be a valid string" << RESET << endl;
+		cerr << BOLDCYAN << "Error: port must be a valid number and password must be a valid string" << RESET << endl;
 		return (1);
 	}
 	t_serv serv = {};
@@ -22,7 +22,7 @@ int main (int ac, char **av)
 		runIRC(&serv);
 	}
 	catch (std::exception &e) {
-		cout << RED << e.what() << RESET << endl;
+		cout << BOLDCYAN << e.what() << RESET << endl;
 		return (1);
 	}
 	return (0);

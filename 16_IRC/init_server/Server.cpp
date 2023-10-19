@@ -22,8 +22,6 @@ void runIRC(t_serv *server)
 	cout << BOLDMAGENTA <<"Initializing client..." << RESET << endl;
 
 	initClients(server);
-
-	// clear_data(server);
 }
 
 bool initServer(t_serv *server)
