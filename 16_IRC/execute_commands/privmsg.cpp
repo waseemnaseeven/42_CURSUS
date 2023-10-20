@@ -34,6 +34,23 @@ bool    PRIVMSG_command(t_serv *server, const string& args, int sender_fd)
     if (target[0] == '#')
     {
         cout << "PRIVMSG to channel" << endl;
+        std::map<std::string, Channel*>::iterator it = server->channels.find(target);
+        if (it != server->channels.end())
+        {
+            print_channel(server->channels);
+            Channel *myChannel = it->second;
+            if (!myChannel->is_user(sender_fd))
+            {
+                send_message(server, ERR_NOTONCHANNEL(target, server->users_map[sender_fd]->get_nickname()), sender_fd);
+                return false;
+            }
+            myChannel->broadcast(PRIVMSG2(server->users_map[sender_fd]->get_nickname(), server->users_map[sender_fd]->get_username(), "127.0.0.1", target, message), sender_fd);
+        }
+        else
+        {
+            send_message(server, ERR_NOSUCHCHANNEL(server->users_map[sender_fd]->get_nickname(), target), sender_fd);
+            return false;
+        }
     }
     else
     {

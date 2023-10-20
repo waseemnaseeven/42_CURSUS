@@ -22,6 +22,10 @@ void	clear_data(t_serv *server)
 	for (; it != ite; ++it){
 			delete it->second;
 	}
+	t_channels::iterator it_channels = server->channels.begin();
+	t_channels::iterator ite_channels = server->channels.end();
+	for (; it_channels != ite_channels; it_channels++)
+		delete it_channels->second;
 	shutdown(server->serv_fd, SHUT_RDWR);
 	throw runtime_error("Data Cleaned");
 }

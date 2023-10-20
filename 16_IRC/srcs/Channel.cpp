@@ -4,17 +4,17 @@
 
 Channel::Channel() {}
 
-Channel::Channel (string name, int fd) : 
+Channel::Channel (string name, int fd) :
 	_channel_name(name),
 	_fd_creator(fd),
 	_topic(""),
 	_key_channel(""),
-	_max_channels(1) {
-	
-	cout << GREEN << "[CONSTRUCTOR] Channel " << _channel_name << " created by " << _fd_creator << RESET << endl;
+	_max_channels(3) {
+
+	cout << BOLDGREEN << "[CONSTRUCTOR] Channel " << _channel_name << " created by " << _fd_creator << RESET << endl;
 }
 Channel::~Channel() {
-	cout << RED << "[DESTRUCTOR] Channel " << _channel_name << " has been destroyed!" << RESET << endl;
+	cout << BOLDRED << "[DESTRUCTOR] Channel " << _channel_name << " has been destroyed!" << RESET << endl;
 
 }
 
@@ -54,3 +54,39 @@ void Channel::set_key_channel(const string& key_channel) { _key_channel = key_ch
 void Channel::set_max_channels(int max_channels) { _max_channels = max_channels; }
 
 /* ********** CHANNEL METHODS ********** */
+bool	Channel::is_user(int fd_user)
+{
+	vector<int>::iterator it = this->_fds_users.begin();
+	vector<int>::iterator ite = this->_fds_users.end();
+
+	for (; it != ite; it++)
+	{
+		if (*it == fd_user)
+			return true;
+	}
+	return false;
+}
+
+void	Channel::broadcast(string message, int fd_emitter)
+{
+	vector<int>::iterator it = this->_fds_users.begin();
+	vector<int>::iterator ite = this->_fds_users.end();
+
+	if (message.size() > 510)
+		message = message.substr(0, 510);
+	message += "\r\n";
+	while (it != ite) {
+		if (fd_emitter == -1 || *it != fd_emitter)
+			send(*it, message.c_str(), message.size(), 0);
+		it++;
+	}
+	message.clear();
+}
+
+void	Channel::add_user(int fd_user)
+{
+	if (this->_fds_users.empty())
+		this->_fds_operators.push_back(fd_user);
+	this->_fds_users.push_back(fd_user);
+}
+

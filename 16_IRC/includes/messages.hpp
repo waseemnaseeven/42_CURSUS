@@ -40,16 +40,20 @@
 /*  ****************************************************************************** */
 /*  ******************************** CHANNEL messages ******************************* */
 /*  ****************************************************************************** */
+# define    ERR_NOSUCHCHANNEL(nick, channel) (": 403 " + nick + " " + channel + " :No such channel\r\n")
+# define	ERR_USERNOTINCHANNEL(nick, channel) (": 441 " + nick + " " + channel + " :They aren't on that channel\r\n")
+# define 	ERR_NOTONCHANNEL(channel, nick) (": 442 " + channel + " :" + nick + " not on channel\r\n")
+# define 	ERR_USERONCHANNEL(nick, invitenick, channel) (": 443 " + nick + " " + invitenick + " " + channel + ":is already on channel\r\n")
+# define    ERR_BADCHANMASK(channel) (": 476 " + channel + " :Bad Channel Mask\r\n")
 
 # define    ERR_NOSUCHNICKCHANNEL(nick) ("401 " + nick + " :No such nick\r\n")
-# define    ERR_NOSUCHCHANNEL(channel) ("403 " + channel + " :No such channel\r\n")
 
 /*  Join    */
 # define    JOIN(nick, user, host, channel) (":" + nick + "!" + user + "@" + host + " JOIN :" + channel)
 # define    CREATEDCHANNEL(channel) (channel + " channel created\r\n")
 # define    ERR_INVITEONLYCHAN(nick, channel) ("473 " + nick + " " + channel + " :Cannot join channel (+i)\r\n")
 # define    ERR_BADCHANNELKEY(nick, channel) ("475 " + nick + " " + channel + " :Cannot join channel (+k)\r\n")
-# define    ERR_CHANNELISFULL(nick, channel) ("471 " + nick + " " + channel + " :Cannot join channel (+l)\r\n") 
+# define    ERR_CHANNELISFULL(nick, channel) ("471 " + nick + " " + channel + " :Cannot join channel (+l)\r\n")
 /*  Invite  */
 # define 	RPL_INVITING(user_id, nick, nickinvite, channel) (user_id + " 341 " + nick + " " + nickinvite + " " + channel + ": inviting " + nickinvite + " to " + channel + "\r\n")
 # define	INVITE(user_id, nickinvite, channel)  (user_id + " INVITE " + nickinvite + " " + channel + "\r\n")
@@ -75,5 +79,10 @@
 # define    ERR_KEYSET(channel) (": 467 " + channel + " :Channel key already set\r\n")
 # define    RPL_CHANNELMODEIS(nick, channel) ("324 " + nick + " " + channel + " +itko\r\n")
 # define    ERR_UNKNOWNMODE(mode) (": 472 " + mode + " :is unknown char to me\r\n")
+
+// # define    PRIVMSG(nick, user, dest, string) (":" + nick + " PRIVMSG " + " :" + str + "\r\n")
+# define    PRIVMSG(nick, user, host, dest, str) (":" + nick + "!" + user + "@" + "localhost" + " PRIVMSG " + dest + " :" + str + "\r\n")
+# define    PRIVMSG2(nick, user, host, dest, str) (":" + nick + "!" + user + "@" + "localhost" + " PRIVMSG " + dest + " :" + str)
+
 
 #endif /* _MESSAGES_HPP */

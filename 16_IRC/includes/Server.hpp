@@ -104,6 +104,7 @@ void 	signal_handler(int signum);
 /* ********** PRINT FUNCTIONS ********** */
 void	print_commandsargs(vector<pair<string, string> > commands);
 void 	print_map(map<int, User*> map);
+void	print_channel(map<string, Channel*> channels_map);
 void 	print_vector(vector<int> fd);
 void	print_epoll_status(t_serv *server, int i);
 void    Hello_IRC(t_serv *server);

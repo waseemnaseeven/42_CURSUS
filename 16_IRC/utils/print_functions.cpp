@@ -27,6 +27,15 @@ void	print_map(map<int, User*> users_map)
 	}
 }
 
+void	print_channel(map<string, Channel*> channels_map)
+{
+	map<string, Channel*>::iterator it = channels_map.begin();
+	map<string, Channel*>::iterator ite = channels_map.end();
+	for (; it != ite; ++it) {
+			cout << "channel_name is: " << it->first << " and the Channel is : " << it->second << endl;
+	}
+}
+
 void	print_epoll_status(t_serv *server, int i)
 {
 		cout << "fd: " << server->epoll.events[i].data.fd << endl;
