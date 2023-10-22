@@ -28,6 +28,7 @@ SRCS	= 	srcs/main.cpp \
 			execute_commands/quit.cpp \
 			execute_commands/privmsg.cpp \
 			execute_commands/join.cpp \
+			execute_commands/part.cpp \
 			parsing/parse_args.cpp \
 			cleaning/clear_data.cpp \
 			utils/print_functions.cpp \

@@ -22,39 +22,41 @@ bool    PRIVMSG_command(t_serv *server, const string& args, int sender_fd)
 {
     // ecrire /msg <target> <message>
     string target = get_target(args);
-    cout << "target is: " << target << endl;
+    target.erase(std::remove(target.begin(), target.end(), ' '), target.end()); // Supprimer les espaces
     string message = get_message(args);
-    cout << "message is: " << message << endl;
-    if (target.empty())
-    {
-        cout << "PRIVMSG: target is empty" << endl;
+
+    if (target.empty()) {
         send_message(server, ERR_NOSUCHNICKCHANNEL(target), sender_fd);
         return false;
     }
-    if (target[0] == '#')
-    {
-        cout << "PRIVMSG to channel" << endl;
-        std::map<std::string, Channel*>::iterator it = server->channels.find(target);
-        if (it != server->channels.end())
-        {
-            print_channel(server->channels);
+    
+    if (target[0] == '#') {
+        map<string, Channel*>::iterator it = server->channels.find(target);
+        if (it != server->channels.end()) {
             Channel *myChannel = it->second;
-            if (!myChannel->is_user(sender_fd))
-            {
+            if (!myChannel->is_user(sender_fd)) {
                 send_message(server, ERR_NOTONCHANNEL(target, server->users_map[sender_fd]->get_nickname()), sender_fd);
                 return false;
             }
             myChannel->broadcast(PRIVMSG2(server->users_map[sender_fd]->get_nickname(), server->users_map[sender_fd]->get_username(), "127.0.0.1", target, message), sender_fd);
         }
-        else
-        {
+        else {
             send_message(server, ERR_NOSUCHCHANNEL(server->users_map[sender_fd]->get_nickname(), target), sender_fd);
             return false;
         }
     }
-    else
-    {
-        cout << "PRIVMSG to user" << endl;
+    else {
+        for (map<int, User*>::iterator it = server->users_map.begin(); it != server->users_map.end(); it++) {
+		    if (server->users_map[it->first]->get_nickname() == target) {
+                target = server->users_map[it->first]->get_nickname();
+                send_message(server, PRIVMSG(server->users_map[sender_fd]->get_nickname(), server->users_map[sender_fd]->get_username(), "127.0.0.1", target, message), it->second->get_fd());
+                return true;
+            }
+            else {
+                send_message(server, ERR_NOSUCHNICKCHANNEL(target), sender_fd);
+                return false;
+            }
+	    }
     }
     return true;
 }

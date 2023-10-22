@@ -9,7 +9,9 @@ Channel::Channel (string name, int fd) :
 	_fd_creator(fd),
 	_topic(""),
 	_key_channel(""),
-	_max_channels(3) {
+	_max_channels(1),
+	_is_invite_only(false),
+	_is_topic_set(false) {
 
 	cout << BOLDGREEN << "[CONSTRUCTOR] Channel " << _channel_name << " created by " << _fd_creator << RESET << endl;
 }
@@ -43,6 +45,8 @@ string Channel::get_key_channel() const { return _key_channel; }
 
 int Channel::get_max_channels() const { return _max_channels; }
 
+vector<int> Channel::get_users() const { return _fds_users; }
+
 /* ********** SETTERS ********** */
 
 void Channel::set_channel_name(string name) { _channel_name = name; }
@@ -58,6 +62,32 @@ bool	Channel::is_user(int fd_user)
 {
 	vector<int>::iterator it = this->_fds_users.begin();
 	vector<int>::iterator ite = this->_fds_users.end();
+
+	for (; it != ite; it++)
+	{
+		if (*it == fd_user)
+			return true;
+	}
+	return false;
+}
+
+bool	Channel::is_op(int fd_user)
+{
+	vector<int>::iterator it = this->_fds_operators.begin();
+	vector<int>::iterator ite = this->_fds_operators.end();
+
+	for (; it != ite; it++)
+	{
+		if (*it == fd_user)
+			return true;
+	}
+	return false;
+}
+
+bool	Channel::is_invited(int fd_user)
+{
+	vector<int>::iterator it = this->_fds_invited.begin();
+	vector<int>::iterator ite = this->_fds_invited.end();
 
 	for (; it != ite; it++)
 	{
@@ -90,3 +120,45 @@ void	Channel::add_user(int fd_user)
 	this->_fds_users.push_back(fd_user);
 }
 
+void	Channel::part(int fd_user)
+{
+	vector<int>::iterator it = this->_fds_users.begin();
+	vector<int>::iterator ite = this->_fds_users.end();
+
+	for (; it != ite; it++)
+	{
+		if (*it == fd_user)
+		{
+			this->_fds_users.erase(it);
+			break;
+		}
+	}
+	if (is_op(fd_user) == true)
+	{
+		vector<int>::iterator it = this->_fds_operators.begin();
+		vector<int>::iterator ite = this->_fds_operators.end();
+
+		for (; it != ite; it++)
+		{
+			if (*it == fd_user)
+			{
+				this->_fds_operators.erase(it);
+				break;
+			}
+		}
+	}
+	if (is_invited(fd_user) == true)
+	{
+		vector<int>::iterator it = this->_fds_invited.begin();
+		vector<int>::iterator ite = this->_fds_invited.end();
+
+		for (; it != ite; it++)
+		{
+			if (*it == fd_user)
+			{
+				this->_fds_invited.erase(it);
+				break;
+			}
+		}
+	}
+}

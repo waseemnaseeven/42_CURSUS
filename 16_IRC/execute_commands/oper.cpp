@@ -34,8 +34,7 @@ bool	OPER_command(t_serv *server, const string& args, int sender_fd)
 	string name = get_name(args);
 	string passwd = get_password(args);
 
-	if (args.empty() || args.size() < 2)
-	{
+	if (args.empty() || args.size() < 2) {
 		send_message(server, ERR_NEEDMOREPARAMS(int_to_string(sender_fd), "OPER"), sender_fd);
 		return false;
 	}

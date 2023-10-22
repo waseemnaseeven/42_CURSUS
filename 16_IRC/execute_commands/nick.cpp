@@ -2,13 +2,18 @@
 #include "../includes/User.hpp"
 #include "../includes/messages.hpp"
 
+bool	check_passwd(t_serv *server, int sender_fd)
+{
+    /* Check if passwd is set */
+    if (!server->users_map[sender_fd]->get_hasPassword()) {
+        send_message(server, ERR_NEEDMOREPARAMS(int_to_string(sender_fd), "PASS"), sender_fd);
+        return false;
+    }
+	return true;
+}
+
 bool    NICK_command(t_serv *server, const string& nickname, int sender_fd)
 {
-    // /* Check if passwd is set */
-    // if (!server->users_map[sender_fd]->get_hasPassword()) {
-    //     send_message(server, ERR_NEEDMOREPARAMS(int_to_string(sender_fd), "PASS"), sender_fd);
-    //     return false;
-    // }
     /* Check if proper number of args is set */
     if (nickname.empty())
     {

@@ -113,13 +113,18 @@ string 	welcome_msg();
 /* ********** COMMANDS ********** */
 bool 	PASS_command(t_serv *server, const string& password, int sender_fd);
 bool    NICK_command(t_serv *server, const string& nickname, int sender_fd);
+bool	check_passwd(t_serv *server, int sender_fd);
 bool	USER_command(t_serv *server, const string& username, int sender_fd);
 bool	UNKNOWN_command(t_serv *server, const string& command, int sender_fd);
 bool	PING_command(t_serv *server, const string& args, int sender_fd);
 bool	OPER_command(t_serv *server, const string& args, int sender_fd);
 bool	QUIT_command(t_serv *server, const string& reason, int sender_fd);
 bool    PRIVMSG_command(t_serv *server, const string& args, int sender_fd);
-bool    JOIN_command(t_serv *server, const string& args, int sender_fd);
+bool	JOIN_command(t_serv *server, const string& args, int sender_fd);
+string	get_channel_name(const string& args);
+string	get_key(const string& args);
+bool	PART_command(t_serv *server, const string& args, int sender_fd);
+
 
 
 /* ********** MESSAGES ********** */

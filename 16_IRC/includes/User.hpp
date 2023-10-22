@@ -21,7 +21,7 @@ class User {
 		bool _hasUsername;
 		bool _hasPassword;
 
-		vector<Channel *>	_channels;
+		// vector<Channel *>	_channels;
 
 	public:
 		User();

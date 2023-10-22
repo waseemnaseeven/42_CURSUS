@@ -19,28 +19,18 @@ void	receive_byts(t_serv *server, int i)
 		}
 }
 
-bool	check_passwd(t_serv *server, int sender_fd)
-{
-    /* Check if passwd is set */
-    if (!server->users_map[sender_fd]->get_hasPassword()) {
-        send_message(server, ERR_NEEDMOREPARAMS(int_to_string(sender_fd), "PASS"), sender_fd);
-        return false;
-    }
-	return true;
-}
-
 void    execute_commands(t_serv *server, vector<pair<string, string> > commands, int sender_fd)
 {
 	print_commandsargs(commands);
     for (size_t i = 0; i < commands.size(); i++) {
-        if (commands[i].first == "PASS"){
+        if (commands[i].first == "PASS"){ // finish
 			if (PASS_command(server, commands[i].second, sender_fd) == false)
 			{
 				user_disconnection(server, sender_fd);
 				break ;
 			}
 		}
-        else if (commands[i].first == "NICK")
+        else if (commands[i].first == "NICK") // finish
 		{
 			if (check_passwd(server, sender_fd) == false)
 			{
@@ -49,25 +39,27 @@ void    execute_commands(t_serv *server, vector<pair<string, string> > commands,
 			}
 			NICK_command(server, commands[i].second, sender_fd);
 		}
-		else if (commands[i].first == "USER")
+		else if (commands[i].first == "USER") // finish
 			USER_command(server, commands[i].second, sender_fd);
-		else if (commands[i].first == "PING")
+		else if (commands[i].first == "PING") // finish
 			PING_command(server, commands[i].second, sender_fd);
-		else if (commands[i].first == "OPER")
+		else if (commands[i].first == "OPER") // finish
 			OPER_command(server, commands[i].second, sender_fd);
-		else if (commands[i].first == "QUIT")
+		else if (commands[i].first == "QUIT") 
 		{
 			// have to deal with channels disconnection as well
 			QUIT_command(server, commands[i].second, sender_fd);
 		}
 		else if (commands[i].first == "JOIN")
 		{
+			// have to deal with topics
 			JOIN_command(server, commands[i].second, sender_fd);
 		}
 		else if (commands[i].first == "PRIVMSG")
+			PRIVMSG_command(server, commands[i].second, sender_fd); // finish
+		else if (commands[i].first == "PART")
 		{
-			// have to deal with channels
-			PRIVMSG_command(server, commands[i].second, sender_fd);
+			PART_command(server, commands[i].second, sender_fd);
 		}
 		// else
 		// 	UNKNOWN_command(server, commands[i].first, sender_fd);

@@ -36,6 +36,7 @@ class Channel {
 	string 	get_topic() const;
 	string 	get_key_channel() const;
 	int 	get_max_channels() const;
+	vector<int> get_users() const;
 
 	/* ********** SETTERS ********** */
 	void	set_channel_name(string name);
@@ -45,9 +46,11 @@ class Channel {
 
 	/* ********** CHANNEL METHODS ********** */
 	bool	is_user(int fd_user);
+	bool	is_op(int fd_user);
+	bool	is_invited(int fd_user);
 	void	broadcast(string message, int fd_emitter);
 	void	add_user(int fd_user);
-
+	void	part(int fd_user);
 };
 
 #endif // CHANNEL_HPP
