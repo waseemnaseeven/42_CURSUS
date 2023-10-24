@@ -29,7 +29,7 @@ bool    PRIVMSG_command(t_serv *server, const string& args, int sender_fd)
         send_message(server, ERR_NOSUCHNICKCHANNEL(target), sender_fd);
         return false;
     }
-    
+
     if (target[0] == '#') {
         map<string, Channel*>::iterator it = server->channels.find(target);
         if (it != server->channels.end()) {
@@ -46,17 +46,19 @@ bool    PRIVMSG_command(t_serv *server, const string& args, int sender_fd)
         }
     }
     else {
-        for (map<int, User*>::iterator it = server->users_map.begin(); it != server->users_map.end(); it++) {
-		    if (server->users_map[it->first]->get_nickname() == target) {
-                target = server->users_map[it->first]->get_nickname();
-                send_message(server, PRIVMSG(server->users_map[sender_fd]->get_nickname(), server->users_map[sender_fd]->get_username(), "127.0.0.1", target, message), it->second->get_fd());
+        for (map<int, User*>::iterator it = server->users_map.begin(); it != server->users_map.end(); ++it) {
+		    cout << "name is:'" << server->users_map[it->first]->get_nickname() << "'" << endl;
+            cout << "target is:'" << target << "'"<< endl;
+            cout << "message is:'" << message << "'" << endl;
+            if (server->users_map[it->first]->get_nickname() == target) {
+                send_message(server, PRIVMSG(server->users_map[sender_fd]->get_nickname(), server->users_map[sender_fd]->get_username(), "127.0.0.1", target, message), sender_fd);
+                // send_message(server, PRIVMSG(server->users_map[sender_fd]->get_nickname(), target, message), sender_fd);
                 return true;
             }
-            else {
-                send_message(server, ERR_NOSUCHNICKCHANNEL(target), sender_fd);
-                return false;
-            }
+
 	    }
+        send_message(server, ERR_NOSUCHNICKCHANNEL(target), sender_fd);
+        return false;
     }
     return true;
 }

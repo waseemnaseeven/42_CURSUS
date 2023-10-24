@@ -29,6 +29,36 @@ string get_key(const string& args)
     return key;
 }
 
+void    print_names(t_serv *server, string channel_name, int sender_fd)
+{
+    User *target_user = server->users_map[sender_fd];
+    Channel *myChannel = server->channels[channel_name];
+    string users_info = "";
+
+    vector<int>::iterator user_fds_beg = myChannel->get_users().begin();
+    vector<int>::iterator user_fds_end = myChannel->get_users().end();
+
+    while (user_fds_beg != user_fds_end)
+    {
+        int user_fd = *user_fds_beg;
+        if (user_fd == 0)
+            break;
+        cout << "user_fd is: " << user_fd << endl;
+        User *user = server->users_map[user_fd];
+
+        if (myChannel->is_op(user_fd))
+            users_info += "@";
+
+        users_info += user->get_nickname();
+        user_fds_beg++;
+
+        if (user_fds_beg != user_fds_end)
+            users_info += " ";
+    }
+    send_message(server, RPL_NAMREPLY(channel_name, target_user->get_nickname(), target_user->get_username(), "127.0.0.1", users_info), sender_fd);
+    send_message(server, RPL_ENDOFNAMES(channel_name, target_user->get_nickname(), target_user->get_username(), "127.0.0.1"), sender_fd);
+}
+
 bool    JOIN_command(t_serv *server, const string& args, int sender_fd)
 {
     cout << "JOIN command: " << args << endl;
@@ -36,29 +66,33 @@ bool    JOIN_command(t_serv *server, const string& args, int sender_fd)
         send_message(server, ERR_NEEDMOREPARAMS(int_to_string(sender_fd), "JOIN"), sender_fd);
         return false;
     }
-    string channel_name;
-    string key;
+    string channel_name = get_channel_name(args);
+    channel_name.erase(std::remove(channel_name.begin(), channel_name.end(), ' '), channel_name.end()); // Supprimer les espaces
+    string key = get_key(args);
     Channel *myChannel = NULL;
-        channel_name =  get_channel_name(args);
-        channel_name.erase(std::remove(channel_name.begin(), channel_name.end(), ' '), channel_name.end()); // Supprimer les espaces
-        key = get_key(args);
-        cout << "channel_name: " << channel_name << endl;
-        cout << "key: " << key << endl;
+    cout << "channel_name: " << channel_name << endl;
+    cout << "key: " << key << endl;
     if (args[0] != '#') {
         send_message(server, ERR_BADCHANMASK(channel_name), sender_fd);
         return false;
     }
     else {
-        std::map<std::string, Channel*>::iterator it = server->channels.find(channel_name);
+        map<string, Channel*>::iterator it = server->channels.find(channel_name);
         if (it != server->channels.end()) {
-            // Le canal existe déjà, interagissez avec lui.
             myChannel = it->second;
-            /* Effectuez les opérations nécessaires sur le canal
-                1. Vérifiez s'il est juste invité
-                2. verifiez si on a pas atteint la limite de channel
-                3. Vérifiez si le mot de passe est correct
-            */
-
+            // int len_users = myChannel->get_users().size();
+            if (myChannel->get_is_invite_only() && myChannel->is_invited(sender_fd) == false) {
+                send_message(server, ERR_INVITEONLYCHAN(channel_name, server->users_map[sender_fd]->get_nickname()), sender_fd);
+                return false;
+            }
+            if (myChannel->get_has_user_limit() == true) {
+                send_message(server, ERR_CHANNELISFULL(server->users_map[sender_fd]->get_nickname(), channel_name), sender_fd);
+                return false;
+            }
+            if (myChannel->get_key_channel() != key) {
+                send_message(server, ERR_BADCHANNELKEY(server->users_map[sender_fd]->get_nickname(), channel_name), sender_fd);
+                return false;
+            }
             if (myChannel->is_user(sender_fd))
                 return true;
             myChannel->add_user(sender_fd);
@@ -72,6 +106,9 @@ bool    JOIN_command(t_serv *server, const string& args, int sender_fd)
         }
     }
     myChannel->broadcast(JOIN(server->users_map[sender_fd]->get_nickname(), server->users_map[sender_fd]->get_username(), "127.0.0.1", channel_name), -1);
-    // send_messages(server, RPL_TOPIC(server->users_map[sender_fd]->get_nickname(), server->users_map[sender_fd]->get_username(), "127.0.0.1", channel_name, ), sender_fd);
+    send_message(server, RPL_TOPIC(server->users_map[sender_fd]->get_nickname(), server->users_map[sender_fd]->get_username(), "127.0.0.1", channel_name, myChannel->get_topic()), sender_fd);
+    print_names(server, channel_name, sender_fd);
+    // send_message(server, RPL_NAMREPLY(channel_name, server->users_map[sender_fd]->get_nickname(), server->users_map[sender_fd]->get_username(), "localhost", server->users_map[sender_fd]->get_nickname()), sender_fd);
+    // send_message(server, RPL_ENDOFNAMES(channel_name, server->users_map[sender_fd]->get_nickname(), server->users_map[sender_fd]->get_username(), "localhost"), sender_fd);
     return true;
 }

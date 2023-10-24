@@ -124,7 +124,7 @@ bool	JOIN_command(t_serv *server, const string& args, int sender_fd);
 string	get_channel_name(const string& args);
 string	get_key(const string& args);
 bool	PART_command(t_serv *server, const string& args, int sender_fd);
-
+bool    KICK_command(t_serv *server, const string& args, int sender_fd);
 
 
 /* ********** MESSAGES ********** */

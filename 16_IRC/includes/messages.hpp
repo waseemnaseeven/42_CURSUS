@@ -80,8 +80,8 @@
 # define    RPL_CHANNELMODEIS(nick, channel) ("324 " + nick + " " + channel + " +itko\r\n")
 # define    ERR_UNKNOWNMODE(mode) (": 472 " + mode + " :is unknown char to me\r\n")
 
-// # define    PRIVMSG(nick, user, dest, string) (":" + nick + " PRIVMSG " + " :" + str + "\r\n")
-# define    PRIVMSG(nick, user, host, dest, str) (":" + nick + "!" + user + "@" + "localhost" + " PRIVMSG " + dest + " :" + str + "\r\n")
+// # define    PRIVMSG(nick, dest, message) (":" + nick + " PRIVMSG " + dest + " :" + message + "\n")
+# define    PRIVMSG(nick, user, host, dest, str) (":" + nick + "!~" + user + "@" + "localhost" + " PRIVMSG " + dest + " :" + str)
 # define    PRIVMSG2(nick, user, host, dest, str) (":" + nick + "!" + user + "@" + "localhost" + " PRIVMSG " + dest + " :" + str)
 
 

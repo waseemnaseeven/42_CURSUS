@@ -11,19 +11,18 @@ Channel::Channel (string name, int fd) :
 	_key_channel(""),
 	_max_channels(1),
 	_is_invite_only(false),
-	_is_topic_set(false) {
+	_is_topic_set(false),
+	_max_users(3) {
 
 	cout << BOLDGREEN << "[CONSTRUCTOR] Channel " << _channel_name << " created by " << _fd_creator << RESET << endl;
 }
 Channel::~Channel() {
 	cout << BOLDRED << "[DESTRUCTOR] Channel " << _channel_name << " has been destroyed!" << RESET << endl;
-
 }
 
 Channel::Channel(const Channel& src) {
 	*this = src;
 	cout << GREEN << "[COPY CONSTRUCTOR] Channel " << _channel_name << " has been copied! " << RESET << endl;
-
 }
 
 Channel& Channel::operator=(const Channel& src) {
@@ -47,17 +46,36 @@ int Channel::get_max_channels() const { return _max_channels; }
 
 vector<int> Channel::get_users() const { return _fds_users; }
 
+vector<int> Channel::get_operators() const { return _fds_operators; }
+
+bool Channel::get_is_invite_only() const { return _is_invite_only; }
+
+bool Channel::get_is_topic_set() const { return _is_topic_set; }
+
+int Channel::get_max_users() const { return _max_users; }
+
+bool Channel::get_has_user_limit() const { return _has_user_limit; }
+
 /* ********** SETTERS ********** */
 
 void Channel::set_channel_name(string name) { _channel_name = name; }
 
-void Channel::set_topic(const string& topic) { _topic = topic; }
+void Channel::set_topic(const string& topic) { _is_topic_set = true; _topic = topic; }
+
+void Channel::unset_topic() { _is_topic_set = false; _topic = "";}
 
 void Channel::set_key_channel(const string& key_channel) { _key_channel = key_channel; }
 
 void Channel::set_max_channels(int max_channels) { _max_channels = max_channels; }
 
+void Channel::set_invite_only(bool mode) { _is_invite_only = mode; if (mode == false) _fds_invited.clear(); }
+
+void Channel::set_max_users(int max_users) { _max_users = max_users; }
+
+void Channel::set_has_user_limit(bool mode) { _has_user_limit = mode; }
+
 /* ********** CHANNEL METHODS ********** */
+
 bool	Channel::is_user(int fd_user)
 {
 	vector<int>::iterator it = this->_fds_users.begin();
@@ -89,8 +107,7 @@ bool	Channel::is_invited(int fd_user)
 	vector<int>::iterator it = this->_fds_invited.begin();
 	vector<int>::iterator ite = this->_fds_invited.end();
 
-	for (; it != ite; it++)
-	{
+	for (; it != ite; it++) {
 		if (*it == fd_user)
 			return true;
 	}
@@ -118,6 +135,35 @@ void	Channel::add_user(int fd_user)
 	if (this->_fds_users.empty())
 		this->_fds_operators.push_back(fd_user);
 	this->_fds_users.push_back(fd_user);
+}
+
+void	Channel::kick_user(int fd_user)
+{
+	vector<int>::iterator it = this->_fds_users.begin();
+	vector<int>::iterator ite = this->_fds_users.end();
+
+	for (; it != ite; it++)
+	{
+		if (*it == fd_user)
+		{
+			this->_fds_users.erase(it);
+			break;
+		}
+	}
+	if (is_op(fd_user) == true)
+	{
+		vector<int>::iterator it = this->_fds_operators.begin();
+		vector<int>::iterator ite = this->_fds_operators.end();
+
+		for (; it != ite; it++)
+		{
+			if (*it == fd_user)
+			{
+				this->_fds_operators.erase(it);
+				break;
+			}
+		}
+	}
 }
 
 void	Channel::part(int fd_user)
