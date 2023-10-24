@@ -29,32 +29,41 @@ string get_key(const string& args)
     return key;
 }
 
-void    print_names(t_serv *server, string channel_name, int sender_fd)
+void print_names(t_serv *server, const string& channel_name, int sender_fd)
 {
-    User *target_user = server->users_map[sender_fd];
-    Channel *myChannel = server->channels[channel_name];
+    User* target_user = server->users_map[sender_fd];
+    Channel* myChannel = server->channels[channel_name];
+
+    if (myChannel == NULL) {
+        return;
+    }
+
     string users_info = "";
 
-    vector<int>::iterator user_fds_beg = myChannel->get_users().begin();
-    vector<int>::iterator user_fds_end = myChannel->get_users().end();
+    const vector<int>& user_fds = myChannel->get_users();
 
-    while (user_fds_beg != user_fds_end)
+    for (size_t i = 0; i < user_fds.size(); ++i)
     {
-        int user_fd = *user_fds_beg;
-        if (user_fd == 0)
-            break;
-        cout << "user_fd is: " << user_fd << endl;
-        User *user = server->users_map[user_fd];
+        int user_fd = user_fds[i];
 
-        if (myChannel->is_op(user_fd))
+        if (user_fd <= 0 || user_fd > MAX_EVENTS) {
+            continue;
+        }
+
+        User* user = server->users_map[user_fd];
+
+        if (myChannel->is_op(user_fd)) {
             users_info += "@";
+        }
 
         users_info += user->get_nickname();
-        user_fds_beg++;
 
-        if (user_fds_beg != user_fds_end)
+        if (i < user_fds.size() - 1)
+        {
             users_info += " ";
+        }
     }
+
     send_message(server, RPL_NAMREPLY(channel_name, target_user->get_nickname(), target_user->get_username(), "127.0.0.1", users_info), sender_fd);
     send_message(server, RPL_ENDOFNAMES(channel_name, target_user->get_nickname(), target_user->get_username(), "127.0.0.1"), sender_fd);
 }
@@ -106,9 +115,10 @@ bool    JOIN_command(t_serv *server, const string& args, int sender_fd)
         }
     }
     myChannel->broadcast(JOIN(server->users_map[sender_fd]->get_nickname(), server->users_map[sender_fd]->get_username(), "127.0.0.1", channel_name), -1);
-    send_message(server, RPL_TOPIC(server->users_map[sender_fd]->get_nickname(), server->users_map[sender_fd]->get_username(), "127.0.0.1", channel_name, myChannel->get_topic()), sender_fd);
+    if (myChannel->get_is_topic_set() == true)
+        send_message(server, RPL_TOPIC(server->users_map[sender_fd]->get_nickname(), server->users_map[sender_fd]->get_username(), "127.0.0.1", channel_name, myChannel->get_topic()), sender_fd);
     print_names(server, channel_name, sender_fd);
-    // send_message(server, RPL_NAMREPLY(channel_name, server->users_map[sender_fd]->get_nickname(), server->users_map[sender_fd]->get_username(), "localhost", server->users_map[sender_fd]->get_nickname()), sender_fd);
-    // send_message(server, RPL_ENDOFNAMES(channel_name, server->users_map[sender_fd]->get_nickname(), server->users_map[sender_fd]->get_username(), "localhost"), sender_fd);
+    // User *user = server->users_map[sender_fd];
+    // user->add_channel(myChannel);
     return true;
 }

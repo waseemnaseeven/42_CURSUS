@@ -30,6 +30,7 @@ SRCS	= 	srcs/main.cpp \
 			execute_commands/join.cpp \
 			execute_commands/part.cpp \
 			execute_commands/kick.cpp \
+			execute_commands/topic.cpp \
 			parsing/parse_args.cpp \
 			cleaning/clear_data.cpp \
 			utils/print_functions.cpp \

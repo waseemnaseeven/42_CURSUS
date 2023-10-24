@@ -125,7 +125,7 @@ string	get_channel_name(const string& args);
 string	get_key(const string& args);
 bool	PART_command(t_serv *server, const string& args, int sender_fd);
 bool    KICK_command(t_serv *server, const string& args, int sender_fd);
-
+bool	TOPIC_command(t_serv *server, const string& args, int sender_fd);
 
 /* ********** MESSAGES ********** */
 bool 	send_message(t_serv *server, const string& message, int sender_fd);

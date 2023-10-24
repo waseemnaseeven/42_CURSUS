@@ -53,14 +53,14 @@ void    execute_commands(t_serv *server, vector<pair<string, string> > commands,
 			PRIVMSG_command(server, commands[i].second, sender_fd);
 		else if (commands[i].first == "KICK")
 			KICK_command(server, commands[i].second, sender_fd);
+		else if (commands[i].first == "PART")
+			PART_command(server, commands[i].second, sender_fd);
+		else if (commands[i].first == "TOPIC")
+			TOPIC_command(server, commands[i].second, sender_fd);
 		// else if (commands[i].first == "INVITE")
 		// 	INVITE_command(server, commands[i].second, sender_fd);
-		// else if (commands[i].first == "TOPIC")
-		// 	TOPIC_command(server, commands[i].second, sender_fd);
 		// else if (commands[i].first == "MODE")
 		// 	MODE_command(server, commands[i].second, sender_fd);
-		// else if (commands[i].first == "PART")
-		// 	PART_command(server, commands[i].second, sender_fd);
 		// else if (commands[i].first == "HELP")
 		// 	HELP_command(server, commands[i].second, sender_fd);
 		// else

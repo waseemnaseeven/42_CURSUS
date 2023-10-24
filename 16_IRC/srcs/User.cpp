@@ -49,6 +49,20 @@ User& User::operator=(const User& src) {
 
 /* ********** USER METHODS ********** */
 
+void User::add_channel(Channel *channel) {
+	_channels.push_back(channel);
+}
+
+bool User::remove_channel(const string& channel_name) {
+    for (vector<Channel*>::iterator it = _channels.begin(); it != _channels.end(); ++it) {
+        if ((*it)->get_channel_name() == channel_name) {
+            _channels.erase(it);
+            return true;
+        }
+    }
+    return false;
+}
+
 vector<pair<string, string> > User::splitBuffer(const string& buffer) {
 	vector<pair<string, string> > result;
 	size_t start = 0;
@@ -94,6 +108,15 @@ bool User::get_hasNickname() const { return _hasNickname; }
 bool User::get_hasUsername() const { return _hasUsername; }
 
 bool User::get_hasPassword() const { return _hasPassword; }
+
+Channel* User::get_channel(const string& channel_name) const {
+    for (size_t i = 0; i < _channels.size(); ++i) {
+        if (_channels[i]->get_channel_name() == channel_name) {
+            return _channels[i];
+        }
+    }
+    return NULL;
+}
 
 /* ********** SETTERS ********** */
 

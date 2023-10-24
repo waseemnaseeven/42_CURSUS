@@ -18,9 +18,9 @@ class Channel {
 		vector<int>	_fds_users;
 		vector<int>	_fds_operators;
 		vector<int>	_fds_invited;
-		vector<int>	_fds_kicked;
 		bool 		_is_invite_only;
 		bool 		_is_topic_set;
+		bool		_is_topic_protected;
 		int			_max_users; // max users in channel
 		bool		_has_user_limit;
 
@@ -41,12 +41,14 @@ class Channel {
 	vector<int>	get_operators() const;
 	bool	get_is_invite_only() const;
 	bool	get_is_topic_set() const;
+	bool	get_is_topic_protected() const;
 	int		get_max_users() const;
 	bool	get_has_user_limit() const;
 
 	/* ********** SETTERS ********** */
 	void	set_channel_name(string name);
-	void	set_topic(const string& topic);
+	void	set_topic(string topic);
+	void	set_protected_topic(bool mode);
 	void	unset_topic();
 	void	set_key_channel(const string& key_channel);
 	void	set_max_channels(int max_channels);

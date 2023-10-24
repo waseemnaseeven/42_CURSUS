@@ -21,6 +21,8 @@ class User {
 		bool _hasUsername;
 		bool _hasPassword;
 
+		vector<Channel *> _channels;
+
 	public:
 		User();
 		User(int fd);
@@ -40,6 +42,7 @@ class User {
 		bool get_hasNickname() const;
 		bool get_hasUsername() const;
 		bool get_hasPassword() const;
+		Channel *get_channel(const string& channel_name) const;
 
 		/* ********** SETTERS ********** */
 		void set_username(const string& username);
@@ -54,6 +57,8 @@ class User {
 		void set_hasPassword(bool hasPassword);
 
 		/* ********** USER METHODS ********** */
+		void add_channel(Channel *channel);
+		bool remove_channel(const string& channel_name);
 		vector<pair<string, string> > splitBuffer(const string& buffer);
 
 };

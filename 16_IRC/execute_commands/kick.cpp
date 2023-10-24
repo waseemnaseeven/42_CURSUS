@@ -28,16 +28,38 @@ string get_nickname(const string& args)
 	return nickname;
 }
 
+
+User* getUser(string channel_name, string nick, t_serv *server)
+{
+    User *myUser;
+
+	vector<int> user_fds = server->channels[channel_name]->get_users();
+    for (vector<int>::iterator user_begin = user_fds.begin(); user_begin != user_fds.end(); ++user_begin)
+    {
+		int user_fd = *user_begin;
+		cout << "user_fd is: " << user_fd << endl;
+        myUser = server->users_map.at(user_fd);
+        if (nick == myUser->get_nickname())
+            return myUser;
+    }
+
+    return NULL;
+}
+
 bool    KICK_command(t_serv *server, const string& args, int sender_fd)
 {
-	User *target_user = server->users_map[sender_fd];
 	string channel_name = get_channel_name(args);
 	cout << "channel_name: " << channel_name << endl;
 	string nickname = get_nickname(args);
 	cout << "nickname:'" << nickname << "'" << endl;
 	string comment = get_comment(args);
 	cout << "'" << comment << "'" << endl;
+	User *target_user = getUser(channel_name, nickname, server);
 
+	if (target_user == NULL) {
+		send_message(server, ERR_NOSUCHNICKCHANNEL(nickname), sender_fd);
+		return false;
+	}
 	if (channel_name.empty() || nickname.empty()) {
 		send_message(server, ERR_NEEDMOREPARAMS(int_to_string(sender_fd), "KICK"), sender_fd);
 		return false;
@@ -54,11 +76,7 @@ bool    KICK_command(t_serv *server, const string& args, int sender_fd)
 		send_message(server, ERR_CHANOPRIVSNEEDED(target_user->get_nickname(), channel_name), sender_fd);
 		return false;
 	}
-	// if (server->users_map[sender_fd]->get_nickname() != nickname) {
-	// 	send_message(server, ERR_NOSUCHNICKCHANNEL(nickname), sender_fd);
-	// 	return false;
-	// }
-	if (server->channels[channel_name]->is_user(server->users_map[sender_fd]->get_fd()) == false) {
+	if (server->channels[channel_name]->is_user(target_user->get_fd()) == false) {
 		send_message(server, ERR_USERNOTINCHANNEL(nickname, channel_name), sender_fd);
 		return false;
 	}
