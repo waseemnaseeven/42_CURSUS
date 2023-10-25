@@ -9,7 +9,6 @@ Channel::Channel (string name, int fd) :
 	_fd_creator(fd),
 	_topic(""),
 	_key_channel(""),
-	_max_channels(1),
 	_is_invite_only(false),
 	_is_topic_set(false),
 	_is_topic_protected(false),
@@ -44,8 +43,6 @@ string Channel::get_topic() const { return _topic; }
 
 string Channel::get_key_channel() const { return _key_channel; }
 
-int Channel::get_max_channels() const { return _max_channels; }
-
 vector<int> Channel::get_users() const { return _fds_users; }
 
 vector<int> Channel::get_operators() const { return _fds_operators; }
@@ -72,8 +69,6 @@ void Channel::unset_topic() { _is_topic_set = false; _topic = "";}
 
 void Channel::set_key_channel(const string& key_channel) { _key_channel = key_channel; }
 
-void Channel::set_max_channels(int max_channels) { _max_channels = max_channels; }
-
 void Channel::set_invite_only(bool mode) { _is_invite_only = mode; if (mode == false) _fds_invited.clear(); }
 
 void Channel::set_max_users(int max_users) { _max_users = max_users; }
@@ -97,6 +92,8 @@ bool	Channel::is_user(int fd_user)
 
 bool	Channel::is_op(int fd_user)
 {
+	if (fd_user == -1)
+		return false;
 	vector<int>::iterator it = this->_fds_operators.begin();
 	vector<int>::iterator ite = this->_fds_operators.end();
 
@@ -134,6 +131,23 @@ void	Channel::broadcast(string message, int fd_emitter)
 		it++;
 	}
 	message.clear();
+
+	if (is_op(fd_emitter) == true)
+	{
+		vector<int>::iterator op = this->_fds_operators.begin();
+		vector<int>::iterator ope = this->_fds_operators.end();
+
+		if (message.size() > 510)
+			message = message.substr(0, 510);
+		message += "\r\n";
+		while (op != ope) {
+			if (fd_emitter == -1 || *op != fd_emitter)
+				send(*op, message.c_str(), message.size(), 0);
+			op++;
+		}
+		message.clear();
+	}		
+
 }
 
 void	Channel::add_user(int fd_user)
@@ -150,8 +164,7 @@ void	Channel::kick_user(int fd_user)
 
 	for (; it != ite; it++)
 	{
-		if (*it == fd_user)
-		{
+		if (*it == fd_user) {
 			this->_fds_users.erase(it);
 			break;
 		}
@@ -172,6 +185,11 @@ void	Channel::kick_user(int fd_user)
 	}
 }
 
+void	Channel::invite_user(int fd_user)
+{
+	if (is_invited(fd_user) == false)
+		this->_fds_invited.push_back(fd_user);
+}
 
 void	Channel::part(int fd_user)
 {

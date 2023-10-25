@@ -34,12 +34,10 @@ bool	PART_command(t_serv *server, const string& args, int sender_fd)
             return false;
         }
 		if (reason.empty())
-			myChannel->broadcast(PART_WOREASON(server->users_map[sender_fd]->get_nickname(), server->users_map[sender_fd]->get_username(), "127.0.0.1", channel_name), sender_fd);
+			myChannel->broadcast(PART_WOREASON(server->users_map[sender_fd]->get_nickname(), server->users_map[sender_fd]->get_username(), "127.0.0.1", channel_name), -1);
 		else
-			myChannel->broadcast(PART_WREASON(server->users_map[sender_fd]->get_nickname(), server->users_map[sender_fd]->get_username(), "127.0.0.1", channel_name, reason), sender_fd);
+			myChannel->broadcast(PART_WREASON(server->users_map[sender_fd]->get_nickname(), server->users_map[sender_fd]->get_username(), "127.0.0.1", channel_name, reason), -1);
 		myChannel->part(sender_fd);
-		// User* user = server->users_map[sender_fd];
-		// user->remove_channel(channel_name);
 		if (myChannel->get_users().empty()) {
 			delete myChannel;
 			server->channels.erase(it);

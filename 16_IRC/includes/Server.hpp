@@ -40,6 +40,7 @@ using namespace std;
 #define LOCAL_HOST "127.0.0.1"
 #define BUFFERSIZE 1024
 #define MAX_EVENTS 10 // ou backlog, ou max_clients, le nbr de pending connections queue
+#define MAX_CHANNELS 1
 
 extern bool Open;
 
@@ -125,8 +126,10 @@ string	get_channel_name(const string& args);
 string	get_key(const string& args);
 bool	PART_command(t_serv *server, const string& args, int sender_fd);
 bool    KICK_command(t_serv *server, const string& args, int sender_fd);
+User*	getUser(string channel_name, string nick, t_serv *server);
 bool	TOPIC_command(t_serv *server, const string& args, int sender_fd);
-
+bool	INVITE_command(t_serv *server, const string& args, int sender_fd);
+Channel*getChannel(const string& channel_name, t_serv *server);
 /* ********** MESSAGES ********** */
 bool 	send_message(t_serv *server, const string& message, int sender_fd);
 

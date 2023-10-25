@@ -68,23 +68,22 @@ bool    KICK_command(t_serv *server, const string& args, int sender_fd)
 		send_message(server, ERR_NOSUCHCHANNEL(target_user->get_nickname(), channel_name), sender_fd);
 		return false;
 	}
-	if (server->channels[channel_name]->is_user(sender_fd) == false) {
+	if (server->channels[channel_name]->is_user(target_user->get_fd()) == false) {
 		send_message(server, ERR_NOTONCHANNEL(channel_name, target_user->get_nickname()), sender_fd);
 		return false;
 	}
-	if (server->channels[channel_name]->is_op(sender_fd) == false) {
-		send_message(server, ERR_CHANOPRIVSNEEDED(target_user->get_nickname(), channel_name), sender_fd);
+	if (server->channels[channel_name]->is_op(sender_fd) == false && server->users_map[sender_fd]->get_isOperator() == false) {
+		send_message(server, ERR_CHANOPRIVSNEEDED(server->users_map[sender_fd]->get_nickname(), channel_name), sender_fd);
 		return false;
 	}
-	if (server->channels[channel_name]->is_user(target_user->get_fd()) == false) {
+	if (server->channels[channel_name]->is_user(sender_fd) == false) {
 		send_message(server, ERR_USERNOTINCHANNEL(nickname, channel_name), sender_fd);
 		return false;
 	}
 	if (comment != "")
-		server->channels[channel_name]->broadcast(":" + target_user->get_nickname() + " KICK " + channel_name + " " + nickname + "\r\n", sender_fd);
+		server->channels[channel_name]->broadcast(":" + target_user->get_nickname() + "!" + target_user->get_nickname() + "localhost" + " KICK " + channel_name + " " + nickname + "\r\n", sender_fd);
 	else
-		server->channels[channel_name]->broadcast(":" + target_user->get_nickname() + " KICK " + channel_name + " " + nickname + " :" + comment + "\r\n", sender_fd);
-
+		server->channels[channel_name]->broadcast(":" + target_user->get_nickname() + " KICK " + channel_name + " " + nickname + " :" + comment + "\r\n", sender_fd);	
 	server->channels[channel_name]->kick_user(target_user->get_fd());
 	return true;
 }

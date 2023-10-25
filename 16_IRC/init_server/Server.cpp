@@ -5,8 +5,8 @@ bool Open = true;
 
 void runIRC(t_serv *server)
 {
-	cout << BOLDYELLOW << "Port is: " << server->_port << RESET << endl;
-	cout << BOLDYELLOW << "Passwd is: " << server->_passwd << RESET << endl;
+	cout << BOLDYELLOW << "Port is: " << server->_port << endl;
+	cout << "Passwd is: " << server->_passwd << RESET << endl;
 	struct sigaction sa = {};
 
 	cout << BOLDMAGENTA <<"Initializing server..." << RESET << endl;

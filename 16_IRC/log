@@ -1,0 +1,112 @@
+<< CAP LS
+<< NICK W_____
+<< USER wnaseeve wnaseeve irc.dal.net :Waseem NASEEVEN
+>> :atw.hu.eu.dal.net NOTICE AUTH :*** Looking up your hostname...
+>> :atw.hu.eu.dal.net NOTICE AUTH :*** Checking Ident
+>> :atw.hu.eu.dal.net NOTICE AUTH :*** Found your hostname
+>> :atw.hu.eu.dal.net NOTICE AUTH :*** No Ident response
+>> :atw.hu.eu.dal.net 001 W_____ :Welcome to the DALnet IRC Network W_____!~wnaseeve@62.210.34.32
+<< MODE W_____ +i
+>> :atw.hu.eu.dal.net 002 W_____ :Your host is atw.hu.eu.dal.net, running version bahamut-2.2.2
+>> :atw.hu.eu.dal.net 003 W_____ :This server was created Sat 08 Oct CEST at 2022 02:30:58 PM
+>> :atw.hu.eu.dal.net 004 W_____ atw.hu.eu.dal.net bahamut-2.2.2 aAbcCdefFghHiIjkKmnoOPrRsSwxXy AbceiIjklLmMnoOpPrRsStv beIjklov
+>> :atw.hu.eu.dal.net 005 W_____ NETWORK=DALnet SAFELIST MAXBANS=200 MAXCHANNELS=50 CHANNELLEN=32 KICKLEN=307 NICKLEN=30 TOPICLEN=307 MODES=6 CHANTYPES=# CHANLIMIT=#:50 PREFIX=(ohv)@%+ STATUSMSG=@%+ :are available on this server
+>> :atw.hu.eu.dal.net 005 W_____ CASEMAPPING=ascii WATCH=128 SILENCE=10 ELIST=cmntu EXCEPTS INVEX CHANMODES=beI,k,jl,ciPAmMnOprRsSt MAXLIST=b:200,e:100,I:100 TARGMAX=DCCALLOW:,JOIN:,KICK:4,KILL:20,NOTICE:20,PART:,PRIVMSG:20,WHOIS:,WHOWAS: :are available on this server
+>> :atw.hu.eu.dal.net 251 W_____ :There are 67 users and 7423 invisible on 38 servers
+>> :atw.hu.eu.dal.net 252 W_____ 74 :IRC Operators online
+>> :atw.hu.eu.dal.net 254 W_____ 3696 :channels formed
+>> :atw.hu.eu.dal.net 255 W_____ :I have 1653 clients and 1 servers
+>> :atw.hu.eu.dal.net 265 W_____ :Current local users: 1653 Max: 2113
+>> :atw.hu.eu.dal.net 266 W_____ :Current global users: 7490 Max: 12060
+>> :atw.hu.eu.dal.net NOTICE W_____ :*** Notice -- motd was last changed at 20/1/2021 6:02
+>> :atw.hu.eu.dal.net 375 W_____ :- atw.hu.eu.dal.net Message of the Day - 
+>> :atw.hu.eu.dal.net 372 W_____ :-20/1/2021 6:02
+>> :atw.hu.eu.dal.net 372 W_____ :- Welcome to DALnet!  By connecting to this network, you agree to abide
+>> :atw.hu.eu.dal.net 372 W_____ :- by its acceptable use policy, available here: http://www.dal.net/aup
+>> :atw.hu.eu.dal.net 372 W_____ :- 
+>> :atw.hu.eu.dal.net 372 W_____ :- Server Policies:
+>> :atw.hu.eu.dal.net 372 W_____ :- 
+>> :atw.hu.eu.dal.net 372 W_____ :-    *   We reserve the right to deny access to this server without
+>> :atw.hu.eu.dal.net 372 W_____ :-        warning or explanation
+>> :atw.hu.eu.dal.net 372 W_____ :-    *   No malicious bots, including flood and nick/channel chasers
+>> :atw.hu.eu.dal.net 372 W_____ :-    *   No channel filler bots/clients/psybncs
+>> :atw.hu.eu.dal.net 372 W_____ :-          - A channel filler is a client, bnc, or bot which is
+>> :atw.hu.eu.dal.net 372 W_____ :-            connected just to fill a channel and make it look
+>> :atw.hu.eu.dal.net 372 W_____ :-            bigger
+>> :atw.hu.eu.dal.net 372 W_____ :-    *   Operator impersonation, spamming, or any other abuse will
+>> :atw.hu.eu.dal.net 372 W_____ :-        cause you to be banned from this server
+>> :atw.hu.eu.dal.net 372 W_____ :-    *   Abide by DALnet's AUP (www.dal.net/aup)
+>> :atw.hu.eu.dal.net 372 W_____ :-    *   Please have fun and enjoy DALnet!
+>> :atw.hu.eu.dal.net 372 W_____ :- 
+>> :atw.hu.eu.dal.net 372 W_____ :-      ///admins////////////////////////////////////////
+>> :atw.hu.eu.dal.net 372 W_____ :-      //                                             //
+>> :atw.hu.eu.dal.net 372 W_____ :-      //  [ Hidden  - administrator             ]    //
+>> :atw.hu.eu.dal.net 372 W_____ :-      //                                             // 
+>> :atw.hu.eu.dal.net 372 W_____ :-      //  [ koszik  - assistant administrator   ]    //
+>> :atw.hu.eu.dal.net 372 W_____ :-      //                                             //
+>> :atw.hu.eu.dal.net 372 W_____ :-      ///operators/////////////////////////////////////
+>> :atw.hu.eu.dal.net 372 W_____ :-      //                                             //
+>> :atw.hu.eu.dal.net 372 W_____ :-      //                                             //
+>> :atw.hu.eu.dal.net 372 W_____ :-      //                                             //
+>> :atw.hu.eu.dal.net 372 W_____ :-      /////////////////////////////////////////////////
+>> :atw.hu.eu.dal.net 372 W_____ :- 
+>> :atw.hu.eu.dal.net 372 W_____ :- 
+>> :atw.hu.eu.dal.net 372 W_____ :- For IRCop assistance, please /join #operhelp or message one of our
+>> :atw.hu.eu.dal.net 372 W_____ :- friendly server staff listed above.
+>> :atw.hu.eu.dal.net 372 W_____ :- 
+>> :atw.hu.eu.dal.net 372 W_____ :- For multilingual information:  <http://docs.dal.net/>
+>> :atw.hu.eu.dal.net 372 W_____ :- 
+>> :atw.hu.eu.dal.net 372 W_____ :- Thank you for using DALnet!  We hope you have a pleasant day.
+>> :atw.hu.eu.dal.net 372 W_____ :- 
+>> :atw.hu.eu.dal.net 376 W_____ :End of /MOTD command.
+>> :W_____ MODE W_____ :+iH
+<< PING atw.hu.eu.dal.net
+>> :atw.hu.eu.dal.net PONG atw.hu.eu.dal.net :W_____
+--> lag pong
+<< JOIN #street
+>> :W_____!~wnaseeve@ee86-5419-3332-91b3-a380.210.62.ip JOIN :#street
+>> :atw.hu.eu.dal.net 353 W_____ = #street :@W_____ 
+>> :atw.hu.eu.dal.net 366 W_____ #street :End of /NAMES list.
+<< MODE #street
+>> :atw.hu.eu.dal.net 324 W_____ #street + 
+--> chanquery mode
+<< WHO #street
+>> :atw.hu.eu.dal.net 329 W_____ #street 1698252894
+--> event 329
+>> :atw.hu.eu.dal.net 352 W_____ #street ~wnaseeve ee86-5419-3332-91b3-a380.210.62.ip atw.hu.eu.dal.net W_____ H@ :0 Waseem NASEEVEN
+--> silent event who
+>> :atw.hu.eu.dal.net 315 W_____ #street :End of /WHO list.
+--> chanquery who end
+<< MODE #street b
+>> :atw.hu.eu.dal.net 368 W_____ #street :End of Channel Ban List
+--> chanquery ban end
+<< MODE #street +i
+>> :W_____!~wnaseeve@ee86-5419-3332-91b3-a380.210.62.ip MODE #street +i 
+<< PING atw.hu.eu.dal.net
+>> :atw.hu.eu.dal.net PONG atw.hu.eu.dal.net :W_____
+--> lag pong
+<< INVITE AAA_AA #street
+>> :atw.hu.eu.dal.net 341 W_____ AAA_AA #street
+>> :bitcoin.uk.eu.dal.net NOTICE @#street :W_____ invited AAA_AA into channel #street
+>> :AAA_AA!~aboulest@52a8-3cc3-4e96-ba90-edc1.210.62.ip JOIN :#street
+<< PING atw.hu.eu.dal.net
+>> :atw.hu.eu.dal.net PONG atw.hu.eu.dal.net :W_____
+--> lag pong
+<< PING atw.hu.eu.dal.net
+>> :atw.hu.eu.dal.net PONG atw.hu.eu.dal.net :W_____
+--> lag pong
+<< PING atw.hu.eu.dal.net
+>> :atw.hu.eu.dal.net PONG atw.hu.eu.dal.net :W_____
+--> lag pong
+<< PING atw.hu.eu.dal.net
+>> :atw.hu.eu.dal.net PONG atw.hu.eu.dal.net :W_____
+--> lag pong
+<< PING atw.hu.eu.dal.net
+>> :atw.hu.eu.dal.net PONG atw.hu.eu.dal.net :W_____
+--> lag pong
+<< INVITE AAA_AA #street
+>> :atw.hu.eu.dal.net 443 W_____ AAA_AA #street :is already on channel
+<< PING atw.hu.eu.dal.net
+>> :atw.hu.eu.dal.net PONG atw.hu.eu.dal.net :W_____
+--> lag pong
+<< QUIT :leaving

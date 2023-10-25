@@ -5,7 +5,7 @@
 # define    RPL_WELCOME(nick, user, port, host) ("001 " + nick + " Welcome to the " + port + " Network, " + nick + "!" + user + "@" + host + "\r\n")
 # define    ERR_UNKNOWNCOMMAND(client, command) (": 421 " + client + " " + command + " Unknown command(custom)\r\n")
 # define    ERR_NEEDMOREPARAMS(client, command) (": 461 " + client + " " + command + " Not enough parameters\r\n")
-
+# define    user_id(nick, user, host) (":" + nick + "!" + user + "@" + host)
 /*  ****************************************************************************** */
 /*  ******************************** USER messages ******************************* */
 /*  ****************************************************************************** */
@@ -54,9 +54,12 @@
 # define    ERR_INVITEONLYCHAN(nick, channel) ("473 " + nick + " " + channel + " :Cannot join channel (+i)\r\n")
 # define    ERR_BADCHANNELKEY(nick, channel) ("475 " + nick + " " + channel + " :Cannot join channel (+k)\r\n")
 # define    ERR_CHANNELISFULL(nick, channel) ("471 " + nick + " " + channel + " :Cannot join channel (+l)\r\n")
+# define    ERR_TOOMANYCHANNELS(nick, channel) ("405 " + nick + " " + channel + " :You have joined too many channels\r\n")
+
 /*  Invite  */
 # define 	RPL_INVITING(user_id, nick, nickinvite, channel) (user_id + " 341 " + nick + " " + nickinvite + " " + channel + ": inviting " + nickinvite + " to " + channel + "\r\n")
 # define	INVITE(user_id, nickinvite, channel)  (user_id + " INVITE " + nickinvite + " " + channel + "\r\n")
+
 /*  Names   */
 # define    RPL_NAMREPLY(channel, nick, user, host, users) (": 353 " + nick + "!" + user + "@" + host + " = " + channel + " :" + users + "\r\n")
 # define    RPL_ENDOFNAMES(channel, nick, user, host) (": 366 " + nick + "!" + user + "@" + host + " " + channel + " :End of /NAMES list.\r\n")

@@ -14,7 +14,6 @@ class Channel {
 		int			_fd_creator;
 		string		_topic;
 		string		_key_channel; // mdp du channel
-		int			_max_channels; // maximum channels users can join
 		vector<int>	_fds_users;
 		vector<int>	_fds_operators;
 		vector<int>	_fds_invited;
@@ -36,7 +35,6 @@ class Channel {
 	string 	get_channel_name() const;
 	string 	get_topic() const;
 	string 	get_key_channel() const;
-	int 	get_max_channels() const;
 	vector<int>	get_users() const;
 	vector<int>	get_operators() const;
 	bool	get_is_invite_only() const;
@@ -51,7 +49,6 @@ class Channel {
 	void	set_protected_topic(bool mode);
 	void	unset_topic();
 	void	set_key_channel(const string& key_channel);
-	void	set_max_channels(int max_channels);
 	void	set_invite_only(bool mode);
 	void	set_max_users(int max_users);
 	void	set_has_user_limit(bool mode);
@@ -63,6 +60,7 @@ class Channel {
 	void	broadcast(string message, int fd_emitter);
 	void	add_user(int fd_user);
 	void	kick_user(int fd_user);
+	void	invite_user(int fd_user);
 	void	part(int fd_user);
 };
 

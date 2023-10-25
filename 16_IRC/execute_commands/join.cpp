@@ -17,11 +17,10 @@ string    get_channel_name(const string& args)
 
 string get_key(const string& args)
 {
-    string key;
+    string key = "";
     for (size_t i = 0; i < args.size(); i++)
     {
-        if (args[i] == ' ')
-        {
+        if (args[i] == ' ') {
             key = args.substr(i + 1);
             break;
         }
@@ -32,36 +31,30 @@ string get_key(const string& args)
 void print_names(t_serv *server, const string& channel_name, int sender_fd)
 {
     User* target_user = server->users_map[sender_fd];
-    Channel* myChannel = server->channels[channel_name];
+    Channel* myChannel = getChannel(channel_name, server);
 
-    if (myChannel == NULL) {
+    if (myChannel == NULL)
         return;
-    }
 
     string users_info = "";
 
     const vector<int>& user_fds = myChannel->get_users();
 
-    for (size_t i = 0; i < user_fds.size(); ++i)
-    {
+    for (size_t i = 0; i < user_fds.size(); ++i) {
         int user_fd = user_fds[i];
 
-        if (user_fd <= 0 || user_fd > MAX_EVENTS) {
-            continue;
-        }
+        if (user_fd <= 0 || user_fd > MAX_EVENTS)
+            break;
 
         User* user = server->users_map[user_fd];
 
-        if (myChannel->is_op(user_fd)) {
+        if (myChannel->is_op(user_fd) || user->get_isOperator())
             users_info += "@";
-        }
 
         users_info += user->get_nickname();
 
         if (i < user_fds.size() - 1)
-        {
             users_info += " ";
-        }
     }
 
     send_message(server, RPL_NAMREPLY(channel_name, target_user->get_nickname(), target_user->get_username(), "127.0.0.1", users_info), sender_fd);
@@ -89,7 +82,6 @@ bool    JOIN_command(t_serv *server, const string& args, int sender_fd)
         map<string, Channel*>::iterator it = server->channels.find(channel_name);
         if (it != server->channels.end()) {
             myChannel = it->second;
-            // int len_users = myChannel->get_users().size();
             if (myChannel->get_is_invite_only() && myChannel->is_invited(sender_fd) == false) {
                 send_message(server, ERR_INVITEONLYCHAN(channel_name, server->users_map[sender_fd]->get_nickname()), sender_fd);
                 return false;
@@ -118,7 +110,5 @@ bool    JOIN_command(t_serv *server, const string& args, int sender_fd)
     if (myChannel->get_is_topic_set() == true)
         send_message(server, RPL_TOPIC(server->users_map[sender_fd]->get_nickname(), server->users_map[sender_fd]->get_username(), "127.0.0.1", channel_name, myChannel->get_topic()), sender_fd);
     print_names(server, channel_name, sender_fd);
-    // User *user = server->users_map[sender_fd];
-    // user->add_channel(myChannel);
     return true;
 }
