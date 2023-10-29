@@ -150,20 +150,6 @@ void	Channel::broadcast(string message, int fd_emitter)
 		it++;
 	}
 
-
-		// vector<int>::iterator op = this->_fds_operators.begin();
-		// vector<int>::iterator ope = this->_fds_operators.end();
-
-		// if (message.size() > 510)
-		// 	message = message.substr(0, 510);
-		// message += "\r\n";
-		// while (op != ope) {
-		// 	if (fd_emitter == -1 || *op != fd_emitter)
-		// 		send(*op, message.c_str(), message.size(), 0);
-		// 	op++;
-		// }
-		// message.clear();
-
 	message.clear();
 }
 

@@ -24,11 +24,8 @@ User* getUserFromIrssi(const string& nick, t_serv* server) {
 
 bool    INVITE_command(t_serv *server, const string& args, int sender_fd)
 {
-    cout << "INVITE_command" << endl;
     string nickname = get_channel_name(args);
-    cout << "invite nickname: '" << nickname << "'" << endl;
     string channel_name = get_key(args);
-    cout << "invite channel_name: '" << channel_name << "'" << endl;
 
     if (args.empty() || nickname.empty() || channel_name.empty()) {
         send_message(server, ERR_NEEDMOREPARAMS(server->users_map[sender_fd]->get_nickname(), "INVITE"), sender_fd);
@@ -57,10 +54,8 @@ bool    INVITE_command(t_serv *server, const string& args, int sender_fd)
         send_message(server, ERR_USERONCHANNEL(server->users_map[sender_fd]->get_nickname(), nickname, channel_name), sender_fd);
         return false;
     }
-    // myChannel->broadcast(RPL_INVITING(user_id(server->users_map[sender_fd]->get_nickname(), server->users_map[sender_fd]->get_username(), "localhost"), server->users_map[sender_fd]->get_nickname(), target_user->get_nickname(), channel_name), target_user->get_fd());
     send_message(server, RPL_INVITING(user_id(server->users_map[sender_fd]->get_nickname(), server->users_map[sender_fd]->get_username(), "localhost"), server->users_map[sender_fd]->get_nickname(), target_user->get_nickname(), channel_name), sender_fd);
 	myChannel->invite_user(target_user->get_fd());
 	send_message(server, INVITE(user_id(server->users_map[sender_fd]->get_nickname(), server->users_map[sender_fd]->get_username(), "localhost"), target_user->get_nickname(), channel_name), sender_fd);
-    // myChannel->broadcast(INVITE(user_id(server->users_map[sender_fd]->get_nickname(), server->users_map[sender_fd]->get_username(), "localhost"), nickname, channel_name), sender_fd);
     return true;
 }

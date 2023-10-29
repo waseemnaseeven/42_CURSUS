@@ -47,9 +47,6 @@ bool    PRIVMSG_command(t_serv *server, const string& args, int sender_fd)
     }
     else {
         for (map<int, User*>::iterator it = server->users_map.begin(); it != server->users_map.end(); ++it) {
-		    cout << "name is:'" << server->users_map[it->first]->get_nickname() << "'" << endl;
-            cout << "target is:'" << target << "'"<< endl;
-            cout << "message is:'" << message << "'" << endl;
             if (server->users_map[it->first]->get_nickname() == target) {
                 send_message(server, PRIVMSG(server->users_map[sender_fd]->get_nickname(), target, message), server->users_map[it->first]->get_fd());
                 return true;
