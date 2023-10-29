@@ -121,9 +121,7 @@ Channel* User::get_channel(const string& channel_name) const {
 
 void User::set_username(const string& username) { _username = username; }
 
-void User::set_nickname(const string& nickname) {
-	_nickname = nickname;
-}
+void User::set_nickname(string nickname) { _nickname = nickname; }
 
 void User::set_realname(const string& realname) { _realname = realname; }
 

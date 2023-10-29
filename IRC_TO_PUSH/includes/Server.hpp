@@ -113,7 +113,7 @@ string 	welcome_msg();
 
 /* ********** COMMANDS ********** */
 bool 	PASS_command(t_serv *server, const string& password, int sender_fd);
-bool    NICK_command(t_serv *server, const string& nickname, int sender_fd);
+bool    NICK_command(t_serv *server, string nickname, int sender_fd);
 bool	check_passwd(t_serv *server, int sender_fd);
 bool	USER_command(t_serv *server, const string& username, int sender_fd);
 bool	UNKNOWN_command(t_serv *server, const string& command, int sender_fd);

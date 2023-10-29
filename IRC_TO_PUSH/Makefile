@@ -6,7 +6,7 @@
 #    By: wnaseeve <wnaseeve@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/03 11:38:41 by wnaseeve          #+#    #+#              #
-#    Updated: 2023/10/25 20:05:33 by wnaseeve         ###   ########.fr        #
+#    Updated: 2023/10/29 20:14:57 by wnaseeve         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,11 +14,10 @@ NAME	= 	ircserv
 
 SRCS	= 	srcs/main.cpp \
 			srcs/User.cpp \
-			init_server/Server.cpp \
-			init_server/clients_actions.cpp \
+			srcs/Server.cpp \
+			srcs/clients_actions.cpp \
 			execute_commands/actions_commands.cpp \
 			execute_commands/unknown.cpp \
-			execute_commands/help.cpp \
 			execute_commands/pass.cpp \
 			execute_commands/nick.cpp \
 			execute_commands/user.cpp \

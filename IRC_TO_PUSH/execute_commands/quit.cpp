@@ -8,7 +8,6 @@ bool	QUIT_command(t_serv *server, const string& reason, int sender_fd)
 	{
 		send_message(server, QUIT(server->users_map[sender_fd]->get_nickname(), reason), sender_fd);
 		user_disconnection(server, sender_fd);
-		// clear_data(server);
 		return false;
 	}
 	return true;

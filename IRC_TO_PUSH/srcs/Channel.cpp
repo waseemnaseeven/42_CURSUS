@@ -31,9 +31,20 @@ Channel::Channel(const Channel& src) {
 Channel& Channel::operator=(const Channel& src) {
 	std::cout << GREEN << "[ASSIGNATION] Assignation operator called" << RESET << endl;
 	if (this != &src) {
-		// this->_channel_name = src._channel_name;
-		// this->_topic = src._topic;
-		// this->_password = src._password;
+		this->_channel_name = src._channel_name;
+		this->_fd_creator = src._fd_creator;
+		this->_topic = src._topic;
+		this->_key_channel = src._key_channel;
+		this->_is_invite_only = src._is_invite_only;
+		this->_is_topic_set = src._is_topic_set;
+		this->_is_topic_protected = src._is_topic_protected;
+		this->_is_channel_locked = src._is_channel_locked;
+		this->_max_users = src._max_users;
+		this->_has_user_limit = src._has_user_limit;
+		this->_limits = src._limits;
+		this->_fds_users = src._fds_users;
+		this->_fds_operators = src._fds_operators;
+		this->_fds_invited = src._fds_invited;
 	}
 	return *this;
 }

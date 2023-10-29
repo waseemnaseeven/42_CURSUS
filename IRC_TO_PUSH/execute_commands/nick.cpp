@@ -12,7 +12,7 @@ bool	check_passwd(t_serv *server, int sender_fd)
 	return true;
 }
 
-bool    NICK_command(t_serv *server, const string& nickname, int sender_fd)
+bool    NICK_command(t_serv *server, string nickname, int sender_fd)
 {
     /* Check if proper number of args is set */
     if (nickname.empty())
@@ -39,11 +39,12 @@ bool    NICK_command(t_serv *server, const string& nickname, int sender_fd)
     for (size_t i = 0; i < server->open_fds.size(); i++) {
         if (server->users_map[server->open_fds[i]]->get_nickname() == nickname)
         {
-            if (server->users_map[sender_fd]->get_hasNickname() == true)
-            {
+            if (server->users_map[sender_fd]->get_hasNickname() == true) {
                 send_message(server, ERR_NICKNAMEINUSE(int_to_string(sender_fd), nickname), sender_fd);
                 return false;
             }
+            nickname = nickname + "_";
+            break;
         }
     }
 
@@ -56,11 +57,10 @@ bool    NICK_command(t_serv *server, const string& nickname, int sender_fd)
                 send_message(server, NICK(server->users_map[sender_fd]->get_nickname(), "user", LOCAL_HOST, nickname), sender_fd);
                 server->users_map[sender_fd]->set_nickname(nickname);
                 return true;
-
             }
         }
     }
-    
+
     /* Assign the nickname */
     server->users_map[sender_fd]->set_nickname(nickname);
     server->users_map[sender_fd]->set_hasNickname(true);

@@ -46,7 +46,7 @@ class User {
 
 		/* ********** SETTERS ********** */
 		void set_username(const string& username);
-		void set_nickname(const string& nickname);
+		void set_nickname(string nickname);
 		void set_realname(const string& realname);
 		void set_fd(int fd);
 		void set_messages(const string& messages);

@@ -37,11 +37,8 @@ string get_str(const string& args)
 bool    MODE_command(t_serv *server, const string& args, int sender_fd)
 {
     string channel_name = get_channel_name(args);
-    cout << "mode channel_name: '" << channel_name << "'" << endl;
     string mode = get_mode(args);
-    cout << "mode mode: '" << mode << "'" << endl;
     string str = get_str(args);
-    cout << "mode str: '" << str << "'" << endl;
 
     if (args.empty()) {
         send_message(server, ERR_NEEDMOREPARAMS(server->users_map[sender_fd]->get_nickname(), "MODE"), sender_fd);

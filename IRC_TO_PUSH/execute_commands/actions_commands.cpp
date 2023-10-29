@@ -29,44 +29,38 @@ void	receive_byts(t_serv *server, int i)
 
 void    execute_commands(t_serv *server, vector<pair<string, string> > commands, int sender_fd)
 {
-	/*
-		- CTRL-N sur IRSSI
-		- /rawlog open file pour voir ce que j'ai envoye
-		- /connect DALNET 
-	*/
 	print_commandsargs(commands);
     for (size_t i = 0; i < commands.size(); i++) {
-        if (commands[i].first == "PASS"){ // finish
+        if (commands[i].first == "PASS"){
 			if (PASS_command(server, commands[i].second, sender_fd) == false) {
 				user_disconnection(server, sender_fd);
 				break ;
 			}
 		}
-        else if (commands[i].first == "NICK") // finish 
-		{
+        else if (commands[i].first == "NICK") {
 			if (check_passwd(server, sender_fd) == false) {
 				user_disconnection(server, sender_fd);
 				break ;
 			}
 			NICK_command(server, commands[i].second, sender_fd);
 		}
-		else if (commands[i].first == "USER") // finish
+		else if (commands[i].first == "USER")
 			USER_command(server, commands[i].second, sender_fd);
-		else if (commands[i].first == "PING") // finish
+		else if (commands[i].first == "PING")
 			PING_command(server, commands[i].second, sender_fd);
-		else if (commands[i].first == "OPER") // finish
+		else if (commands[i].first == "OPER")
 			OPER_command(server, commands[i].second, sender_fd);
-		else if (commands[i].first == "QUIT") // finish
+		else if (commands[i].first == "QUIT")
 			QUIT_command(server, commands[i].second, sender_fd);
-		else if (commands[i].first == "JOIN") // finish
+		else if (commands[i].first == "JOIN")
 			JOIN_command(server, commands[i].second, sender_fd);
 		else if (commands[i].first == "PRIVMSG")
 			PRIVMSG_command(server, commands[i].second, sender_fd);
-		else if (commands[i].first == "KICK") // finish
+		else if (commands[i].first == "KICK")
 			KICK_command(server, commands[i].second, sender_fd);
-		else if (commands[i].first == "PART") // finish
+		else if (commands[i].first == "PART")
 			PART_command(server, commands[i].second, sender_fd);
-		else if (commands[i].first == "TOPIC") // finish
+		else if (commands[i].first == "TOPIC")
 			TOPIC_command(server, commands[i].second, sender_fd);
 		else if (commands[i].first == "INVITE")
 			INVITE_command(server, commands[i].second, sender_fd);
