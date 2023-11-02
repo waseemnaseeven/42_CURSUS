@@ -2,26 +2,20 @@
 
 RPN::RPN() {
 	std::cout << GREEN << "Constructor called for " << RESET << std::endl;
-
 }
 
 RPN::~RPN() {
 	std::cout << RED << "Destructor called for " << RESET << std::endl;
-
 }
 
 RPN::RPN(const RPN& src) {
-	(void) src;
+	*this = src;
 	std::cout << GREEN << "Copy constructor called for " << RESET << std::endl;
-
 }
 
 RPN& RPN::operator=(const RPN& src) {
 	std::cout << GREEN << "Assignation operator called" << RESET << std::endl;
-	if (this != &src) {
-		// this->_value = src._value;
-	}
-
+    (void) src;
 	return *this;
 }
 
@@ -32,7 +26,6 @@ int ReversePolishNotationCalculator(std::string& input) {
     while (i < input.length()) {
         while (std::isspace(input[i]))
             i++;
-
         if (std::isdigit(input[i]) || std::strchr("+-*/", input[i])) {
             if (std::isdigit(input[i])) {
                 std::string token = "";
@@ -40,17 +33,16 @@ int ReversePolishNotationCalculator(std::string& input) {
                     token += input[i];
                     i++;
                 }
+                if (std::atoi(token.c_str()) < 0 || std::atoi(token.c_str()) > 9)
+                        throw std::runtime_error("Error: less than 0 or greater than 9");
                 list.push(std::atoi(token.c_str()));
-				//
             } else if (std::strchr("+-*/", input[i])) {
-                if (list.size() < 2) {
+                if (list.size() < 2)
                     throw std::runtime_error("Error: not enough operands for operator.");
-                }
                 int operand2 = list.top();
                 list.pop();
                 int operand1 = list.top();
                 list.pop();
-
                 char operation = input[i];
                 int result = 0;
                 switch (operation) {
@@ -75,14 +67,12 @@ int ReversePolishNotationCalculator(std::string& input) {
                 list.push(result);
                 i++;
             }
-        } else {
+        } else
             throw std::runtime_error("Error: bad input.");
-        }
     }
 
-    if (list.size() != 1) {
+    if (list.size() != 1)
         throw std::runtime_error("Error: invalid expression.");
-    }
 
     int finalResult = list.top();
 

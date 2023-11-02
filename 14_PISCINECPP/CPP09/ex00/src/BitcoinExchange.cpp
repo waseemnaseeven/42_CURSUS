@@ -11,7 +11,7 @@ BitcoinExchange::~BitcoinExchange() {
 }
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange& src) {
-	(void) src;
+	*this = src;
 	std::cout << GREEN << "Copy constructor called for " << RESET << std::endl;
 
 }
@@ -19,7 +19,7 @@ BitcoinExchange::BitcoinExchange(const BitcoinExchange& src) {
 BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& src) {
 	std::cout << GREEN << "Assignation operator called" << RESET << std::endl;
 	if (this != &src) {
-		this->_value = src._value;
+		this->_data = src._data;
 	}
 
 	return *this;

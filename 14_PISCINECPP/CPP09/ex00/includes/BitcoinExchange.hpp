@@ -17,8 +17,6 @@
 
 class BitcoinExchange {
 	private:
-		std::string _str;
-		int	_value;
 		std::multimap<std::string, double> _data;
 
 	public:

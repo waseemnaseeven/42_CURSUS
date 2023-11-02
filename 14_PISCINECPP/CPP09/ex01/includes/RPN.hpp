@@ -21,9 +21,6 @@ class RPN {
 		~RPN();
 		RPN(const RPN& src);
 		RPN& operator=(const RPN& src);
-
-
-
 };
 
 int ReversePolishNotationCalculator(std::string& input);
