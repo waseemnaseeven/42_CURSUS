@@ -58,6 +58,10 @@ bool    KICK_command(t_serv *server, const string& args, int sender_fd)
 		send_message(server, ERR_NEEDMOREPARAMS(int_to_string(sender_fd), "KICK"), sender_fd);
 		return false;
 	}
+	if (server->users_map[sender_fd]->get_nickname() ==  nickname) {
+		send_message(server, "Cannot kick ourself\r\n", sender_fd);
+		return false;
+	}
 	if (server->channels[channel_name]->get_channel_name() != channel_name) {
 		send_message(server, ERR_NOSUCHCHANNEL(target_user->get_nickname(), channel_name), sender_fd);
 		return false;
