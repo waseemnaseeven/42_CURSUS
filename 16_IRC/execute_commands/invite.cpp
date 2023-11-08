@@ -56,6 +56,8 @@ bool    INVITE_command(t_serv *server, const string& args, int sender_fd)
     }
     send_message(server, RPL_INVITING(user_id(server->users_map[sender_fd]->get_nickname(), server->users_map[sender_fd]->get_username(), "localhost"), server->users_map[sender_fd]->get_nickname(), target_user->get_nickname(), channel_name), sender_fd);
 	myChannel->invite_user(target_user->get_fd());
-	send_message(server, INVITE(user_id(server->users_map[sender_fd]->get_nickname(), server->users_map[sender_fd]->get_username(), "localhost"), target_user->get_nickname(), channel_name), sender_fd);
+    myChannel->invite_user(sender_fd);
+    myChannel->broadcast(INVITE(user_id(server->users_map[sender_fd]->get_nickname(), server->users_map[sender_fd]->get_username(), "localhost"), target_user->get_nickname(), channel_name), target_user->get_fd());
+	// send_message(server, INVITE(user_id(server->users_map[sender_fd]->get_nickname(), server->users_map[sender_fd]->get_username(), "localhost"), target_user->get_nickname(), channel_name), sender_fd);
     return true;
 }

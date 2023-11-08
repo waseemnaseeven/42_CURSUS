@@ -1,5 +1,11 @@
 # FT_IRC 🧠
 
+## TO_DO LIST
+
+- message du invite vers la personne qui se fait inviter
+- Verifier s'il y a encore qqun dans le channel
+- Gerer le handle file transfer
+
 ## HOW TO MAKE AN IRC SERVER
 
 - init structure de données, classes, heritage, gestion d'erreur
@@ -17,6 +23,11 @@
 - init server
 
 - switch case pour les commandes
+
+- handle file transfer:
+    - /dcc send <nickname> /filepath/
+    - /dcc get 
+        - chercher a l'endroit ou irssi a ete lance
 
 ## EVERYTHINGS I'VE TO KNOW
 
@@ -82,13 +93,19 @@ Les ports :  les numéros de port permettent de différencier différentes servi
     - authenticate: nickname, username, join channel, send and receive private messages using your reference client
 
 ### COMMANDS
+AUTHENTICATION
+- CAP LS
+- PASS
+- NICK
+- USER
 ONLY OPERATORS CAN USE THOSE COMMANDS
 - KICK
     - trouver le client a kick sinon erreur
 - INVITE (mode +i)
     - trouver le client a inviter sinon erreur
-- 
-
+- TOPIC
+- OPER
+- MODE
 
 ### USERS
 
@@ -99,7 +116,7 @@ ONLY OPERATORS CAN USE THOSE COMMANDS
 
 - Un user peut etre un operator 
 
-- 
+etc...
 
 ### MESSAGES
 
@@ -107,6 +124,7 @@ ONLY OPERATORS CAN USE THOSE COMMANDS
 - gestion des messages vides
 - gestion des messages trop longs
 - gestion des messages avec des caracteres speciaux
+- FAIRE UN DEFINE DE MESSAGE
 
 ## FUNCTIONS AUTHORIZED:
 

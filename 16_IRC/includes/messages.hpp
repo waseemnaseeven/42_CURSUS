@@ -25,7 +25,7 @@
 
 /*  PING OR PONG   */
 # define    PING(user_id, param) (user_id + " PING :" + param + "\r\n")
-# define    PONG(user_id, param) (user_id + " PONG :" "PING sent "+ param + "\r\n")
+# define    PONG(user_id, param) (user_id + " PONG :" + param + "\r\n")
 
 /*  OPERATOR messages   */
 # define    RPL_YOUREOPER(nick) ("381 " + nick + " :You are now an IRC operator\r\n")

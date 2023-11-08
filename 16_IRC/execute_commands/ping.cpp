@@ -7,16 +7,16 @@ bool	PING_command(t_serv *server, const string& args, int sender_fd)
 	if (server->users_map[sender_fd]->get_isAuthentified() == false)
 	{
 		if (args.empty())
-			send_message(server, PING(int_to_string(sender_fd), ""), sender_fd);
+			send_message(server, PING(user_id(server->users_map[sender_fd]->get_nickname(), server->users_map[sender_fd]->get_username(), "localhost"), ""), sender_fd);
 		else
-			send_message(server, PING(int_to_string(sender_fd), args), sender_fd);
+			send_message(server, PING(user_id(server->users_map[sender_fd]->get_nickname(), server->users_map[sender_fd]->get_username(), "localhost"), args), sender_fd);
 	}
 	else
 	{
 		if (args.empty())
-			send_message(server, PONG(int_to_string(sender_fd), ""), sender_fd);
+			send_message(server, PONG(user_id(server->users_map[sender_fd]->get_nickname(), server->users_map[sender_fd]->get_username(), "localhost"), ""), sender_fd);
 		else
-			send_message(server, PONG(int_to_string(sender_fd), args), sender_fd);
+			send_message(server, PONG(user_id(server->users_map[sender_fd]->get_nickname(), server->users_map[sender_fd]->get_username(), "localhost"), args), sender_fd);
 	}
 	return true;
 }
