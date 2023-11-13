@@ -1,0 +1,60 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# name: vagrant
+# pswd: vagrant
+
+LOCAL_USER = ENV['USER']
+
+Vagrant.configure("2")do |config|
+    # Define the box to be used
+    config.vm.box = "ubuntu/bionic64"
+    # Define the provider (virtualbox, aws, etc)
+    config.vm.provider "virtualbox" do |vb|
+        vb.name = "#{LOCAL_USER}"
+        vb.gui = true
+        vb.memory = "4096"
+        vb.cpus = "4"
+    end
+
+    # Script to install components
+    config.vm.provision "shell", privileged: true, inline: <<-SHELL
+        # Basic installation
+        apt-get update
+        apt-get upgrade -y
+        apt-get install -y git vim make wget curl openssh-server ufw
+        DEBIAN_FRONTEND=noninteractive apt-get install -y ubuntu-desktop
+        apt-get install -y virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11
+        # Install Docker
+        curl -fsSL https://get.docker.com -o get-docker.sh && sh get-docker.sh    
+
+        # Users & groups
+        USERNAME=#{LOCAL_USER}
+        GROUP=docker
+        adduser $USERNAME
+        addgroup $GROUP
+        usermod -aG sudo $USERNAME
+        usermod -aG $GROUP $USERNAME
+        hostnamectl set-hostname $USERNAME
+        
+    SHELL
+
+    config.vm.provision "shell", privileged: true, inline: <<-SHELL
+        # Install Brave Browser
+        curl -fsSLo brave.deb https://brave-browser-apt-release.s3.brave.com/brave-core.asc
+        apt-key --keyring /etc/apt/trusted.gpg.d/brave-browser-release.gpg add brave.deb
+        echo "deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main" > /etc/apt/sources.list.d/brave-browser-release.list
+        apt-get update
+        apt-get install -y brave-browser
+
+        # Install VSCode
+        curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor -o /usr/share/keyrings/microsoft-archive-keyring.gpg
+        echo "deb [signed-by=/usr/share/keyrings/microsoft-archive-keyring.gpg] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list
+        apt-get update
+        apt-get install -y code
+
+        # Remove installation files and reboot
+        rm ubuntu-bionic-18.04-cloudimg-console.log
+        reboot now
+    SHELL
+end

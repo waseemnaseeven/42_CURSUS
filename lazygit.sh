@@ -37,6 +37,17 @@ while true; do
         git push
     }
 
+    function perfect_push {
+        read -p "Your add: " add
+
+        git add "$add"
+
+        read -p "Your commit: " commit
+
+        git commit -m "$commit"
+        git push 
+    }
+
     function create_branch {
         read -p "Name of the branch: " branch_name
         git checkout -b "$branch_name"
@@ -71,17 +82,20 @@ while true; do
     }
 
     # Available options for git
-
-    echo -e "\nOptions available:"
-    echo -e "1) Ugly push"
-    echo -e "2) Manage branch"
-    echo -e "3) exit\n"
+    echo -e "Options available:"
+    echo -e "1) Git status"
+    echo -e "2) Ugly push"
+    echo -e "3) Perfect push"
+    echo -e "4) Manage branch"
+    echo -e "5) exit\n"
 
     read -p "Select your option: " opt
     
     case $opt in
-        "1") ugly_push ;;
-        "2") manage_branch ;;
-        "3") exit 0 ;;
+        "1") clear && git status ;;
+        "2") ugly_push ;;
+        "3") perfect_push ;;
+        "4") manage_branch ;;
+        "5") exit 0 ;;
     esac
 done
