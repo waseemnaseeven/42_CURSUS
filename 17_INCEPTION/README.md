@@ -71,7 +71,29 @@ Ainsi, lorsque votre conteneur WordPress essaie de se connecter au port 3306 du 
 
 - `ENTRYPOINT` = Lancer une commande avant le lancement de Docker
 
-### DOCKER-COMPOSE
+### DOCKER COMPOSE
+
+
+
+### DOCKER CMDS
+
+* docker build -t /path/to/directory .
+    - constuction des images
+    - '-t' tags l'image
+    - le '.' permet a Docker de tcheker le dockerfile dans le dossier courant
+
+* docker run -dp 127.0.0.1:3000:3000 /path/to/directory
+    - '-d' pour --detach run le container 
+    - '-p' creer un port entre le host et le container.
+    -  http://localhost:3000 (pour constater le resultat)
+
+* Pour supprimer un old container
+    - docker ps
+    - docker stop <the-container-id> (ex:7da7ff2b9c80)
+    - docker rm <the-container-id> (ex:7da7ff2b9c80)
+
+
+### DOCKER-COMPOSE CMDS
 
 * docker-compose build
 	- construction uniquement des images
