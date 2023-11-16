@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "443:443"
+
+volumes:
+  mariadb-data:
+  wordpress-files:
+

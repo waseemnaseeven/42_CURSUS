@@ -55,7 +55,7 @@ Le grand avantage de Docker est la possibilité de modéliser chaque conteneur s
     ENTRYPOINT	["sh", "setup_nginx.sh"]
 ```
 
-- `FROM` = Permet d’indiquer à Docker sous quel OS doit tourner votre machine virtuelle.
+- `FROM` = Permet d’indiquer à Docker sous quel OS doit tourner ma machine virtuelle.
 
 - `RUN` = Lance une commande sur ma VM. 
 L’équivalent de se connecter en ssh, puis de taper une commande bash, comme : echo “Hello World!”, qui affichera….
@@ -72,6 +72,9 @@ Ainsi, lorsque votre conteneur WordPress essaie de se connecter au port 3306 du 
 - `ENTRYPOINT` = Lancer une commande avant le lancement de Docker
 
 ### DOCKER COMPOSE
+    - Outil qui a ete dev pour aider a definir et a partager des applications multi-conteneurs
+
+    - Fichier YAML:
 
 
 
@@ -122,6 +125,15 @@ Ainsi, lorsque votre conteneur WordPress essaie de se connecter au port 3306 du 
 ### NGINX
 
 - Un serveur web (qui stocke, traite et fournit des fichiers de sites internet) donc qui utilise le protocole HTTP
+
+* openssl: 
+    - logiciel open-source qui implemente protocole de securite SSL pour assurer la securite des communications sur un reseau. Ca chiffre les donnees transmises entre un client et un serveur.
+    - Securise la connexion et ajoute 'S' a HTTP : HTTPS
+    - RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+        -keyout /etc/nginx/ssl/nginx.key -out /etc/nginx/ssl/nginx.crt \
+        -subj "/C=US/ST=State/L=City/O=Organization/CN=localhost"
+            - This command generates a self-signed SSL/TLS certificate and private key using the OpenSSL command-line tool. The `req` command is used to generate a new certificate signing request (CSR) and to self-sign the certificate using the provided private key. In this specific command, the `-x509` option specifies that a self-signed certificate should be generated, and the `-nodes` option specifies that the private key should not be encrypted with a passphrase. The `-out` option specifies the output file for the certificate, and the `-keyout` option specifies the output file for the private key. The `-subj` option is used to specify the subject field of a certificate signing request (CSR). The subject field contains information about the identity of the certificate's owner, such as the common name(domain name), organization name, and country.
+
 
 ### MARIADB
 
