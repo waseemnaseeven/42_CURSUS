@@ -1,2 +1,6 @@
-.vscode
-.DS_Store
+**/.vscode
+**/.DS_Store
+**/.env
+**/.dockerignore
+**/.vagrant
+**/.img

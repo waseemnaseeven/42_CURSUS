@@ -8,12 +8,7 @@ RUN apt-get install -y \
     mariadb-client \
     procps
 
-COPY conf/50-server.cnf	/etc/mysql/mariadb.conf.d/50-server.cnf
-
-ENV SQL_ROOT_PASSWORD=password
-ENV SQL_DATABASE=inception
-ENV SQL_USER=fabrice
-ENV SQL_PASSWORD=mariadb
+COPY ./conf/50-server.cnf	/etc/mysql/mariadb.conf.d/50-server.cnf
 
 RUN mkdir -p /var/run/mysqld
 RUN mkdir -p /var/lib/mysql
