@@ -1,27 +1,25 @@
-#ifndef ATARGET_HPP
-#define ATARGET_HPP
+#pragma once
 
-#include <string>
-#include <iostream>
-#include "ASpell.hpp"
+#include "Warlock.hpp"
 
 class ASpell;
 
 class ATarget {
-
-    public:
-        ATarget(const std::string& type);
-        virtual ~ATarget();
-        ATarget(const ATarget& src);
-
-    ATarget& operator=(const ATarget& src);
-    
-    const std::string& getType() const;
-    virtual ATarget* clone() const = 0;
-    virtual void getHitBySpell(const ASpell& spell) const;
-
     protected:
         std::string _type;
-};
 
-#endif
+    public:
+        ATarget();
+        ATarget(const std::string& type);
+        virtual ~ATarget();
+    
+    ATarget(const ATarget& src);
+    ATarget& operator=(const ATarget& src);
+
+    const std::string getType() const;
+
+    void getHitBySpell(const ASpell& spell) const;
+
+    virtual ATarget* clone() const = 0;
+
+};

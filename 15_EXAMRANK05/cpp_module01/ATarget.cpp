@@ -1,25 +1,27 @@
 #include "ATarget.hpp"
 #include "ASpell.hpp"
 
-ATarget::ATarget(const std::string& type) : _type(type) {}
+ATarget::ATarget() {}
 
-ATarget::~ATarget(){
-    std::cout << "My job here is done!" << std::endl;
+ATarget::ATarget(const std::string& type) :
+    _type(type) {}
+
+ATarget::~ATarget() {}
+
+ATarget::ATarget(const ATarget& src) {*this = src;}
+
+ATarget& ATarget::operator=(const ATarget& src)
+{
+    this->_type = src._type;
+    return *this;
 }
 
-ATarget::ATarget(const ATarget& src) : _type(src._type) {
-
+const std::string ATarget::getType() const 
+{
+    return this->_type;
 }
 
-ATarget& ATarget::operator=(const ATarget& src) {
-    _type = src._type;
-    return (*this);
-}
-
-const std::string& ATarget::getType() const {
-    return _type;
-}
-
-void ATarget::getHitBySpell(const ASpell& spell) const {
-    std::cout << getType() << " has been " << spell.getEffects() << "!" << std::endl;
+void ATarget::getHitBySpell(const ASpell& spell) const
+{
+    std::cout << this->getType() << " has been " <<  spell.getEffects() << std::endl;
 }

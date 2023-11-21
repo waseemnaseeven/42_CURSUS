@@ -1,2 +1,2 @@
-c++ -Wall -Wextra -Werror *.cpp && ./a.out
-rm a.out 
+clang++ -Wall -Wextra -Werror *.cpp && ./a.out
+rm a.out

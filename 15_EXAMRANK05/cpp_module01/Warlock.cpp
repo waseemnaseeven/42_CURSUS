@@ -1,57 +1,66 @@
 #include "Warlock.hpp"
 
-Warlock::Warlock(const std::string& name, const std::string& title) : _name(name), _title(title)
+Warlock::Warlock(const std::string& name, const std::string& title) : 
+    _name(name),
+    _title(title)
 {
-    std::cout << this->_name << ": ";
-    std::cout << "This looks like another boring day." << std::endl;
+    std::cout << name << ": This looks like another boring day." << std::endl;
 }
 
-Warlock::~Warlock(){
-    std::cout << this->_name << ": ";
-    std::cout << "My job here is done!" << std::endl;
+Warlock::~Warlock()
+{
+    std::cout << this->_name << ": My job here is done!" << std::endl;
+    std::map<std::string, ASpell *>::iterator it_begin = this->Spell_Book.begin();
+    std::map<std::string, ASpell *>::iterator it_end = this->Spell_Book.end();
+    while (it_begin != it_end)
+    {
+        delete it_begin->second;
+        ++it_begin;
+    }
+    this->Spell_Book.clear();
 }
 
-Warlock::Warlock(const Warlock& src) : _name(src._name), _title(src._title) {
+Warlock::Warlock(const Warlock& src) {*this = src;}
 
+Warlock& Warlock::operator=(const Warlock& src)
+{
+    this->_name = src._name;
+    this->_title = src._title;
+    this->Spell_Book = src.Spell_Book;
+    return *this;
 }
 
-Warlock& Warlock::operator=(const Warlock& src) {
-    _name = src._name;
-    _title = src._title;
-    return (*this);
-}
+const std::string& Warlock::getName() const {return this->_name;}
 
-const std::string& Warlock::getName() const {
-    return _name;
-}
+const std::string& Warlock::getTitle() const {return this->_title;}
 
-const std::string& Warlock::getTitle() const {
-    return _title;
-}
+void Warlock::setTitle(const std::string& title) {this->_title = title;}
 
-void    Warlock::setTitle(const std::string& title) {
-    this->_title = title;
-}
-
-void    Warlock::introduce() const {
-    std::cout << this->_name << ": ";
-    std::cout << "I am " << this->_name << ", " << this->_title << "!" << std::endl;
+void Warlock::introduce() const 
+{
+    std::cout << this->getName() << ": I am " << this->getName() << ", " << this->getTitle() << "!" << std::endl;
 }
 
 void Warlock::learnSpell(ASpell* spell)
 {
-	if (spell)
-		_spells[spell->getName()] = spell;
+    if (spell)
+        Spell_Book[spell->getName()] = spell->clone();
 }
 
-void Warlock::forgetSpell(std::string SpellName)
+void Warlock::forgetSpell(const std::string& spellName)
 {
-	if (_spells.find(SpellName) != _spells.end())
-		_spells.erase(_spells.find(SpellName));
+    std::map<std::string, ASpell*>::iterator it = Spell_Book.find(spellName);
+    std::map<std::string, ASpell*>::iterator ite = Spell_Book.end();
+    if (it != ite)
+    {
+        delete it->second;
+        Spell_Book.erase(it);
+    }
 }
 
-void Warlock::launchSpell(std::string SpellName, ATarget & target)
-{
-	if (_spells.find(SpellName) != _spells.end())
-		_spells[SpellName]->launch(target);
+void Warlock::launchSpell(const std::string& spellName, ATarget& target) {
+    std::map<std::string, ASpell*>::iterator it = Spell_Book.find(spellName);
+    if (it != Spell_Book.end()) {
+        it->second->launch(target);
+    }
 }

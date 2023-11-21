@@ -1,31 +1,29 @@
 #include "ASpell.hpp"
-#include "ATarget.hpp"
 
-ASpell::ASpell(std::string name, std::string effects) : _name(name), _effects(effects) {}
+ASpell::ASpell() {}
 
-ASpell::~ASpell() {
-    std::cout << this->_name << ": ";
-    std::cout << "My job here is done!" << std::endl;
+ASpell::ASpell(std::string const &name, std::string const &effects)
+{
+    this->name = name;
+    this->effects = effects;
 }
 
-ASpell::ASpell(const ASpell& src) : _name(src._name), _effects(src._effects) {
+ASpell::ASpell(ASpell const &other) { *this = other;}
 
-}
-
-ASpell& ASpell::operator=(const ASpell& src) {
-    _name = src._name;
-    _effects = src._effects;
+ASpell &ASpell::operator=(ASpell const &other)
+{
+    this->name = other.name;
+    this->effects = other.effects;
     return (*this);
 }
 
-std::string ASpell::getName() const {
-    return _name;
-}
+ASpell::~ASpell() {}
 
-std::string ASpell::getEffects() const {
-    return _effects;
-}
+std::string const &ASpell::getName() const { return (this->name);}
 
-void ASpell::launch(const ATarget& target) const {
-    target.getHitBySpell(*this);
+std::string const &ASpell::getEffects() const { return (this->effects);}
+
+void ASpell::launch(ATarget const &atarget_ref) const
+{
+    atarget_ref.getHitBySpell((*this));
 }

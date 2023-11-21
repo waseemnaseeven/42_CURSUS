@@ -1,13 +1,14 @@
-#ifndef DUMMY_HPP
-#define DUMMY_HPP
+#pragma once
 
+#include "Warlock.hpp"
 #include "ATarget.hpp"
 
+class ATarget;
+
 class Dummy : public ATarget {
-public:
-    Dummy();
-    virtual ~Dummy();
+    public:
+        Dummy();
+        ~Dummy();
+    
     virtual ATarget* clone() const;
 };
-
-#endif // DUMMY_HPP
