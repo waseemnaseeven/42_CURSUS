@@ -117,9 +117,38 @@ LA SUPPRESSION A N'IMPORTE QUEL MOMENT:
 
 ## DOCKER COMPOSE
 
-    - Outil qui a ete dev pour aider a definir et a partager des applications multi-conteneurs
+`Outil qui a ete dev pour aider a definir et a partager des applications multi-conteneurs`
 
-    - Fichier YAML:
+* Fichier YAML:
+
+  - Services :
+    - Mariadb Service :
+      - `image`: Utilise notre image
+      - `container_name`: Donne un nom spécifique au conteneur MariaDB.
+      - `build`: Spécifie le chemin vers le Dockerfile pour construire l'image MariaDB personnalisée.
+      - `volumes`: Montre le volume partagé pour stocker les données de la base de données MariaDB.
+      - `expose`: Expose le port 3306 pour que d'autres services puissent y accéder.
+      - `networks`: Connecte le service au réseau nommé "inception".
+      - `restart`: Redémarre le conteneur en cas d'arrêt, sauf s'il est arrêté manuellement.
+      - `env_file`: Charge les variables d'environnement depuis le fichier .env.
+      - `healthcheck`: Effectue un test de santé pour s'assurer que le service MariaDB est en cours d'exécution.
+    
+    - Wordpress Service :
+      - Configurations similaires à Mariadb avec quelques différences spécifiques à WordPress, comme l'exposition du `port 9000`.
+      - `depends_on`: Indique que ce service dépend du service MariaDB, et il ne démarre que si le service MariaDB est en bonne santé.
+
+    - Nginx Service :
+      - Utilise notre image
+      - Dépend du service WordPress et expose le port 443 pour les connexions HTTPS.
+      - Effectue également un test de santé pour s'assurer que Nginx répond sur le `port 443`.
+
+
+    - Volumes :
+
+      - Définit deux volumes locaux pour stocker les données de la base de données MariaDB et les fichiers WordPress. Ces volumes sont montés dans les conteneurs pour assurer la persistance des données.
+
+    - Networks :
+      - Crée un réseau Docker nommé "inception" pour permettre aux services de communiquer entre eux.
 
 ### DOCKER-COMPOSE CMDS
 
@@ -196,9 +225,13 @@ events {
 
 - Configure les protocoles SSL et spécifie les chemins des fichiers de certificat SSL et de clé privée.
 
+- gzip on : Active la compression Gzip pour servir du contenu compressé.
+
+Cette configuration suppose que vous avez un site WordPress installé dans le répertoire /var/www/html/wordpress et que vous avez des fichiers de certificat SSL et de clé privée (inception.crt et inception.key dans ce cas) stockés dans le répertoire SSL spécifié
+
 ## MARIADB
 
-    * MariaDB est un système de gestion de base de données édité sous licence GPL. Il s'agit d'un embranchement communautaire de MySQL : la gouvernance du projet est assurée par la fondation MariaDB.
+  * MariaDB est un système de gestion de base de données édité sous licence GPL. Il s'agit d'un embranchement communautaire de MySQL : la gouvernance du projet est assurée par la fondation MariaDB.
 
     * fichier de config mySQL/Mariadb :
         - [server] : C'est le début du bloc de configuration server, ce qui indique que les options suivantes s'appliquent au serveur MariaDB/MySQL dans son ensemble.
@@ -224,3 +257,31 @@ events {
         - log_error : Cette option spécifie l'emplacement du fichier journal d'erreurs pour le serveur MariaDB/MySQL. Dans ce cas, la valeur est définie sur /var/log/mysql/error.log.
 
 ## WORDPRESS
+
+* Fichier de config www.conf
+
+  - [www]: Cela définit un nouveau pool nommé "www". Vous pouvez avoir plusieurs pools avec différentes configurations dans une seule instance PHP-FPM.
+
+  - user = www-data: Spécifie l'utilisateur sous lequel les processus PHP-FPM fonctionneront. Dans ce cas, c'est "www-data".
+
+  - group = www-data: Spécifie le groupe sous lequel les processus PHP-FPM fonctionneront. Dans ce cas, c'est également "www-data".
+
+  - listen = 9000: Définit l'adresse et le numéro de port ou le chemin du socket où PHP-FPM écoutera les requêtes entrantes. Dans ce cas, il écoute sur le port 9000.
+
+  - listen.owner = www-data et listen.group = www-data: Définit la propriété du socket d'écoute sur l'utilisateur et le groupe "www-data".
+
+`La configuration pm dans PHP-FPM fait référence au gestionnaire de processus, c'est-à-dire à la manière dont PHP-FPM gère les processus qui exécutent les scripts PHP. Il existe plusieurs modes de gestionnaire de processus, et le paramètre pm dans le fichier de configuration permet de choisir le mode souhaité.`
+
+  - pm = dynamic: Le mode du gestionnaire de processus (pm) est défini sur "dynamic". Cela signifie que PHP-FPM ajustera dynamiquement le nombre de processus ouvriers en fonction de la charge actuelle.
+
+    - pm.max_children = 5: C'est le nombre maximum de processus PHP-FPM ouvriers autorisés pour ce pool. Il définit la limite supérieure du nombre de processus qui peuvent être créés pour gérer les requêtes PHP.
+
+    - pm.start_servers = 2: C'est le nombre de processus PHP-FPM ouvriers à démarrer lorsque PHP-FPM démarre. Il s'agit d'un nombre initial au démarrage.
+
+    - pm.min_spare_servers = 1: C'est le nombre minimum de processus ouvriers inactifs (spare) qui devraient être maintenus. Si le nombre de processus ouvriers descend en dessous de ce seuil, de nouveaux processus sont créés.
+
+    - pm.max_spare_servers = 3: C'est le nombre maximum de processus ouvriers inactifs (spare) autorisés. Si le nombre de processus ouvriers inactifs est supérieur à ce seuil, certains d'entre eux sont terminés.
+
+    - pm.max_requests = 100: Le nombre maximum de requêtes que chaque processus ouvrier peut traiter avant d'être terminé et remplacé par un nouveau processus ouvrier. Cela aide à prévenir les fuites de mémoire et d'autres problèmes pouvant survenir avec des processus de longue durée.
+
+  - clear_env = no: Spécifie s'il faut effacer les variables d'environnement pour chaque processus ouvrier. En réglant cela sur "no", les processus ouvriers hériteront des variables d'environnement du processus PHP-FPM.

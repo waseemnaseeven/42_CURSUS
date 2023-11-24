@@ -1,21 +1,23 @@
-build:
-	docker-compose build
-
-up:
-	docker-compose up -d
-
-down:
-	docker-compose down
-
-stop:
-	docker-compose stop
-
-clean:
-	docker-compose down -v
+all: 
+	mkdir -p /home/wnaseeve/data/mariadb
+	mkdir -p /home/wnaseeve/data/wordpress
+	docker compose -f ./srcs/docker-compose.yml build
+	docker compose -f ./srcs/docker-compose.yml up -d
 
 logs:
-	docker-compose logs -f
+	docker logs wordpress
+	docker logs mariadb
+	docker logs nginx
 
-rebuild: build up
+clean:
+	docker container stop nginx mariadb wordpress
+	docker network rm inception
 
-.PHONY: build up down stop clean logs rebuild
+fclean: clean
+	@sudo rm -rf /home/wnaseeve/data/mariadb/*
+	@sudo rm -rf /home/wnaseeve/data/wordpress/*
+	@docker system prune -af
+
+re: fclean all
+
+.Phony: all logs clean fclean
