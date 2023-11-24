@@ -56,7 +56,7 @@ void	ft_initialize(t_data *data)
 	i = 0;
 	while (i <= 5)
 		data->cmds[i++] = false;
-	data->p_speed = 0.1;
+	data->p_speed = 0.01;
 	data->count_key = 0;
 	data->ray->raydirx = 0;
 	data->ray->raydiry = 0;
