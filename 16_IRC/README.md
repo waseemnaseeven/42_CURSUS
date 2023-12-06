@@ -4,30 +4,7 @@
 
 - message du invite vers la personne qui se fait inviter
 - Verifier s'il y a encore qqun dans le channel
-- Gerer le handle file transfer
-
-## HOW TO MAKE AN IRC SERVER
-
-- init structure de données, classes, heritage, gestion d'erreur
-
-- parsing input 1 et 2
-    - input1:
-        - 8080
-        - 127.0.0.1
-        - null ou \0
-    - input2:
-        - alpha num
-        - caracteres speciaux acceptés
-        - null ou \0 interdit
-
-- init server
-
-- switch case pour les commandes
-
-- handle file transfer:
-    - /dcc send <nickname> /filepath/
-    - /dcc get 
-        - chercher a l'endroit ou irssi a ete lance
+- Verifier avec nc -C 127.0.0
 
 ## EVERYTHINGS I'VE TO KNOW
 
@@ -115,8 +92,7 @@ ONLY OPERATORS CAN USE THOSE COMMANDS
 
 
 - Un user peut etre un operator 
-
-etc...
+- [...]
 
 ### MESSAGES
 
