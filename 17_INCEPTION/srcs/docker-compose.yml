@@ -9,8 +9,6 @@ services:
       dockerfile: Dockerfile
     volumes:
       - mariadb:/var/lib/mysql
-    expose:
-      - "3306"
     networks:
       - inception
     restart: unless-stopped
@@ -19,7 +17,7 @@ services:
       test: mysqladmin ping --host=localhost -p${SQL_ROOT_PASSWORD}
       interval: 5s
       timeout: 1s
-      retries: 20
+      retries: 10
       start_period: 5s
 
   wordpress:
@@ -30,8 +28,6 @@ services:
       dockerfile: Dockerfile
     volumes:
       - wordpress:/var/www/html/wordpress
-    expose:
-      - "9000"
     networks:
       - inception
     restart: unless-stopped
@@ -45,7 +41,7 @@ services:
     container_name: nginx
     build:
       context: ./requirements/nginx
-      dockerfile: Dockerfile	
+      dockerfile: Dockerfile
     volumes:
       - wordpress:/var/www/html/wordpress
     depends_on:
@@ -65,17 +61,19 @@ services:
 
 volumes:
   mariadb:
+    name: mariadb
     driver: local
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: '/home/yatang/data/mariadb'
+      device: '/home/wnaseeve/data/mariadb'
   wordpress:
+    name: wordpress
     driver: local
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: '/home/yatang/data/wordpress'
+      device: '/home/wnaseeve/data/wordpress'
 
 networks:
   inception:

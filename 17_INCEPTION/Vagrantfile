@@ -15,6 +15,8 @@ Vagrant.configure("2") do |config|
     config.vm.provider "virtualbox" do |vb|
       vb.name = "#{LOCAL_USER}"
       vb.gui = true
+      vb.customize ["modifyvm", :id, "--name", "#{LOCAL_USER}"]
+      vb.customize ["setproperty", "machinefolder", "/mnt/nfs/homes/wnaseeve/sgoinfre/#{LOCAL_USER}"]
       vb.memory = "4096"
       vb.cpus = "4"
     end
@@ -42,7 +44,7 @@ Vagrant.configure("2") do |config|
         # Users & groups
         usermod -aG sudo "#{LOCAL_USER}"
         usermod -aG docker "#{LOCAL_USER}"
-        echo "127.0.0.1 "#{LOCAL_USER}".42.fr" >> /etc/hosts
+        echo "127.0.0.1 "#{LOCAL_USER}".42.fr" >> /etc/hosts/
         hostnamectl set-hostname $USERNAME
 
         # Sudoers file

@@ -10,7 +10,7 @@ RUN mkdir -p /etc/nginx/ssl
 
 # Generate a self-signed SSL certificate
 # ou inception.key et inception.crt
-RUN openssl req -x509 -nodes -out /etc/nginx/ssl/inception.crt -keyout /etc/nginx/ssl/inception.key -subj "/C=FR/ST=IDF/L=Paris/O=42/OU=42/CN=yatang.42.fr/UID=yatang"
+RUN openssl req -x509 -nodes -out /etc/nginx/ssl/inception.crt -keyout /etc/nginx/ssl/inception.key -subj "/C=FR/ST=IDF/L=Paris/O=42/OU=42/CN=wnaseeve.42.fr/UID=wnaseeve"
 
 # Create nginx PID directory
 RUN mkdir -p /var/run/nginx

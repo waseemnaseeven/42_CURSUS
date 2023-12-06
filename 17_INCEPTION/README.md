@@ -183,6 +183,12 @@ LA SUPPRESSION A N'IMPORTE QUEL MOMENT:
 - docker-compose pull
   - maj des images
 
+- docker volume rm ...
+
+- docker network ls
+
+
+
 ## NGINX
 
 - Un serveur web (qui stocke, traite et fournit des fichiers de sites internet) donc qui utilise le protocole HTTP
@@ -285,3 +291,51 @@ Cette configuration suppose que vous avez un site WordPress installé dans le r�
     - pm.max_requests = 100: Le nombre maximum de requêtes que chaque processus ouvrier peut traiter avant d'être terminé et remplacé par un nouveau processus ouvrier. Cela aide à prévenir les fuites de mémoire et d'autres problèmes pouvant survenir avec des processus de longue durée.
 
   - clear_env = no: Spécifie s'il faut effacer les variables d'environnement pour chaque processus ouvrier. En réglant cela sur "no", les processus ouvriers hériteront des variables d'environnement du processus PHP-FPM.
+
+
+CORRECTION:
+
+- docker rm $(docker ps -qa)
+  -qa affiche tous les conteneurs, qu'ils soient en cours d'execution, arrete ou supprime.
+
+- diff entre CMD et ENTRYPOINT :
+  - CMD definit la commande par defaut qui sera execute lorsque le conteneur demarre.
+  on peut specifier une commande dans le dockerile mais elle epeut etre ecrasee lors du demarrage du conteneur.
+  - ENTRYPOINT definit une commande qui sera tjrs executee lorsque le conteneur est demarre.
+
+- Docker et docker-compose sont des outils qui facilient le deploiement et la gestion d'applications dans des conteneurs:
+
+* Docker:
+  - Docker utilise une technologie de conteneurisation pour isoler les applications et leurs dépendances du système hôte.
+  Chaque conteneur fonctionne comme une instance légère d'une image Docker, qui est une unité de base contenant l'application et son environnement d'exécution.
+
+  - Une image Docker est un modèle immuable et léger qui contient l'ensemble des fichiers nécessaires à l'exécution d'une application, ainsi que ses dépendances.
+  Ces images sont construites à partir d'un fichier de configuration appelé Dockerfile.
+
+CHAQUE CONTENEUR A SON PROPRE ESPACE DE FICHIERS ISOLE ET SON PROPRE ENSEMBLE DE PROCESSUS.
+
+* docker-compose
+  - Docker-compose est un outil permettant de définir et de gérer des applications multi-conteneurs.
+  Il utilise un fichier YAML (docker-compose.yml) pour décrire les services, les réseaux, et les volumes nécessaires.
+  - docker-compose gère automatiquement les dépendances entre les services.
+  Par exemple, si une application web dépend d'une base de données, docker-compose peut s'assurer que la base de données est lancée avant l'application web.
+
+* la difference: 
+  - SANS: on doit run chaque conteneur individuellement. on doit specifier manuellement toutes les options, y compris les ports a exposer, les volumes a monter et les variables d'env.
+  - AVEC: docker compose simplifie le processus de gestion de plusieurs conteneurs en permettant de decrire tous les services dans un fichier.
+
+* Avantage de Docker au lieu d'une VM : 
+  - Partage les ressources du systeme alors que les VM necessite un systeme d'exploitation complet pour chaque instance.
+  - Docker demarre bcp plus vite.
+  - Isolation legere
+  - portabilite
+  - deploiement rapide et surtout coherent par rapport au besoin
+
+docker inspect image name
+
+* docker network:
+  permet de gérer les réseaux Docker. Docker prend en charge la création et la gestion de réseaux virtuels qui permettent aux conteneurs Docker de communiquer entre eux et avec le monde extérieur
+  On peut créer des réseaux Docker personnalisés pour isoler les conteneurs. Par défaut, Docker crée un réseau "bridge" pour chaque hôte.
+  
+  - lister les reseaux
+  - connexion de conteneurs a un reseau

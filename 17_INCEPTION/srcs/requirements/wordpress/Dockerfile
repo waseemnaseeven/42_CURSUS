@@ -23,11 +23,8 @@ RUN wget https://wordpress.org/wordpress-6.1.1.tar.gz -P /var/www/html \
     && rm /var/www/html/wordpress-6.1.1.tar.gz
 
 # Attribution des droits appropriés au répertoire WordPress
-RUN chown -R www-data:www-data /var/www/*
+RUN chown -R www-data:www-data /var/www/html/wordpress/
 RUN chmod -R 755 /var/www/*
-
-# Exposition du port 9000 utilisé par php-fpm
-EXPOSE 9000
 
 # Copie du script d'initialisation WordPress
 COPY ./tools/wpscript.sh ./
