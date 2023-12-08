@@ -25,27 +25,26 @@ Les ports :  les numéros de port permettent de différencier différentes servi
     - utilisation après accept() avec cmd = F_SETFL et arg = O_NONBLOCK
 
 - Only 1 poll() for operations like read, write, listen
-    - epoll est un gestionnaire de fd
+    - epoll est un gestionnaire de fd, chaque user a un fd unique.
 
 - Communication between client and server has to be done via TCP/IP v4 or v6
 
 - Les clients doivent avoir le même num de port pour recevoir les messages. Le client envoie la requête au serveur qu'il souhaite envoyer à un message à une autre personne, le serveur envoie une réponse.
 
-- Chaque user a un fd unique, le serveur doit pouvoir gérer plusieurs clients en même temps sans jamais se bloquer. On va utiliser epoll().
 
-		epoll pour manipuler plusieurs clients 
-		epoll_create1(EPOLL_CLOEXEC) crer un descrpteur de fichier
-		CLO_EXEC indique que le descripteur sera ferme automatiquement
-		lorsqu'un exec est effectue dans le processus (utile pour eviter
-		les fuites de descripteur)
+    epoll pour manipuler plusieurs clients 
+    epoll_create1(EPOLL_CLOEXEC) crer un descrpteur de fichier
+    CLO_EXEC indique que le descripteur sera ferme automatiquement
+    lorsqu'un exec est effectue dans le processus (utile pour eviter
+    les fuites de descripteur)
 
-		Vous ajoutez le descripteur de fichier du socket serveur à 
-		l'instance epoll en utilisant epoll_ctl() avec EPOLL_CTL_ADD. 
-		Vous spécifiez que vous souhaitez surveiller les événements 
-		EPOLLIN, ce qui signifie que l'événement sera déclenché 
-		lorsqu'il y aura des données à lire sur le socket serveur.
+    Vous ajoutez le descripteur de fichier du socket serveur à 
+    l'instance epoll en utilisant epoll_ctl() avec EPOLL_CTL_ADD. 
+    Vous spécifiez que vous souhaitez surveiller les événements 
+    EPOLLIN, ce qui signifie que l'événement sera déclenché 
+    lorsqu'il y aura des données à lire sur le socket serveur.
 
-        epoll_wait : pour attendre des événements sur les descripteurs de fichiers surveillés par epoll. Cela bloquera jusqu'à ce qu'au moins un événement se produise.
+    epoll_wait : pour attendre des événements sur les descripteurs de fichiers surveillés par epoll. Cela bloquera jusqu'à ce qu'au moins un événement se produise.
 
 - Difference entre fcntl() et epoll_wait():
     - `fcntl` va rendre un fd (comme le socket par ex) non bloquant, ca signifie que les operations de lecture et d'ecriture sur le fd, meme s'il n'y a pas de donnees dispo pour la lecture ou si le tampon est plein pour l'ecriture. ca nous permet de ne pas manquer d'evenements avant de passer sur de la gestion asynchrone.

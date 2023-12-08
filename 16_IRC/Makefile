@@ -6,7 +6,7 @@
 #    By: wnaseeve <wnaseeve@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/03 11:38:41 by wnaseeve          #+#    #+#              #
-#    Updated: 2023/10/29 20:14:57 by wnaseeve         ###   ########.fr        #
+#    Updated: 2023/12/07 15:33:48 by wnaseeve         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,7 +63,7 @@ obj/%.o:	src/%.cpp
 	${CC} ${CFLAGS} -I. -c $< -o $@
 
 valgrind:
-	make && clear && valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all --track-fds=yes ./ircserv 8080 lol
+	make && clear && valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all --track-fds=yes ./ircserv 6667 test
 
 clean:
 	@printf "%b" "\t    $(_PURPLE)[Cleaning] $(_PURPLE)[all]$(_PINK_ORANGE)\n";

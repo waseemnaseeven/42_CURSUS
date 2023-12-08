@@ -6,7 +6,6 @@ void    Hello_IRC(t_serv *server)
 	send(server->new_fd, welcome.c_str(), welcome.size(), 0);
 }
 
-
 string  welcome_msg()
 {
     std::string welcome = BOLDMAGENTA;
