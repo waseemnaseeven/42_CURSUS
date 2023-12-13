@@ -15,7 +15,7 @@
 # define    ERR_ALREADYREGISTERED(client) ("462 " + client + " " ":You may not reregister\r\n")
 
 // PASS MESSAGE ERRORS
-# define    ERR_PASSWDMISMATCH(client) (":464 " + client + " :Password incorrect\r\n")
+# define    ERR_PASSWDMISMATCH(client) (":464 " + client + " :Password incorrect" + "\r\n")
 
 // NICK MESSAGE ERRORS
 # define    NICK(old_nick, user, host, nick) (":" + old_nick + "!" + user + "@" + host + " NICK " + nick + "\r\n")

@@ -6,6 +6,7 @@ User::User(int fd) :
 	_username(""),
 	_nickname(""),
 	_messages(""),
+	partial_data(""),
 	_fd(fd),
 	_isOperator(false),
 	_isAuthentified(false),
@@ -86,6 +87,11 @@ vector<pair<string, string> > User::splitBuffer(const string& buffer) {
 	return result;
 }
 
+void User::append_partial_data(const string& data) {
+	cout << "bufferize: " << data << endl;
+	partial_data += data;
+}
+
 /* ********** GETTERS ********** */
 
 string User::get_username() const { return _username; }
@@ -93,6 +99,10 @@ string User::get_username() const { return _username; }
 string User::get_nickname() const { return _nickname; }
 
 string User::get_realname() const { return _realname; }
+
+string User::get_partial_data() const {
+	return this->partial_data; 
+}
 
 int User::get_fd() const { return _fd; }
 
@@ -124,6 +134,8 @@ void User::set_username(const string& username) { _username = username; }
 void User::set_nickname(string nickname) { _nickname = nickname; }
 
 void User::set_realname(const string& realname) { _realname = realname; }
+
+void User::set_partial_data(const string& partial_data) { this->partial_data = partial_data; }
 
 void User::set_fd(int fd) { _fd = fd; }
 

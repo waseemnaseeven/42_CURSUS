@@ -14,6 +14,7 @@ class User {
 		string _realname;
 		string _nickname;
 		string _messages;
+		string partial_data;
 		int _fd;
 		bool _isOperator;
 		bool _isAuthentified;
@@ -35,6 +36,7 @@ class User {
 		string get_username() const;
 		string get_nickname() const;
 		string get_realname() const;
+		string get_partial_data() const;
 		int get_fd() const;
 		string get_messages() const;
 		bool get_isOperator() const;
@@ -48,6 +50,7 @@ class User {
 		void set_username(const string& username);
 		void set_nickname(string nickname);
 		void set_realname(const string& realname);
+		void set_partial_data(const string& partial_data);
 		void set_fd(int fd);
 		void set_messages(const string& messages);
 		void set_isOperator(bool isOperator);
@@ -59,6 +62,7 @@ class User {
 		/* ********** USER METHODS ********** */
 		void add_channel(Channel *channel);
 		bool remove_channel(const string& channel_name);
+		void append_partial_data(const string& data);
 		vector<pair<string, string> > splitBuffer(const string& buffer);
 
 };

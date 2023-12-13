@@ -4,7 +4,7 @@
 
 bool	QUIT_command(t_serv *server, const string& reason, int sender_fd)
 {
-	if (reason == ":leaving") {
+	if (reason == ":leaving \r\n") {
 		send_message(server, QUIT(server->users_map[sender_fd]->get_nickname(), reason), sender_fd);
 		user_disconnection(server, sender_fd);
 		return false;

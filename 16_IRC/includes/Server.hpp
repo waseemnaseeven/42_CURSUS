@@ -135,7 +135,6 @@ bool    MODE_command(t_serv *server, const string& args, int sender_fd);
 /* ********** MESSAGES ********** */
 bool 	send_message(t_serv *server, const string& message, int sender_fd);
 
-
 /* ********** UTILS FUNCTIONS ********** */
 int		find_user_fd(int fd, t_serv *server);
 string	int_to_string(int n);

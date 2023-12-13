@@ -1,12 +1,10 @@
 # FT_IRC 🧠
 
-## TO_DO LIST
+RAPPELS:
 
-- message du invite vers la personne qui se fait inviter
-- Verifier s'il y a encore qqun dans le channel
-- Verifier avec nc -C 127.0.0.1
+- /dcc send <receiver_name> <file/to/path/> puis /dcc get <sender_name>
 
-## EVERYTHINGS I'VE TO KNOW
+## EVERYTHINGS I' VE TO KNOW
 
 ### CONNECTION SERVER-CLIENTS (MONITORING MULTIPLE FDS)
 

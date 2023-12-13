@@ -60,9 +60,4 @@ void signal_handler(int sig)
 	{
 		Open = false;
 	}
-	else
-	{
-		cout << BOLDRED << "Signal not handled or ctrl + D" << RESET << endl;
-	}
 }
-
