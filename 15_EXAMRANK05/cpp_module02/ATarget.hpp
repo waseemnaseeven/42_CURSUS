@@ -16,7 +16,7 @@ class ATarget {
     ATarget(const ATarget& src);
     ATarget& operator=(const ATarget& src);
 
-    const std::string& getType() const;
+    const std::string getType() const;
 
     virtual ATarget* clone() const = 0;
 
