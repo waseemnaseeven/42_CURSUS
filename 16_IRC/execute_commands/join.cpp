@@ -81,7 +81,8 @@ bool    JOIN_command(t_serv *server, const string& args, int sender_fd)
                 send_message(server, ERR_INVITEONLYCHAN(server->users_map[sender_fd]->get_nickname(), channel_name), sender_fd);
                 return false;
             }
-            if (myChannel->get_has_user_limit() == true && myChannel->get_max_users() == myChannel->get_nb_users()) {
+            if (myChannel->get_has_user_limit() == true && myChannel->get_nb_users() >= myChannel->get_max_users())
+            {
                 send_message(server, ERR_CHANNELISFULL(server->users_map[sender_fd]->get_nickname(), channel_name), sender_fd);
                 return false;
             }

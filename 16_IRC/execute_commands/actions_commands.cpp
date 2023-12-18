@@ -12,26 +12,6 @@ bool send_message(t_serv *server, const string& message, int sender_fd)
 	return true;
 }
 
-// void	receive_byts(t_serv *server, int i)
-// {
-// 	int sender_fd = server->epoll.events[i].data.fd;
-// 	char buffer[BUFFERSIZE];
-// 	int bytes_read = recv(sender_fd, buffer, BUFFERSIZE, 0);
-
-// 	if (bytes_read <= 0)
-// 	{
-// 		if (bytes_read == 0)
-// 			user_disconnection(server, sender_fd);
-// 		else
-// 			perror("recv");
-// 	}
-// 	else {
-// 		string message(buffer, bytes_read);
-// 		vector<pair<string, string> > commands = server->users_map[sender_fd]->splitBuffer(message);
-// 		execute_commands(server, commands, sender_fd);
-// 	}
-// }
-
 void receive_byts(t_serv *server, int i)
 {
     int sender_fd = server->epoll.events[i].data.fd;
