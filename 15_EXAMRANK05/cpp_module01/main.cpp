@@ -8,6 +8,7 @@ int main()
 
   Dummy bob;
   Fwoosh* fwoosh = new Fwoosh();
+  
 
   richard.learnSpell(fwoosh);
 
@@ -16,6 +17,8 @@ int main()
 
   richard.forgetSpell("Fwoosh");
   richard.launchSpell("Fwoosh", bob);
+  std::cout << fwoosh->getEffects() << std::endl;
+  std::cout << fwoosh->getName() << std::endl;
   delete fwoosh;
 
   return (0);

@@ -14,13 +14,13 @@ class Warlock {
         std::string _name;
         std::string _title;
         std::map<std::string, ASpell*> Spell_Book;
+        Warlock(const Warlock& src);
+        Warlock& operator=(const Warlock& src);
 
     public:
         Warlock(const std::string& name, const std::string& title);
         ~Warlock();
     
-    Warlock(const Warlock& src);
-    Warlock& operator=(const Warlock& src);
 
     const std::string& getName() const;
     const std::string& getTitle() const;
