@@ -8,12 +8,12 @@ SpellBook::SpellBook(void) {}
 
 SpellBook::~SpellBook(void)
 {
-    std::list<ASpell *>::iterator start = this->spells.begin();
-    std::list<ASpell *>::iterator end = this->spells.end();
-    for (; start != end; ++start)
-        delete *start;
-    this->spells.clear();
-    std::cout << "Cleared SpellBook" << std::endl;
+    // std::list<ASpell *>::iterator start = this->spells.begin();
+    // std::list<ASpell *>::iterator end = this->spells.end();
+    // for (; start != end; ++start)
+    //     delete *start;
+    // this->spells.clear();
+    // std::cout << "Cleared SpellBook" << std::endl;
 }
 
 void SpellBook::learnSpell(ASpell *spell)
@@ -41,7 +41,7 @@ void SpellBook::forgetSpell(std::string const &spellName)
         if ((*start)->getName() == spellName)
         {
             std::cout << "Spell deleted: " << spellName << std::endl;
-            delete *start;
+            // delete *start;
             this->spells.erase(start);
             return;
         }
@@ -61,5 +61,5 @@ ASpell *SpellBook::createSpell(std::string const &spellName)
             return (*start);
         }
     }
-    return (nullptr);
+    return (NULL);
 }

@@ -61,6 +61,5 @@ void Warlock::launchSpell(std::string const spellName, ATarget &target)
     ASpell *spell = this->book.createSpell(spellName);
     if (spell)
         spell->launch(target);
-    else
-        std::cout << "Spell wasn't learnt yet" << std::endl;
 }
+

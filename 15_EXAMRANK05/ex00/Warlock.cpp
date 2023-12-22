@@ -12,6 +12,17 @@ Warlock::~Warlock(void)
     std::cout << name << ": My job here is done!" << std::endl;
 }
 
+Warlock::Warlock(const Warlock& src)
+{
+    *this = src;
+}
+
+Warlock& Warlock::operator=(const Warlock &src) {
+    this->title = src.title;
+    this->name = src.name;
+    return *this;
+}
+
 std::string const &Warlock::getName(void) const
 {
     return this->name;

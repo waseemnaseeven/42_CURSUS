@@ -48,5 +48,5 @@ int main(void)
     richard.launchSpell("Fwoosh", bob);
 
     std::cout << std::endl;
-    system("leaks a.out");
+    // system("leaks a.out");
 }

@@ -10,11 +10,11 @@ TargetGenerator::TargetGenerator(void)
 
 TargetGenerator::~TargetGenerator(void)
 {
-    std::list<ATarget *>::iterator start = this->targets.begin();
-    std::list<ATarget *>::iterator end = this->targets.end();
-    for (; start != end; ++start)
-        delete *start;
-    this->targets.clear();
+    // std::list<ATarget *>::iterator start = this->targets.begin();
+    // std::list<ATarget *>::iterator end = this->targets.end();
+    // for (; start != end; ++start)
+    //     // delete *start;
+    // this->targets.clear();
 }
 
 void TargetGenerator::learnTargetType(ATarget *target)
@@ -29,7 +29,7 @@ void TargetGenerator::learnTargetType(ATarget *target)
             return;
         }
     }
-    this->targets.push_back(target->clone());
+    this->targets.push_back(target);
     std::cout << "Learnt target type " << target->getType() << std::endl;
 }
 
@@ -42,8 +42,9 @@ void TargetGenerator::forgetTargetType(std::string const &targetType)
         if ((*start)->getType() == targetType)
         {
             std::cout << "Target deleted: " << targetType << std::endl;
-            delete *start;
+            // delete *start;
             this->targets.erase(start);
+            return;
         }
     }
     std::cout << "No target to forget" << std::endl;
@@ -57,9 +58,9 @@ ATarget *TargetGenerator::createTarget(std::string const &targetType)
     {
         if ((*start)->getType() == targetType)
         {
-            std::cout << "Generated new spell: " << targetType << std::endl;
+            std::cout << "Generated new target: " << targetType << std::endl;
             return (*start);
         }
     }
-    return (nullptr);
+    return (NULL);
 }

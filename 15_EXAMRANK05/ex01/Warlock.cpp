@@ -23,14 +23,13 @@ Warlock &Warlock::operator=(Warlock const &src)
 
 Warlock::~Warlock(void)
 {
-    std::cout << name << ": My job here is done!" << std::endl;
-    std::list<ASpell *>::iterator start = this->spells.begin();
-    std::list<ASpell *>::iterator end = this->spells.end();
-    for (; start != end; ++start)
-    {
-        delete *start;
-    }
-    this->spells.clear();
+    // std::cout << name << ": My job here is done!" << std::endl;
+    // std::list<ASpell *>::iterator start = this->spells.begin();
+    // std::list<ASpell *>::iterator end = this->spells.end();
+    // for (; start != end; ++start) {
+    //     delete *start;
+    // }
+    // this->spells.clear();
 }
 
 std::string const &Warlock::getName(void) const
@@ -77,7 +76,7 @@ void Warlock::forgetSpell(std::string const spellName)
         if ((*start)->getName() == spellName)
         {
             std::cout << "Spell deleted: " << spellName << std::endl;
-            delete *start;
+            // delete *start;
             this->spells.erase(start);
             return;
         }

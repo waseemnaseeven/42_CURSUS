@@ -19,7 +19,4 @@ public:
 protected:
     std::string type;
 
-    ATarget(void);
-    ATarget(ATarget const &src);
-    ATarget const &operator=(ATarget const &src);
 };

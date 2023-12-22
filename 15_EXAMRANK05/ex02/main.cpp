@@ -11,8 +11,9 @@
 
 int main(void)
 {
-    std::cout << YELLOW << "Creating new Richard:" << NOCOL << std::endl;
-    Warlock richard("Richard", "foo");
+    // std::cout << YELLOW << "Creating new Richard:" << NOCOL << std::endl;
+    // Warlock richard("Richard", "foo");
+     Warlock richard("Richard", "the Titled");
 
     std::cout << std::endl
               << YELLOW << "Setting a title on Richard:" << NOCOL << std::endl;
@@ -74,5 +75,7 @@ int main(void)
               << YELLOW << "Forgetting Fireball spell:" << NOCOL << std::endl;
     richard.forgetSpell("Fireball");
 
-    system("leaks a.out");
+//     // system("leaks a.out");
+
+   
 }

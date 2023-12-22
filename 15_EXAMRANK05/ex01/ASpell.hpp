@@ -21,7 +21,4 @@ protected:
     std::string name;
     std::string effects;
 
-    ASpell(void);
-    ASpell(ASpell const &src);
-    ASpell const &operator=(ASpell const &src);
 };
