@@ -6,7 +6,6 @@
 #include <netinet/in.h>
 #include <sys/select.h>
 
-#define MAX_CLIENTS 10
 #define MAX_MESSAGE_SIZE 4096
 
 typedef struct s_client {
@@ -29,7 +28,7 @@ void broadcast_message(int sender_id, char *msg) {
     while (current != NULL) {
         if (current->fd != sender_id) {
             char client_msg[MAX_MESSAGE_SIZE];
-            snprintf(client_msg, sizeof(client_msg), "client %d: %s", sender_id, msg);
+            sprintf(client_msg, "client %d: %s", sender_id, msg);
             send(current->fd, client_msg, strlen(client_msg), 0);
         }
         current = current->next;
@@ -49,12 +48,10 @@ void add_client(int fd) {
 
     // Notify all clients about the new arrival
     char arrival_msg[MAX_MESSAGE_SIZE];
-    // snprintf(arrival_msg, sizeof(arrival_msg), "server: client %d just arrived\n", new_client->id);
     sprintf(arrival_msg, "server: client %d just arrived\n", new_client->id);
 
     broadcast_message(fd, arrival_msg);
 
-    // printf("New connection, assigned ID: %d\n", new_client->id);
 }
 
 void remove_client(int fd) {
@@ -65,15 +62,14 @@ void remove_client(int fd) {
         if (current->fd == fd) {
             // Notify all clients about the departure
             char departure_msg[MAX_MESSAGE_SIZE];
-            snprintf(departure_msg, sizeof(departure_msg), "server: client %d just left\n", current->id);
+            sprintf(departure_msg, "server: client %d just left\n", current->id);
             broadcast_message(fd, departure_msg);
 
             // Remove the client from the linked list
-            if (prev == NULL) {
+            if (prev == NULL)
                 g_clients = current->next;
-            } else {
+            else
                 prev->next = current->next;
-            }
 
             free(current);
             break;
@@ -82,6 +78,27 @@ void remove_client(int fd) {
         prev = current;
         current = current->next;
     }
+}
+
+void print_list()
+{
+    t_client *current = g_clients;
+
+    while (current != NULL)
+    {
+        printf("Client ID: %d | Socket FD: %d\n", current->id, current->fd);
+        current = current->next;
+    }
+}
+
+void unit_test()
+{
+    print_list();
+    add_client(5);
+    add_client(6);
+    print_list();
+    remove_client(6);
+    print_list();
 }
 
 int main(int ac, char *av[]) {
@@ -97,6 +114,7 @@ int main(int ac, char *av[]) {
     if (sockfd < 0) {
         fatal_msg();
     }
+    unit_test();
 
     bzero(&servaddr, sizeof(servaddr));
     servaddr.sin_family = AF_INET;
@@ -167,5 +185,6 @@ int main(int ac, char *av[]) {
         }
     }
 
-    return 0;
+    return (0);
+
 }
