@@ -8,6 +8,8 @@
 
 #define MAX_MESSAGE_SIZE 4096
 
+// a corriger 
+
 typedef struct s_client {
     int fd;
     int id;
@@ -50,6 +52,14 @@ void add_client(int fd) {
     char arrival_msg[MAX_MESSAGE_SIZE];
     sprintf(arrival_msg, "server: client %d just arrived\n", new_client->id);
 
+    // while (new_client != NULL)
+    // {
+    //     if (new_client->fd != fd)
+    //     {
+    //         send(new_client->fd, arrival_msg, strlen(arrival_msg), 0);
+    //     }
+    //     new_client = new_client->next;
+    // }
     broadcast_message(fd, arrival_msg);
 
 }
@@ -80,26 +90,26 @@ void remove_client(int fd) {
     }
 }
 
-void print_list()
-{
-    t_client *current = g_clients;
+// void print_list()
+// {
+//     t_client *current = g_clients;
 
-    while (current != NULL)
-    {
-        printf("Client ID: %d | Socket FD: %d\n", current->id, current->fd);
-        current = current->next;
-    }
-}
+//     while (current != NULL)
+//     {
+//         printf("Client ID: %d | Socket FD: %d\n", current->id, current->fd);
+//         current = current->next;
+//     }
+// }
 
-void unit_test()
-{
-    print_list();
-    add_client(5);
-    add_client(6);
-    print_list();
-    remove_client(6);
-    print_list();
-}
+// void unit_test()
+// {
+//     print_list();
+//     add_client(5);
+//     add_client(6);
+//     print_list();
+//     remove_client(6);
+//     print_list();
+// }
 
 int main(int ac, char *av[]) {
     if (ac != 2) {
@@ -114,7 +124,7 @@ int main(int ac, char *av[]) {
     if (sockfd < 0) {
         fatal_msg();
     }
-    unit_test();
+    // unit_test();
 
     bzero(&servaddr, sizeof(servaddr));
     servaddr.sin_family = AF_INET;
