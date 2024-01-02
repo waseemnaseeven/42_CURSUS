@@ -10,7 +10,7 @@
 
 #define MAX_SIZE 4096
 
-typedef struct  s_client
+typedef struct s_client
 {
     int fd;
     int id;
@@ -23,14 +23,13 @@ int sockfd = 0;
 void fatal_msg()
 {
     write(2, "Fatal error\n", strlen("Fatal error\n"));
-    exit(1);
-    
+    exit (1);
 }
 
 void broadcast_message(int fd, int id, char *msg)
 {
     t_client *current = g_client;
-
+    
     while (current)
     {
         if (current->fd != fd)
@@ -54,8 +53,8 @@ void add_client(int fd)
     new_client->next = g_client;
     g_client = new_client;
 
-    char arrival_msg[MAX_SIZE];
-    sprintf(arrival_msg, "server: client %d just arrived\n", new_client->id);
+        char arrival_msg[MAX_SIZE];
+        sprintf(arrival_msg, "server: client %d just arrived\n", new_client->id);
     while (new_client)
     {
         if (new_client->fd != fd)
@@ -75,13 +74,13 @@ void remove_client(int fd)
         {
             char departure_msg[MAX_SIZE];
             sprintf(departure_msg, "server: client %d just left\n", current->id);
-            t_client *notify_client = g_client;
-            while (notify_client)
-            {
-                if (notify_client->fd != fd)
-                    send(notify_client->fd, departure_msg, strlen(departure_msg), 0);
+            t_client *notify_clients = g_client;
 
-                notify_client = notify_client->next;
+            while (notify_clients)
+            {
+                if (notify_clients->fd != fd)
+                    send(notify_clients->fd, departure_msg, strlen(departure_msg), 0);
+                notify_clients = notify_clients->next;
             }
 
             if (prev == NULL)
@@ -97,40 +96,36 @@ void remove_client(int fd)
     }
 }
 
-
-int main(int ac, char *av[])
+int main (int ac, char *av[])
 {
     if (ac != 2)
     {
         write(2, "Wrong number of arguments\n", strlen("Wrong number of arguments\n"));
-        exit (1);
+        exit(1);
     }
 
-    int port = atoi(av[1]);
     struct sockaddr_in servaddr, cli;
-
-    sockfd = socket(AF_INET, SOCK_STREAM, 0);
-    if (sockfd == -1)
+    sockfd = socket(AF_INET, SOCK_STREAM, 0); 
+    if (sockfd < 0)
         fatal_msg();
     
-    bzero(&servaddr, sizeof(servaddr));
-    servaddr.sin_family = AF_INET; 
+    bzero(&servaddr, sizeof(servaddr)); 
+	servaddr.sin_family = AF_INET; 
 	servaddr.sin_addr.s_addr = htonl(INADDR_LOOPBACK); //127.0.0.1
-	servaddr.sin_port = htons(port);
+	servaddr.sin_port = htons(atoi(av[1]));
 
     if ((bind(sockfd, (const struct sockaddr *)&servaddr, sizeof(servaddr))) != 0)
         fatal_msg();
     
     if (listen(sockfd, 10) != 0)
         fatal_msg();
-
+    
     fd_set read_fd, master_fd;
     FD_ZERO(&master_fd);
     FD_SET(sockfd, &master_fd);
-
     int max_fd = sockfd;
 
-    while (1) 
+    while (1)
     {
         read_fd = master_fd;
 
@@ -141,12 +136,12 @@ int main(int ac, char *av[])
         {
             if (FD_ISSET(fd, &read_fd))
             {
-                if (fd == sockfd)
+                if (sockfd == fd)
                 {
                     socklen_t len = sizeof(cli);
                     int connfd;
-                    connfd = accept(sockfd, (struct sockaddr *) &cli, &len);
-                    if (connfd == -1)
+                    connfd = accept(sockfd, (struct sockaddr *)&cli, &len);
+                    if (connfd < 0)
                         fatal_msg();
                     
                     FD_SET(connfd, &master_fd);
@@ -154,7 +149,6 @@ int main(int ac, char *av[])
                         max_fd = connfd;
                     
                     add_client(connfd);
-
                 }
                 else
                 {
@@ -163,13 +157,14 @@ int main(int ac, char *av[])
                     if (bytes <= 0)
                     {
                         remove_client(fd);
-                        FD_CLR(fd, &master_fd);
                         close(fd);
+                        FD_CLR(fd, &master_fd);
                     }
                     else
                     {
                         buffer[bytes] = '\0';
                         t_client *current = g_client;
+
                         while (current)
                         {
                             if (current->fd == fd)
@@ -181,4 +176,5 @@ int main(int ac, char *av[])
             }
         }
     }
+    return 0;
 }
