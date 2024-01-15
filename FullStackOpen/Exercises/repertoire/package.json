@@ -1,0 +1,19 @@
+{
+  "name": "backend",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specifiedd\" && exit 1"
+  },
+  "author": "Waseem Naseeven",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "json-server": "^1.0.0-alpha.21",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.0.2"
+  }
+}
