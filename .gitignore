@@ -4,3 +4,4 @@
 **/.dockerignore
 **/.vagrant
 **/.img
+**/.node_modules
