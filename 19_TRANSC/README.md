@@ -27,6 +27,9 @@ Framework backend...
 - npm install -g @nestjs/cli || npm install --global --prefix=$HOME @nestjs/cli
 - nest new <project name>
 - npm install @nestjs/typeorm typeorm pg
+npm install json-server --save-dev
+npm install axios
+npx json-server --port 3001 --watch db.json
 
 
 ## DOCKER
