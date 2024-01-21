@@ -19,7 +19,6 @@ Framework front end...
 - static typing != dynamic-typed (as Javascript, Python, Ruby)
     - declaration d'une variable d'un seul et unique type
 - Compilation = transpilation vers javascript
-- 
 
 ### Config
 
@@ -40,5 +39,10 @@ npm install json-server --save-dev
 npm install axios
 npx json-server --port 3001 --watch db.json
 
+### Few cmds
+
+- nest g module <name>
+- nest g controller <name>
+- nest g service <name>
 
 ## DOCKER
