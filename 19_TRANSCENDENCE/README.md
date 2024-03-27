@@ -2,7 +2,7 @@
 
 Cool project we done in React and Nest TypeScript. A Pong Game with Authentication (using our school 42 intranet API), a 2FA, a Chat, a Profile, Matchmaking and a game History. 
 
-![transcendence](trans.mov)
+![transcendence](trans.gif)
 
 ## PREREQUISITES
 
