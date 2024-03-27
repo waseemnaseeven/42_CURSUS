@@ -1,48 +1,10 @@
 # FT_TRANSCENDENCE
 
-npm config set prefix ~/.local (pour les ordis de l'ecole)
+The last project at 42 for the CommonCore was to create a Pong Game in Nest (backend) and React (frontend) TypesScript.
 
-# LEARNING WEB APP DEV
+```
+git clone https://github.com/waseemnaseeven/42_CURSUS.git
+cd 42_CURSUS && cd 19_TRANSCENDENCE
+docker-compose up --build
+```
 
-## SINGLE PAGE APPLICATION
-
-- L'approche classique est : les données sont récupérées lorsqu'une réponse serveur est reçue, alors que dans le cas d'une SPA, les données sont souvent manipulées localement et synchronisées avec le serveur de manière asynchrone.
-- On ne refresh pas la page
-- La gestion des donnees est geree cote client et, 
-
-## REACT.JS
-
-Framework front end...
-
-### Typescript
-
-- static typing != dynamic-typed (as Javascript, Python, Ruby)
-    - declaration d'une variable d'un seul et unique type
-- Compilation = transpilation vers javascript
-
-### Config
-
-- sudo install npm
-- npx create-react-app pong-contest-frontend --template typescript
-
-## NEST.JS
-
-Framework backend...
-
-### Config
-
-- sudo apt install npm
-- npm install -g @nestjs/cli || npm install --global --prefix=$HOME @nestjs/cli
-- nest new <project name>
-- npm install @nestjs/typeorm typeorm pg
-npm install json-server --save-dev
-npm install axios
-npx json-server --port 3001 --watch db.json
-
-### Few cmds
-
-- nest g module <name>
-- nest g controller <name>
-- nest g service <name>
-
-## DOCKER
