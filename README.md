@@ -3,7 +3,7 @@
 | Name  | Language      | End Date      |                       Description                 | Estimated effort (h)   | Difficulty (1 to 5) |
 | ----- |:-------------:| :-----------: | :------------------------------------------------:| :---------------------:| :------------------:|
 | [transcendence](https://github.com/waseemnaseeven/42_CURSUS/tree/main/19_TRANSCENDENCE) |TypeScript| March 2024 | Final project aims to create a Pong Game with a chat, Authentication using OAuth 42 API with 2FA and matchmaking system | 300 | 4,5 |
-| [examRank06](https://github.com/waseemnaseeven/42_CURSUS/tree/main/18_EXAMRANK06) |C| March 2024 | Some exercises before the exam, implementing a mini server | ... | 666 |
+| [examRank06](https://github.com/waseemnaseeven/42_CURSUS/tree/main/18_EXAMRANK06) |C| March 2024 | Some exercises before the exam, implementing a mini server | ... | 1 |
 | [inception](https://github.com/waseemnaseeven/42_CURSUS/tree/main/17_INCEPTION) |Docker| December 2023 | This project aims to broaden your knowledge of system administration by using Docker. You will virtualize several Docker images, creating them in your new personal virtual machine | 210 | 4 |
 | [irc_server](https://github.com/waseemnaseeven/42_CURSUS/tree/main/16_IRC) |C++| October 2023 | Create your own IRC server in C++, fully compatible with an official client | 175 | 3 |
 | [examRank05](https://github.com/waseemnaseeven/42_CURSUS/tree/main/15_EXAMRANK05) |C++| August 2023 | Some exercises before the exam |  ... | 666 |
