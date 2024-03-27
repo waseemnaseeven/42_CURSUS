@@ -1,0 +1,237 @@
+.profile-style {
+	position: relative;
+
+	align-items: center;
+}
+
+.profile-content {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-medium);
+
+	min-width: 256px;
+}
+
+.picture-container {
+	position: relative;
+}
+
+.box {	
+	flex-grow: 1;
+	flex-basis: 0;
+
+	background-color: var(--color-light-medium);
+
+	text-align: center;
+
+	padding-top: var(--spacing-small-medium);
+	padding-right: var(--spacing-small-medium);
+	padding-bottom: var(--spacing-small-medium);
+	padding-left: var(--spacing-small-medium);
+
+	border-radius: var(--border-radius-extra-small);
+}
+
+/* Game history */
+
+.wins-losses {
+	display: flex;
+	gap: var(--spacing-medium);
+}
+
+.number {
+	font-weight: 600;
+}
+
+.big-number-won {
+	color: var(--color-dark);
+	font-size: var(--font-size-large);
+	font-weight:500;
+	font-style: normal;
+}
+
+.big-number-lose {
+	color: var(--color-dark-medium);
+	font-size: var(--font-size-large);
+	font-weight:500;
+	font-style: normal;
+}
+
+.game-history-title-style {
+	flex-shrink: 0;
+	margin-left: var(--spacing-small);
+}
+
+.game-result-container {
+	display: flex;	
+	flex-direction: column;
+	overflow-y: auto;
+	gap: var(--spacing-medium);
+}
+
+.game-result {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	position: relative;
+
+	background-color: var(--color-light-medium);
+	font-family: var(--font-family-principal);
+
+	border-radius: var(--border-radius-extra-small);
+}
+
+.game-result-item-start {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	justify-content: flex-start;
+	padding-left: 16px;
+}
+
+.game-result-item-end {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	justify-content: flex-end;
+	padding-right: var(--spacing-medium);
+}
+
+.game-result-item-middle {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	position: absolute;
+	width: 100%;
+}
+
+.left {
+	position: absolute;
+	left: 50%;
+	transform: translateX(calc(-100% - var(--spacing-large)));
+}
+  
+.right {
+	position: absolute;
+	right: 50%;
+	transform: translateX(calc(100% + var(--spacing-large)));
+}
+
+/* Scroll Bar */
+
+::-webkit-scrollbar {
+	width: 24px;
+	background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+	background: var(--color-medium);
+	border-radius: 100px;
+	border: 8px solid transparent;
+	background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background:var(--color-dark-medium);
+	border-radius: var(--border-radius-full);
+	border: 7px solid transparent;
+	background-clip: padding-box;
+}
+
+/* Picture Overlay */
+
+.picture-overlay-background {
+	position: absolute;
+	top: 53%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+
+	padding: 0px;
+
+	width: 256px;
+	height: 256px;
+	
+	background: linear-gradient(180deg, rgba(54, 53, 51, 0.00) 0%, #363533 100%);
+	border-style: solid;
+	border-width: 0px;
+	border-color: transparent;
+	border-radius: var(--border-radius-full);
+
+	cursor: pointer;
+
+	opacity: 0;
+
+	transition:
+		opacity 0.2s;
+}
+
+.picture-overlay-background:hover {
+	opacity: 1;
+}
+
+.picture-overlay-text {
+	position: relative;
+	
+	top: 15%;
+
+	white-space: nowrap;
+
+	color: var(--color-light);
+	font-family: var(--font-family-principal);
+	font-weight: normal;
+	font-style: normal;
+	font-size: var(--font-size-medium);
+	text-shadow: 0px 1px 14px var(--color-dark);
+	letter-spacing: 0.33px;
+
+	transition:
+		top 0.4s,
+		opacity 0.2s;
+
+	opacity: 0;	
+}
+
+.picture-overlay-background:hover .picture-overlay-text {
+	top: 2%;
+	opacity: 1;
+}
+
+/* Login */
+
+.login-container {
+	position: relative;
+	transition:
+		transform 0.2s;
+}
+
+.login-container:hover {
+	transform: scale(1.05) translateY(-0.375rem);
+}
+
+.login-overlay {
+	position: absolute;
+	top: 90%;
+	right: 50%;
+	transform: translate(50%, -50%);
+
+	width: calc(100% + var(--spacing-large));
+	height: calc(100% + var(--spacing-medium-large));
+
+	background: transparent;
+	border-style: solid;
+	border-width: 1.5px;
+	border-color: var(--color-medium);
+	border-radius: var(--border-radius-full);
+
+	cursor: pointer;
+
+	transition:
+		opacity 0.2s;
+
+	opacity: 0;
+}
+
+.login-overlay:hover {
+	opacity: 1;
+}

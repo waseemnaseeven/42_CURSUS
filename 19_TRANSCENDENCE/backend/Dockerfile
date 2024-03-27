@@ -1,11 +1,10 @@
-FROM node:latest
+FROM	node:21.6.0
 
-WORKDIR /app
+RUN		npm install -g @nestjs/cli
 
-COPY package*.json ./
+WORKDIR	/usr/src/app
+COPY	. /usr/src/app
 
-RUN npm install
+RUN		npm install && npx prisma generate
 
-COPY . ./app
-
-CMD ["npm", "start"]
+CMD		[ "npm", "run", "start:migrate:dev" ]

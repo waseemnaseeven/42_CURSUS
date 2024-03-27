@@ -1,0 +1,109 @@
+.friends-header{
+	display: flex;
+
+	justify-content: space-between;
+	gap: var(--spacing-medium);
+
+	flex-shrink: 0;
+}
+
+.friends-title{
+	white-space: nowrap;
+}
+
+.friend-card-container-parent {
+	display: flex;
+
+	overflow-y: auto;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(192px, 1fr));
+	gap: var(--spacing-medium);
+	width: 100%;
+}
+
+.friend-card-container {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(192px, 1fr));
+	gap: var(--spacing-medium);
+	width: 100%;
+}
+
+.friend-card-container-parent::-webkit-scrollbar {
+	width: 24px;
+	background: transparent;
+}
+
+.friend-card-container-parent::-webkit-scrollbar-thumb {
+	background: var(--color-dark-medium);
+	border-radius: 100px;
+	border: 8px solid transparent;
+	background-clip: padding-box;
+}
+
+.friend-card-container-parent::-webkit-scrollbar-thumb:hover {
+	background:var(--color-dark);
+	border-radius: 100px;
+	border: 7px solid transparent;
+	background-clip: padding-box;
+}
+
+.overlay {
+	display: flex;
+    position: absolute;
+	top: 60%;
+	left: 50%;
+
+	transform: translate(-50% , -50%);
+	
+	white-space: nowrap;
+
+	color: var(--color-light);
+	font-family: var(--font-family-principal);
+	font-weight: normal;
+	font-style: normal;
+	font-size: var(--font-size-medium);
+	text-shadow: 0px 1px 14px var(--color-dark);
+	letter-spacing: 0.33px;
+
+	transition:
+		top 0.4s,
+		opacity 0.2s;
+
+	opacity: 0;
+}
+
+.friend-card:hover .xmark-iconoir-button {
+	opacity: 1;
+}
+
+.friend-card:hover .overlay {
+	top: 52%;
+    opacity: 1;
+}
+
+.friend-card-picture-container {
+	position: relative;
+	margin-top: 16px;
+}
+
+.background-overlay {
+    position: absolute;
+	top: 0%;
+	left: 0%;
+
+	width: 128px;
+	height: 128px;
+
+	background: linear-gradient(180deg, rgba(54, 53, 51, 0.00) 0%, #363533 100%);
+	border-radius: var(--border-radius-full);
+
+	transition:
+		top 0.4s,
+		opacity 0.2s;
+
+	opacity: 0;	
+}
+
+.friend-card:hover .background-overlay {
+    opacity: 1;
+}

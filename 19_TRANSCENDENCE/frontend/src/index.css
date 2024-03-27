@@ -1,13 +1,78 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+
+html, h1, h2, h3, h4, h5, h6, p, ul, ol, li, figure, figcaption, blockquote, dl, dd {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.root {
+	height: 100vh;
+	padding: var(--spacing-medium);
+	box-sizing: border-box;
+}
+
+.before-root {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	pointer-events: none;
+}
+
+body {
+	margin: 0;
+	padding: 0px;
+
+	background-color: var(--color-light-medium);
+}
+
+.container {
+	display: flex;
+	gap: var(--spacing-medium);
+	height: 100%;
+}
+
+.page {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-medium);
+	flex-grow: 1;
+	flex-basis: 0;
+	padding: var(--spacing-medium);
+	box-sizing: border-box;
+
+	background-color: var(--color-light);
+	border-radius: var(--border-radius-small-medium);
+}
+
+.void-page {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-medium);
+	flex-grow: 1;
+	flex-basis: 0;
+}
+
+h1 {
+	color: var(--color-dark);
+	font-family: var(--font-family-principal);
+	font-weight: 500;
+	font-style: normal;
+	font-size: var(--font-size-extra-large);
+}
+
+h3 {
+	color: var(--color-dark);
+	font-family: var(--font-family-principal);
+	font-weight:500;
+	font-style: normal;
+	font-size: var(--font-size-large);
+}
+
+p, span, div {
+	color: var(--color-dark);
+	font-family: var(--font-family-principal);
+	font-weight: normal;
+	font-style: normal;
+	font-size: var(--font-size-medium);
 }

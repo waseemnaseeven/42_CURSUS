@@ -1,11 +1,12 @@
-FROM node:14-alpine
+FROM		node:21.6.0
 
-# WORKDIR /app
+WORKDIR		/usr/src/app
+COPY		. /usr/src/app
 
-COPY package*.json ./
+RUN			chmod +x /usr/src/app/script.sh		\
+				&& npm install -g serve			\
+				&& npm install
 
-RUN npm install
+ENTRYPOINT	["/usr/src/app/script.sh"]
 
-COPY . .
-
-CMD ["npm", "start"]
+CMD			["serve", "-s", "dist"]

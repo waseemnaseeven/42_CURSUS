@@ -1,0 +1,49 @@
+.item-style {
+	width: 100%;
+	border: none;
+	background-color: var(--color-light);
+
+	cursor: pointer;
+
+	color: var(--color-dark);
+	font-family: var(--font-family-principal);
+	font-weight: normal;
+	font-style: normal;
+	font-size: var(--font-size-medium);
+	text-align: left;
+
+	padding: var(--spacing-small);
+	padding-right: var(--spacing-small-medium);
+	padding-left: var(--spacing-small-medium);
+
+	border-radius: var(--border-radius-extra-small);
+
+	transition:
+		background-color 0.1s ease-in-out,
+		color 0.1s ease-in-out;
+}
+
+.clicked-item-style {
+	width: 100%;
+	border: none;
+	background-color: var(--color-dark);
+
+	cursor: pointer;
+
+	color: var(--color-light);
+	font-family: var(--font-family-principal);
+	font-weight: normal;
+	font-style: normal;
+	font-size: var(--font-size-medium);
+	text-align: left;
+
+	padding: var(--spacing-small);
+	padding-right: var(--spacing-small-medium);
+	padding-left: var(--spacing-small-medium);
+
+	border-radius: var(--border-radius-extra-small);
+}
+
+.item-style:hover {
+	background-color: var(--color-light-medium);
+}

@@ -1,0 +1,19 @@
+.overlay {
+    position: absolute;
+
+	padding: var(--spacing-extra-extra-small);
+	padding-left:  var(--small-medium);
+	padding-right: var(--small-medium);
+	white-space: nowrap;
+
+	background-color: var(--color-light);
+
+	border: solid 1.33px var(--color-medium);
+	border-radius: var(--border-radius-full);
+
+	opacity: 0;
+
+	transition:
+		top 0.4s,
+		opacity 0.2s;
+}

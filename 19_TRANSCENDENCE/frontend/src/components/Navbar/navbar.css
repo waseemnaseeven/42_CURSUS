@@ -1,0 +1,24 @@
+.navbar-style {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+
+	background-color: var(--color-light);
+	padding: var(--spacing-medium);
+	width: 192px;
+	border-radius: var(--border-radius-small-medium);
+	box-sizing: border-box;
+	@media screen and (max-width: 768px) {
+		width: fit-content;
+	}
+}
+
+.first-container-navbar {
+	display: flex;
+	flex-direction: column;
+
+	gap: var(--spacing-extra-extra-small);
+	@media screen and (max-width: 768px) {
+		width: fit-content;
+	}
+}

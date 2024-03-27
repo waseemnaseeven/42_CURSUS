@@ -1,65 +1,71 @@
 version: '3'
 
 services:
-  backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
-    container_name: backend
-    networks:
-      - transcendence
-    environment:
-      - POSTGRES_HOST=db
-      - POSTGRES_PORT=5432
-      - POSTGRES_USER=test_user
-      - POSTGRES_PASSWORD=mypassword
-      - POSTGRES_DB=backend
-    expose:
-      - "3001"
-    depends_on:
-      - db
-  
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    container_name: frontend
-    networks:
-      - transcendence
-    expose:
-      - "3000"
-    depends_on:
-      - backend
+    db:
+        image: postgres:14
+        container_name: db
+        ports:
+            - "5432:5432"
+        volumes:
+            - pgdata:/var/lib/postgresql/data
+        env_file:
+            - .env
+            - ./backend/.env
+        networks:
+            - transcendence_network
+        restart: always
 
-  db:
-    image: postgres:latest
-    volumes:
-      - ./data:/var/lib/postgresql/data
-    environment:
-      POSTGRES_USER: test_user
-      POSTGRES_PASSWORD: mypassword
-      POSTGRES_DB: backend
-    ports:
-      - "5432:5432"
-    networks:
-      - transcendence
-  
-  # nginx:
-  #   build:
-  #     context: nginx
-  #   container_name: nginx
-  #   restart: always
-  #   tty: true
-  #   ports:
-  #     - "8000:80"
-  #   networks:
-  #     - transcendence
-  #   volumes:
-  #     - ./nginx/default.conf:/etc/nginx/conf.d/default.conf 
-  #   depends_on:
-  #     - frontend
-  #     - backend
+    frontend:
+        container_name: frontend
+        build: ./frontend
+        env_file:
+            - .env
+            - .env.private
+        ports:
+            - "${FRONTEND_PORT}:${FRONTEND_PORT}"
+        depends_on:
+            - db
+        networks:
+            - transcendence_network
+        restart: unless-stopped
+    
+    backend:
+        container_name: backend
+        build: ./backend
+        env_file:
+            - .env
+            - ./backend/.env
+            - .env.private
+        ports:
+            - "${BACKEND_PORT}:${BACKEND_PORT}"
+        depends_on:
+            - db
+            - frontend
+        networks:
+            - transcendence_network
+        restart: unless-stopped
+
+    prisma-studio:
+        container_name: prisma-studio
+        build:
+            context: ./backend
+            dockerfile: Dockerfile.studio
+        env_file:
+            - ./backend/.env
+        ports:
+            - "5555:5555"
+        depends_on:
+            - db
+            - backend
+            - frontend
+        networks:
+            - transcendence_network
+        restart: unless-stopped
+
+volumes:
+    pgdata:
+        name: pgdata
 
 networks:
-  transcendence:
-    driver: bridge
+    transcendence_network:
+        driver: bridge

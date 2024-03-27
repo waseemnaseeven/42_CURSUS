@@ -1,0 +1,20 @@
+.channel {
+	display: flex;
+	justify-content: center;
+
+	cursor: pointer;
+
+	padding: var(--spacing-medium);
+
+	background-color: var(--color-light);
+	border-style: none;
+
+
+	color: var(--color-dark);
+    font-weight: 500;
+    font-style: normal;
+    font-size: var(--font-size-medium-large);
+
+
+}
+
