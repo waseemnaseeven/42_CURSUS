@@ -2,6 +2,7 @@ import { Route, Routes, Navigate } from 'react-router-dom';
 import axios from 'axios';
 import LayoutWithNavbar from './components/LayoutWithNavbar';
 import Login from './components/Login/Login';
+import Home from './components/Home/Home';
 import Profile from './components/Profile/Profile';
 import Channels from './components/Chat/Channels';
 import Game from './components/Game/Game';
@@ -22,7 +23,8 @@ function App() {
     <div className="App container">
       <Routes>
         <Route path="/" element={<LayoutWithNavbar />}>
-          <Route index element={<Navigate to="/profile/:login" replace />} />
+          <Route index element={<Navigate to="/home" replace />} />
+          <Route path="home" element={<Home />} />
           <Route path="/profile/:login" element={<Profile />} />
           <Route path="friends" element={<Friends />} />
           <Route path="chat" element={<Channels />} />

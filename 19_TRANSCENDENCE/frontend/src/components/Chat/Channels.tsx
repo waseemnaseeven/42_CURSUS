@@ -113,7 +113,6 @@ const Channels = () => {
           if ('message' in object) {
             console.log('%cWrong password', 'color: red;');
           } else {
-            console.log('%cRight password', 'color: green;');
 
             setSelectedChannel(undefined);
             setIsModalVisiblePasswordChannel(false);
@@ -186,6 +185,7 @@ const Channels = () => {
       )}
 
       <div className="banner">
+        <input type="button" value="🏠" onClick={() => navigate('/home')} />
         <h3>Chat</h3>
         <input
           type="button"

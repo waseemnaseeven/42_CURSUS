@@ -2,10 +2,8 @@
 **/.DS_Store
 
 # compiled output
-**/node_modules
 **/dist
-**/dist-ssr
-**/.local
+**/node_modules
 
 # Logs
 **/logs
@@ -29,11 +27,6 @@
 **/.launch
 **/.settings/
 **/.sublime-workspace
-**/.suo
-**/.ntvs*
-**/.njsproj
-**/.sln
-**/.sw?
 
 # IDE - VSCode
 **/.vscode/*
@@ -43,7 +36,7 @@
 !.vscode/extensions.json
 
 # Other
-# **/.env
+**/.env
 
 # dependencies
 **/node_modules
