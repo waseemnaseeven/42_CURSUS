@@ -2,17 +2,17 @@
 
 # Define colors
 RESET='\033[0m'
-BLACK='\033[30m'        # Black
-RED='\033[31m'          # Red
-PURPLE='\033[0;35m'     # Purple
-GREEN='\033[32m'        # Green
-YELLOW='\033[33m'       # Yellow
-BLUE='\033[34m'         # Blue
-MAGENTA='\033[35m'      # Magenta
-CYAN='\033[36m'         # Cyan
-WHITE='\033[37m'        # White
-BOLD='\033[1m'          # Bold
-BLINK='\033[5m'         # Blink
+BLACK='\033[30m'        
+RED='\033[31m'          
+PURPLE='\033[0;35m'     
+GREEN='\033[32m'        
+YELLOW='\033[33m'       
+BLUE='\033[34m'         
+MAGENTA='\033[35m'      
+CYAN='\033[36m'         
+WHITE='\033[37m'        
+BOLD='\033[1m'          
+BLINK='\033[5m'         
 
 
 if [[ $# -lt 1 || $# -gt 1 || ( $# -eq 1 && "$1" != "run" ) ]]

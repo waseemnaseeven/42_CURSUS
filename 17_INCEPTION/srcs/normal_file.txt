@@ -1,3 +1,5 @@
+Credentials that shouldnt be push into a repo, thats a school exercice
+
 DOMAIN_NAME=${USER}.42.fr
 
 # Database
